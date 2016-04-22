@@ -24,4 +24,4 @@ Suggests:
 Roxygen: list(wrap = FALSE)
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
-Remotes: dmenne/gastempt
+
