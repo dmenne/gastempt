@@ -1,0 +1,26 @@
+Package: gastempt
+Type: Package
+Title: Analyzing gastric emptying functions
+Version: 0.1.0
+Authors@R: person("Dieter", "Menne", email="dieter.menne@menne-biomed.de",
+  role=c("aut","cre"))
+Maintainer: Dieter Menne <dieter.menne@menne-biomed.de>
+Description: Fit functions using nonlinear mixed-model population methods to
+    gastric emptying time series and compute derived parameters such as t50.
+License: GPL (>=3)
+LazyData: TRUE
+NeedsCompilation: no
+URL: http://github.com/dmenne/gastempt
+BugReports: http://github.com/dmenne/gastempt/issues
+Imports:
+    nlme,
+    dplyr,
+    ggplot2,
+    assertthat
+Suggests:
+    testthat,
+    rmarkdown,
+    knitr
+Roxygen: list(wrap = FALSE)
+RoxygenNote: 5.0.1
+VignetteBuilder: knitr
