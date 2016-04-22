@@ -8,7 +8,7 @@ By dieter.menne@menne-biomed.de, Menne Biomed Consulting Tübingen, D-72074 Tüb
 
 A package and a Shiny web application to create simulated gastric emptying data, and to analyze experimental gastric emptying data using population fit with R and package nlme.
 
-The package is available from github: https://github.com/dmenne/SS
+The package is available from github: https://github.com/dmenne/gastempt
 
 Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich.
 
@@ -24,7 +24,7 @@ Hopefully coming (looking for sponsors... ):
 * Post-hoc analysis in Shiny application by treatment groups, both for cross-over and fully randomized designs.
 * Overcoming the convergence constraints of nlme fits: Using Bayesian models and Stan (http://mc-stan.org/). 
 * Tutorial: Why are single curve fits not useful in clinical research? How to analyze studies, and how to fit single curves anyway, e.g. for clinical practice.
-* Tutorial: How to fit curves in more complex cases that cannot be handled by the Shiny application using R,  package SS, and Stan directly.
+* Tutorial: How to fit curves in more complex cases that cannot be handled by the Shiny application using R,  package gastempt, and Stan directly.
 
 ![Screenshot](inst/shiny/screenshot.png)
 
