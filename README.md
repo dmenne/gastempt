@@ -22,4 +22,4 @@ Hopefully coming (looking for sponsors... ):
 * Tutorial: Why are single curve fits not useful in clinical research? How to analyze studies, and how to fit single curves anyway, e.g. for clinical practice.
 * Tutorial: How to fit curves in more complex cases that cannot be handled by the Shiny application using R,  package gastempt, and Stan directly.
 
-[[https://github.com/dmenne/gastemt/inst/shiny/screenshot.png|alt=Screenshot]]
+[[https://github.com/dmenne/gastempt/inst/shiny/screenshot.png|alt=Screenshot]]
