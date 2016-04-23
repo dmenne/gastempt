@@ -1,7 +1,5 @@
 [![Travis-CI Build Status](https://travis-ci.org/dmenne/gastempt.svg?branch=master)](https://travis-ci.org/dmenne/gastempt)
-[![Coverage Status](https://coveralls.io/repos/dmenne/gastempt/badge.svg?branch=master&service=github)](https://coveralls.io/github/dmenne/gastempt?branch=master)
-
-
+[![Coverage Status](https://coveralls.io/repos/github/dmenne/gastempt/badge.svg?branch=master)](https://coveralls.io/github/dmenne/gastempt?branch=master)
 # Fitting gastric emptying curve
 
 By dieter.menne@menne-biomed.de, Menne Biomed Consulting Tübingen, D-72074 Tübingen
