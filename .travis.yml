@@ -9,3 +9,4 @@ r-github-packages:
 
 after_success:
   - Rscript -e 'covr::coveralls()'
+  
