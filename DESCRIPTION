@@ -1,7 +1,7 @@
 Package: gastempt
 Type: Package
 Title: Analyzing gastric emptying functions
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Dieter", "Menne", email="dieter.menne@menne-biomed.de",
   role=c("aut","cre"))
 Maintainer: Dieter Menne <dieter.menne@menne-biomed.de>

@@ -80,6 +80,10 @@ test_that("fit of powexp data to powexp curve gives valid coefficients", {
   expect_equal(names(fit), c("coef", "summary", "plot", "pnlsTol","message"))
   expect_is(plot(fit), "ggplot")
   expect_is(coef(fit), "data.frame")
+  fit = nlme_gastempt(d, model = powexp, variant = 2)
+  expect_equal(fit$pnlsTol, 0.001)
+  fit = nlme_gastempt(d, model = powexp, variant = 3)
+  expect_equal(fit$pnlsTol, 0.001)
 })
 
 
@@ -102,6 +106,7 @@ test_that("fit of powexp data with beta=2 to linexp curve converges", {
   fit = nlme_gastempt(d, model = linexp)
   expect_equal(fit$pnlsTol, 0.001)
   expect_equal(fit$message, "Ok")
+  fit = nlme_gastempt(d, model = linexp)
 
 })
 

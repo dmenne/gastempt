@@ -4,3 +4,8 @@ cache: packages
 
 r-github-packages:
   - hadley/ggplot2
+  - jimhester/covr
+
+
+after_success:
+  - Rscript -e 'covr::coveralls()'
