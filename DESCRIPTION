@@ -9,10 +9,13 @@ Description: Fit functions using nonlinear mixed-model population methods to
     gastric emptying time series and compute derived parameters such as t50.
 License: GPL (>=3)
 LazyData: TRUE
-NeedsCompilation: no
+NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
-Depends: R (>= 3.0.2), Rcpp (>= 0.11.0)
+Depends:
+    R (>= 3.0.2),
+    Rcpp (>= 0.11.0),
+    methods
 Imports:
     nlme,
     dplyr,
@@ -23,8 +26,11 @@ Suggests:
     rmarkdown,
     knitr,
     covr
-Roxygen: list(wrap = FALSE)
+LinkingTo:
+    StanHeaders (>= 2.8.0),
+    rstan (>= 2.8.1),
+    BH (>= 1.58.0),
+    Rcpp (>= 0.11.0)
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 Remotes: hadley/ggplot2
-LinkingTo: StanHeaders (>= 2.8.0), rstan (>= 2.8.1), BH (>= 1.58.0), Rcpp (>= 0.11.0), RcppEigen
