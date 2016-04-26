@@ -4,3 +4,6 @@
 .Ruserdata
 inst/doc
 *.html
+src/*.cpp
+src/*.o
+scr/include/
