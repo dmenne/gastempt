@@ -14,7 +14,7 @@ gastempt is free software: you can redistribute it and/or modify
 
 #include <stan/model/model_header.hpp>
 
-namespace model_LinExpGastro_1b_namespace {
+namespace model_linexpgastro_1b_namespace {
 
 using std::istream;
 using std::string;
@@ -30,7 +30,7 @@ typedef Eigen::Matrix<double,1,Eigen::Dynamic> row_vector_d;
 typedef Eigen::Matrix<double,Eigen::Dynamic,Eigen::Dynamic> matrix_d;
 
 static int current_statement_begin__;
-class model_LinExpGastro_1b : public prob_grad {
+class model_linexpgastro_1b : public prob_grad {
 private:
     double prior_v0;
     int n;
@@ -39,12 +39,12 @@ private:
     vector<double> minute;
     vector<double> volume;
 public:
-    model_LinExpGastro_1b(stan::io::var_context& context__,
+    model_linexpgastro_1b(stan::io::var_context& context__,
         std::ostream* pstream__ = 0)
         : prob_grad(0) {
         current_statement_begin__ = -1;
 
-        static const char* function__ = "model_LinExpGastro_1b_namespace::model_LinExpGastro_1b";
+        static const char* function__ = "model_linexpgastro_1b_namespace::model_linexpgastro_1b";
         (void) function__; // dummy call to supress warning
         size_t pos__;
         (void) pos__; // dummy call to supress warning
@@ -123,7 +123,7 @@ throw std::runtime_error("*** IF YOU SEE THIS, PLEASE REPORT A BUG ***");
         ++num_params_r__;
     }
 
-    ~model_LinExpGastro_1b() { }
+    ~model_linexpgastro_1b() { }
 
 
     void transform_inits(const stan::io::var_context& context__,
@@ -410,7 +410,7 @@ throw std::runtime_error("*** IF YOU SEE THIS, PLEASE REPORT A BUG ***");
                      std::ostream* pstream__ = 0) const {
         vars__.resize(0);
         stan::io::reader<double> in__(params_r__,params_i__);
-        static const char* function__ = "model_LinExpGastro_1b_namespace::write_array";
+        static const char* function__ = "model_linexpgastro_1b_namespace::write_array";
         (void) function__; // dummy call to supress warning
         // read-transform, write parameters
         vector<double> v0;
@@ -502,7 +502,7 @@ throw std::runtime_error("*** IF YOU SEE THIS, PLEASE REPORT A BUG ***");
     }
 
     static std::string model_name() {
-        return "model_LinExpGastro_1b";
+        return "model_linexpgastro_1b";
     }
 
 

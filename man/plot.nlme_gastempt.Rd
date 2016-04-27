@@ -4,7 +4,7 @@
 \alias{plot.nlme_gastempt}
 \title{Plot data points and fit curve of an nlme_gastempt fit}
 \usage{
-\method{plot}{nlme_gastempt}(x, ...)
+plot.nlme_gastempt(x, ...)
 }
 \arguments{
 \item{x}{Result of a call to nlme_gastempt}
