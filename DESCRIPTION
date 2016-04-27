@@ -13,9 +13,7 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.0.2),
-    Rcpp (>= 0.11.0),
-    methods
+    R (>= 3.0.2)
 Imports:
     nlme,
     dplyr,
@@ -33,8 +31,7 @@ LinkingTo:
     BH (>= 1.58.0),
     Rcpp (>= 0.11.0),
     RcppEigen
-RcppModules:
-    stan_fit4linexpgastro_1b_mod
+RcppModules: stan_fit4linexpgastro_1b_mod
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 Remotes: hadley/ggplot2

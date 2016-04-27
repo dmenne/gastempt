@@ -54,9 +54,8 @@ test_that("Basic direct use of Stan returns valid results", {
     record = mr$record_i,
     minute = mr$minute,
     volume = mr$vol)
-  expect_output(
-    mr_stan <- stan(file = file.path(MODELS_HOME, "/LinExpGastro_1b.stan"),
-               chains = 2, iter = 1000, data = data, seed = 4711) ,"do not ask")
+  expect_output(mr_stan <- sampling(stanmodels$linexpgastro_1b,
+               chains = 1, iter = 1000, data = data, seed = 4711),"do not ask")
   ss  = summary(mr_stan, "v0")$summary[,1]
   # residual standard deviation
   expect_lt(sqrt(var(ss- s$record$v0)), 7)
