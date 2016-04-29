@@ -11,7 +11,7 @@ t50 = function(x) {
 }
 
 #' @export
-t50.numeric = function(x){
+t50.default = function(x){
   tempt = ifelse("logtempt" %in% names(x), exp(x["logtempt"]), x["tempt"])
   # Search interval is 5*tempt
   interval = c(.0001, 5*tempt)
@@ -54,7 +54,7 @@ t50.data.frame = function(x){
   x$t50 = 0
   x$slope_t50 = 0
   for (i in 1:nrow(x)) {
-    tt =  t50.numeric(unlist(x[i,-1]))
+    tt =  t50(unlist(x[i,-1]))
     x[i,"t50"] = as.numeric(tt)
     x[i,"slope_t50"] = attr(tt,"slope")
   }
