@@ -15,7 +15,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 # This file is only intended to be used during the installation process
-#' @useDynLib gastempt, .registration = TRUE
 # nocov start
 MODELS_HOME <- "exec"
 if (!file.exists(MODELS_HOME)) MODELS_HOME <- sub("R$", "exec", getwd())

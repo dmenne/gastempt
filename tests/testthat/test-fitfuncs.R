@@ -1,7 +1,6 @@
 context("Test fit functions")
 tolerance = 5.e-5
 
-
 test_that("Functions at t=0 must return initial volume",{
   v0 = 400
   tempt = 60

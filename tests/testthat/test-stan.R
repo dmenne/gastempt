@@ -1,36 +1,17 @@
-context("Test basic Stan models")
-
 # only for debugging
-if (FALSE) {
+if (TRUE) {
   library(testthat)
   library(ggplot2)
   library(assertthat)
-  library(rstan)
   library(dplyr)
+  library(Rcpp)
+  library(gastempt)
+  suppressPackageStartupMessages(library(rstan))
 }
 
-MODELS_HOME <- "exec"
-fsep <- .Platform$file.sep
-if (!file.exists(MODELS_HOME)) {
-  MODELS_HOME <- sub(paste0("tests.*", fsep, "testthat$"),
-                     paste0("rstanarm", fsep, "exec"), getwd())
-}
-if (!file.exists(MODELS_HOME)) {
-  MODELS_HOME <- sub(paste0("tests.*", fsep, "testthat$"), "exec", getwd())
-}
-if (!file.exists(MODELS_HOME)) {
-  MODELS_HOME <- system.file("exec", package = "rstanarm")
-}
 
-test_that("Stan programs are available", {
-  message(MODELS_HOME)
-  expect_true(file.exists(MODELS_HOME))
-  expect_true(file.exists(file.path(system.file("chunks", package = "rstanarm"),
-                                    "common_functions.stan")))
-
-})
-
-library(rstan)
+context("Test basic Stan models")
+#loadModule("gastempt", TRUE)
 
 test_that("Basic direct use of Stan returns valid results", {
   set.seed(471)
@@ -47,6 +28,7 @@ test_that("Basic direct use of Stan returns valid results", {
   rstan_options(auto_write = TRUE)
   options(mc.cores = parallel::detectCores())
 
+
   data = list(
     prior_v0 = unlist(prior_v0$v0),
     n = nrow(mr),
@@ -54,8 +36,10 @@ test_that("Basic direct use of Stan returns valid results", {
     record = mr$record_i,
     minute = mr$minute,
     volume = mr$vol)
-  expect_output(mr_stan <- sampling(stanmodels$linexpgastro_1b,
-               chains = 1, iter = 1000, data = data, seed = 4711),"do not ask")
+
+  expect_output(mr_stan <- sampling(linexpgastro_1b,
+       chains = 1, iter = 1000, data = data, seed = 4711),
+    "do not ask")
   ss  = summary(mr_stan, "v0")$summary[,1]
   # residual standard deviation
   expect_lt(sqrt(var(ss- s$record$v0)), 7)

@@ -13,18 +13,20 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.0.2)
+    R (>= 3.2.0),
+    Rcpp (>= 0.11.0)
 Imports:
     nlme,
     dplyr,
     ggplot2,
-    assertthat,
-    rstan(>= 2.8.1)
+    rstan,
+    assertthat
 Suggests:
     testthat,
     rmarkdown,
     knitr,
-    covr
+    covr,
+    methods,
 LinkingTo:
     StanHeaders (>= 2.8.0),
     rstan (>= 2.8.1),

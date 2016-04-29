@@ -208,7 +208,6 @@ nlme_powexp_3 = function(d, start, pnlsTol){
 #'
 #' @return a data frame with coefficients. See \code{\link{nlme_gastempt}} for an example.
 #' @export
-#'
 coef.nlme_gastempt = function(object, ...){
   Call = match.call(expand.dots = TRUE)
   sigdig = as.integer(Call[["signif"]])
@@ -226,7 +225,6 @@ coef.nlme_gastempt = function(object, ...){
 #'
 #' @return a ggplot object. Use \code{print()} if used non-interactively
 #' @export
-#'
 plot.nlme_gastempt = function(x, ...){
   x$plot
 }

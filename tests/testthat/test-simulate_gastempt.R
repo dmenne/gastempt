@@ -1,4 +1,5 @@
 context("Test simulation of data")
+
 library(testthat)
 library(assertthat)
 
