@@ -6,4 +6,6 @@ inst/doc
 *.html
 src/*.o
 src/include/
+src/cpp
+src/include/hpp
 *.rda

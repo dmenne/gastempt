@@ -11,7 +11,7 @@ t50 = function(x) {
 }
 
 #' @export
-t50.numeric = function(x){
+t50.default = function(x){
   tempt = ifelse("logtempt" %in% names(x), exp(x["logtempt"]), x["tempt"])
   # Search interval is 5*tempt
   interval = c(.0001, 5*tempt)
