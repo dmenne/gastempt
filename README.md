@@ -31,3 +31,5 @@ Hopefully coming (looking for sponsors... ):
 
 ![Screenshot](inst/shiny/screenshot.png)
 
+Use `roxygen2::roxygenize(clean = TRUE)`; devtools/RStudio documentation fails.
+
