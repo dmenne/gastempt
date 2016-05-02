@@ -83,8 +83,7 @@ test_that("t50 for data frame returns a data frame with column t50",{
     record = letters[1:n],
     v0 = rnorm(n, 400, 10),
     tempt = rnorm(n, 100, 20),
-    kappa = rnorm(n, 0.7, 0.1),
-    t50 = NA
+    kappa = rnorm(n, 0.7, 0.1)
   )
   ret = t50(x)
   expect_is(ret, "data.frame")
