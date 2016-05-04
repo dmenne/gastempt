@@ -1,9 +1,10 @@
-#' Half-emptying time from nlme parameters
+#' Compute half-emptying time from nlme parameters
 #'
 #' No closed solution known for linexp, we use newton  approximation
 #' @name t50
-#' @param x  Result of a nlme fit, with named components tempt, beta, logbeta,
-#' kappa, logkappa depending on model
+#' @param x  Result of a nlme fit, with named components `tempt, beta, logbeta,
+#' kappa, logkappa` depending on model. Function used `logbeta` when it is present,
+#' in `x`, otherwise beta, and similar for logkappa/kappa.
 #' @return Half-emptying time. Name of evaluated function is returned as attribute \code{fun}. Negative of slope is returned as attribute \code{slope}.
 #' @export
 t50 = function(x) {
@@ -54,7 +55,7 @@ t50.data.frame = function(x){
   x$t50 = 0
   x$slope_t50 = 0
   for (i in 1:nrow(x)) {
-    tt =  t50.numeric(unlist(x[i,-1]))
+    tt =  t50(unlist(x[i,-1]))
     x[i,"t50"] = as.numeric(tt)
     x[i,"slope_t50"] = attr(tt,"slope")
   }
