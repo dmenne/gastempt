@@ -13,6 +13,14 @@ if (TRUE) {
 context("Test basic Stan models")
 #loadModule("gastempt", TRUE)
 
+test_that("stanmodels exist", {
+  expect_true(exists("stanmodels"), "No stanmodels found")
+})
+
+test_that("stanmodels$linexp_gastro_1b exists", {
+  expect_silent(stanmodels$linexp_gastro_1b)
+})
+
 test_that("Basic direct use of Stan returns valid results", {
   set.seed(471)
   s = simulate_gastempt(n_records = 6)
@@ -40,8 +48,10 @@ test_that("Basic direct use of Stan returns valid results", {
   expect_output(mr_stan <- sampling(linexpgastro_1b,
        chains = 1, iter = 1000, data = data, seed = 4711),
     "do not ask")
+  expect_s4_class(mr_stan, "stanfit")
+
   ss  = summary(mr_stan, "v0")$summary[,1]
   # residual standard deviation
-  expect_lt(sqrt(var(ss- s$record$v0)), 7)
+  expect_lt(sqrt(var(ss - s$record$v0)), 7)
 })
 

@@ -2,8 +2,7 @@ Package: gastempt
 Type: Package
 Title: Analyzing gastric emptying functions
 Version: 0.1.2
-Authors@R: person("Dieter", "Menne", email="dieter.menne@menne-biomed.de",
-  role=c("aut","cre"))
+Author: Dieter Menne<dieter.menne@menne-biomed.de>
 Maintainer: Dieter Menne <dieter.menne@menne-biomed.de>
 Description: Fit functions using nonlinear mixed-model population methods to
     gastric emptying time series and compute derived parameters such as t50.
@@ -14,8 +13,8 @@ URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
     R (>= 3.2.0),
-    Rcpp (>= 0.11.0)
 Imports:
+    Rcpp (>= 0.11.0),
     nlme,
     dplyr,
     ggplot2,
@@ -33,7 +32,7 @@ LinkingTo:
     BH (>= 1.58.0),
     Rcpp (>= 0.11.0),
     RcppEigen
-RcppModules: stan_fit4linexpgastro_1b_mod
+RcppModules: stan_fit4linexp_gastro_1b_mod
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 Remotes: hadley/ggplot2
