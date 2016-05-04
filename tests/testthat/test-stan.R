@@ -1,5 +1,5 @@
 # only for debugging
-if (TRUE) {
+if (FALSE) {
   library(testthat)
   library(ggplot2)
   library(assertthat)
@@ -8,10 +8,7 @@ if (TRUE) {
   library(gastempt)
   suppressPackageStartupMessages(library(rstan))
 }
-
-
 context("Test basic Stan models")
-#loadModule("gastempt", TRUE)
 
 test_that("stanmodels exist", {
   expect_true(exists("stanmodels"), "No stanmodels found")
@@ -44,10 +41,9 @@ test_that("Basic direct use of Stan returns valid results", {
     record = mr$record_i,
     minute = mr$minute,
     volume = mr$vol)
-
-  expect_output(mr_stan <- sampling(linexpgastro_1b,
-       chains = 1, iter = 1000, data = data, seed = 4711),
-    "do not ask")
+  model = stanmodels$linexp_gastro_1b
+  mr_stan <- sampling(model,
+       chains = 1, iter = 1000, data = data, seed = 4711)
   expect_s4_class(mr_stan, "stanfit")
 
   ss  = summary(mr_stan, "v0")$summary[,1]

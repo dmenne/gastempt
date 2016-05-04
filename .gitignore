@@ -6,6 +6,11 @@ inst/doc
 *.html
 src/*.o
 src/include/
-src/cpp
+src/*.cpp
+^./src-i
 src/include/hpp
+src/*.rds
 *.rda
+src-i386
+src-x64
+..Rcheck

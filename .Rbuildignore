@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 cleanup*
 .travis.yml
+.git
