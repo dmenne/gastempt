@@ -18,7 +18,7 @@ test_that("stanmodels$linexp_gastro_1b exists", {
   expect_silent(stanmodels$linexp_gastro_1b)
 })
 
-skip_on_travis(
+if (FALSE){
   test_that("Basic direct use of Stan returns valid results", {
     set.seed(471)
     s = simulate_gastempt(n_records = 6)
@@ -50,4 +50,4 @@ skip_on_travis(
     # residual standard deviation
     expect_lt(sqrt(var(ss - s$record$v0)), 7)
   })
-)
+}
