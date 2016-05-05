@@ -4,7 +4,7 @@
 \alias{plot.nlme_gastempt}
 \title{Plot data points and fit curve of an nlme_gastempt fit}
 \usage{
-plot.nlme_gastempt(x, ...)
+\method{plot}{nlme_gastempt}(x, ...)
 }
 \arguments{
 \item{x}{Result of a call to nlme_gastempt}
@@ -12,7 +12,7 @@ plot.nlme_gastempt(x, ...)
 \item{...}{other arguments}
 }
 \value{
-a ggplot object. Use \code{print()} if used non-interactively
+a ggplot object. Use \code{print()} if used non-interactively to show the curve
 }
 \description{
 Plot data points and fit curve of an nlme_gastempt fit

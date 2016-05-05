@@ -49,6 +49,8 @@
 #' @export
 #' @import assertthat
 #' @importFrom nlme nlme nlmeControl pdDiag
+#' @importFrom 	stats coef median na.omit predict rnorm	rt uniroot
+#' @importFrom utils head	tail
 #' @import ggplot2
 #' @import dplyr
 #'
@@ -223,7 +225,8 @@ coef.nlme_gastempt = function(object, ...){
 #' @param x Result of a call to nlme_gastempt
 #' @param ... other arguments
 #'
-#' @return a ggplot object. Use \code{print()} if used non-interactively
+#' @return a ggplot object. Use \code{print()} if used non-interactively to show the curve
+#' @method plot nlme_gastempt
 #' @export
 plot.nlme_gastempt = function(x, ...){
   x$plot
