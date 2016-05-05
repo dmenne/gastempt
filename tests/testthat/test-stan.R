@@ -43,7 +43,6 @@ skip_on_travis(
       minute = mr$minute,
       volume = mr$vol)
     model = stanmodels$linexp_gastro_1b
-    expect_
     mr_stan <- sampling(model, chains = 1, iter = 1000, data = data)
     expect_s4_class(mr_stan, "stanfit")
 
