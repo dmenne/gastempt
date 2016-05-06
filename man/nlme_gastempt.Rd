@@ -30,7 +30,8 @@ See \code{\link[nlme]{nlmeControl}}  When the model does not converge, \code{pnl
   }}
 }
 \value{
-A list with elements \code{coef, summary, plot, pnlsTol, message}
+A list of class nlme_gastempt with elements
+\code{coef, summary, plot, pnlsTol, message}
 \itemize{
   \item \code{coef} is a data frame with columns:
     \itemize{

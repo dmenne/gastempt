@@ -1,9 +1,10 @@
 Package: gastempt
+Version: 0.1.3
+Authors@R: c(
+      person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
+    )
 Type: Package
 Title: Analyzing gastric emptying functions
-Version: 0.1.2
-Author: Dieter Menne<dieter.menne@menne-biomed.de>
-Maintainer: Dieter Menne <dieter.menne@menne-biomed.de>
 Description: Fit functions using nonlinear mixed-model population methods to
     gastric emptying time series and compute derived parameters such as t50.
 License: GPL (>=3)
@@ -17,7 +18,7 @@ Imports:
     Rcpp (>= 0.11.0),
     nlme,
     dplyr,
-    ggplot2,
+    ggplot2 (>= 2.1.0),
     rstan,
     assertthat
 Suggests:
@@ -26,6 +27,7 @@ Suggests:
     knitr,
     covr,
     methods,
+    rstan
 LinkingTo:
     StanHeaders (>= 2.8.0),
     rstan (>= 2.8.1),

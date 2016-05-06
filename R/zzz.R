@@ -1,3 +1,3 @@
 .onLoad <- function(libname, pkgname) {
-  Rcpp::loadRcppModules()
+  Rcpp::loadModule("stan_fit4linexp_gastro_1b_mod")
 }

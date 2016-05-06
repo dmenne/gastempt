@@ -22,7 +22,8 @@
 #'   \item \code{variant = 3} Since parameters \code{kappa} and \code{beta} respectively are the most difficult to estimate, these are fixed in this variant (\code{random = v0 + tempt ~ 1}). This variant converges in all reasonable cases, but the estimates of \code{kappa} and \code{beta} cannot be use for secondary between-group analysis. If you are only interested in \code{t50}, you can use this safe version.
 #'   }
 #'
-#' @return A list with elements \code{coef, summary, plot, pnlsTol, message}
+#' @return A list of class nlme_gastempt with elements
+#' \code{coef, summary, plot, pnlsTol, message}
 #' \itemize{
 #'   \item \code{coef} is a data frame with columns:
 #'     \itemize{
