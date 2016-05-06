@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -13,7 +13,7 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.2.0),
+    R (>= 3.2.0)
 Imports:
     Rcpp (>= 0.11.0),
     nlme,
@@ -26,8 +26,7 @@ Suggests:
     rmarkdown,
     knitr,
     covr,
-    methods,
-    rstan
+    methods
 LinkingTo:
     StanHeaders (>= 2.8.0),
     rstan (>= 2.8.1),

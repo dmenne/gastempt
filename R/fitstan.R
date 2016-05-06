@@ -25,6 +25,7 @@
 #'   \item \code{plot} A ggplot graph of data and prediction. Plot of raw data is
 #'      returned even when convergence was not achieved.
 #'  }
+#' @useDynLib gastempt, .registration = TRUE
 #' @import rstan
 #' @export
 stan_gastempt = function(d){
@@ -41,15 +42,12 @@ stan_gastempt = function(d){
     record = d$record_i,
     minute = d$minute,
     volume = d$vol)
-
-  model = stanmodels$linexp_gastro_1b
-  fit = sampling(model, chains = 1, iter = 1000, data = data)
-
-  cf  = summary(fit, "v0")$summary[,1]
-
-  ret = list(coef = cf, fit = fit, plot = NULL)
+  mod = stanmodels$linexp_gastro_1b
+  testthat::expect_s4_class(mod, "stanmodel")
+  testthat::expect_identical(mod@model_name, "linexp_gastro_1b")
+  fit = sampling(mod, data = data, chain = 2, iter = 1000)
+  coef = summary(fit)$summary[,1]
+  ret = list(coef = coef, fit = fit, plot = NULL)
   class(ret) = "stan_gastempt"
   ret
-
-
 }

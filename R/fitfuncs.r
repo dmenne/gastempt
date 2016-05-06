@@ -33,7 +33,6 @@
 #' lines(t, powexp(t, v0, tempt, 1), type = "l", col = "green")
 #' @name gastemptfunc
 NULL
-#' @useDynLib gastempt, .registration = TRUE
 #' @rdname gastemptfunc
 #' @export
 linexp = function(t, v0 = 1, tempt, kappa){

@@ -1,4 +1,3 @@
-# For Gastric functions, per record only
 data{
   real prior_v0;
   int<lower=0> n; # Number of data

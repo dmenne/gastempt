@@ -1,4 +1,6 @@
 context("Test nlme fit to gastric emptying data")
+test_nlme = FALSE
+
 
 # only for debugging
 if (FALSE) {
@@ -10,6 +12,7 @@ if (FALSE) {
 }
 
 test_that("nlme_gastempt returns a valid structure", {
+  skip_if_not(test_nlme)
   set.seed(4711)
   d = simulate_gastempt()$data
   fit = nlme_gastempt(d)
@@ -22,6 +25,7 @@ test_that("nlme_gastempt returns a valid structure", {
 })
 
 test_that("nlme_gastempt can handle noisy and missing data", {
+  skip_if_not(test_nlme)
   set.seed(11)
   d = simulate_gastempt(kappa_mean=1, noise = 40, student_t_df = 3)$data
   fit = nlme_gastempt(d)
@@ -37,6 +41,7 @@ test_that("nlme_gastempt can handle noisy and missing data", {
 
 
 test_that("nlme_gastempt with special data fails", {
+  skip_if_not(test_nlme)
   # This fails
   set.seed(1706)
   d = simulate_gastempt()$data
@@ -70,6 +75,7 @@ search_pnlsTol = function(model = linexp, nlme_model = linexp,
 #search_pnlsTol(model = powexp, nlme_model = linexp)
 
 test_that("fit of powexp data to powexp curve gives valid coefficients", {
+  skip_if_not(test_nlme)
   set.seed(4711)
   d = simulate_gastempt(model = powexp)$data
   expect_match(comment(d), "beta")
@@ -88,6 +94,7 @@ test_that("fit of powexp data to powexp curve gives valid coefficients", {
 
 
 test_that("fit of default powexp data to linexp curve fails often", {
+  skip_if_not(test_nlme)
   set.seed(9344)
   d = simulate_gastempt(model = powexp)$data
   fit = nlme_gastempt(d, model = linexp)
@@ -101,13 +108,13 @@ test_that("fit of default powexp data to linexp curve fails often", {
 })
 
 test_that("fit of powexp data with beta=2 to linexp curve converges", {
+  skip_if_not(test_nlme)
   set.seed(4711)
   d = simulate_gastempt(beta_mean = 2,model = powexp)$data
   fit = nlme_gastempt(d, model = linexp)
   expect_equal(fit$pnlsTol, 0.001)
   expect_equal(fit$message, "Ok")
   fit = nlme_gastempt(d, model = linexp)
-
 })
 
 
