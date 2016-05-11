@@ -42,8 +42,8 @@ linexp = function(t, v0 = 1, tempt, kappa){
 #' @rdname gastemptfunc
 #' @export
 linexp_slope = function(t, v0 = 1, tempt, kappa){
-# (d)/(dt)(v (1+(kappa t)/p) exp(-t/p)) = (v e^(-t/p) ((kappa-1) p-kappa t))/p^2
-  (v0 * exp(-t/tempt) * ((kappa - 1) * tempt - kappa * t))/tempt ^ 2
+# d/dt v (1+(k t)/p) exp(-t/p)  Wolframalpha
+  (v0 * exp(-t/tempt)*((kappa - 1)*tempt - kappa*t))/(tempt*tempt)
 }
 
 #' @rdname gastemptfunc
@@ -56,8 +56,10 @@ powexp = function(t, v0 = 1, tempt, beta){
 #' @export
 powexp_slope = function(t, v0 = 1, tempt, beta){
   # No solution for t=0
-# (d)/(dt)(v exp(-(t/p)^b)) = -(b v e^(-(t/p)^b) (t/p)^b)/t
-  -(beta * v0 * exp(-(t/tempt)^beta)*(t/tempt) ^ beta)/t
+# d/dt v exp(-(t/p)^b)
+#  -beta * v0 * tempt^(-beta) * t ^ (beta-1) * exp(-tempt/t)^(-beta)
+  ttt = (t/tempt) ^ beta
+  -(beta * v0 * exp(-ttt) * ttt)/t
 }
 
 

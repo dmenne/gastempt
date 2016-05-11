@@ -17,9 +17,24 @@ checklinexp = function(tempt, kappa){
   expect_equal(attr(tt,"fun"), linexp)
   v50 = as.numeric(attr(tt,"fun")(tt, v0 = v0, tempt = tempt, kappa = kappa))
   expect_equal(v50, v0/2,  tolerance = tolerance)
-  expect_is(attr(tt,"slope"), "numeric")
-
   expect_equal(tt0, tt, check.attributes = FALSE, tolerance = tolerance )
+
+  expect_is(attr(tt,"slope"), "numeric")
+  slope = attr(tt,"slope")
+  # Compute slope directly
+  slope_0 = 10*diff(linexp(c(tt + 0.05, tt - 0.05), v0 = v0,
+                           tempt = tempt, kappa = kappa))
+  # This is very approximate only
+  expect_equal(slope_0, slope, tolerance = 1e-3)
+
+if (FALSE) {
+  x = 0:400
+  plot(x, linexp(x, v0, tempt, kappa), type ="l", ylim=c(0, 400))
+  a = as.numeric(v50 + slope_0*tt)
+  abline(a = a, b = -slope_0)
+  abline(a = a, b = slope)
+  abline(a = 200, b = 0)
+}
 
   # Transformed
   ttt = t50(c(v0 = v0, logtempt = log(tempt), logkappa = log(kappa)))
@@ -38,6 +53,9 @@ test_that("linexp t50 returns correct value",{
   checklinexp(20, .1)
   checklinexp(.5, .5)
 })
+
+
+
 
 checkpowexp = function(tempt, beta){
   # Non-transformed

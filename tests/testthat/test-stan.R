@@ -29,7 +29,7 @@ gastempt_data = function(){
 }
 
 test_that("Direct use of sample model returns valid results", {
-  skip("Must compile and is slow. Only use on errors")
+  skip("Must compile and is slow. Only use on errors in other Stan functions.")
   data = gastempt_data()
   expect_true(file.exists("../../exec/linexp_gastro_1b.stan"))
   rstan_options(auto_write = TRUE)

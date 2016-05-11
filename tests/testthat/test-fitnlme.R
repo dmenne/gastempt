@@ -1,5 +1,5 @@
 context("Test nlme fit to gastric emptying data")
-test_nlme = FALSE
+test_nlme = TRUE
 
 
 # only for debugging
