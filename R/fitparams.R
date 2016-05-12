@@ -17,6 +17,7 @@ t50.default = function(x){
   # Search interval is 5*tempt
   interval = c(.0001, 5*tempt)
   v0 = ifelse(is.na(x["v0"]), 1, x["v0"])
+  auc = NA
   if ("logbeta" %in% names(x)) {
     ssfun = powexp_log
     ret = uniroot(function(t)
@@ -35,7 +36,8 @@ t50.default = function(x){
         ret = uniroot(function(t)
           linexp_log(t, 1, x["logtempt"], x["logkappa"]) - 0.5,
           interval = interval)$root
-          slope = linexp_slope(ret, v0, exp(x["logtempt"]), exp(x["logkappa"]))
+          slope = linexp_slope(ret, v0, exp(x["logtempt"]),
+                               exp(x["logkappa"]))
       } else
         if ("kappa" %in% names(x)) {
           ssfun = linexp
@@ -43,7 +45,9 @@ t50.default = function(x){
             linexp(t, 1, x["tempt"], x["kappa"]) - 0.5,
             interval = interval)$root
             slope = linexp_slope(ret, v0, x["tempt"], x["kappa"])
+            auc = linexp_auc(v0, x["tempt"], x["kappa"])
         }
+  attr(ret, "auc") = as.numeric(auc)
   attr(ret, "slope") = -as.numeric(slope)
   attr(ret, "fun" ) = ssfun
   ret
@@ -54,10 +58,12 @@ t50.data.frame = function(x){
   assert_that(all(c("record","tempt","v0") %in% names(x)))
   x$t50 = 0
   x$slope_t50 = 0
+  x$auc = NA
   for (i in 1:nrow(x)) {
     tt =  t50(unlist(x[i,-1]))
     x[i,"t50"] = as.numeric(tt)
     x[i,"slope_t50"] = attr(tt,"slope")
+    x[i,"auc"] = attr(tt,"auc")
   }
   x
 }

@@ -10,12 +10,14 @@ checklinexp = function(tempt, kappa){
   v50 = as.numeric(attr(tt0,"fun")(tt0, tempt = tempt, kappa = kappa))
   expect_equal(v50, 0.5,  tolerance = tolerance)
   expect_is(attr(tt0,"slope"), "numeric")
+  expect_is(attr(tt0,"auc"), "numeric")
 
   # With v0
   v0 = 400
   tt = t50(c(v0 = v0, tempt = tempt, kappa = kappa))
   expect_equal(attr(tt,"fun"), linexp)
-  v50 = as.numeric(attr(tt,"fun")(tt, v0 = v0, tempt = tempt, kappa = kappa))
+  v50 = as.numeric(attr(tt,"fun")(tt, v0 = v0, tempt = tempt,
+                                  kappa = kappa))
   expect_equal(v50, v0/2,  tolerance = tolerance)
   expect_equal(tt0, tt, check.attributes = FALSE, tolerance = tolerance )
 
@@ -26,6 +28,10 @@ checklinexp = function(tempt, kappa){
                            tempt = tempt, kappa = kappa))
   # This is very approximate only
   expect_equal(slope_0, slope, tolerance = 1e-3)
+
+  auc = attr(tt,"auc")
+  auc_0 = integrate(linexp, 0, Inf, v0, tempt, kappa)
+  expect_equal(auc, auc_0, tolerance = 1e-3)
 
 if (FALSE) {
   x = 0:400
@@ -106,7 +112,8 @@ test_that("t50 for data frame returns a data frame with column t50",{
   ret = t50(x)
   expect_is(ret, "data.frame")
   expect_equal(nrow(ret), 3)
-  expect_equal(names(ret), c(names(x), c("t50", "slope_t50")))
+  expect_false(any(sapply(ret, function(x) any(is.na(x)))))
+  expect_equal(names(ret), c(names(x), c("t50", "slope_t50", "auc")))
 })
 
 

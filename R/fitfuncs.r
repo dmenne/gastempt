@@ -48,6 +48,13 @@ linexp_slope = function(t, v0 = 1, tempt, kappa){
 
 #' @rdname gastemptfunc
 #' @export
+linexp_auc = function(v0 = 1, tempt, kappa){
+  v0 * (1 + kappa) * tempt
+}
+
+
+#' @rdname gastemptfunc
+#' @export
 powexp = function(t, v0 = 1, tempt, beta){
   v0 * exp(-(t / tempt) ^ beta)
 }
