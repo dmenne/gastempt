@@ -30,7 +30,7 @@ checklinexp = function(tempt, kappa){
   expect_equal(slope_0, slope, tolerance = 1e-3)
 
   auc = attr(tt,"auc")
-  auc_0 = integrate(linexp, 0, Inf, v0, tempt, kappa)
+  auc_0 = integrate(linexp, 0, Inf, v0, tempt, kappa)$value
   expect_equal(auc, auc_0, tolerance = 1e-3)
 
 if (FALSE) {

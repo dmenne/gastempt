@@ -59,7 +59,6 @@ test_that("Running internal stan_gastempt fit returns valid result", {
   # residual standard deviation
   coef = ret$coef
   v0_f = coef[1:length(v0_d)]
-  print(var(v0_d - v0_f))
   expect_lt(sqrt(var(v0_d - v0_f)), 6)
 })
 
