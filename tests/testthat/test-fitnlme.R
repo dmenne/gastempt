@@ -1,7 +1,6 @@
 context("Test nlme fit to gastric emptying data")
 test_nlme = TRUE
 
-
 # only for debugging
 if (FALSE) {
   library(testthat)

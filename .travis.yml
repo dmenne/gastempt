@@ -8,5 +8,6 @@ r-github-packages:
 
 
 after_success:
-  - Rscript -e 'covr::coveralls()'
+    - tar -C .. -xf $PKG_TARBALL
+    - Rscript -e 'covr::coveralls()'
   
