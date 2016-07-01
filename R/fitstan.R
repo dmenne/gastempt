@@ -45,7 +45,7 @@ stan_gastempt = function(d){
   mod = stanmodels$linexp_gastro_1b
   testthat::expect_s4_class(mod, "stanmodel")
   testthat::expect_identical(mod@model_name, "linexp_gastro_1b")
-  fit = sampling(mod, data = data, chain = 2, iter = 1000)
+  fit = sampling(mod, data = data, chains = 2, iter = 1000)
   coef = summary(fit)$summary[,1]
   ret = list(coef = coef, fit = fit, plot = NULL)
   class(ret) = "stan_gastempt"

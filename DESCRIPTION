@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.1.5
+Version: 0.1.6
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -15,9 +15,10 @@ BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
     R (>= 3.2.0)
 Imports:
-    Rcpp (>= 0.11.0),
+    Rcpp (>= 0.12.5),
     nlme,
     dplyr,
+    tibble,
     ggplot2 (>= 2.1.0),
     rstan,
     assertthat
@@ -28,8 +29,8 @@ Suggests:
     covr,
     methods
 LinkingTo:
-    StanHeaders (>= 2.8.0),
-    rstan (>= 2.8.1),
+    StanHeaders (>= 2.10.0),
+    rstan (>= 2.10.0),
     BH (>= 1.58.0),
     Rcpp (>= 0.11.0),
     RcppEigen

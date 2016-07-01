@@ -1,6 +1,5 @@
 # only for debugging
 context("Test basic Stan models")
-test_stan = TRUE
 library(rstan)
 
 test_that("stanmodels exist", {
@@ -29,17 +28,16 @@ gastempt_data = function(){
 }
 
 test_that("Direct use of sample model returns valid results", {
-  skip("Must compile and is slow. Only use on errors in other Stan functions.")
+  skip("This test must compile and is slow. Only use on errors in other Stan functions.")
   data = gastempt_data()
   expect_true(file.exists("../../exec/linexp_gastro_1b.stan"))
   rstan_options(auto_write = TRUE)
-  mr = stan("../../exec/linexp_gastro_1b.stan", data = data, chain = 1)
+  mr = stan("../../exec/linexp_gastro_1b.stan", data = data, chains = 1)
   expect_is(mr, "stanfit")
 })
 
 
 test_that("Running precompiled model directly returns valid result", {
-  skip_if_not(test_stan)
   mod = stanmodels$linexp_gastro_1b
   testthat::expect_s4_class(mod, "stanmodel")
   testthat::expect_identical(mod@model_name, "linexp_gastro_1b")
@@ -50,7 +48,6 @@ test_that("Running precompiled model directly returns valid result", {
 })
 
 test_that("Running internal stan_gastempt fit returns valid result", {
-  skip_if_not(test_stan)
   set.seed(471)
   d = simulate_gastempt(n_records = 6)
   v0_d = d$record$v0

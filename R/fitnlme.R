@@ -52,6 +52,7 @@
 #' @importFrom nlme nlme nlmeControl pdDiag
 #' @importFrom 	stats coef median na.omit predict rnorm	rt uniroot
 #' @importFrom utils head	tail
+#' @importFrom tibble rownames_to_column
 #' @import ggplot2
 #' @import dplyr
 #'
@@ -131,7 +132,7 @@ nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1){
     return(ret)
   }
   cf =  coef(d_nlme) %>%
-    add_rownames("record")  %>%
+    tibble::rownames_to_column("record")  %>%
     t50() # Adds columns t50 and slope_t50
   # Plot prediction
   newdata = expand.grid(record = levels(d$record),

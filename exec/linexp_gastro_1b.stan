@@ -32,10 +32,10 @@ model{
   sigma ~ gamma(20, 0.5);
 
 for (i in 1:n){
-   rec <- record[i];
-   v0r <- v0[rec];
-   kappar <- kappa[rec];
-   temptr <- tempt[rec];
+   rec = record[i];
+   v0r = v0[rec];
+   kappar = kappa[rec];
+   temptr = tempt[rec];
    volume[i] ~ normal(v0r*(1+kappar*minute[i]/temptr)*exp(-minute[i]/temptr), sigma);
   }
 }
