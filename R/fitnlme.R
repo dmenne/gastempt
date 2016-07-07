@@ -120,11 +120,13 @@ nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1){
     pl = c(list(t = newdata$minute), start$fixed)
     newdata$vol = do.call(model, pl)
     start_r = lapply(start$fixed, signif, 3)
-    subtitle = paste0("Start values are shown in red: ",
-           paste0(names(start$fixed), " = ", start_r , collapse = ","))
+    # TODO: Enable subtitle when version of ggplot > 2.1.0
+#    subtitle = paste0("Start values are shown in red: ",
+#           paste0(names(start$fixed), " = ", start_r , collapse = ","))
     plot = plot + geom_line(data = newdata, col = "red") +
-      ggtitle(paste("No convergence:", title, ", pnlsTol = ", pnlsTol ),
-              subtitle = subtitle)
+        ggtitle(paste("No convergence:", title, ", pnlsTol = ", pnlsTol ))
+#      ggtitle(paste("No convergence:", title, ", pnlsTol = ", pnlsTol ),
+#              subtitle = subtitle)
     ret = list(coef = NULL, summary = NULL, pnlsTol = pnlsTol, plot = plot,
                message = paste("pnlsTol = ", signif(pnlsTol, 2),"\n",
                                as.character(d_nlme)))
@@ -139,8 +141,9 @@ nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1){
                         minute = seq(0, max(d$minute), length.out = 50))
   newdata$vol = predict(d_nlme, newdata)
   plot = plot + geom_line(data = newdata, col = "#006400") +
-    ggtitle(paste0(title, ", pnlsTol = ", pnlsTol),
-            subtitle = comment(d) )
+    ggtitle(paste0(title, ", pnlsTol = ", pnlsTol))
+# TODO: subtitle
+#            , subtitle = comment(d) )
   ret = list(coef = cf, summary = summary(d_nlme), plot = plot,
              pnlsTol = pnlsTol, message = "Ok")
   class(ret) = "nlme_gastempt"

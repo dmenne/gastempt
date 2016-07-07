@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.1.6
+Version: 0.1.7
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -34,7 +34,8 @@ LinkingTo:
     BH (>= 1.58.0),
     Rcpp (>= 0.11.0),
     RcppEigen
-RcppModules: stan_fit4linexp_gastro_1b_mod
+RcppModules: stan_fit4linexp_gastro_1b_mod,
+   stan_fit4linexp_gastro_1c_mod,
+   stan_fit4linexp_gastro_1d_mod
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
-Remotes: hadley/ggplot2

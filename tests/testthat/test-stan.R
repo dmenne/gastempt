@@ -1,6 +1,11 @@
 # only for debugging
 context("Test basic Stan models")
-library(rstan)
+
+if (FALSE){
+  library(rstan)
+  library(testthat)
+  library(gastempt)
+}
 
 test_that("stanmodels exist", {
   expect_true(exists("stanmodels"), "No stanmodels found")
@@ -28,30 +33,56 @@ gastempt_data = function(){
 }
 
 test_that("Direct use of sample model returns valid results", {
-  skip("This test must compile and is slow. Only use on errors in other Stan functions.")
+  skip("This test must compile the model and is slow. Only use on errors in other Stan functions.")
   data = gastempt_data()
-  expect_true(file.exists("../../exec/linexp_gastro_1b.stan"))
+  stan_model = "../../exec/linexp_gastro_1b.stan"
+  expect_true(file.exists(stan_model))
   rstan_options(auto_write = TRUE)
-  mr = stan("../../exec/linexp_gastro_1b.stan", data = data, chains = 1)
-  expect_is(mr, "stanfit")
+  iter = 5000
+  mr_b = stan(stan_model, data = data, chains = 4, iter = iter, seed = 4711,
+              refresh = FALSE)
+  expect_is(mr_b, "stanfit")
+
+  stan_model = "../../exec/linexp_gastro_1c.stan"
+  mr_c = stan(stan_model, data = data, chains = 4, iter = iter, seed = 4711,
+              refresh = FALSE)
+
+  stan_model = "../../exec/linexp_gastro_1d.stan"
+  mr_d = stan(stan_model, data = data, chains = 4, iter = iter, seed = 4711,
+              refresh = FALSE)
+
+  m_d = get_posterior_mean(mr_d)[,5];
+  m_c = get_posterior_mean(mr_c)[,5];
+  m_b = get_posterior_mean(mr_b)[,5];
+  cbind(m_b, m_c, m_c)
+
+  sum(get_elapsed_time(mr_b))
+  sum(get_elapsed_time(mr_c))
+  sum(get_elapsed_time(mr_d))
 })
 
 
-test_that("Running precompiled model directly returns valid result", {
-  mod = stanmodels$linexp_gastro_1b
+run_precompiled_model = function(model){
+  mod = stanmodels[[model]]
   testthat::expect_s4_class(mod, "stanmodel")
-  testthat::expect_identical(mod@model_name, "linexp_gastro_1b")
+  testthat::expect_identical(mod@model_name, model)
   data = gastempt_data()
-  fit = rstan::sampling(mod, data = data, chains = 1, iter = 100,
-                 show_messages = FALSE)
+  fit = rstan::sampling(mod, data = data, chains = 1, iter = 500,                      refresh = -1, verbose = FALSE)
   expect_is(fit, "stanfit")
+}
+
+
+test_that("Running precompiled model directly returns valid result", {
+  run_precompiled_model("linexp_gastro_1b")
+  run_precompiled_model("linexp_gastro_1c")
+  run_precompiled_model("linexp_gastro_1d")
 })
 
 test_that("Running internal stan_gastempt fit returns valid result", {
   set.seed(471)
   d = simulate_gastempt(n_records = 6)
-  v0_d = d$record$v0
-  ret = stan_gastempt(d$data)
+  v0_d = d$rec$v0
+  ret = stan_gastempt(d$data, model_name = "linexp_gastro_1c", refresh = -1)
   expect_is(ret, "stan_gastempt")
   # residual standard deviation
   coef = ret$coef

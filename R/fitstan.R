@@ -2,16 +2,18 @@
 #'
 #' @param d A data frame with columns
 #' \itemize{
-#'   \item \code{record} Record descriptor as grouping variable, e.g. patient ID
+#'   \item \code{rec} Record descriptor as grouping variable, e.g. patient ID
 #'   \item \code{minute} Time after meal or start of recording.
 #'   \item \code{vol} Volume of meal or stomach
 #'  }
+#' @param model_name Name of predefined model in \code{gastempt/exec}
+#' @param ... Additional parameter passed to \code{sampling}
 #'
 #' @return A list of class stan_gastempt with elements \code{coef, fit, plot}
 #' \itemize{
 #'   \item \code{coef} is a data frame with columns:
 #'     \itemize{
-#'       \item \code{record} Record descriptor, e.g. patient ID
+#'       \item \code{rec} Record descriptor, e.g. patient ID
 #'       \item \code{v0} Initial volume at t=0
 #'       \item \code{tempt} Emptying time constant
 #'       \item \code{kappa} Parameter \code{kappa} for
@@ -28,7 +30,7 @@
 #' @useDynLib gastempt, .registration = TRUE
 #' @import rstan
 #' @export
-stan_gastempt = function(d){
+stan_gastempt = function(d, model_name = "linexp_gastro_1b", ...){
   assert_that(all(c("record", "minute","vol") %in% names(d)))
 #  rstan_options(auto_write = TRUE)
 #  options(mc.cores = parallel::detectCores())
@@ -45,7 +47,7 @@ stan_gastempt = function(d){
   mod = stanmodels$linexp_gastro_1b
   testthat::expect_s4_class(mod, "stanmodel")
   testthat::expect_identical(mod@model_name, "linexp_gastro_1b")
-  fit = sampling(mod, data = data, chains = 2, iter = 1000)
+  fit = sampling(mod, data = data, ...)
   coef = summary(fit)$summary[,1]
   ret = list(coef = coef, fit = fit, plot = NULL)
   class(ret) = "stan_gastempt"

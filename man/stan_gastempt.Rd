@@ -4,22 +4,26 @@
 \alias{stan_gastempt}
 \title{Fit gastric emptying curves with Stan}
 \usage{
-stan_gastempt(d)
+stan_gastempt(d, model_name = "linexp_gastro_1b", ...)
 }
 \arguments{
 \item{d}{A data frame with columns
 \itemize{
-  \item \code{record} Record descriptor as grouping variable, e.g. patient ID
+  \item \code{rec} Record descriptor as grouping variable, e.g. patient ID
   \item \code{minute} Time after meal or start of recording.
   \item \code{vol} Volume of meal or stomach
  }}
+
+\item{model_name}{Name of predefined model in \code{gastempt/exec}}
+
+\item{...}{Additional parameter passed to \code{sampling}}
 }
 \value{
 A list of class stan_gastempt with elements \code{coef, fit, plot}
 \itemize{
   \item \code{coef} is a data frame with columns:
     \itemize{
-      \item \code{record} Record descriptor, e.g. patient ID
+      \item \code{rec} Record descriptor, e.g. patient ID
       \item \code{v0} Initial volume at t=0
       \item \code{tempt} Emptying time constant
       \item \code{kappa} Parameter \code{kappa} for
