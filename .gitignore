@@ -1,6 +1,7 @@
 *.o
 src/*.o-*
 *.so
+*.rda
 *.dll
 *.html
 .RData
