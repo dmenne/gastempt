@@ -9,8 +9,9 @@
 #' @param student_t_df When NULL (default), Gaussian noise is added; when >= 2, Student_t distributed noise is added, which generates more realistic outliers. Values from 2 to 5 are useful, when higher values are used the result comes close to that of Gaussian noise. Values below 2 are truncated to 2.
 #' @param missing When 0 (default), all curves have the same number of data points. When > 0, this is the fraction of points that were removed randomly to simulate missing points. Maximum value is 0.5.
 #' @param model linexp(default) or powexp
+#' @param seed optional seed; not set if seed = NULL (default)
 #'
-#' @return A list with two elements:
+#' @return A list with 3 elements:
 #' \describe{
 #'   \item{record}{Data frame with columns
 #'     \code{record(chr), v0, tempt, kappa/beta} giving the effective
@@ -18,7 +19,10 @@
 #'     \code{v0} is rounded to nearest integer.}
 #'   \item{data}{Data frame with columns
 #'     \code{record(chr), minute(dbl), vol(dbl)} giving the
-#'      time series and grouping parameters. \code{vol} is rounded to nearest integer.}
+#'      time series and grouping parameters. \code{vol} is rounded
+#'      to nearest integer.}
+#'   \item{stan_data}{A list for use as \code{data} in Stan-based fits
+#'   with elements \code{prior_v0, n, n_record, record, minute, volume}.}
 #'  }
 #'  A comment is attached to the return value that can be used as a title
 #' @examples
@@ -49,10 +53,13 @@ simulate_gastempt = function(
   noise = 20,
   student_t_df = NULL,
   missing = 0,
-  model = linexp) {
+  model = linexp,
+  seed = NULL) {
 
   # Hack to avoid notes
   vol = . = NULL
+  if (!is.null(seed))
+    set.seed(seed)
   # Only linexp and powexp are supported
   assert_that(identical(model, linexp) || identical(model, powexp))
   model_name = ifelse(identical(model, linexp), "linexp", "powexp")
@@ -132,7 +139,22 @@ simulate_gastempt = function(
           n_records, model_name, v0_mean, v0_std, tempt_mean, tempt_std, kb,
           sf, noise, 100*missing)
   comment(data) = comment
-  list(record = rec, data = data)
+  # Add list format for use with stan
+  #
+  data1 = data %>%
+    mutate(
+      record_i = as.integer(as.factor(data$record))
+    )
+
+  stan_data = list(
+    prior_v0 = median(data1$vol[data1$minute < 10]),
+    n = nrow(data1),
+    n_record = max(data1$record_i),
+    record = data1$record_i,
+    minute = data1$minute,
+    volume = data1$vol)
+
+  list(record = rec, data = data, stan_data = stan_data)
 }
 
 

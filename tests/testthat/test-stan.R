@@ -19,17 +19,7 @@ test_that("stanmodels$linexp_gastro_1b exists", {
 })
 
 gastempt_data = function(){
-  set.seed(471)
-  d = simulate_gastempt(n_records = 6)$data
-  d$record_i =  as.integer(as.factor(d$record))
-
-  list(
-    prior_v0 = median(d$vol[d$minute < 10]),
-    n = nrow(d),
-    n_record = max(d$record_i),
-    record = d$record_i,
-    minute = d$minute,
-    volume = d$vol)
+  simulate_gastempt(n_records = 6, seed = 471)$stan_data
 }
 
 test_that("Direct use of sample model returns valid results", {
@@ -38,7 +28,7 @@ test_that("Direct use of sample model returns valid results", {
   stan_model = "../../exec/linexp_gastro_1b.stan"
   expect_true(file.exists(stan_model))
   rstan_options(auto_write = TRUE)
-  iter = 5000
+  iter = 500
   mr_b = stan(stan_model, data = data, chains = 4, iter = iter, seed = 4711,
               refresh = FALSE)
   expect_is(mr_b, "stanfit")

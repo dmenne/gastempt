@@ -6,7 +6,7 @@ library(assertthat)
 test_that("Default call of simulate_gastempt must return plausible values",{
   set.seed(4711)
   d = simulate_gastempt()
-  expect_equal(names(d), c("record", "data"))
+  expect_equal(names(d), c("record", "data", "stan_data"))
   expect_match(comment(d$data), "linexp")
   data = d$data
   record = d$record
@@ -20,7 +20,7 @@ test_that("Default call of simulate_gastempt must return plausible values",{
 test_that("Noise = 0 must issue a warning",{
   set.seed(4711)
   expect_warning(d <- simulate_gastempt(noise = 0), "zero")
-  expect_equal(names(d), c("record", "data"))
+  expect_equal(names(d), c("record", "data", "stan_data"))
   data = d$data
   record = d$record
   expect_equal(nrow(record), 10)
@@ -67,7 +67,7 @@ test_that(
   "Default call of simulate_gastempt for powexp must return plausible values",{
   set.seed(4711)
   d = simulate_gastempt(model = powexp)
-  expect_equal(names(d), c("record", "data"))
+  expect_equal(names(d), c("record", "data", "stan_data"))
   data = d$data
   record = d$record
   expect_equal(nrow(record), 10)
@@ -83,7 +83,7 @@ test_that("Noise = 0 must issue a warning and powexp should not overshoot",{
     noise = 0, model = powexp), "zero")
   data = d$data
   record = d$record
-  expect_equal(names(d), c("record", "data"))
+  expect_equal(names(d), c("record", "data", "stan_data"))
   expect_true(all(data$vol >= 0))
   expect_true(all(data$vol <= 400))
   # Without noise, first

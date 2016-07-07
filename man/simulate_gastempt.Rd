@@ -8,7 +8,7 @@ simulate_gastempt(n_records = 10, v0_mean = 400, v0_std = 50,
   tempt_mean = ifelse(identical(model, linexp), 60, 120),
   tempt_std = tempt_mean/3, kappa_mean = 0.7, kappa_std = kappa_mean/3,
   beta_mean = 0.7, beta_std = beta_mean/3, noise = 20,
-  student_t_df = NULL, missing = 0, model = linexp)
+  student_t_df = NULL, missing = 0, model = linexp, seed = NULL)
 }
 \arguments{
 \item{n_records}{Number of records}
@@ -28,9 +28,11 @@ simulate_gastempt(n_records = 10, v0_mean = 400, v0_std = 50,
 \item{missing}{When 0 (default), all curves have the same number of data points. When > 0, this is the fraction of points that were removed randomly to simulate missing points. Maximum value is 0.5.}
 
 \item{model}{linexp(default) or powexp}
+
+\item{seed}{optional seed; not set if seed = NULL (default)}
 }
 \value{
-A list with two elements:
+A list with 3 elements:
 \describe{
   \item{record}{Data frame with columns
     \code{record(chr), v0, tempt, kappa/beta} giving the effective
@@ -38,7 +40,10 @@ A list with two elements:
     \code{v0} is rounded to nearest integer.}
   \item{data}{Data frame with columns
     \code{record(chr), minute(dbl), vol(dbl)} giving the
-     time series and grouping parameters. \code{vol} is rounded to nearest integer.}
+     time series and grouping parameters. \code{vol} is rounded
+     to nearest integer.}
+  \item{stan_data}{A list for use as \code{data} in Stan-based fits
+  with elements \code{prior_v0, n, n_record, record, minute, volume}.}
  }
  A comment is attached to the return value that can be used as a title
 }
