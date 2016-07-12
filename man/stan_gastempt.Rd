@@ -4,7 +4,7 @@
 \alias{stan_gastempt}
 \title{Fit gastric emptying curves with Stan}
 \usage{
-stan_gastempt(d, model_name = "linexp_gastro_1b", ...)
+stan_gastempt(d, model_name = "linexp_gastro_1d", ...)
 }
 \arguments{
 \item{d}{A data frame with columns
@@ -42,9 +42,9 @@ A list of class stan_gastempt with elements \code{coef, fit, plot}
 Fit gastric emptying curves with Stan
 }
 \examples{
-  d = simulate_gastempt(n_records = 6, seed = 471)
-  v0_d = d$rec$v0
-  ret = stan_gastempt(d$data, model_name = "linexp_gastro_1c")
+  dd = simulate_gastempt(n_records = 6, seed = 471)
+  d = dd$data
+  ret = stan_gastempt(d)
   print(ret$coef)
 }
 

@@ -55,8 +55,31 @@ stan_gastempt = function(d, model_name = "linexp_gastro_1d", ...){
   capture.output({
     fit = suppressWarnings(sampling(mod, data = data, ...))
   })
-  coef = summary(fit)$summary[,1]
+  cf = summary(fit)$summary[,1]
+  coef = data_frame(
+    record = unique(d$record),
+    v0 = cf[grep("v0", names(cf))],
+    kappa = cf[grep("^kappa", names(cf))],
+    tempt = cf[grep("^tempt", names(cf))]
+  ) %>% t50
+  attr(coef, "sigma") = cf["sigma"]
+  attr(coef, "mu_kappa") = cf["mu_kappa"]
+  attr(coef, "sigma_kappa") = cf["sigma_kappa"]
+  attr(coef, "lp") = cf["lp__"]
+  # Assemble return
   ret = list(coef = coef, fit = fit, plot = NULL)
   class(ret) = "stan_gastempt"
   ret
+}
+
+
+if (FALSE) {
+  library(gastempt)
+  library(rstan)
+  library(dplyr)
+  library(assertthat)
+  dd = simulate_gastempt(n_records = 6, seed = 471)
+  d = dd$data
+  ret = stan_gastempt(d)
+  coef = ret$coef
 }
