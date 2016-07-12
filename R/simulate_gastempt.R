@@ -10,6 +10,8 @@
 #' @param missing When 0 (default), all curves have the same number of data points. When > 0, this is the fraction of points that were removed randomly to simulate missing points. Maximum value is 0.5.
 #' @param model linexp(default) or powexp
 #' @param seed optional seed; not set if seed = NULL (default)
+#' @param max_minute Maximal time in minutes; if NULL, a sensible
+#' default rounded to hours is used
 #'
 #' @return A list with 3 elements:
 #' \describe{
@@ -54,7 +56,8 @@ simulate_gastempt = function(
   student_t_df = NULL,
   missing = 0,
   model = linexp,
-  seed = NULL) {
+  seed = NULL,
+  max_minute = NULL) {
 
   # Hack to avoid notes
   vol = . = NULL
@@ -75,13 +78,15 @@ simulate_gastempt = function(
 
 
   # Time range as 3* t50
-  if (model_name == "linexp") {
-    max_minute = 3*as.numeric(t50(c(tempt = tempt_mean, kappa = kappa_mean)))
-  } else  {
-    max_minute = 3*as.numeric(t50(c(tempt = tempt_mean, beta = beta_mean)))
+  if (is.null(max_minute)) {
+    if (model_name == "linexp") {
+      max_minute = 3*as.numeric(t50(c(tempt = tempt_mean, kappa = kappa_mean)))
+    } else  {
+      max_minute = 3*as.numeric(t50(c(tempt = tempt_mean, beta = beta_mean)))
+    }
+    # Round to hours
+    max_minute = ((max_minute %/% 60) + 1) * 60
   }
-  # Round to hours
-  max_minute = ((max_minute %/% 60) + 1) * 60
   minute = c(seq(0,20, by = 5), seq(30, max_minute, by = 30))
 
   # Record
@@ -98,12 +103,12 @@ simulate_gastempt = function(
   # Noise term
   if (is.null(student_t_df) || student_t_df == 0 ) {
     if (noise == 0)
-      warning("Without zero noise, non-linear fits might fail.")
+      warning("With noise == 0, non-linear fits might fail.")
     noise_d = rnorm(nrow(rec)*length(minute), 0, noise)
   } else {
-    if (student_t_df < 3) {
-      student_t_df = 3
-      warning("Degrees of freedom of Student-t noise was set to 3")
+    if (student_t_df < 2) {
+      student_t_df = 2
+      warning("Degrees of freedom of Student-t noise was set to 2")
     }
     noise_d = noise*rt(nrow(rec)*length(minute), student_t_df)
   }
@@ -135,7 +140,7 @@ simulate_gastempt = function(
               sprintf("beta = %.2f\U00B1%.2f", beta_mean,  beta_std))
   sf = ifelse(is.null(student_t_df) || student_t_df == 0, "Gaussian",
               paste0("Student-t ", student_t_df," df"))
-  comment = sprintf("%.0f records, %s, v0 = %.0f\U00B1%.0f, tempt =  %.0f\U00B1%.0f, %s, %s noise amplitude = %.0f, %.0f%% missing",
+  comment = sprintf("%.0f records, %s, v0 = %.0f\U00B1%.0f, tempt =  %.0f\U00B1%.0f, %s,\n%s noise amplitude = %.0f, %.0f%% missing",
           n_records, model_name, v0_mean, v0_std, tempt_mean, tempt_std, kb,
           sf, noise, 100*missing)
   comment(data) = comment

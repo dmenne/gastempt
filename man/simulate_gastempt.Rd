@@ -8,7 +8,8 @@ simulate_gastempt(n_records = 10, v0_mean = 400, v0_std = 50,
   tempt_mean = ifelse(identical(model, linexp), 60, 120),
   tempt_std = tempt_mean/3, kappa_mean = 0.7, kappa_std = kappa_mean/3,
   beta_mean = 0.7, beta_std = beta_mean/3, noise = 20,
-  student_t_df = NULL, missing = 0, model = linexp, seed = NULL)
+  student_t_df = NULL, missing = 0, model = linexp, seed = NULL,
+  max_minute = NULL)
 }
 \arguments{
 \item{n_records}{Number of records}
@@ -30,6 +31,9 @@ simulate_gastempt(n_records = 10, v0_mean = 400, v0_std = 50,
 \item{model}{linexp(default) or powexp}
 
 \item{seed}{optional seed; not set if seed = NULL (default)}
+
+\item{max_minute}{Maximal time in minutes; if NULL, a sensible
+default rounded to hours is used}
 }
 \value{
 A list with 3 elements:

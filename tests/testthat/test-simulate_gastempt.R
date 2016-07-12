@@ -16,6 +16,12 @@ test_that("Default call of simulate_gastempt must return plausible values",{
   expect_lt(median(data$vol[data$minute > max(data$minute)*0.7]), 200)
 })
 
+test_that("When max_minute is explicitly given, it must be used",{
+  set.seed(4711)
+  d = simulate_gastempt(max_minute = 88)
+  expect_equal(max(d$data$minute), 60)
+})
+
 
 test_that("Noise = 0 must issue a warning",{
   set.seed(4711)
