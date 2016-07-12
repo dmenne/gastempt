@@ -28,9 +28,15 @@
 #'      returned even when convergence was not achieved.
 #'  }
 #' @useDynLib gastempt, .registration = TRUE
+#' @examples
+#'   dd = simulate_gastempt(n_records = 6, seed = 471)
+#'   d = dd$data
+#'   ret = stan_gastempt(d)
+#'   print(ret$coef)
 #' @import rstan
+#' @importFrom utils capture.output
 #' @export
-stan_gastempt = function(d, model_name = "linexp_gastro_1b", ...){
+stan_gastempt = function(d, model_name = "linexp_gastro_1d", ...){
   assert_that(all(c("record", "minute","vol") %in% names(d)))
 #  rstan_options(auto_write = TRUE)
 #  options(mc.cores = parallel::detectCores())
@@ -44,9 +50,8 @@ stan_gastempt = function(d, model_name = "linexp_gastro_1b", ...){
     record = d$record_i,
     minute = d$minute,
     volume = d$vol)
-  mod = stanmodels$linexp_gastro_1b
+  mod = stanmodels[[model_name]]
   testthat::expect_s4_class(mod, "stanmodel")
-  testthat::expect_identical(mod@model_name, "linexp_gastro_1b")
   capture.output({
     fit = suppressWarnings(sampling(mod, data = data, ...))
   })

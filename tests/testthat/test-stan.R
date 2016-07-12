@@ -76,8 +76,7 @@ test_that("Running precompiled model directly returns valid result", {
 })
 
 test_that("Running internal stan_gastempt fit returns valid result", {
-  set.seed(471)
-  d = simulate_gastempt(n_records = 6)
+  d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_1c", refresh = -1)
   expect_is(ret, "stan_gastempt")
@@ -88,8 +87,7 @@ test_that("Running internal stan_gastempt fit returns valid result", {
 })
 
 test_that("Running internal stan_gastempt with many missing data returns valid result", {
-  set.seed(471)
-  d = simulate_gastempt(n_records = 6, missing = 0.3)
+  d = simulate_gastempt(n_records = 6, missing = 0.3, seed = 471)
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_1c", refresh = -1)
   expect_is(ret, "stan_gastempt")

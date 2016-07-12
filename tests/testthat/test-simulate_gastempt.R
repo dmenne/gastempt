@@ -25,7 +25,7 @@ test_that("When max_minute is explicitly given, it must be used",{
 
 test_that("Noise = 0 must issue a warning",{
   set.seed(4711)
-  expect_warning(d <- simulate_gastempt(noise = 0), "zero")
+  expect_warning(d <- simulate_gastempt(noise = 0), "might fail")
   expect_equal(names(d), c("record", "data", "stan_data"))
   data = d$data
   record = d$record
@@ -86,7 +86,7 @@ test_that("Noise = 0 must issue a warning and powexp should not overshoot",{
   expect_warning(d <- simulate_gastempt(
     n_record = 4, v0_mean = 400, v0_std = 0,
     beta_mean = 4,
-    noise = 0, model = powexp), "zero")
+    noise = 0, model = powexp), "might fail")
   data = d$data
   record = d$record
   expect_equal(names(d), c("record", "data", "stan_data"))
