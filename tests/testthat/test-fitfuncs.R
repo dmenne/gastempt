@@ -1,6 +1,91 @@
 context("Test fit functions")
 tolerance = 5.e-5
 
+test_that("Linexp Functions can be called with par or explicit parameters",{
+  v0 = 400
+  tempt = 60
+  kappa = 2
+  t = c(0, 10, 300)
+
+  # linexp
+  pars = c(v0 = v0, tempt = tempt, kappa = kappa)
+  r = linexp(t, v0, tempt, kappa)
+  rp = linexp(t, pars = pars)
+  expect_equal(r, rp)
+  expect_equal(length(r), 3)
+  expect_error(linexp(t, v0, tempt, kappa, pars), "Either")
+  expect_error(linexp(t, tempt = tempt, kappa = kappa, pars = pars), "Either")
+
+  # linexp_slope
+  pars = c(v0 = v0, tempt = tempt, kappa = kappa)
+  r = linexp_slope(t, v0, tempt, kappa)
+  rp = linexp_slope(t, pars = pars)
+  expect_equal(r, rp)
+  expect_equal(length(r), 3)
+  expect_error(linexp_slope(t, v0, tempt, kappa, pars), "Either")
+  expect_error(linexp_slope(t, tempt = tempt, kappa = kappa, pars = pars), "Either")
+
+  # linexp_auc
+  pars = c(v0 = v0, tempt = tempt, kappa = kappa)
+  r = linexp_auc(v0, tempt, kappa)
+  rp = linexp_auc(pars = pars)
+  expect_equal(r, rp)
+  expect_error(linexp_auc(v0, tempt, kappa, pars), "Either")
+  expect_error(linexp_auc(tempt = tempt, kappa = kappa, pars = pars), "Either")
+
+  # linexp_log
+  logtempt = log(tempt)
+  logkappa = log(kappa)
+  pars = c(v0 = v0, logtempt = logtempt, logkappa = logkappa)
+  r = linexp_log(t, v0, logtempt, logkappa)
+  rp = linexp_log(t, pars = pars)
+  expect_equal(r, rp)
+  expect_equal(length(r), 3)
+  expect_error(linexp_log(t, v0, logtempt, logkappa, pars), "Either")
+  expect_error(linexp_log(t, logtempt = logtempt, logkappa = logkappa,
+                          pars = pars), "Either")
+})
+
+test_that("Powexp Functions can be called with par or explicit parameters",{
+  v0 = 400
+  tempt = 60
+  beta = 2
+  t = c(0, 10, 300)
+
+  # powexp
+  pars = c(v0 = v0, tempt = tempt, beta = beta)
+  r = powexp(t, v0, tempt, beta)
+  rp = powexp(t, pars = pars)
+  expect_equal(r, rp)
+  expect_equal(length(r), 3)
+  expect_error(powexp(t, v0, tempt, beta, pars), "Either")
+  expect_error(powexp(t, tempt = tempt, beta = beta, pars = pars), "Either")
+
+  # powexp_slope
+  pars = c(v0 = v0, tempt = tempt, beta = beta)
+  r = powexp_slope(t, v0, tempt, beta)
+  rp = powexp_slope(t, pars = pars)
+  expect_equal(r, rp)
+  expect_equal(length(r), 3)
+  expect_error(powexp_slope(t, v0, tempt, beta, pars), "Either")
+  expect_error(powexp_slope(t, tempt = tempt, beta = beta, pars = pars), "Either")
+
+  # There is no powexp_auc
+
+  # powexp_log
+  logtempt = log(tempt)
+  logbeta = log(beta)
+  pars = c(v0 = v0, logtempt = logtempt, logbeta = logbeta)
+  r = powexp_log(t, v0, logtempt, logbeta)
+  rp = powexp_log(t, pars = pars)
+  expect_equal(r, rp)
+  expect_equal(length(r), 3)
+  expect_error(powexp_log(t, v0, logtempt, logbeta, pars), "Either")
+  expect_error(powexp_log(t, logtempt = logtempt, logbeta = logbeta,
+                          pars = pars), "Either")
+})
+
+
 test_that("Functions at t=0 must return initial volume",{
   v0 = 400
   tempt = 60

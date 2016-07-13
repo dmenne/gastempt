@@ -66,8 +66,33 @@ stan_gastempt = function(d, model_name = "linexp_gastro_1d", ...){
   attr(coef, "mu_kappa") = cf["mu_kappa"]
   attr(coef, "sigma_kappa") = cf["sigma_kappa"]
   attr(coef, "lp") = cf["lp__"]
+  #
+  # Compute plot
+  plot = ggplot(d, aes(x = minute, y = vol)) + geom_point() +
+    facet_wrap(~ record) +
+    expand_limits(x = 0, y = 0) # force zeroes to be visible
+  minute = seq(min(d$minute), max(d$minute), length.out = 51)
+  if (grep("linexp", model_name)){
+    title = paste0("Stan fitted linexp function, model ", model_name)
+    pred_func = linexp
+  } else {
+    ### TODO Not tested
+    title = paste0("Fitted powexp function, model ", model_name)
+    pred_func = powexp
+  }
+  newdata  = coef %>%
+    rowwise() %>%
+    do({
+      # TODO: powexp
+      vol = pred_func(minute, v0 = .$v0, tempt = .$tempt, kappa = .$kappa )
+      data_frame(record = .$record, minute = minute, vol = vol)
+    })
+
+  plot = plot + geom_line(data = newdata, col = "#006400")  +
+    ggtitle(title, subtitle = comment(d))
+
   # Assemble return
-  ret = list(coef = coef, fit = fit, plot = NULL)
+  ret = list(coef = coef, fit = fit, plot = plot)
   class(ret) = "stan_gastempt"
   ret
 }
@@ -82,4 +107,5 @@ if (FALSE) {
   d = dd$data
   ret = stan_gastempt(d)
   coef = ret$coef
+  plot(ret$plot)
 }

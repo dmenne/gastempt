@@ -16,6 +16,7 @@ The package is available from github: https://github.com/dmenne/gastempt. It can
 devtools::install_github("dmenne/gastempt")
 ```
 
+Compilation of the Stan models require several minutes.
 
 Two models are implemented:
 
@@ -26,6 +27,7 @@ Two models are implemented:
 * Several preset simulations are provided in the Shiny app. 
 * Robustness of models can be tested by manipulating noise quality and between-subject variance. 
 * Fits are displayed with data.
+* [Stan-based fits](http://menne-biomed.de/blog/tag:Stan) in work, not yet in Shiny
 * The coefficients of the analysis including t50 and the slope in t50 can be downloaded in .csv format.
 
 Coming:

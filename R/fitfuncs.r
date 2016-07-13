@@ -16,6 +16,9 @@
 #' @param logbeta Logarithm of power term for power exponential function (scalar).
 #' @param kappa Overshoot term for linexp function (scalar).
 #' @param logkappa Logarithm of overshoot term for linexp function (scalar).
+#' @param pars Default NULL. If not NULL, the other parameters with exception
+#' of \code{t} are not used and are retrieved as named parameters
+#' from the numeric vector pars instead.
 #' @return Vector of \code{length(t)} for computed volume.
 #' @seealso Self starting functions  \code{\link{selfStart}}.
 #' @examples
@@ -24,62 +27,127 @@
 #' tempt = 60
 #' v0 = 400
 #' beta = 3
-#' par(mfrow=c(1,2))
+#' pars = c(v0 = v0, tempt = tempt, kappa = kappa)
+#' par(mfrow=c(1,3))
 #' plot(t, linexp(t, v0, tempt, kappa), type = "l", ylab = "volume",
 #'    main = "linexp\nkappa = 1.3 and 1.0")
+#' lines(t, linexp(t, v0, tempt, 1), type = "l", col = "green")
+#' # This should give the same plot as above
+#' plot(t, linexp(t, pars = pars), type = "l", ylab = "volume",
+#'    main = "linexp\nkappa = 1.3 and 1.0\nwith vectored parameters")
 #' lines(t, linexp(t, v0, tempt, 1), type = "l", col = "green")
 #' plot(t, powexp(t, v0, tempt, beta), type = "l", ylab = "volume",
 #'   main = "powexp\nbeta = 2 and 1")
 #' lines(t, powexp(t, v0, tempt, 1), type = "l", col = "green")
 #' @name gastemptfunc
-NULL
 #' @rdname gastemptfunc
 #' @export
-linexp = function(t, v0 = 1, tempt, kappa){
-  v0 * (1 + kappa * t / tempt) * exp(-t / tempt)
+linexp = function(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL) {
+  use_pars = is.null(tempt) ||  is.null(kappa)
+  if (use_pars == is.null(pars))
+      stop("Either (tempt, kappa) or pars must be given in linexp")
+  if (!is.null(pars)) {
+    v0 = pars["v0"]
+    tempt = pars["tempt"]
+    kappa = pars["kappa"]
+  }
+  as.numeric(v0 * (1 + kappa * t / tempt) * exp(-t / tempt))
 }
 
 #' @rdname gastemptfunc
 #' @export
-linexp_slope = function(t, v0 = 1, tempt, kappa){
-# d/dt v (1+(k t)/p) exp(-t/p)  Wolframalpha
-  (v0 * exp(-t/tempt)*((kappa - 1)*tempt - kappa*t))/(tempt*tempt)
+linexp_slope = function(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL){
+  use_pars = is.null(tempt) ||  is.null(kappa)
+  if (use_pars == is.null(pars))
+    stop("Either (tempt, kappa) or pars must be given in linexp_slope")
+  if (!is.null(pars)) {
+    v0 = pars["v0"]
+    tempt = pars["tempt"]
+    kappa = pars["kappa"]
+  }
+  # d/dt v (1+(k t)/p) exp(-t/p)  Wolframalpha
+  as.numeric((v0 * exp(-t/tempt)*((kappa - 1)*tempt - kappa*t))/(tempt*tempt))
 }
 
 #' @rdname gastemptfunc
 #' @export
-linexp_auc = function(v0 = 1, tempt, kappa){
-  v0 * (1 + kappa) * tempt
+linexp_auc = function(v0 = 1, tempt = NULL, kappa = NULL, pars = NULL){
+  use_pars = is.null(tempt) &&  is.null(kappa)
+  if (use_pars == is.null(pars))
+    stop("Either (tempt, kappa) or pars must be given in linexp_auc")
+  if (!is.null(pars)) {
+    v0 = pars["v0"]
+    tempt = pars["tempt"]
+    kappa = pars["kappa"]
+  }
+  as.numeric(v0 * (1 + kappa) * tempt)
 }
 
 
 #' @rdname gastemptfunc
 #' @export
-powexp = function(t, v0 = 1, tempt, beta){
-  v0 * exp(-(t / tempt) ^ beta)
+powexp = function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
+  use_pars = is.null(tempt) &&  is.null(beta)
+  if (use_pars == is.null(pars))
+    stop("Either (tempt, beta) or pars must be given in powexp")
+  if (!is.null(pars)) {
+    v0 = pars["v0"]
+    tempt = pars["tempt"]
+    beta = pars["beta"]
+  }
+  as.numeric(v0 * exp(-(t / tempt) ^ beta))
 }
 
 #' @rdname gastemptfunc
 #' @export
-powexp_slope = function(t, v0 = 1, tempt, beta){
+powexp_slope = function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
+  use_pars = is.null(tempt) &&  is.null(beta)
+  if (use_pars == is.null(pars))
+    stop("Either (tempt, beta) or pars must be given in powexp_slope")
+  if (!is.null(pars)) {
+    v0 = pars["v0"]
+    tempt = pars["tempt"]
+    beta = pars["beta"]
+  }
   # No solution for t=0
 # d/dt v exp(-(t/p)^b)
 #  -beta * v0 * tempt^(-beta) * t ^ (beta-1) * exp(-tempt/t)^(-beta)
   ttt = (t/tempt) ^ beta
-  -(beta * v0 * exp(-ttt) * ttt)/t
+  as.numeric(-(beta * v0 * exp(-ttt) * ttt)/t)
 }
 
 
 #' @rdname gastemptfunc
 #' @export
-linexp_log = function(t, v0 = 1, logtempt, logkappa){
-  tempt = exp(logtempt)
-  v0 * (1 + exp(logkappa) * t / tempt) * exp(-t / tempt)
+linexp_log = function(t, v0 = 1, logtempt = NULL, logkappa = NULL, pars = NULL){
+  use_pars = is.null(logtempt) &&  is.null(logkappa)
+  if (use_pars == is.null(pars))
+    stop("Either (v0, logtempt, logkappa) or pars must be given in linexp_log")
+  if (!is.null(pars)) {
+    v0 = as.numeric(pars["v0"])
+    tempt = exp(as.numeric(pars["logtempt"]))
+    kappa = exp(as.numeric(pars["logkappa"]))
+  } else {
+    tempt = exp(logtempt)
+    kappa = exp(logkappa)
+  }
+  as.numeric(v0 * (1 + kappa * t / tempt) * exp(-t / tempt))
 }
 
 #' @rdname gastemptfunc
 #' @export
-powexp_log = function(t, v0 = 1, logtempt, logbeta){
-  v0 * exp(-(t / exp(logtempt)) ^ exp(logbeta))
+powexp_log = function(t, v0 = 1, logtempt = NULL, logbeta = NULL, pars = NULL){
+  use_pars =  is.null(logtempt) &&  is.null(logbeta)
+  if (use_pars == is.null(pars))
+    stop("Either (v0, tempt, beta) or pars must be given in powexp_log")
+  if (!is.null(pars)) {
+    v0 = as.numeric(pars["v0"])
+    tempt = exp(as.numeric(pars["logtempt"]))
+    beta = exp(as.numeric(pars["logbeta"]))
+  } else {
+    tempt = exp(logtempt)
+    beta = exp(logbeta)
+  }
+  as.numeric(v0 * exp(-(t / tempt) ^ beta))
 }
 

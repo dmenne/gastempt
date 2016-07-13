@@ -11,19 +11,19 @@
 \alias{powexp_slope}
 \title{Functions for gastric emptying analysis}
 \usage{
-linexp(t, v0 = 1, tempt, kappa)
+linexp(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL)
 
-linexp_slope(t, v0 = 1, tempt, kappa)
+linexp_slope(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL)
 
-linexp_auc(v0 = 1, tempt, kappa)
+linexp_auc(v0 = 1, tempt = NULL, kappa = NULL, pars = NULL)
 
-powexp(t, v0 = 1, tempt, beta)
+powexp(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL)
 
-powexp_slope(t, v0 = 1, tempt, beta)
+powexp_slope(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL)
 
-linexp_log(t, v0 = 1, logtempt, logkappa)
+linexp_log(t, v0 = 1, logtempt = NULL, logkappa = NULL, pars = NULL)
 
-powexp_log(t, v0 = 1, logtempt, logbeta)
+powexp_log(t, v0 = 1, logtempt = NULL, logbeta = NULL, pars = NULL)
 }
 \arguments{
 \item{t}{Time after meal or start of scan, in minutes; can be a vector.}
@@ -33,6 +33,10 @@ powexp_log(t, v0 = 1, logtempt, logbeta)
 \item{tempt}{Emptying time constant in minutes (scalar).}
 
 \item{kappa}{Overshoot term for linexp function (scalar).}
+
+\item{pars}{Default NULL. If not NULL, the other parameters with exception
+of \code{t} are not used and are retrieved as named parameters
+from the numeric vector pars instead.}
 
 \item{beta}{Power term for power exponential function (scalar).}
 
@@ -62,9 +66,14 @@ kappa = 1.3
 tempt = 60
 v0 = 400
 beta = 3
-par(mfrow=c(1,2))
+pars = c(v0 = v0, tempt = tempt, kappa = kappa)
+par(mfrow=c(1,3))
 plot(t, linexp(t, v0, tempt, kappa), type = "l", ylab = "volume",
    main = "linexp\\nkappa = 1.3 and 1.0")
+lines(t, linexp(t, v0, tempt, 1), type = "l", col = "green")
+# This should give the same plot as above
+plot(t, linexp(t, x), type = "l", ylab = "volume",
+   main = "linexp\\nkappa = 1.3 and 1.0 with vectored parameters")
 lines(t, linexp(t, v0, tempt, 1), type = "l", col = "green")
 plot(t, powexp(t, v0, tempt, beta), type = "l", ylab = "volume",
   main = "powexp\\nbeta = 2 and 1")
