@@ -79,7 +79,8 @@ shinyServer(function(input, output, session) {
       student_t_df, missing, model)
     # Copy simulated data to editor
     tc = textConnection("dt","w")
-    writeLines(paste0("# ", comment(d$data)), con = tc)
+    comment = str_replace_all(comment(d$data),"\\n", " ")
+    writeLines(paste0("# ", comment), con = tc)
     suppressWarnings(write.table(d$data, file = tc, append = TRUE,
                 row.names = FALSE, sep = "\t", quote = FALSE))
     updateAceEditor(session, "data", value = paste(dt, collapse = "\n") )
@@ -124,8 +125,12 @@ shinyServer(function(input, output, session) {
       }
       cf = coef(p, signif = 3)
       comment = comment(p)
-      if (!is.null(comment) || comment != "")
+      if (!is.null(comment) || comment != ""){
+        comment = str_replace_all(comment,"\\n", " ")
+        print(str(comment))
         writeLines(paste0("# ", comment), con = con)
+
+      }
       suppressWarnings(write.table(cf, file = con, append = TRUE,
                row.names = FALSE, sep = ",", quote = FALSE))
     }

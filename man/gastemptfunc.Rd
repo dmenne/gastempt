@@ -72,8 +72,8 @@ plot(t, linexp(t, v0, tempt, kappa), type = "l", ylab = "volume",
    main = "linexp\\nkappa = 1.3 and 1.0")
 lines(t, linexp(t, v0, tempt, 1), type = "l", col = "green")
 # This should give the same plot as above
-plot(t, linexp(t, x), type = "l", ylab = "volume",
-   main = "linexp\\nkappa = 1.3 and 1.0 with vectored parameters")
+plot(t, linexp(t, pars = pars), type = "l", ylab = "volume",
+   main = "linexp\\nkappa = 1.3 and 1.0\\nwith vectored parameters")
 lines(t, linexp(t, v0, tempt, 1), type = "l", col = "green")
 plot(t, powexp(t, v0, tempt, beta), type = "l", ylab = "volume",
   main = "powexp\\nbeta = 2 and 1")

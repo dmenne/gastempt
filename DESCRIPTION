@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.1.8
+Version: 0.1.9
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -21,7 +21,8 @@ Imports:
     tibble,
     ggplot2 (>= 2.1.0),
     rstan,
-    assertthat
+    assertthat,
+    stringr
 Suggests:
     testthat,
     rmarkdown,

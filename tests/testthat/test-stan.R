@@ -80,6 +80,8 @@ test_that("Running internal stan_gastempt fit returns valid result", {
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_1c", refresh = -1)
   expect_is(ret, "stan_gastempt")
+  expect_is(ret$plot, "ggplot")
+  expect_s4_class(ret$fit, "stanfit")
   # residual standard deviation
   v0_f = ret$coef$v0
   expect_lt(sqrt(var(v0_d - v0_f)), 6)
@@ -92,6 +94,8 @@ test_that("Running internal stan_gastempt with many missing data returns valid r
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_1c", refresh = -1)
   expect_is(ret, "stan_gastempt")
+  expect_is(ret$plot, "ggplot")
+  expect_s4_class(ret$fit, "stanfit")
   # residual standard deviation
   v0_f = ret$coef$v0
   expect_lt(sqrt(var(v0_d - v0_f)), 8)
