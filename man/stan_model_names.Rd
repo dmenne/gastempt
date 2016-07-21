@@ -18,6 +18,6 @@ A data frame with \code{model_name} and the first \code{n_lines}
 comment lines in model as description
 }
 \description{
-Names and descriptions of precompiled Stan models
+By default, line 2 and 3 of comments in Stan file are returned
 }
 

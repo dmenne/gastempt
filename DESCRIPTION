@@ -28,7 +28,6 @@ Suggests:
     rmarkdown,
     knitr,
     covr,
-    shiny,
     methods
 LinkingTo:
     StanHeaders (>= 2.10.0),
