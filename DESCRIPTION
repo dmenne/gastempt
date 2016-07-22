@@ -22,7 +22,8 @@ Imports:
     ggplot2 (>= 2.1.0),
     rstan,
     assertthat,
-    stringr
+    stringr,
+    shiny
 Suggests:
     testthat,
     rmarkdown,

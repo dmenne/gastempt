@@ -1,7 +1,6 @@
 #' Run shiny app demonstrating fit strategies with simulated data
 #'
 #' @return  Not used, starts shiny app
-#' @importFrom shiny runApp
 #' @export
 #'
 run_shiny = function() {
