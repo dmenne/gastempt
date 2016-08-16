@@ -27,7 +27,7 @@ model{
   real v0r;
   real kappar;
   real temptr;
-
+  real vol[n];
   mu_kappa ~ normal(1.5,0.5);
   sigma_kappa ~ normal(1,0.5);
 
@@ -41,8 +41,9 @@ for (i in 1:n){
    v0r = v0[reci];
    kappar = kappa[reci];
    temptr = tempt[reci];
-   volume[i] ~ normal(v0r*(1+kappar*minute[i]/temptr)*exp(-minute[i]/temptr), sigma);
+   vol[i] = v0r*(1+kappar*minute[i]/temptr)*exp(-minute[i]/temptr);
   }
+  volume ~ normal(vol, sigma);
 }
 
 

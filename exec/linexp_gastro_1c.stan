@@ -22,6 +22,7 @@ parameters{
 
 
 model{
+  vector[n] vol;
   mu_kappa ~ normal(1.5,0.5);
   sigma_kappa ~ normal(1,0.5);
 
@@ -29,10 +30,9 @@ model{
   kappa ~ lognormal(mu_kappa, sigma_kappa);
   tempt ~ normal(60, 20);
   sigma ~ gamma(20, 0.5);
-
-  volume ~ normal(
-      v0[record] .* (1+ kappa[record] .* (minute ./ tempt[record])) .*
-      exp(-minute ./ tempt[record]), sigma);
+  vol = v0[record] .* (1+ kappa[record] .* (minute ./ tempt[record])) .*
+      exp(-minute ./ tempt[record]);
+  volume ~ normal(vol, sigma);
 }
 
 
