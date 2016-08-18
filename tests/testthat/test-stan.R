@@ -98,7 +98,7 @@ test_that("Running internal stan_gastempt fit with default parameters and multip
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
   rstan_options(auto_write = TRUE)
-  chains = 2
+  chains = 1
   options(mc.cores = min(parallel::detectCores(), chains))
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b",
                       chains = chains, refresh = -1)
@@ -114,7 +114,7 @@ test_that("Running internal stan_gastempt fit with default parameters and multip
 
 
 test_that("Running internal stan_gastempt with powexp returns valid result", {
-  #skip_on_travis()
+  skip_on_travis()
   cat("Powexp cores\n")
   options(mc.cores = 1)
   d = simulate_gastempt(n_records = 6, seed = 471, model = powexp,
