@@ -81,7 +81,7 @@ test_that("Running precompiled models linexp _1x directly returns valid result",
 })
 
 test_that("Running precompiled linexp models _2x directly returns valid result", {
-  skip_on_travis()
+#  skip_on_travis()
   run_precompiled_model("linexp_gastro_2b")
   run_precompiled_model("linexp_gastro_2c")
 })
@@ -135,7 +135,7 @@ test_that("Running internal stan_gastempt with powexp returns valid result", {
 
 
 test_that("Running internal stan_gastempt fit with non-default parameters returns valid result", {
-  skip_on_travis()
+#  skip_on_travis()
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2c",
