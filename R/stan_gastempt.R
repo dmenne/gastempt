@@ -16,8 +16,8 @@
 #' @param student_df Student-t degrees of freedom for residual error;
 #' default 5. Use 3 for strong outliers; values above 10 are close to gaussian
 #' residual distribution.
-#' @param init for stan; default = 0. When you plan to use random
-#' initialization, check chains carefully, they often get stuck.
+#' @param init_r for stan, default = 0.2; Stan's own default is 2, which
+#' often results in stuck chains.
 #' @param chains for stan; default = 4. For debugging, use 1.
 #' @param ... Additional parameter passed to \code{sampling}
 #'
@@ -49,7 +49,7 @@
 #' @importFrom utils capture.output
 #' @export
 stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
-                         student_df = 5L, init = 0, chains = 4,  ...){
+                         student_df = 5L, init_r = 0.2, chains = 4,  ...){
   assert_that(all(c("record", "minute","vol") %in% names(d)))
 #  rstan_options(auto_write = TRUE)
 #  options(mc.cores = parallel::detectCores())
@@ -69,7 +69,7 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
   testthat::expect_s4_class(mod, "stanmodel")
   capture.output({
     #fit = suppressWarnings(sampling(mod, data = data))
-    fit = suppressWarnings(sampling(mod, data = data, init = init,
+    fit = suppressWarnings(sampling(mod, data = data, init_r = init_r,
                                     chains = chains, ...))
   })
   cf = summary(fit)$summary[,1]

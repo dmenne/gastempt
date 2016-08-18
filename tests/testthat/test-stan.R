@@ -79,11 +79,13 @@ test_that("Running precompiled models _1x directly returns valid result", {
 })
 
 test_that("Running precompiled models _2x directly returns valid result", {
+  skip_on_travis()
   run_precompiled_model("linexp_gastro_2b")
   run_precompiled_model("linexp_gastro_2c")
 })
 
 test_that("Running internal stan_gastempt fit with default parameters returns valid result", {
+  skip_on_travis()
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b", refresh = -1)
@@ -99,10 +101,11 @@ test_that("Running internal stan_gastempt fit with default parameters returns va
 
 
 test_that("Running internal stan_gastempt fit with non-default parameters returns valid result", {
+  skip_on_travis()
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2c", refresh = -1,
-                      chains = 4, init = "random", init_r = 0.1)
+                      chains = 2, init_r = 0.3)
   expect_is(ret, "stan_gastempt")
   v0_f = ret$coef$v0
   expect_lt(sqrt(var(v0_d - v0_f)), 8)
