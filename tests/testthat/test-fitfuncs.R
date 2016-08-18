@@ -11,7 +11,9 @@ test_that("Linexp Functions can be called with par or explicit parameters",{
   pars = c(v0 = v0, tempt = tempt, kappa = kappa)
   r = linexp(t, v0, tempt, kappa)
   rp = linexp(t, pars = pars)
+  rpd = linexp(t, pars = data.frame(t(pars)))
   expect_equal(r, rp)
+  expect_equal(r, rpd)
   expect_equal(length(r), 3)
   expect_error(linexp(t, v0, tempt, kappa, pars), "Either")
   expect_error(linexp(t, tempt = tempt, kappa = kappa, pars = pars), "Either")
@@ -20,7 +22,9 @@ test_that("Linexp Functions can be called with par or explicit parameters",{
   pars = c(v0 = v0, tempt = tempt, kappa = kappa)
   r = linexp_slope(t, v0, tempt, kappa)
   rp = linexp_slope(t, pars = pars)
+  rpd = linexp_slope(t, pars = data.frame(t(pars)))
   expect_equal(r, rp)
+  expect_equal(r, rpd)
   expect_equal(length(r), 3)
   expect_error(linexp_slope(t, v0, tempt, kappa, pars), "Either")
   expect_error(linexp_slope(t, tempt = tempt, kappa = kappa, pars = pars), "Either")
@@ -29,7 +33,9 @@ test_that("Linexp Functions can be called with par or explicit parameters",{
   pars = c(v0 = v0, tempt = tempt, kappa = kappa)
   r = linexp_auc(v0, tempt, kappa)
   rp = linexp_auc(pars = pars)
+  rpd = linexp_auc(pars = data.frame(t(pars)))
   expect_equal(r, rp)
+  expect_equal(r, rpd)
   expect_error(linexp_auc(v0, tempt, kappa, pars), "Either")
   expect_error(linexp_auc(tempt = tempt, kappa = kappa, pars = pars), "Either")
 
@@ -39,14 +45,16 @@ test_that("Linexp Functions can be called with par or explicit parameters",{
   pars = c(v0 = v0, logtempt = logtempt, logkappa = logkappa)
   r = linexp_log(t, v0, logtempt, logkappa)
   rp = linexp_log(t, pars = pars)
+  rpd = linexp_log(t, pars = data.frame(t(pars)))
   expect_equal(r, rp)
+  expect_equal(r, rpd)
   expect_equal(length(r), 3)
   expect_error(linexp_log(t, v0, logtempt, logkappa, pars), "Either")
   expect_error(linexp_log(t, logtempt = logtempt, logkappa = logkappa,
                           pars = pars), "Either")
 })
 
-test_that("Powexp Functions can be called with par or explicit parameters",{
+test_that("Powexp Functions can be called with pars or explicit parameters",{
   v0 = 400
   tempt = 60
   beta = 2
@@ -56,7 +64,9 @@ test_that("Powexp Functions can be called with par or explicit parameters",{
   pars = c(v0 = v0, tempt = tempt, beta = beta)
   r = powexp(t, v0, tempt, beta)
   rp = powexp(t, pars = pars)
+  rpd = powexp(t, pars = data.frame(t(pars)))
   expect_equal(r, rp)
+  expect_equal(r, rpd)
   expect_equal(length(r), 3)
   expect_error(powexp(t, v0, tempt, beta, pars), "Either")
   expect_error(powexp(t, tempt = tempt, beta = beta, pars = pars), "Either")
@@ -78,7 +88,9 @@ test_that("Powexp Functions can be called with par or explicit parameters",{
   pars = c(v0 = v0, logtempt = logtempt, logbeta = logbeta)
   r = powexp_log(t, v0, logtempt, logbeta)
   rp = powexp_log(t, pars = pars)
+  rpd = powexp_log(t, pars = data.frame(t(pars)))
   expect_equal(r, rp)
+  expect_equal(r, rpd)
   expect_equal(length(r), 3)
   expect_error(powexp_log(t, v0, logtempt, logbeta, pars), "Either")
   expect_error(powexp_log(t, logtempt = logtempt, logbeta = logbeta,

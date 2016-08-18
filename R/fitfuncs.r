@@ -1,13 +1,19 @@
 #' Functions for gastric emptying analysis
 #'
-#' The \code{linexp} and the power exponential (\code{powexp}) functions are
-#' useful models to fit  gastric emptying curves. The \code{linexp}
-#' function can have an initial overshoot
-#' to model secretion. The \code{powexp} function introduced by
-#' Elashof et al. is strictlty
-#' montonous declining but has more freedom to model details in the function tail.
+#' The \code{linexp} and the power exponential (\code{powexp}) functions can
+#' be used to fit gastric emptying curves.
 #'
-#' In Pinheiro/Bates and in the
+#' The \code{linexp} function can have an initial overshoot
+#' to model secretion.
+#'
+#' \code{vol(t) = v0 * (1 + kappa * t / tempt) * exp(-t / tempt)}
+#'
+#' The \code{powexp} function introduced by  Elashof et al. is strictly
+#' montonous decreasing but has more freedom to model details in the
+#' function tail.
+#'
+#' \code{v0 * exp(-(t / tempt) ^ beta)}
+#'
 #' @param v0 Initial volume at t=0.
 #' @param t Time after meal or start of scan, in minutes; can be a vector.
 #' @param tempt Emptying time constant in minutes (scalar).
@@ -47,9 +53,9 @@ linexp = function(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL) {
   if (use_pars == is.null(pars))
       stop("Either (tempt, kappa) or pars must be given in linexp")
   if (!is.null(pars)) {
-    v0 = pars["v0"]
-    tempt = pars["tempt"]
-    kappa = pars["kappa"]
+    v0 = pars[["v0"]]
+    tempt = pars[["tempt"]]
+    kappa = pars[["kappa"]]
   }
   as.numeric(v0 * (1 + kappa * t / tempt) * exp(-t / tempt))
 }
@@ -61,9 +67,9 @@ linexp_slope = function(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL){
   if (use_pars == is.null(pars))
     stop("Either (tempt, kappa) or pars must be given in linexp_slope")
   if (!is.null(pars)) {
-    v0 = pars["v0"]
-    tempt = pars["tempt"]
-    kappa = pars["kappa"]
+    v0 = pars[["v0"]]
+    tempt = pars[["tempt"]]
+    kappa = pars[["kappa"]]
   }
   # d/dt v (1+(k t)/p) exp(-t/p)  Wolframalpha
   as.numeric((v0 * exp(-t/tempt)*((kappa - 1)*tempt - kappa*t))/(tempt*tempt))
@@ -76,25 +82,29 @@ linexp_auc = function(v0 = 1, tempt = NULL, kappa = NULL, pars = NULL){
   if (use_pars == is.null(pars))
     stop("Either (tempt, kappa) or pars must be given in linexp_auc")
   if (!is.null(pars)) {
-    v0 = pars["v0"]
-    tempt = pars["tempt"]
-    kappa = pars["kappa"]
+    v0 = pars[["v0"]]
+    tempt = pars[["tempt"]]
+    kappa = pars[["kappa"]]
   }
+  if (is.null(v0) || is.null(tempt) || is.null(kappa))
+    stop("Parameters v0, tempt and kappa must be given")
   as.numeric(v0 * (1 + kappa) * tempt)
 }
 
 
 #' @rdname gastemptfunc
 #' @export
-powexp = function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
+powexp =  function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
   use_pars = is.null(tempt) &&  is.null(beta)
   if (use_pars == is.null(pars))
     stop("Either (tempt, beta) or pars must be given in powexp")
   if (!is.null(pars)) {
-    v0 = pars["v0"]
-    tempt = pars["tempt"]
-    beta = pars["beta"]
+    v0 = pars[["v0"]]
+    tempt = pars[["tempt"]]
+    beta = pars[["beta"]]
   }
+  if (is.null(v0) || is.null(tempt) || is.null(beta))
+    stop("Parameters v0, tempt and beta must be given")
   as.numeric(v0 * exp(-(t / tempt) ^ beta))
 }
 
@@ -105,9 +115,9 @@ powexp_slope = function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
   if (use_pars == is.null(pars))
     stop("Either (tempt, beta) or pars must be given in powexp_slope")
   if (!is.null(pars)) {
-    v0 = pars["v0"]
-    tempt = pars["tempt"]
-    beta = pars["beta"]
+    v0 = pars[["v0"]]
+    tempt = pars[["tempt"]]
+    beta = pars[["beta"]]
   }
   # No solution for t=0
 # d/dt v exp(-(t/p)^b)
@@ -125,8 +135,8 @@ linexp_log = function(t, v0 = 1, logtempt = NULL, logkappa = NULL, pars = NULL){
     stop("Either (v0, logtempt, logkappa) or pars must be given in linexp_log")
   if (!is.null(pars)) {
     v0 = as.numeric(pars["v0"])
-    tempt = exp(as.numeric(pars["logtempt"]))
-    kappa = exp(as.numeric(pars["logkappa"]))
+    tempt = exp(as.numeric(pars[["logtempt"]]))
+    kappa = exp(as.numeric(pars[["logkappa"]]))
   } else {
     tempt = exp(logtempt)
     kappa = exp(logkappa)
@@ -142,8 +152,8 @@ powexp_log = function(t, v0 = 1, logtempt = NULL, logbeta = NULL, pars = NULL){
     stop("Either (v0, tempt, beta) or pars must be given in powexp_log")
   if (!is.null(pars)) {
     v0 = as.numeric(pars["v0"])
-    tempt = exp(as.numeric(pars["logtempt"]))
-    beta = exp(as.numeric(pars["logbeta"]))
+    tempt = exp(as.numeric(pars[["logtempt"]]))
+    beta = exp(as.numeric(pars[["logbeta"]]))
   } else {
     tempt = exp(logtempt)
     beta = exp(logbeta)

@@ -50,15 +50,20 @@ from the numeric vector pars instead.}
 Vector of \code{length(t)} for computed volume.
 }
 \description{
-The \code{linexp} and the power exponential (\code{powexp}) functions are
-useful models to fit  gastric emptying curves. The \code{linexp}
-function can have an initial overshoot
-to model secretion. The \code{powexp} function introduced by
-Elashof et al. is strictlty
-montonous declining but has more freedom to model details in the function tail.
+The \code{linexp} and the power exponential (\code{powexp}) functions can
+be used to fit gastric emptying curves.
 }
 \details{
-In Pinheiro/Bates and in the
+The \code{linexp} function can have an initial overshoot
+to model secretion.
+
+\code{vol(t) = v0 * (1 + kappa * t / tempt) * exp(-t / tempt)}
+
+The \code{powexp} function introduced by  Elashof et al. is strictly
+montonous decreasing but has more freedom to model details in the
+function tail.
+
+\code{v0 * exp(-(t / tempt) ^ beta)}
 }
 \examples{
 t = seq(0,100, by=5)
