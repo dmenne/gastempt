@@ -94,11 +94,11 @@ test_that("Running precompiled powexp models _2x directly returns valid result",
 
 test_that("Running internal stan_gastempt fit with default parameters and multiple cores returns valid result", {
   #skip_on_travis()
-  cat("Multiple cores\n")
+  #cat("Multiple cores\n")
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
   rstan_options(auto_write = TRUE)
-  chains = 2
+  chains = 1
   options(mc.cores = min(parallel::detectCores(), chains))
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b",
                       chains = chains, refresh = -1, iter = 500)
