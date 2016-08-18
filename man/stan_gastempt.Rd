@@ -4,7 +4,8 @@
 \alias{stan_gastempt}
 \title{Fit gastric emptying curves with Stan}
 \usage{
-stan_gastempt(d, model_name = "linexp_gastro_1d", ...)
+stan_gastempt(d, model_name = "linexp_gastro_2b", lkj = 2,
+  student_df = 5L, init = 0, chains = 4, ...)
 }
 \arguments{
 \item{d}{A data frame with columns
@@ -14,7 +15,23 @@ stan_gastempt(d, model_name = "linexp_gastro_1d", ...)
   \item \code{vol} Volume of meal or stomach
  }}
 
-\item{model_name}{Name of predefined model in \code{gastempt/exec}}
+\item{model_name}{Name of predefined model in
+\code{gastempt/exec}. Use \code{stan_model_names()} to get a list
+of available models.}
+
+\item{lkj}{LKJ prior for kappa/tempt correlation, only required
+for model linexp_gastro_2b. Values from 1.5 (strong correlation) to 50
+(almost independent) are useful. See
+\url{http://www.psychstatistics.com/2014/12/27/d-lkj-priors/} for examples.}
+
+\item{student_df}{Student-t degrees of freedom for residual error;
+default 5. Use 3 for strong outliers; values above 10 are close to gaussian
+residual distribution.}
+
+\item{init}{for stan; default = 0. When you plan to use random
+initialization, check chains carefully, they often get stuck.}
+
+\item{chains}{for stan; default = 4. For debugging, use 1.}
 
 \item{...}{Additional parameter passed to \code{sampling}}
 }

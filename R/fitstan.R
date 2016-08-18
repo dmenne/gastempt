@@ -6,7 +6,19 @@
 #'   \item \code{minute} Time after meal or start of recording.
 #'   \item \code{vol} Volume of meal or stomach
 #'  }
-#' @param model_name Name of predefined model in \code{gastempt/exec}
+#' @param model_name Name of predefined model in
+#' \code{gastempt/exec}. Use \code{stan_model_names()} to get a list
+#' of available models.
+#' @param lkj LKJ prior for kappa/tempt correlation, only required
+#' for model linexp_gastro_2b. Values from 1.5 (strong correlation) to 50
+#' (almost independent) are useful. See
+#' \url{http://www.psychstatistics.com/2014/12/27/d-lkj-priors/} for examples.
+#' @param student_df Student-t degrees of freedom for residual error;
+#' default 5. Use 3 for strong outliers; values above 10 are close to gaussian
+#' residual distribution.
+#' @param init for stan; default = 0. When you plan to use random
+#' initialization, check chains carefully, they often get stuck.
+#' @param chains for stan; default = 4. For debugging, use 1.
 #' @param ... Additional parameter passed to \code{sampling}
 #'
 #' @return A list of class stan_gastempt with elements \code{coef, fit, plot}
@@ -36,7 +48,8 @@
 #' @import rstan
 #' @importFrom utils capture.output
 #' @export
-stan_gastempt = function(d, model_name = "linexp_gastro_1d", ...){
+stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
+                         student_df = 5L, init = 0, chains = 4,  ...){
   assert_that(all(c("record", "minute","vol") %in% names(d)))
 #  rstan_options(auto_write = TRUE)
 #  options(mc.cores = parallel::detectCores())
@@ -44,21 +57,25 @@ stan_gastempt = function(d, model_name = "linexp_gastro_1d", ...){
   d$record_i =  as.integer(as.factor(d$record))
 
   data = list(
-    prior_v0 = median(d$vol[d$minute < 10]),
+    prior_v0 = median(d$vol[d$minute < 10]), # only required for _1x
     n = nrow(d),
     n_record = max(d$record_i),
+    lkj = lkj,
+    student_df = as.integer(student_df),
     record = d$record_i,
     minute = d$minute,
     volume = d$vol)
   mod = stanmodels[[model_name]]
   testthat::expect_s4_class(mod, "stanmodel")
   capture.output({
-    fit = suppressWarnings(sampling(mod, data = data, ...))
+    #fit = suppressWarnings(sampling(mod, data = data))
+    fit = suppressWarnings(sampling(mod, data = data, init = init,
+                                    chains = chains, ...))
   })
   cf = summary(fit)$summary[,1]
   coef = data_frame(
     record = unique(d$record),
-    v0 = cf[grep("v0", names(cf))],
+    v0 = cf[grep("v0\\[", names(cf))],
     kappa = cf[grep("^kappa", names(cf))],
     tempt = cf[grep("^tempt", names(cf))]
   ) %>% t50

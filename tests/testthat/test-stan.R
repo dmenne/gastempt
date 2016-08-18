@@ -26,7 +26,7 @@ gastempt_data = function(){
 test_that("Direct use of sample model returns valid results", {
   skip("This test must compile the model and is slow. Only use on errors in other Stan functions.")
   data = gastempt_data()
-  stan_model = "../../exec/linexp_gastro_1b.stan"
+  stan_model = "../../exec/linexp_gastro_2b.stan"
   expect_true(file.exists(stan_model))
   rstan_options(auto_write = TRUE)
   iter = 500
@@ -61,32 +61,51 @@ run_precompiled_model = function(model){
   testthat::expect_s4_class(mod, "stanmodel")
   testthat::expect_identical(mod@model_name, model)
   data = gastempt_data()
+  data$lkj = 2
+  data$student_df = 5
   cap = capture_output({
     fit = suppressWarnings(
-      rstan::sampling(mod, data = data, chains = 1, iter = 500,                            refresh = -1, verbose = FALSE))
+      rstan::sampling(mod, data = data, chains = 2, iter = 500,                            refresh = -1, verbose = FALSE))
   })
   expect_is(fit, "stanfit")
 }
 
 
-test_that("Running precompiled model directly returns valid result", {
+test_that("Running precompiled models _1x directly returns valid result", {
+  skip_on_travis()
   run_precompiled_model("linexp_gastro_1b")
   run_precompiled_model("linexp_gastro_1c")
   run_precompiled_model("linexp_gastro_1d")
 })
 
-test_that("Running internal stan_gastempt fit returns valid result", {
+test_that("Running precompiled models _2x directly returns valid result", {
+  run_precompiled_model("linexp_gastro_2b")
+  run_precompiled_model("linexp_gastro_2c")
+})
+
+test_that("Running internal stan_gastempt fit with default parameters returns valid result", {
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
-  ret = stan_gastempt(d$data, model_name = "linexp_gastro_1c", refresh = -1)
+  ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b", refresh = -1)
   expect_is(ret, "stan_gastempt")
   expect_is(ret$plot, "ggplot")
   expect_s4_class(ret$fit, "stanfit")
   # residual standard deviation
   v0_f = ret$coef$v0
-  expect_lt(sqrt(var(v0_d - v0_f)), 6)
+  expect_lt(sqrt(var(v0_d - v0_f)), 8)
   expect_true(all(c("sigma", "mu_kappa", "sigma_kappa", "lp") %in%
                     names(attributes(ret$coef))))
+})
+
+
+test_that("Running internal stan_gastempt fit with non-default parameters returns valid result", {
+  d = simulate_gastempt(n_records = 6, seed = 471)
+  v0_d = d$rec$v0
+  ret = stan_gastempt(d$data, model_name = "linexp_gastro_2c", refresh = -1,
+                      chains = 4, init = "random", init_r = 0.1)
+  expect_is(ret, "stan_gastempt")
+  v0_f = ret$coef$v0
+  expect_lt(sqrt(var(v0_d - v0_f)), 8)
 })
 
 test_that("Running internal stan_gastempt with many missing data returns valid result", {

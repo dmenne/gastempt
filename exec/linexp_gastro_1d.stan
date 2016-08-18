@@ -29,14 +29,13 @@ model{
   vector[n] vol;
   mu_kappa ~ normal(1.5,0.5);
   sigma_kappa ~ normal(1,0.5);
-
+#
   v0    ~ normal(prior_v0, 100);
   kappa ~ lognormal(mu_kappa, sigma_kappa);
   tempt ~ normal(60., 20.);
   sigma ~ gamma(20., 0.5);
   vol = v0[record] .* (1+ kappa[record] .* mt) .*  exp(-mt);
   volume ~ normal(vol, sigma);
-
 }
 
 
