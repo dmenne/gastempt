@@ -101,7 +101,7 @@ test_that("Running internal stan_gastempt fit with default parameters and multip
   chains = 1
   options(mc.cores = min(parallel::detectCores(), chains))
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b",
-                      chains = chains, refresh = -1)
+                      chains = chains, refresh = -1, iter = 500)
   expect_is(ret, "stan_gastempt")
   expect_is(ret$plot, "ggplot")
   expect_s4_class(ret$fit, "stanfit")
