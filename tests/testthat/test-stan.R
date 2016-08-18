@@ -101,7 +101,7 @@ test_that("Running internal stan_gastempt fit with default parameters and multip
   chains = 1
   options(mc.cores = min(parallel::detectCores(), chains))
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b",
-                      chains = chains, refresh = -1, iter = 500)
+                      chains = chains,  iter = 500, refresh = -1)
   expect_is(ret, "stan_gastempt")
   expect_is(ret$plot, "ggplot")
   expect_s4_class(ret$fit, "stanfit")
@@ -118,9 +118,10 @@ test_that("Running internal stan_gastempt with powexp returns valid result", {
   cat("Powexp cores\n")
   options(mc.cores = 1)
   d = simulate_gastempt(n_records = 6, seed = 471, model = powexp,
-                        beta_mean = 2.5, missing = 0.3, iter = 500)
+                        beta_mean = 2.5, missing = 0.3)
   v0_d = d$rec$v0
-  ret = stan_gastempt(d$data, model_name = "powexp_gastro_2c", refresh = -1)
+  ret = stan_gastempt(d$data, model_name = "powexp_gastro_2c",
+                      refresh = -1, iter = 500)
   expect_is(ret, "stan_gastempt")
   expect_is(ret$plot, "ggplot")
   expect_s4_class(ret$fit, "stanfit")
@@ -137,8 +138,8 @@ test_that("Running internal stan_gastempt fit with non-default parameters return
   skip_on_travis()
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
-  ret = stan_gastempt(d$data, model_name = "linexp_gastro_2c", refresh = -1,
-                      chains = 2, init_r = 0.3)
+  ret = stan_gastempt(d$data, model_name = "linexp_gastro_2c",
+                      refresh = -1, chains = 2, init_r = 0.3)
   expect_is(ret, "stan_gastempt")
   v0_f = ret$coef$v0
   expect_lt(sqrt(var(v0_d - v0_f)), 8)
