@@ -51,6 +51,8 @@
 stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
                          student_df = 5L, init_r = 0.2, chains = 4,  ...){
   assert_that(all(c("record", "minute","vol") %in% names(d)))
+
+  is_linexp = grepl("linexp", model_name)
 #  rstan_options(auto_write = TRUE)
 #  options(mc.cores = parallel::detectCores())
   # Integer index of records
@@ -73,15 +75,28 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
                                     chains = chains, ...))
   })
   cf = summary(fit)$summary[,1]
-  coef = data_frame(
-    record = unique(d$record),
-    v0 = cf[grep("v0\\[", names(cf))],
-    kappa = cf[grep("^kappa", names(cf))],
-    tempt = cf[grep("^tempt", names(cf))]
-  ) %>% t50
+  if (is_linexp){
+    coef = data_frame(
+      record = unique(d$record),
+      v0 = cf[grep("v0\\[", names(cf))],
+      kappa = cf[grep("^kappa", names(cf))],
+      tempt = cf[grep("^tempt", names(cf))]
+    ) %>% t50
+    attr(coef, "mu_kappa") = cf["mu_kappa"]
+    attr(coef, "sigma_kappa") = cf["sigma_kappa"]
+  } else {
+    # Assume powexp
+    coef = data_frame(
+      record = unique(d$record),
+      v0 = cf[grep("v0\\[", names(cf))],
+      beta = cf[grep("^beta", names(cf))],
+      tempt = cf[grep("^tempt", names(cf))]
+    ) %>% t50
+    attr(coef, "mu_beta") = cf["mu_beta"]
+    attr(coef, "sigma_beta") = cf["sigma_beta"]
+  }
+  # Common attributes
   attr(coef, "sigma") = cf["sigma"]
-  attr(coef, "mu_kappa") = cf["mu_kappa"]
-  attr(coef, "sigma_kappa") = cf["sigma_kappa"]
   attr(coef, "lp") = cf["lp__"]
   #
   # Compute plot
@@ -89,7 +104,7 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
     facet_wrap(~ record) +
     expand_limits(x = 0, y = 0) # force zeroes to be visible
   minute = seq(min(d$minute), max(d$minute), length.out = 51)
-  if (grep("linexp", model_name)){
+  if (is_linexp){
     title = paste0("Stan fitted linexp function, model ", model_name)
     pred_func = linexp
   } else {
@@ -100,8 +115,7 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
   newdata  = coef %>%
     rowwise() %>%
     do({
-      # TODO: powexp
-      vol = pred_func(minute, v0 = .$v0, tempt = .$tempt, kappa = .$kappa )
+      vol = pred_func(minute, pars = . )
       data_frame(record = .$record, minute = minute, vol = vol)
     })
 

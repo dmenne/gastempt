@@ -1,7 +1,7 @@
-# only for debugging
 context("Test basic Stan models")
 
-if (FALSE){
+# only for debugging
+if (FALSE) {
   library(rstan)
   library(testthat)
   library(gastempt)
@@ -23,8 +23,10 @@ gastempt_data = function(){
   simulate_gastempt(n_records = 6, seed = 471)$stan_data
 }
 
+if (FALSE)
 test_that("Direct use of sample model returns valid results", {
-  skip("This test must compile the model and is slow. Only use on errors in other Stan functions.")
+  # This test must compile the model and is slow.
+  # Only use on errors in other Stan functions.
   data = gastempt_data()
   stan_model = "../../exec/linexp_gastro_2b.stan"
   expect_true(file.exists(stan_model))
@@ -70,25 +72,34 @@ run_precompiled_model = function(model){
   expect_is(fit, "stanfit")
 }
 
-
-test_that("Running precompiled models _1x directly returns valid result", {
+test_that("Running precompiled models linexp _1x directly returns valid result", {
   skip_on_travis()
   run_precompiled_model("linexp_gastro_1b")
   run_precompiled_model("linexp_gastro_1c")
   run_precompiled_model("linexp_gastro_1d")
 })
 
-test_that("Running precompiled models _2x directly returns valid result", {
+test_that("Running precompiled linexp models _2x directly returns valid result", {
   skip_on_travis()
   run_precompiled_model("linexp_gastro_2b")
   run_precompiled_model("linexp_gastro_2c")
 })
 
-test_that("Running internal stan_gastempt fit with default parameters returns valid result", {
+test_that("Running precompiled powexp models _2x directly returns valid result", {
   skip_on_travis()
+  run_precompiled_model("powexp_gastro_2c")
+})
+
+
+test_that("Running internal stan_gastempt fit with default parameters and multiple cores returns valid result", {
+  #skip_on_travis()
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
-  ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b", refresh = -1)
+  rstan_options(auto_write = TRUE)
+  chains = 2
+  options(mc.cores = min(parallel::detectCores(), chains))
+  ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b",
+                      chains = chains, refresh = -1)
   expect_is(ret, "stan_gastempt")
   expect_is(ret$plot, "ggplot")
   expect_s4_class(ret$fit, "stanfit")
@@ -98,6 +109,25 @@ test_that("Running internal stan_gastempt fit with default parameters returns va
   expect_true(all(c("sigma", "mu_kappa", "sigma_kappa", "lp") %in%
                     names(attributes(ret$coef))))
 })
+
+
+test_that("Running internal stan_gastempt with powexp returns valid result", {
+  #skip_on_travis()
+  options(mc.cores = 1)
+  d = simulate_gastempt(n_records = 6, seed = 471, model = powexp,
+                        beta_mean = 2.5, missing = 0.3)
+  v0_d = d$rec$v0
+  ret = stan_gastempt(d$data, model_name = "powexp_gastro_2c", refresh = -1)
+  expect_is(ret, "stan_gastempt")
+  expect_is(ret$plot, "ggplot")
+  expect_s4_class(ret$fit, "stanfit")
+  # residual standard deviation
+  v0_f = ret$coef$v0
+  expect_lt(sqrt(var(v0_d - v0_f)), 20)
+  expect_true(all(c("sigma", "mu_beta", "sigma_beta", "lp") %in%
+                    names(attributes(ret$coef))))
+})
+
 
 
 test_that("Running internal stan_gastempt fit with non-default parameters returns valid result", {
