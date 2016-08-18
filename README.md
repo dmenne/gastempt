@@ -18,7 +18,12 @@ devtools::install_github("dmenne/gastempt")
 
 Compilation of the Stan models require several minutes.
 
-Two models are implemented:
+## Shiny online interface
+
+The web interface can be installed on your computer, or [run in ShinyApps](  
+https://menne-biomed.shinyapps.io/gastempt/).
+
+Two models are implemented in the web interface
 
 * `linexp, vol = v0 * (1 + kappa * t / tempt) * exp(-t / tempt):`Recommended for gastric emptying curves with an initial volume overshoot from secretion. With parameter kappa > 1, there is a maximum after t=0.  When all emptying curves start with a steep drop, this model can be difficult to fit.
 * `powexp, vol = v0 * exp(-(t / tempt) ^ beta):` The power exponential function introduced by Elashof et. al. to fit scintigraphic emptying data; this type of data does not have an initial overshoot by design. Compared to the `linexp` model, fitting `powexp` is more reliable and rarely fails to converge in the presence of noise and outliers. The power exponential can be useful with MRI data when there is an unusual late phase in emptying.
@@ -27,15 +32,27 @@ Two models are implemented:
 * Several preset simulations are provided in the Shiny app. 
 * Robustness of models can be tested by manipulating noise quality and between-subject variance. 
 * Fits are displayed with data.
-* [Stan-based fits](http://menne-biomed.de/blog/tag:Stan) in work, not yet in Shiny
 * The coefficients of the analysis including t50 and the slope in t50 can be downloaded in .csv format.
 
-Coming:
+## In source code, not yet in web interface 
 
+* [Stan-based fits](http://menne-biomed.de/blog/tag:Stan). See the documentation of R function [stan_gastempt](https://github.com/dmenne/gastempt/blob/master/R/stan_gastempt.R) in the package. Some details can be found in [my blog](http://menne-biomed.de/blog/multiple-indexes-stan). The rationale for using Stan to fit non-linear curves is discussed here for [<sup>13</sup>C breath test data](http://menne-biomed.de/blog/breath-test-stan) and equally valid for gastric emptying data. 
+
+Example program with simulated data (needs about 40 seconds till plot shows):
+
+```
+library(gastempt)
+dd = simulate_gastempt(n_records = 6, seed = 471)
+d = dd$data
+ret = stan_gastempt(d)
+print(ret$coef)
+print(ret$plot)
+```
+
+## Coming:
+
+* Web interface for Shiny fits
 * Post-hoc analysis in Shiny application by treatment groups, both for cross-over and fully randomized designs.
-* More Stan (http://mc-stan.org/). 
-* Tutorial: Why are single curve fits not useful in clinical research? How to analyze studies, and how to fit single curves anyway, e.g. for clinical practice.
-* Tutorial: How to fit curves in more complex cases that cannot be handled by the Shiny application using R,  package gastempt, and Stan directly.
 
 ![Screenshot](inst/shiny/screenshot.png)
 
