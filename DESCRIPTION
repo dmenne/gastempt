@@ -5,8 +5,9 @@ Authors@R: c(
     )
 Type: Package
 Title: Analyzing gastric emptying functions
-Description: Fit functions using nonlinear mixed-model population methods to
-    gastric emptying time series and compute derived parameters such as t50.
+Description: Fit functions using nonlinear mixed-model population
+   and Bayesian methods to gastric emptying time series and
+   compute derived parameters such as t50 and AUC
 License: GPL (>=3)
 LazyData: TRUE
 NeedsCompilation: yes
@@ -36,9 +37,14 @@ LinkingTo:
     BH (>= 1.58.0),
     Rcpp (>= 0.11.0),
     RcppEigen
-RcppModules: stan_fit4linexp_gastro_1b_mod,
-   stan_fit4linexp_gastro_1c_mod,
-   stan_fit4linexp_gastro_1d_mod
+RcppModules:
+  stan_fit4linexp_gastro_1b_mod,
+  stan_fit4linexp_gastro_1c_mod,
+  stan_fit4linexp_gastro_1d_mod,
+  stan_fit4linexp_gastro_2b_mod,
+  stan_fit4linexp_gastro_2c_mod,
+  stan_fit4powexp_gastro_1b_mod,
+  stan_fit4powexp_gastro_2c_mod
 RoxygenNote: 5.0.1
 VignetteBuilder: knitr
 Remotes: hadley/ggplot2

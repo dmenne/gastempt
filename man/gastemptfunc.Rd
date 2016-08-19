@@ -59,11 +59,11 @@ to model secretion.
 
 \code{vol(t) = v0 * (1 + kappa * t / tempt) * exp(-t / tempt)}
 
-The \code{powexp} function introduced by  Elashof et al. is strictly
-montonous decreasing but has more freedom to model details in the
+The \code{powexp} function introduced by  Elashof et al. is
+montonously decreasing but has more freedom to model details in the
 function tail.
 
-\code{v0 * exp(-(t / tempt) ^ beta)}
+\code{vol(t) = v0 * exp(-(t / tempt) ^ beta)}
 }
 \examples{
 t = seq(0,100, by=5)
