@@ -25,14 +25,21 @@ shinyServer(function(input, output, session) {
     d
   })
 
+
   pc = reactive({
     # Compute fit
     d = getData();
     if (is.null(d)) return(NULL)
-    model = eval(parse(text = input$model_a))
-    variant = input$variant
-    ng = nlme_gastempt(d, model = model, variant = variant )
-    comment(ng) = comment(d)
+    if (input$method_a == "nlme") {
+      model = eval(parse(text = input$fit_model))
+      variant = input$variant
+      ng = nlme_gastempt(d, model = model, variant = variant )
+      comment(ng) = comment(d)
+    } else {
+      model_name = stan_models[input$cov_model, input$fit_model]
+      ng = stan_gastempt(d, model_name = model_name, chains = 1)
+      comment(ng) = comment(d)
+    }
     ng
   })
 
@@ -104,6 +111,7 @@ shinyServer(function(input, output, session) {
   output$table = DT::renderDataTable({
     p1 = pc()
     if (is.null(p1)) return(NULL)
+    return(NULL)
     p = coef(p1, signif = 3)
     if (is.null(p)) return(NULL)
     DT::datatable(p, rownames = FALSE, caption = comment(p1),

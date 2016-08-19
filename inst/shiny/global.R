@@ -17,7 +17,7 @@ pop_content = c(
 
   variant = "<b>Variant 1:</b> The most generic assumptions to estimate the per-record parameters is also the most likely to fail to converge. If this variant works, use it. Otherwise, try one of the other variants.<br><b>Variant 2</b>: A slightly more restricted version; sometimes converges when variant 1 fails.<br><b>Variant 3</b>: Parameters beta or kappa, which are most difficult to estimate for each curve individually, are computed once only for all records, so these parameters cannot be tested for between-treatment differences. If you are only interested in a good estimate of t50 and v0 and the other variants do not work, use this method.",
 
-  model_b = "Stan model ",
+  stan_model = "Try the simple model without covariance first, it runs faster. The model with covariance estimation between kappa/beta and tempt possibly follows the points not as good, but provide a higher degree of shrinkage.",
 
   data = "Enter data from Excel-clipboard or other tab-separated data here. Column headers must be present and named <code>record, minute, vol</code>.<br>Lines starting with <code>#</code> are comments that will be shown in plots and output files.<br>Avoid editing details in this table because curves are recalculated on every key press; use the Clear button, and paste in the full edited data set from source instead.",
 
@@ -33,6 +33,11 @@ noise_perc = "Noise amplitude, measured in % of the initial volume v0",
 missing = "Fraction of randomly missing data to test the method for robustness"
 
 )
+
+stan_models = ####################### add powexp_gastro_1d ++++
+  matrix(c("linexp_gastro_1b", "linexp_gastro_2b",
+           "powexp_gastro_1b", "powexp_gastro_2c"),
+         nrow = 2, dimnames = list(c("nocov", "withcov"), c("linexp", "powexp")))
 
 preset_description = function(id){
   as.character(presets[presets$id == id, "description"])

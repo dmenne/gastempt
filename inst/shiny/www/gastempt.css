@@ -14,6 +14,7 @@
   font-size: 18px;
   font-weight:500;
   color: #008B00;
+  margin-top:0px;
 }
 .h4, h4 {
   font-size: 16px;
@@ -73,10 +74,13 @@ hr {
   margin-bottom: 10px;
   border-width: 4px 0px 0px;
   border-style: solid none none;
-  border-color: #F0F0F0
+  border-color: #808080
 }
 
 .withSeparator{
   margin-top:10px;
 }
 
+.well{
+  padding: 12px;
+}

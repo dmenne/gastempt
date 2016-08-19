@@ -68,7 +68,7 @@ run_precompiled_model = function(model){
   data$student_df = 5
   cap = capture_output({
     fit = suppressWarnings(
-      rstan::sampling(mod, data = data, chains = 2, iter = 500,                            refresh = -1, verbose = FALSE))
+      rstan::sampling(mod, data = data, chains = 2, iter = 500,                                  refresh = -1, verbose = FALSE))
   })
   expect_is(fit, "stanfit")
 }
@@ -86,8 +86,9 @@ test_that("Running precompiled linexp models _2x directly returns valid result",
   run_precompiled_model("linexp_gastro_2c")
 })
 
-test_that("Running precompiled powexp models _2x directly returns valid result", {
+test_that("Running precompiled powexp models directly returns valid result", {
   skip_on_travis()
+  run_precompiled_model("powexp_gastro_1b")
   run_precompiled_model("powexp_gastro_2c")
 })
 

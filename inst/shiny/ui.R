@@ -12,16 +12,32 @@ shinyUI(
     sidebarLayout(
       sidebarPanel(
         h3("Analyze data"),
-        selectInput("model_a", "Curves analyzed as ", choices =
+        selectInput("method_a", "Method", choices =
+                      c("nlme population fit" = "nlme",
+                       "Bayesian Stan fit" = "stan"),
+                    selected = "stan"),
+        selectInput("fit_model", "Curves analyzed as ", choices =
                       c("linexp (with overshoot)" = "linexp",
                         "powexp (without overshoot)" = "powexp"),
                     selected = "linexp"),
         bsPopover("model_a",  "Available Models", pop_content["model_a"], "right"),
-        selectInput("variant", "Variant",
+        conditionalPanel(
+          condition = "input.method_a == 'nlme'",
+          selectInput("variant", "Variant", choices =
                     c("1: v0 + tempt + kappa" = 1,
                       "2: pdDiag(v0 + tempt + kappa)" = 2,
                       "3: v0 + tempt" = 3)),
-        bsPopover("variant",  "Available Variants", pop_content["variant"], "right"),
+          bsPopover("variant",  "Available Variants", pop_content["variant"], "right")
+        ),
+        conditionalPanel(
+          condition = "input.method_a == 'stan'",
+          selectInput("cov_model", "Model name", choices =
+                      c("No covariance" = "nocov",
+                        "With covariance" = "withcov")),
+          bsPopover("model_cov",  "Stan Model",
+                    pop_content["stan_model"], "right")
+        ), # conditionalPanel stan
+        hr(),
         h3("Generate data"),
         h4("Preset"),
         selectInput("preset",NULL,
