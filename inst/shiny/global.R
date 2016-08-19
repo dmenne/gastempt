@@ -17,7 +17,7 @@ pop_content = c(
 
   variant = "<b>Variant 1:</b> The most generic assumptions to estimate the per-record parameters is also the most likely to fail to converge. If this variant works, use it. Otherwise, try one of the other variants.<br><b>Variant 2</b>: A slightly more restricted version; sometimes converges when variant 1 fails.<br><b>Variant 3</b>: Parameters beta or kappa, which are most difficult to estimate for each curve individually, are computed once only for all records, so these parameters cannot be tested for between-treatment differences. If you are only interested in a good estimate of t50 and v0 and the other variants do not work, use this method.",
 
-  stan_model = "Try the simple model without covariance first, it runs faster. The model with covariance estimation between kappa/beta and tempt possibly follows the points not as good, but provide a higher degree of shrinkage.",
+  stan_model = "Try the simple model without covariance first, it runs faster. The model with estimation of covariance between kappa/beta and tempt possibly follows the points not as good, but shows a higher degree of shrinkage, which results in lower variance.",
 
   data = "Enter data from Excel-clipboard or other tab-separated data here. Column headers must be present and named <code>record, minute, vol</code>.<br>Lines starting with <code>#</code> are comments that will be shown in plots and output files.<br>Avoid editing details in this table because curves are recalculated on every key press; use the Clear button, and paste in the full edited data set from source instead.",
 
@@ -28,6 +28,11 @@ model_s = "The model used to <b>generate</b> the simulated data set; this is dif
 kappa_beta = "<b>kappa</b> is used for the linexp model; values of kappa &gt; 1 indicate that a maximum after t=0 is present, i.e. an overshoot from secretion. <br><b>beta</b> is used for the powexp model only; values above 1 indicate that the curve starts with an horizontal slope at t=0, but the volume never rised above the initial volume v0.",
 
 student_t_df = "Gaussian noise is the usual nice-behaved noise that never occurs in the real world of medical research. With three variants of Student-t distributed noise, outliers can be generated to test the methods for robustness. ",
+fit_model2 = '<b>linexp or powexp?</b> The linexp function can have an initial overshoot to fit gastric emptying curves with secretion.<br><code>vol(t) = v0 * (1 + kappa * t / tempt) * exp(-t / tempt)</code>.<img src="powlinexp.png">',
+
+fit_model = '<b>linexp or powexp?</b><img src="linexp.png"><br>The <b>linexp</b> function introduced by the author of this app can have an initial overshoot to fit gastric emptying curves with secretion.<br><code>vol(t) = v0 * (1 + kappa * t / tempt) * exp(-t / tempt)</code><br>. Fatty meals analyzed by MRI are best represented by this function. The method does not work well when gastric emptying is almost linear or exponential in time; try the Bayesian version with covariance estimation to get stable results.<br><img src="powexp.png"><br>The <b>powexp</b> function historically used by Elashof et al. is strictly montonously decreasing but has more freedom to model details in the function tail. It is the model of choice for scintigraphic data which by definition cannot overshoot.<br><code>vol(t) = v0 * exp(-(t / tempt) ^ beta)</code><br>',
+
+method_a = "<b>Methods to fit curves</b> For gastric emptying time series without too many missing data and few outliers, the <code>nlme</code> population fit provide quick and reliable fits. If <code>nlme</code> fails, the Bayesian method will work; it needs much more time and may bring the free online account on ShinyApps into the knee; no problem if you run this on your own computer. If you have a data set that does not give a fit with the Bayesian method, please contact me.",
 
 noise_perc = "Noise amplitude, measured in % of the initial volume v0",
 missing = "Fraction of randomly missing data to test the method for robustness"

@@ -15,12 +15,15 @@ shinyUI(
         selectInput("method_a", "Method", choices =
                       c("nlme population fit" = "nlme",
                        "Bayesian Stan fit" = "stan"),
-                    selected = "stan"),
+                    selected = "nlme"),
+        bsPopover("method_a",  "Fitting method",
+                  pop_content["method_a"], "right"),
         selectInput("fit_model", "Curves analyzed as ", choices =
                       c("linexp (with overshoot)" = "linexp",
                         "powexp (without overshoot)" = "powexp"),
                     selected = "linexp"),
-        bsPopover("model_a",  "Available Models", pop_content["model_a"], "right"),
+        bsPopover("fit_model",  "Modelling curves",
+                  pop_content["fit_model"], "right"),
         conditionalPanel(
           condition = "input.method_a == 'nlme'",
           selectInput("variant", "Variant", choices =
@@ -34,7 +37,7 @@ shinyUI(
           selectInput("cov_model", "Model name", choices =
                       c("No covariance" = "nocov",
                         "With covariance" = "withcov")),
-          bsPopover("model_cov",  "Stan Model",
+          bsPopover("cov_model",  "Stan Model",
                     pop_content["stan_model"], "right")
         ), # conditionalPanel stan
         hr(),
@@ -92,6 +95,8 @@ shinyUI(
         bsPopover("student_t_df",  "Type of noise",   pop_content["student_t_df"], "right"),
         bsPopover("noise_perc", "Amplitude of noise", pop_content["noise_perc"], "right"),
         bsPopover("missing", "Fraction of data missing", pop_content["missing"], "right"),
+        hr(),
+        helpText(HTML('<a href = "https://github.com/dmenne/gastempt" target="_blank">github source code</a>')),
         width = 3), # sidebarPanel
       mainPanel(
         actionButton("clearButton","Clear", icon = icon("eraser")),
