@@ -14,7 +14,10 @@ numcols = which(sapply(presets, is.numeric))
 
 pop_content = c(
   model_a = "<code>linexp</code>, <b>vol = v0 * (1 + kappa * t / tempt) * exp(-t / tempt):</b><br>Recommended for gastric emptying curves with an initial volume overshoot from secretion. With parameter kappa &gt; 1, there is a maximum after t=0. When all emptying curves start with a steep drop, this model can be difficult to fit.<hr><code>powexp</code>, <b>vol = v0 * exp(-(t / tempt) ^ beta):</b><br>The power exponential function introduced by Elashof et. al. to fit scintigraphic emptying data; this type of data does not have an initial overshoot by design. Compared to the linexp model, fitting powexp is more reliable and rarely fails to converge in the presence of noise and outliers. The power exponential can be useful with MRI data when there is an unusual late phase in emptying.",
+
   variant = "<b>Variant 1:</b> The most generic assumptions to estimate the per-record parameters is also the most likely to fail to converge. If this variant works, use it. Otherwise, try one of the other variants.<br><b>Variant 2</b>: A slightly more restricted version; sometimes converges when variant 1 fails.<br><b>Variant 3</b>: Parameters beta or kappa, which are most difficult to estimate for each curve individually, are computed once only for all records, so these parameters cannot be tested for between-treatment differences. If you are only interested in a good estimate of t50 and v0 and the other variants do not work, use this method.",
+
+  model_b = "Stan model ",
 
   data = "Enter data from Excel-clipboard or other tab-separated data here. Column headers must be present and named <code>record, minute, vol</code>.<br>Lines starting with <code>#</code> are comments that will be shown in plots and output files.<br>Avoid editing details in this table because curves are recalculated on every key press; use the Clear button, and paste in the full edited data set from source instead.",
 

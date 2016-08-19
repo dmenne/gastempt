@@ -10,7 +10,7 @@ shinyUI(
     tags$link(rel = "stylesheet", type = "text/css", href = "gastempt.css"),
     titlePanel("Fitting gastric emptying curves"),
     sidebarLayout(
-      sidebarPanel( "", width = 3,
+      sidebarPanel(
         h3("Analyze data"),
         selectInput("model_a", "Curves analyzed as ", choices =
                       c("linexp (with overshoot)" = "linexp",
@@ -75,9 +75,8 @@ shinyUI(
                   pop_content["kappa_beta"], "right"),
         bsPopover("student_t_df",  "Type of noise",   pop_content["student_t_df"], "right"),
         bsPopover("noise_perc", "Amplitude of noise", pop_content["noise_perc"], "right"),
-        bsPopover("missing", "Fraction of data missing", pop_content["missing"], "right")
-
-      ), # sidebarPanel
+        bsPopover("missing", "Fraction of data missing", pop_content["missing"], "right"),
+        width = 3), # sidebarPanel
       mainPanel(
         actionButton("clearButton","Clear", icon = icon("eraser")),
         aceEditor("data", "", mode = "plain_text"),

@@ -59,7 +59,7 @@ test_that("Direct use of sample model returns valid results", {
 
 
 run_precompiled_model = function(model){
-  cat("Testing ", model,"\n") # Generate output for travis
+  cat("\nTesting ", model,"\n") # Generate output for travis
   mod = stanmodels[[model]]
   testthat::expect_s4_class(mod, "stanmodel")
   testthat::expect_identical(mod@model_name, model)
@@ -94,16 +94,17 @@ test_that("Running precompiled powexp models _2x directly returns valid result",
 
 test_that("Running internal stan_gastempt fit with default parameters and multiple cores returns valid result", {
   #skip_on_travis()
-  #cat("Multiple cores\n")
+  cat("\nMultiple cores\n")
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
-  rstan_options(auto_write = TRUE)
   chains = 1
   options(mc.cores = min(parallel::detectCores(), chains))
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b",
                       chains = chains,  iter = 500, refresh = -1)
   expect_is(ret, "stan_gastempt")
   expect_is(ret$plot, "ggplot")
+  expect_is(ret$plot, "ggplot")
+  expect_equal(ret$coef, coef(ret))
   expect_s4_class(ret$fit, "stanfit")
   # residual standard deviation
   v0_f = ret$coef$v0
@@ -115,7 +116,7 @@ test_that("Running internal stan_gastempt fit with default parameters and multip
 
 test_that("Running internal stan_gastempt with powexp returns valid result", {
   #skip_on_travis()
-  cat("Powexp cores\n")
+  cat("\nPowexp cores\n")
   options(mc.cores = 1)
   d = simulate_gastempt(n_records = 6, seed = 471, model = powexp,
                         beta_mean = 2.5, missing = 0.3)

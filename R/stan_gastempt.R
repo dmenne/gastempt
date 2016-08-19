@@ -128,6 +128,35 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
   ret
 }
 
+#' Extract coefficients from stan_gastempt result
+#'
+#' @param object Result of a call to stan_gastempt
+#' @param ... other arguments
+#'
+#' @return a data frame with coefficients. See \code{\link{nlme_gastempt}} for an example.
+#' @export
+coef.stan_gastempt = function(object, ...){
+  Call = match.call(expand.dots = TRUE)
+  sigdig = as.integer(Call[["signif"]])
+  cf = object$coef
+  if (!is.null(Call[["signif"]])) {
+    cf[,-1] = lapply(cf[,-1], signif, sigdig)
+  }
+  cf
+}
+
+#' Plot data points and fit curve of an stan_gastempt fit
+#'
+#' @param x Result of a call to stan_gastempt
+#' @param ... other arguments
+#'
+#' @return a ggplot object. Use \code{print()} if used
+#' non-interactively to show the curve
+#' @method plot stan_gastempt
+#' @export
+plot.stan_gastempt = function(x, ...){
+  x$plot
+}
 
 if (FALSE) {
   library(gastempt)
