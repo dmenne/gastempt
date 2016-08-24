@@ -51,7 +51,7 @@
 stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
                          student_df = 5L, init_r = 0.2, chains = 4,  ...){
   assert_that(all(c("record", "minute","vol") %in% names(d)))
-
+  . = NULL # keep notes quiet
   is_linexp = grepl("linexp", model_name)
 #  rstan_options(auto_write = TRUE)
 #  options(mc.cores = parallel::detectCores())

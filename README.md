@@ -7,8 +7,7 @@ By dieter.menne@menne-biomed.de, Menne Biomed Consulting Tübingen, D-72074 Tüb
 
 A package and a Shiny web application to create simulated gastric emptying data, and to analyze experimental gastric emptying data using population fit with R and package nlme. Simplified versions of Stan-based (http://mc-stan.org/) Bayesian fits are included and will be extended in future.
 
-Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; thanks to Werner Schwizer and Andreas Steingötter for support.
-
+Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; we thank Prof. Werner Schwizer and Dr. Andreas Steingötter for their contributions.
 
 The package is available from github: https://github.com/dmenne/gastempt. It can be installed with
 
@@ -27,7 +26,6 @@ Two models are implemented in the web interface
 
 * `linexp, vol = v0 * (1 + kappa * t / tempt) * exp(-t / tempt):`Recommended for gastric emptying curves with an initial volume overshoot from secretion. With parameter kappa > 1, there is a maximum after t=0.  When all emptying curves start with a steep drop, this model can be difficult to fit.
 * `powexp, vol = v0 * exp(-(t / tempt) ^ beta):` The power exponential function introduced by Elashof et. al. to fit scintigraphic emptying data; this type of data does not have an initial overshoot by design. Compared to the `linexp` model, fitting `powexp` is more reliable and rarely fails to converge in the presence of noise and outliers. The power exponential can be useful with MRI data when there is an unusual late phase in emptying.
-
 * Data can be entered directly from the clipboard copied from Excel, or can be simulated using a Shiny app.
 * Several preset simulations are provided in the Shiny app. 
 * Robustness of models can be tested by manipulating noise quality and between-subject variance. 

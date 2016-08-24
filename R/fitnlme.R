@@ -37,9 +37,9 @@
 #'       \item \code{slope_t50} Slope in t50; typically in units of ml/minute
 #'  }
 #'  On error, coef is NULL
-#'   \item \code{summary} Result of the nlme fit summary; can be used for addition
-#'      processing, e.g. to extract AIC or residual errors.
-#'      On error, summary is NULL.
+#'   \item \code{nlme_result} Result of the nlme fit; can be used for addition
+#'      processing, e.g. to plot residuals or via \code{summary} to extract AIC.
+#'      On error, nlme_result is NULL.
 #'   \item \code{plot} A ggplot graph of data and prediction. Plot of raw data is
 #'      returned even when convergence was not achieved.
 #'   \item \code{pnlsTol} Effective value of pnlsTo after convergence or failure.
@@ -141,7 +141,7 @@ nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1){
   newdata$vol = predict(d_nlme, newdata)
   plot = plot + geom_line(data = newdata, col = "#006400") +
     ggtitle(paste0(title, ", pnlsTol = ", pnlsTol), subtitle = comment(d))
-  ret = list(coef = cf, summary = summary(d_nlme), plot = plot,
+  ret = list(coef = cf, nlme_result = d_nlme, plot = plot,
              pnlsTol = pnlsTol, message = "Ok")
   class(ret) = "nlme_gastempt"
   ret
