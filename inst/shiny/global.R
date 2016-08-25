@@ -4,7 +4,7 @@ library(gastempt)
 suppressPackageStartupMessages(library(dplyr))
 library(readxl)
 suppressPackageStartupMessages(library(shinyBS))
-
+github_repo = "https://github.com/dmenne/gastempt/blob/master/exec/"
 
 presets = na.omit(read_excel("gastempt_presets.xlsx")) %>%
   mutate(
@@ -17,7 +17,7 @@ pop_content = c(
 
   variant = "<b>Variant 1:</b> The most generic assumptions to estimate the per-record parameters is also the most likely to fail to converge. If this variant works, use it. Otherwise, try one of the other variants.<br><b>Variant 2</b>: A slightly more restricted version; sometimes converges when variant 1 fails.<br><b>Variant 3</b>: Parameters beta or kappa, which are most difficult to estimate for each curve individually, are computed once only for all records, so these parameters cannot be tested for between-treatment differences. If you are only interested in a good estimate of t50 and v0 and the other variants do not work, use this method.",
 
-  stan_model = "Try the simple model without covariance first, it runs faster. The model with estimation of covariance between kappa/beta and tempt possibly follows the points not as good, but shows a higher degree of shrinkage, which results in lower variance.",
+  cov_model = 'Try the simple model "Without covariance" first, it runs faster. Compare with the model "With covariance" when the fit is not satisfactory. The preset "rough powexp scint" provides example data where the more complex fit is markedly superior.',
 
   data = "Enter data from Excel-clipboard or other tab-separated data here. Column headers must be present and named <code>record, minute, vol</code>.<br>Lines starting with <code>#</code> are comments that will be shown in plots and output files.<br>Avoid editing details in this table because curves are recalculated on every key press; use the Clear button, and paste in the full edited data set from source instead.",
 
@@ -35,7 +35,8 @@ fit_model = '<b>linexp or powexp?</b><img src="linexp.png"><br>The <b>linexp</b>
 method_a = "<b>Methods to fit curves</b> For gastric emptying time series without too many missing data and few outliers, the <code>nlme</code> population fit provide quick and reliable fits. If <code>nlme</code> fails, the Bayesian method will work; it needs much more time and may bring the free online account on ShinyApps into the knee; no problem if you run this on your own computer. If you have a data set that does not give a fit with the Bayesian method, please contact me.",
 
 noise_perc = "Noise amplitude, measured in % of the initial volume v0",
-missing = "Fraction of randomly missing data to test the method for robustness"
+missing = "Fraction of randomly missing data to test the method for robustness",
+manual = "Expert settings to create simulated emptying curves."
 
 )
 

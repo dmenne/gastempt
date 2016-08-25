@@ -15,7 +15,7 @@ test_that("nlme_gastempt returns a valid structure", {
   fit = nlme_gastempt(d)
   expect_is(fit, "nlme_gastempt")
   expect_equal(fit$message, "Ok")
-  expect_equal(names(fit), c("coef", "summary", "plot", "pnlsTol","message"))
+  expect_equal(names(fit), c("coef", "nlme_result", "plot", "pnlsTol","message"))
   expect_is(plot(fit), "ggplot")
   expect_is(coef(fit), "data.frame")
   expect_equal(as.numeric(coef(fit, signif = 1)[1,2]) , 500)
@@ -62,7 +62,7 @@ search_pnlsTol = function(model = linexp, nlme_model = linexp,
     set.seed(r)
     d = simulate_gastempt(model = model)$data
     fit = nlme_gastempt(d, model = nlme_model, variant = variant)
-    cat(r, " ",fit$pnlsTol, fit$summary$numIter, "\n")
+    cat(r, " ",fit$pnlsTol, fit$nl$numIter, "\n")
   }
 }
 
@@ -77,7 +77,7 @@ test_that("fit of powexp data to powexp curve gives valid coefficients", {
   expect_equal(fit$pnlsTol, 0.001)
   expect_is(fit, "nlme_gastempt")
   expect_equal(fit$message, "Ok")
-  expect_equal(names(fit), c("coef", "summary", "plot", "pnlsTol","message"))
+  expect_equal(names(fit), c("coef", "nlme_result", "plot", "pnlsTol","message"))
   expect_is(plot(fit), "ggplot")
   expect_is(coef(fit), "data.frame")
   fit = nlme_gastempt(d, model = powexp, variant = 2)
