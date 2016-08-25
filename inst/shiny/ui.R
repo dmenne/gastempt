@@ -31,14 +31,21 @@ shinyUI(
           condition = "input.method_a == 'stan'",
           selectInput("cov_model", "Model name", choices =
                       c("No covariance" = "nocov",
-                        "With covariance" = "withcov"))
+                        "With covariance" = "withcov")),
+          conditionalPanel(
+            condition = "input.manual",
+            fluidRow(splitLayout(
+              numericInput("lkj", "LKJ", 2, 1, 50, 1, width = "80px"),
+              numericInput("student_df", "Student df", 5, 2, 30, 1, width = "80px")
+            ))
+          )
         ), # conditionalPanel stan
+        checkboxInput("manual", "Expert Mode"),
         hr(),
         h3("Simulated data"),
         h4("Preset"),
         selectInput("preset",NULL,
                     choices = setNames(presets$id, presets$label)),
-        checkboxInput("manual", "Expert Mode"),
         conditionalPanel(
           condition = "input.manual",
           h4("Manual settings"),

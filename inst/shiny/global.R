@@ -32,12 +32,13 @@ fit_model2 = '<b>linexp or powexp?</b> The linexp function can have an initial o
 
 fit_model = '<b>linexp or powexp?</b><img src="linexp.png"><br>The <b>linexp</b> function introduced by the author of this app can have an initial overshoot to fit gastric emptying curves with secretion.<br><code>vol(t) = v0 * (1 + kappa * t / tempt) * exp(-t / tempt)</code><br>. Fatty meals analyzed by MRI are best represented by this function. The method does not work well when gastric emptying is almost linear or exponential in time; try the Bayesian version with covariance estimation to get stable results.<br><img src="powexp.png"><br>The <b>powexp</b> function historically used by Elashof et al. is strictly montonously decreasing but has more freedom to model details in the function tail. It is the model of choice for scintigraphic data which by definition cannot overshoot.<br><code>vol(t) = v0 * exp(-(t / tempt) ^ beta)</code><br>',
 
-method_a = "<b>Methods to fit curves</b> For gastric emptying time series without too many missing data and few outliers, the <code>nlme</code> population fit provide quick and reliable fits. If <code>nlme</code> fails, the Bayesian method will work; it needs much more time and may bring the free online account on ShinyApps into the knee; no problem if you run this on your own computer. If you have a data set that does not give a fit with the Bayesian method, please contact me.",
+method_a = "<b>Methods to fit curves</b> For gastric emptying time series without too many missing data and few outliers, the <code>nlme</code> population fit provide quick and reliable fits. If <code>nlme</code> fails, the Bayesian method will work; it needs much more time and may bring the free online account on ShinyApps into the knee; no problem if you run this on your own computer. If you have a data set that does not give a fit with the Bayesian method, please post example on github issues.",
 
 noise_perc = "Noise amplitude, measured in % of the initial volume v0",
 missing = "Fraction of randomly missing data to test the method for robustness",
-manual = "Expert settings to create simulated emptying curves."
-
+manual = "Expert settings for parameters of simulated emptying curves and Bayesian fit.",
+lkj = 'LKJ prior for kappa/tempt correlation, only required for model with covariance. Values from 1.5 (strong correlation) to 50 (almost independent) are useful. See http://www.psychstatistics.com/2014/12/27/d-lkj-priors/ for examples.',
+student_df = "Student-t degrees of freedom for residual error; default 5. Use 3 when there are heavy outliers in the data set; values above 10 are adequate for almost gaussian residuals."
 )
 
 stan_models = ####################### add powexp_gastro_1d ++++

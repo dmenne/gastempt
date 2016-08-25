@@ -39,7 +39,8 @@ shinyServer(function(input, output, session) {
       comment(ng) = comment(d)
     } else {
       model_name = stan_models[input$cov_model, input$fit_model]
-      ng = stan_gastempt(d, model_name = model_name, chains = 1)
+      ng = stan_gastempt(d, model_name = model_name, lkj = input$lkj,
+                         student_df = input$student_df, chains = 1)
       comment(ng) = comment(d)
     }
     ng
@@ -65,7 +66,8 @@ shinyServer(function(input, output, session) {
     popit(session, show, "seed",  "Randomization Seed")
     popit(session, show, "model_s",  "Curves created as")
     popit(session, show, "manual", "Manual set parameter of simulated data")
-
+    popit(session, show, "lkj", "LKJ parameter for covariance")
+    popit(session, show, "student_df", "Residual error outliers")
     popit(session, show, "tempt_mean",  "Mean of emptying time constant")
     popit(session, show, "tempt_std_perc",
               "Between-record standard deviation of emptying time constant")
