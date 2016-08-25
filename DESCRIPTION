@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -26,10 +26,10 @@ Imports:
     stringr,
     shiny
 Suggests:
-    testthat,
     rmarkdown,
     knitr,
     covr,
+    testthat,
     methods
 LinkingTo:
     StanHeaders (>= 2.10.0),

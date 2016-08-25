@@ -78,6 +78,7 @@ shinyUI(
           hr()
         ), # conditionalPanel manual,
         helpText(HTML('<a href = "https://github.com/dmenne/gastempt" target="_blank">github source code</a>')),
+        helpText(HTML('<a href = "https://github.com/dmenne/gastempt/issues" target="_blank">Report issues</a>')),
         checkboxInput("show_pop", "Show popover help", value = TRUE),
         # The following should not be moved to the server, because one
         # popover must remain on the page to load dependencies

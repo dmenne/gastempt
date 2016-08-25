@@ -7,8 +7,9 @@ By dieter.menne@menne-biomed.de, Menne Biomed Consulting Tübingen, D-72074 Tüb
 
 A package and a Shiny web application to create simulated gastric emptying data, and to analyze experimental gastric emptying data using population fit with R and package nlme. Simplified versions of Stan-based (http://mc-stan.org/) Bayesian fits are included and will be extended in future.
 
-Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; we thank Prof. Werner Schwizer and Dr. Andreas Steingötter for their contributions.
+> Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; we thank Prof. Werner Schwizer and Dr. Andreas Steingötter for their contributions.
 
+### Download
 The package is available from github: https://github.com/dmenne/gastempt. It can be installed with
 
 ```
@@ -17,26 +18,32 @@ devtools::install_github("dmenne/gastempt")
 
 Compilation of the Stan models require several minutes.
 
-## Shiny online interface
+### Shiny online interface
 
 The web interface can be installed on your computer, or [run in ShinyApps](  
 https://menne-biomed.shinyapps.io/gastempt/).
 
-Two models are implemented in the web interface
+Two __models__ are implemented in the web interface
 
 * `linexp, vol = v0 * (1 + kappa * t / tempt) * exp(-t / tempt):`Recommended for gastric emptying curves with an initial volume overshoot from secretion. With parameter kappa > 1, there is a maximum after t=0.  When all emptying curves start with a steep drop, this model can be difficult to fit.
 * `powexp, vol = v0 * exp(-(t / tempt) ^ beta):` The power exponential function introduced by Elashof et. al. to fit scintigraphic emptying data; this type of data does not have an initial overshoot by design. Compared to the `linexp` model, fitting `powexp` is more reliable and rarely fails to converge in the presence of noise and outliers. The power exponential can be useful with MRI data when there is an unusual late phase in emptying.
+
+### Methods with variants
+
+* Population fits based on function `nlme` in package R `nlme`.
+* [Stan-based fits](http://menne-biomed.de/blog/tag:Stan), both [without](https://github.com/dmenne/gastempt/blob/master/exec/linexp_gastro_1b.stan) and [with](https://github.com/dmenne/gastempt/blob/master/exec/linexp_gastro_2b.stan) covariance estimation. Thanks to priors, fitting with Bayesian methods also works for single records, even if stability strongly improves with more data sets available. See the documentation of R function [stan_gastempt](https://github.com/dmenne/gastempt/blob/master/R/stan_gastempt.R) in the package. Some details can be found in [my blog](http://menne-biomed.de/blog/multiple-indexes-stan). The rationale for using Stan to fit non-linear curves is discussed here for [<sup>13</sup>C breath test data](http://menne-biomed.de/blog/breath-test-stan) and is equally valid for gastric emptying data. 
+
+### Data entry:
 * Data can be entered directly from the clipboard copied from Excel, or can be simulated using a Shiny app.
-* Several preset simulations are provided in the Shiny app. 
+* Several preset simulations are provided in the Shiny app, with different amounts of noise and outliers 
 * Robustness of models can be tested by manipulating noise quality and between-subject variance. 
 * Fits are displayed with data.
 * The coefficients of the analysis including t50 and the slope in t50 can be downloaded in .csv format.
 
-## In source code, not yet in web interface 
 
-* [Stan-based fits](http://menne-biomed.de/blog/tag:Stan). See the documentation of R function [stan_gastempt](https://github.com/dmenne/gastempt/blob/master/R/stan_gastempt.R) in the package. Some details can be found in [my blog](http://menne-biomed.de/blog/multiple-indexes-stan). The rationale for using Stan to fit non-linear curves is discussed here for [<sup>13</sup>C breath test data](http://menne-biomed.de/blog/breath-test-stan) and equally valid for gastric emptying data. 
+### Example 
 
-Example program with simulated data (needs about 40 seconds till plot shows):
+Program with simulated data (needs about 40 seconds till plot shows):
 
 ```
 library(gastempt)
@@ -47,9 +54,8 @@ print(ret$coef)
 print(ret$plot)
 ```
 
-## Coming:
+### Coming:
 
-* Web interface for Shiny fits
 * Post-hoc analysis in Shiny application by treatment groups, both for cross-over and fully randomized designs.
 
 ![Screenshot](inst/shiny/screenshot.png)

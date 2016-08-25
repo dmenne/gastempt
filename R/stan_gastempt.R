@@ -68,7 +68,6 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
     minute = d$minute,
     volume = d$vol)
   mod = stanmodels[[model_name]]
-  testthat::expect_s4_class(mod, "stanmodel")
   capture.output({
     #fit = suppressWarnings(sampling(mod, data = data))
     fit = suppressWarnings(sampling(mod, data = data, init_r = init_r,
