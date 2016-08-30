@@ -98,7 +98,11 @@ shinyUI(
             actionButton("clearButton","Clear", icon = icon("eraser")),
             tags$script(type = "text/javascript",
               HTML("ace.edit('data').setOptions({tabSize:12,showInvisibles:true,useSoftTabs:false});")),
-            plotOutput("fit_plot"),
+            div(id = "plot-container",
+                tags$img(src = "spinner.gif",
+                         id = "loading-spinner"),
+                plotOutput("fit_plot")
+            ),
             hr(),
             downloadButton("download_coef", "Download"),
             DT::dataTableOutput("table")
