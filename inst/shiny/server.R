@@ -46,12 +46,12 @@ shinyServer(function(input, output, session) {
     ng
   })
 
-  popit = function(session, show, id, title ){
+  popit = function(session, show, id, title, placement = "right" ){
     if (show) {
       content = pop_content[id]
       if (is.na(pop_content[id]))
         content = ""
-      addPopover(session, id, title, content, "right")
+      addPopover(session, id, title, content, placement)
     } else {
       removePopover(session, id)
     }
@@ -80,7 +80,7 @@ shinyServer(function(input, output, session) {
     popit(session, show, "student_t_df",  "Type of noise")
     popit(session, show, "noise_perc", "Amplitude of noise")
     popit(session, show, "missing", "Fraction of data missing")
-    popit(session, show, "data",  "Entering data")
+    popit(session, show, "data",  "Entering data", "bottom")
   })
 
   observe({
