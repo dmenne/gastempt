@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -20,7 +20,7 @@ Imports:
     nlme,
     dplyr,
     tibble,
-    ggplot2 (>= 2.1.0),
+    ggplot2 (>= 2.2.0),
     rstan,
     assertthat,
     stringr,
@@ -30,7 +30,8 @@ Suggests:
     knitr,
     covr,
     testthat,
-    methods
+    methods,
+    packagedocs
 LinkingTo:
     StanHeaders (>= 2.10.0),
     rstan (>= 2.10.0),
@@ -46,5 +47,5 @@ RcppModules:
   stan_fit4powexp_gastro_1b_mod,
   stan_fit4powexp_gastro_2c_mod
 RoxygenNote: 5.0.1
-VignetteBuilder: knitr
-Remotes: hadley/ggplot2
+VignetteBuilder: knitr,
+    packagedocs
