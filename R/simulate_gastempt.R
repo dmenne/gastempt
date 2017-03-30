@@ -6,7 +6,7 @@
 #' @param kappa_mean,kappa_std For linexp only: Mean and between-record standard deviation of overshoot parameter \code{kappa}. For values of \code{kappa} above 1, curve has an overshoot that can be used to follow volume time series with secretion.
 #' @param beta_mean,beta_std For powexp only: Mean and between-record standard deviation of the so called lag parameter.
 #' @param noise Standard deviation of normal noise when \code{student_t_df = NULL}; scaling of noise when student_t_df >= 2.
-#' @param student_t_df When NULL (default), Gaussian noise is added; when >= 2, Student_t distributed noise is added, which generates more realistic outliers. Values from 2 to 5 are useful, when higher values are used the result comes close to that of Gaussian noise. Values below 2 are truncated to 2.
+#' @param student_t_df When NULL (default), Gaussian noise is added; when >= 2, Student_t distributed noise is added, which generates more realistic outliers. Values from 2 to 5 are useful, when higher values are used the result comes close to that of Gaussian noise. Values below 2 are rounded to 2.
 #' @param missing When 0 (default), all curves have the same number of data points. When > 0, this is the fraction of points that were removed randomly to simulate missing points. Maximum value is 0.5.
 #' @param model linexp(default) or powexp
 #' @param seed optional seed; not set if seed = NULL (default)

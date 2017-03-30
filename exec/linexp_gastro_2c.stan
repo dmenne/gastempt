@@ -20,12 +20,9 @@ data{
 }
 
 transformed data{
-    vector[2] zeros;
     vector[n] volume_1;
     real norm_vol;
     int n_norm;
-    zeros[1] = 0;
-    zeros[2] = 0;
     n_norm = 0;
     norm_vol = 0;
     # Use mean of initial volume to normalize
@@ -60,8 +57,8 @@ model{
   real v0r;
   real kappar;
   real temptr;
-  vector[n] mu;
-  # http://www.psychstatistics.com/2014/12/27/d-lkj-priors/
+#  vector[n] mu;
+  # http://www.psychstatistics.com/2014/12/27/d-lkj-priors/c
   # Large values, e.g. 70, give priors that prefer low correlations
   # near 0. At 1 flat -1 to 1; lower 1 produces a trough at 0
   L_rho ~ lkj_corr_cholesky(lkj);
