@@ -12,4 +12,3 @@ Not used, starts shiny app
 \description{
 Run shiny app demonstrating fit strategies with simulated data
 }
-

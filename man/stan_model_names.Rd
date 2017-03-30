@@ -20,4 +20,3 @@ comment lines in model as description
 \description{
 By default, line 2 and 3 of comments in Stan file are returned
 }
-

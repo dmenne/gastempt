@@ -3,12 +3,12 @@
 \name{gastemptfunc}
 \alias{gastemptfunc}
 \alias{linexp}
-\alias{linexp_auc}
-\alias{linexp_log}
 \alias{linexp_slope}
+\alias{linexp_auc}
 \alias{powexp}
-\alias{powexp_log}
 \alias{powexp_slope}
+\alias{linexp_log}
+\alias{powexp_log}
 \title{Functions for gastric emptying analysis}
 \usage{
 linexp(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL)
@@ -87,4 +87,3 @@ lines(t, powexp(t, v0, tempt, 1), type = "l", col = "green")
 \seealso{
 Self starting functions  \code{\link{selfStart}}.
 }
-

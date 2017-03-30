@@ -17,4 +17,3 @@ a ggplot object. Use \code{print()} if used non-interactively to show the curve
 \description{
 Plot data points and fit curve of an nlme_gastempt fit
 }
-

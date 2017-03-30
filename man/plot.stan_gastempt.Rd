@@ -18,4 +18,3 @@ non-interactively to show the curve
 \description{
 Plot data points and fit curve of an stan_gastempt fit
 }
-

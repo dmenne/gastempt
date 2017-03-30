@@ -17,4 +17,3 @@ Half-emptying time. Name of evaluated function is returned as attribute \code{fu
 \description{
 No closed solution known for linexp, we use newton  approximation
 }
-

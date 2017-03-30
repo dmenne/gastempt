@@ -45,9 +45,9 @@ A list of class nlme_gastempt with elements
       \item \code{slope_t50} Slope in t50; typically in units of ml/minute
  }
  On error, coef is NULL
-  \item \code{summary} Result of the nlme fit summary; can be used for addition
-     processing, e.g. to extract AIC or residual errors.
-     On error, summary is NULL.
+  \item \code{nlme_result} Result of the nlme fit; can be used for addition
+     processing, e.g. to plot residuals or via \code{summary} to extract AIC.
+     On error, nlme_result is NULL.
   \item \code{plot} A ggplot graph of data and prediction. Plot of raw data is
      returned even when convergence was not achieved.
   \item \code{pnlsTol} Effective value of pnlsTo after convergence or failure.
@@ -73,4 +73,3 @@ theme_set(theme_bw() + theme(panel.margin = grid::unit(0,"lines")))
 # fit_d$plot  # direct access is possible
 plot(fit_d) # better use accessor function
 }
-

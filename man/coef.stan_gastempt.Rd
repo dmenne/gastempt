@@ -17,4 +17,3 @@ a data frame with coefficients. See \code{\link{nlme_gastempt}} for an example.
 \description{
 Extract coefficients from stan_gastempt result
 }
-

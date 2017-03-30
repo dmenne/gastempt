@@ -57,7 +57,7 @@ model{
   real v0r;
   real kappar;
   real temptr;
-#  vector[n] mu;
+  vector[n] mu;
   # http://www.psychstatistics.com/2014/12/27/d-lkj-priors/c
   # Large values, e.g. 70, give priors that prefer low correlations
   # near 0. At 1 flat -1 to 1; lower 1 produces a trough at 0

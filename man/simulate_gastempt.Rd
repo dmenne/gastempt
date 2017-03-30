@@ -24,7 +24,7 @@ simulate_gastempt(n_records = 10, v0_mean = 400, v0_std = 50,
 
 \item{noise}{Standard deviation of normal noise when \code{student_t_df = NULL}; scaling of noise when student_t_df >= 2.}
 
-\item{student_t_df}{When NULL (default), Gaussian noise is added; when >= 2, Student_t distributed noise is added, which generates more realistic outliers. Values from 2 to 5 are useful, when higher values are used the result comes close to that of Gaussian noise. Values below 2 are truncated to 2.}
+\item{student_t_df}{When NULL (default), Gaussian noise is added; when >= 2, Student_t distributed noise is added, which generates more realistic outliers. Values from 2 to 5 are useful, when higher values are used the result comes close to that of Gaussian noise. Values below 2 are rounded to 2.}
 
 \item{missing}{When 0 (default), all curves have the same number of data points. When > 0, this is the fraction of points that were removed randomly to simulate missing points. Maximum value is 0.5.}
 
@@ -66,4 +66,3 @@ ggplot(vol_powexp$data, aes(x = minute, y = vol)) + geom_point() +
   facet_wrap(~record) + ggtitle("powexp, noise = 10 (default), 20\% missing,
   Student-t (df = 2) noise")
 }
-

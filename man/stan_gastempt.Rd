@@ -64,4 +64,3 @@ Fit gastric emptying curves with Stan
   ret = stan_gastempt(d)
   print(ret$coef)
 }
-
