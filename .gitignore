@@ -3,7 +3,6 @@ src/*.o-*
 *.so
 *.rda
 *.dll
-*.html
 .RData
 .Rproj.user
 .Rhistory
