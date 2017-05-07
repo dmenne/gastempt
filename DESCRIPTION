@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.3.2
+Version: 0.4-0
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -14,7 +14,7 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.2.0)
+    R (>= 3.4.0)
 Imports:
     Rcpp (>= 0.12.6),
     nlme,
@@ -30,11 +30,10 @@ Suggests:
     knitr,
     covr,
     testthat,
-    methods,
-    packagedocs
+    methods
 LinkingTo:
     StanHeaders (>= 2.10.0),
-    rstan (>= 2.10.0),
+    rstan (>= 2.15.0),
     BH (>= 1.60.0),
     Rcpp (>= 0.12.0),
     RcppEigen
@@ -47,5 +46,4 @@ RcppModules:
   stan_fit4powexp_gastro_1b_mod,
   stan_fit4powexp_gastro_2c_mod
 RoxygenNote: 6.0.1
-VignetteBuilder: knitr,
-    packagedocs
+VignetteBuilder: knitr

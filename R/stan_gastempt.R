@@ -71,7 +71,7 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
   capture.output({
     #fit = suppressWarnings(sampling(mod, data = data))
     fit = suppressWarnings(sampling(mod, data = data, init_r = init_r,
-                                    chains = chains, ...))
+                                    chains = chains))
   })
   cf = summary(fit)$summary[,1]
   if (is_linexp){

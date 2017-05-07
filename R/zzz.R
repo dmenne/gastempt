@@ -1,9 +1,5 @@
+#' @importFrom Rcpp loadModule
 .onLoad <- function(libname, pkgname) {
-  Rcpp::loadModule("stan_fit4linexp_gastro_1b_mod", TRUE)
-  Rcpp::loadModule("stan_fit4linexp_gastro_1c_mod", TRUE)
-  Rcpp::loadModule("stan_fit4linexp_gastro_1d_mod", TRUE)
-  Rcpp::loadModule("stan_fit4linexp_gastro_2b_mod", TRUE)
-  Rcpp::loadModule("stan_fit4linexp_gastro_2c_mod", TRUE)
-  Rcpp::loadModule("stan_fit4powexp_gastro_1b_mod", TRUE)
-  Rcpp::loadModule("stan_fit4powexp_gastro_2c_mod", TRUE)
+  modules <- paste0("stan_fit4", names(stanmodels), "_mod")
+  for (m in modules) Rcpp::loadModule(m, what = TRUE)
 }
