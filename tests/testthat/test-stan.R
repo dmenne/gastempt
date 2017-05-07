@@ -68,7 +68,8 @@ run_precompiled_model = function(model){
   data$student_df = 5
   cap = capture_output({
     fit = suppressWarnings(
-      rstan::sampling(mod, data = data, chains = 2, iter = 500,                                  refresh = -1, verbose = FALSE))
+      rstan::sampling(mod, data = data, chains = 2, iter = 500,
+                      refresh = -1, verbose = FALSE))
   })
   expect_is(fit, "stanfit")
 }
@@ -82,12 +83,13 @@ test_that("Running precompiled models linexp _1x directly returns valid result",
 
 test_that("Running precompiled linexp models _2x directly returns valid result", {
 #  skip_on_travis()
+  skip_on_cran()
   run_precompiled_model("linexp_gastro_2b")
   run_precompiled_model("linexp_gastro_2c")
 })
 
 test_that("Running precompiled powexp models directly returns valid result", {
-  skip_on_travis()
+  skip_on_cran()
   run_precompiled_model("powexp_gastro_1b")
   run_precompiled_model("powexp_gastro_2c")
 })
@@ -95,6 +97,7 @@ test_that("Running precompiled powexp models directly returns valid result", {
 
 test_that("Running internal stan_gastempt fit with default parameters and multiple cores returns valid result", {
   #skip_on_travis()
+  skip_on_cran()
   cat("\nMultiple cores\n")
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
@@ -138,6 +141,7 @@ test_that("Running internal stan_gastempt with powexp returns valid result", {
 
 test_that("Running internal stan_gastempt fit with non-default parameters returns valid result", {
 #  skip_on_travis()
+  skip_on_cran()
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2c",
@@ -149,6 +153,7 @@ test_that("Running internal stan_gastempt fit with non-default parameters return
 
 test_that("Running internal stan_gastempt with many missing data returns valid result", {
   cat("Missing data\n")
+  skip_on_cran()
   d = simulate_gastempt(n_records = 6, missing = 0.3, seed = 471)
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_1c", refresh = -1)

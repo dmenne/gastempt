@@ -3,3 +3,5 @@
 cleanup*
 .travis.yml
 .git
+shiny.cmd
+^docs$
