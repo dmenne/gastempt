@@ -5,8 +5,8 @@ suppressPackageStartupMessages(library(dplyr))
 library(readxl)
 suppressPackageStartupMessages(library(shinyBS))
 github_repo = "https://github.com/dmenne/gastempt/blob/master/exec/"
-
-presets = na.omit(read_excel("gastempt_presets.xlsx")) %>%
+presets = na.omit(
+  suppressWarnings(read_excel("gastempt_presets.xlsx", sheet = "gastempt_samples"))) %>%
   mutate(
     id = as.character(id)
   )

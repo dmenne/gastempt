@@ -5,3 +5,4 @@ cleanup*
 .git
 shiny.cmd
 ^docs$
+_pkgdown.yml
