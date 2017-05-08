@@ -15,5 +15,5 @@ in `x`, otherwise beta, and similar for logkappa/kappa.}
 Half-emptying time. Name of evaluated function is returned as attribute \code{fun}. Negative of slope is returned as attribute \code{slope}.
 }
 \description{
-No closed solution known for linexp, we use newton  approximation
+No closed solution known for \code{\link{linexp}}, we use a Newton  approximation.
 }

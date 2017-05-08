@@ -59,8 +59,10 @@ A list of class stan_gastempt with elements \code{coef, fit, plot}
 Fit gastric emptying curves with Stan
 }
 \examples{
+\dontrun{
   dd = simulate_gastempt(n_records = 6, seed = 471)
   d = dd$data
   ret = stan_gastempt(d)
   print(ret$coef)
+}
 }

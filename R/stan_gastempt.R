@@ -41,10 +41,12 @@
 #'  }
 #' @useDynLib gastempt, .registration = TRUE
 #' @examples
+#' \dontrun{
 #'   dd = simulate_gastempt(n_records = 6, seed = 471)
 #'   d = dd$data
 #'   ret = stan_gastempt(d)
 #'   print(ret$coef)
+#' }
 #' @import rstan
 #' @importFrom utils capture.output
 #' @export

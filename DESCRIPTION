@@ -1,13 +1,13 @@
 Package: gastempt
-Version: 0.4-0
+Version: 0.4.0
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
 Type: Package
-Title: Analyzing gastric emptying functions
-Description: Fits functions using nonlinear mixed-model population with nlme
-   and Bayesian methods with Stan to gastric emptying time series and
-   computes derived parameters such as t50 and AUC.
+Title: Analyzing Gastric Emptying from MRI or Scintigraphy
+Description: Fits gastric emptying time series from MRI or scintigraphic measurements
+   using nonlinear mixed-model population fits with nlme and Bayesian methods with 
+   Stan and computes derived parameters such as t50 and AUC.
 License: GPL (>=3)
 LazyData: TRUE
 NeedsCompilation: yes
