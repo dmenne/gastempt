@@ -1,6 +1,6 @@
 #' Compute half-emptying time from nlme parameters
 #'
-#' No closed solution known for linexp, we use newton  approximation
+#' No closed solution known for \code{\link{linexp}}, we use a Newton  approximation.
 #' @name t50
 #' @param x  Result of a nlme fit, with named components `tempt, beta, logbeta,
 #' kappa, logkappa` depending on model. Function used `logbeta` when it is present,

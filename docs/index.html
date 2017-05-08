@@ -59,21 +59,21 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#fitting-gastric-emptying-curves" class="anchor"></a>Fitting gastric emptying curves</h1></div>
 <p>By <a href="mailto:dieter.menne@menne-biomed.de">dieter.menne@menne-biomed.de</a>, Menne Biomed Consulting Tübingen, D-72074 Tübingen</p>
-<p>A package and a Shiny web application to create simulated gastric emptying data, and to analyze experimental gastric emptying data using population fit with R and package nlme. Simplified versions of Stan-based (<a href="http://mc-stan.org/" class="uri">http://mc-stan.org/</a>) Bayesian fits are included and will be extended in future.</p>
+<p>A package and a Shiny web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package nlme. Stan-based (<a href="http://mc-stan.org/" class="uri">http://mc-stan.org/</a>) Bayesian fits that can handle critical cases are included and will be extended in future.</p>
 <blockquote>
 <p>Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; we thank Prof. Werner Schwizer and Dr. Andreas Steingötter for their contributions.</p>
 </blockquote>
 <div id="download" class="section level3">
 <h3 class="hasAnchor">
 <a href="#download" class="anchor"></a>Download</h3>
-<p>The package is available from github: <a href="https://github.com/dmenne/gastempt" class="uri">https://github.com/dmenne/gastempt</a>. It can be installed with</p>
+<p>The package is available from <a href="https://github.com/dmenne/gastempt">github</a>, <a href="https://dmenne.github.io/gastempt/">documentation</a>. To install, use:</p>
 <pre><code>devtools::install_github("dmenne/gastempt")</code></pre>
-<p>Compilation of the Stan models require several minutes.</p>
+<p>Compilation of the Stan models needs several minutes.</p>
 </div>
 <div id="shiny-online-interface" class="section level3">
 <h3 class="hasAnchor">
 <a href="#shiny-online-interface" class="anchor"></a>Shiny online interface</h3>
-<p>The web interface can be installed on your computer, or <a href="https://menne-biomed.shinyapps.io/gastempt/">run in ShinyApps</a>.</p>
+<p>The web interface can be installed on your computer, or run as <a href="https://apps.menne-biomed.de/gastempt/">web app</a>.</p>
 <p>Two <strong>models</strong> are implemented in the web interface</p>
 <ul>
 <li>
@@ -119,7 +119,7 @@ print(ret$plot)</code></pre>
 <ul>
 <li>Post-hoc analysis in Shiny application by treatment groups, both for cross-over and fully randomized designs.</li>
 </ul>
-<p><img src="inst/shiny/screenshot.png" alt="Screenshot"></p>
+<p><img src="tools/readme/screenshot.png" alt="Screenshot"></p>
 </div>
 </div>
 

@@ -5,23 +5,23 @@
 
 By dieter.menne@menne-biomed.de, Menne Biomed Consulting Tübingen, D-72074 Tübingen
 
-A package and a Shiny web application to create simulated gastric emptying data, and to analyze experimental gastric emptying data using population fit with R and package nlme. Simplified versions of Stan-based (http://mc-stan.org/) Bayesian fits are included and will be extended in future.
+A package and a Shiny web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package nlme. Stan-based (http://mc-stan.org/) Bayesian fits that can handle critical cases are included and will be extended in future.
 
 > Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; we thank Prof. Werner Schwizer and Dr. Andreas Steingötter for their contributions.
 
 ### Download
-The package is available from github: https://github.com/dmenne/gastempt. It can be installed with
+The package is available from [github](https://github.com/dmenne/gastempt), [documentation](https://dmenne.github.io/gastempt/). To install, use:
 
 ```
 devtools::install_github("dmenne/gastempt")
 ```
 
-Compilation of the Stan models require several minutes.
+Compilation of the Stan models needs several minutes. 
 
 ### Shiny online interface
 
-The web interface can be installed on your computer, or [run in ShinyApps](  
-https://menne-biomed.shinyapps.io/gastempt/).
+The web interface can be installed on your computer, or run as [web app](  
+https://apps.menne-biomed.de/gastempt/).
 
 Two __models__ are implemented in the web interface
 
@@ -58,7 +58,7 @@ print(ret$plot)
 
 * Post-hoc analysis in Shiny application by treatment groups, both for cross-over and fully randomized designs.
 
-![Screenshot](inst/shiny/screenshot.png)
+![Screenshot](tools/readme/screenshot.png)
 
 
 
