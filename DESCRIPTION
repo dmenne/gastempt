@@ -13,6 +13,7 @@ LazyData: TRUE
 NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
+SystemRequirements: C++11
 Depends:
     R (>= 3.4.0)
 Imports:

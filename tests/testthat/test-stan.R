@@ -10,6 +10,9 @@ if (FALSE) {
 
 test_that("stanmodels exist", {
   expect_true(exists("stanmodels"), "No stanmodels found")
+  mn = stan_model_names()
+  expect_gt(nrow(mn), 3)
+  expect_equal(names(mn), c("model_name", "description"))
 })
 
 test_that("stanmodels$linexp_gastro_1b exists", {
@@ -71,6 +74,7 @@ run_precompiled_model = function(model){
       rstan::sampling(mod, data = data, chains = 2, iter = 500,
                       refresh = -1, verbose = FALSE))
   })
+  testthat::expect_equal(fit$coef, coef(fit))
   expect_is(fit, "stanfit")
 }
 
@@ -93,11 +97,14 @@ test_that("Running precompiled linexp models _2x directly returns valid result",
 })
 
 test_that("Running precompiled powexp models directly returns valid result", {
-  skip_on_cran()
   run_precompiled_model("powexp_gastro_1b")
-  run_precompiled_model("powexp_gastro_2c")
 })
 
+test_that("Running precompiled powexp models directly returns valid result", {
+  skip_on_travis()
+  skip_on_cran()
+  run_precompiled_model("powexp_gastro_2c")
+})
 
 test_that("Running internal stan_gastempt fit with default parameters and multiple cores returns valid result", {
   skip_on_travis()
