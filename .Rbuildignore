@@ -6,3 +6,8 @@ cleanup*
 shiny.cmd
 ^docs$
 _pkgdown.yml
+^inst/doc/[A-Za-z0-9\-_]+[.]svg$
+^inst/doc/[A-Za-z0-9\-_]+[.]txt$
+^inst/doc/[A-Za-z0-9\-_]+[.]csv
+^inst/doc/\.install_extras$
+vignettes/_output.yaml
