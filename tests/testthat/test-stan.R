@@ -6,6 +6,7 @@ if (FALSE) {
   library(testthat)
   library(gastempt)
   library(assertthat)
+  library(gastempt)
 }
 
 test_that("stanmodels exist", {
@@ -63,7 +64,7 @@ test_that("Direct use of sample model returns valid results", {
 
 run_precompiled_model = function(model){
   cat("\nTesting ", model,"\n") # Generate output for travis
-  mod = stanmodels[[model]]
+  mod = gastempt:::stanmodels[[model]]
   testthat::expect_s4_class(mod, "stanmodel")
   testthat::expect_identical(mod@model_name, model)
   data = gastempt_data()
@@ -74,7 +75,6 @@ run_precompiled_model = function(model){
       rstan::sampling(mod, data = data, chains = 2, iter = 500,
                       refresh = -1, verbose = FALSE))
   })
-  testthat::expect_equal(fit$coef, coef(fit))
   expect_is(fit, "stanfit")
 }
 
@@ -106,13 +106,10 @@ test_that("Running precompiled powexp models directly returns valid result", {
   run_precompiled_model("powexp_gastro_2c")
 })
 
-test_that("Running internal stan_gastempt fit with default parameters and multiple cores returns valid result", {
-  skip_on_travis()
-  skip_on_cran()
-  cat("\nMultiple cores\n")
+test_that("Running stan_gastempt fit with default parameters returns valid result", {
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
-  chains = 1
+  chains = 2 # Problems with more chains on travis
   options(mc.cores = min(parallel::detectCores(), chains))
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_2b",
                       chains = chains,  iter = 500, refresh = -1)
@@ -129,8 +126,7 @@ test_that("Running internal stan_gastempt fit with default parameters and multip
 })
 
 
-test_that("Running internal stan_gastempt with powexp returns valid result", {
-  skip_on_travis()
+test_that("Running stan_gastempt with powexp returns valid result", {
   skip_on_cran()
   options(mc.cores = 1)
   d = simulate_gastempt(n_records = 6, seed = 471, model = powexp,
@@ -148,9 +144,7 @@ test_that("Running internal stan_gastempt with powexp returns valid result", {
                     names(attributes(ret$coef))))
 })
 
-
-
-test_that("Running internal stan_gastempt fit with non-default parameters returns valid result", {
+test_that("Running stan_gastempt fit with non-default parameters returns valid result", {
   skip_on_travis()
   skip_on_cran()
   d = simulate_gastempt(n_records = 6, seed = 471)
@@ -162,7 +156,7 @@ test_that("Running internal stan_gastempt fit with non-default parameters return
   expect_lt(sqrt(var(v0_d - v0_f)), 8)
 })
 
-test_that("Running internal stan_gastempt with many missing data returns valid result", {
+test_that("Running stan_gastempt with many missing data returns valid result", {
   skip_on_cran()
   d = simulate_gastempt(n_records = 6, missing = 0.3, seed = 471)
   v0_d = d$rec$v0
