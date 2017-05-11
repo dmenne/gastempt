@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.4.01
+Version: 0.4.02
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )

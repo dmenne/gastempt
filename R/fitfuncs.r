@@ -14,6 +14,11 @@
 #'
 #' \code{vol(t) = v0 * exp(-(t / tempt) ^ beta)}
 #'
+#' The \code{_slope} functions return the first derivatives of \code{linexp}
+#' and \code{powexp}.
+#' Use the \code{_log} functions to enforce positive parameters
+#' \code{tempt} and \code{beta}. Rarely required for gastric emptying curves.
+#'
 #' @param v0 Initial volume at t=0.
 #' @param t Time after meal or start of scan, in minutes; can be a vector.
 #' @param tempt Emptying time constant in minutes (scalar).
@@ -26,7 +31,6 @@
 #' of \code{t} are not used and are retrieved as named parameters
 #' from the numeric vector pars instead.
 #' @return Vector of \code{length(t)} for computed volume.
-#' @seealso Self starting functions  \code{\link{selfStart}}.
 #' @examples
 #' t = seq(0,100, by=5)
 #' kappa = 1.3
