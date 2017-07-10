@@ -7,7 +7,7 @@ RCPP_MODULE(stan_fit4linexp_gastro_1b_mod) {
 
     class_<rstan::stan_fit<model_linexp_gastro_1b_namespace::model_linexp_gastro_1b, boost::random::ecuyer1988> >("model_linexp_gastro_1b")
 
-    .constructor<SEXP,SEXP>()
+    .constructor<SEXP,SEXP,SEXP>()
 
 
     .method("call_sampler", &rstan::stan_fit<model_linexp_gastro_1b_namespace::model_linexp_gastro_1b, boost::random::ecuyer1988> ::call_sampler)
@@ -36,7 +36,7 @@ RCPP_MODULE(stan_fit4linexp_gastro_1c_mod) {
 
     class_<rstan::stan_fit<model_linexp_gastro_1c_namespace::model_linexp_gastro_1c, boost::random::ecuyer1988> >("model_linexp_gastro_1c")
 
-    .constructor<SEXP,SEXP>()
+    .constructor<SEXP,SEXP,SEXP>()
 
 
     .method("call_sampler", &rstan::stan_fit<model_linexp_gastro_1c_namespace::model_linexp_gastro_1c, boost::random::ecuyer1988> ::call_sampler)
@@ -65,7 +65,7 @@ RCPP_MODULE(stan_fit4linexp_gastro_1d_mod) {
 
     class_<rstan::stan_fit<model_linexp_gastro_1d_namespace::model_linexp_gastro_1d, boost::random::ecuyer1988> >("model_linexp_gastro_1d")
 
-    .constructor<SEXP,SEXP>()
+    .constructor<SEXP,SEXP,SEXP>()
 
 
     .method("call_sampler", &rstan::stan_fit<model_linexp_gastro_1d_namespace::model_linexp_gastro_1d, boost::random::ecuyer1988> ::call_sampler)
@@ -94,7 +94,7 @@ RCPP_MODULE(stan_fit4linexp_gastro_2b_mod) {
 
     class_<rstan::stan_fit<model_linexp_gastro_2b_namespace::model_linexp_gastro_2b, boost::random::ecuyer1988> >("model_linexp_gastro_2b")
 
-    .constructor<SEXP,SEXP>()
+    .constructor<SEXP,SEXP,SEXP>()
 
 
     .method("call_sampler", &rstan::stan_fit<model_linexp_gastro_2b_namespace::model_linexp_gastro_2b, boost::random::ecuyer1988> ::call_sampler)
@@ -123,7 +123,7 @@ RCPP_MODULE(stan_fit4linexp_gastro_2c_mod) {
 
     class_<rstan::stan_fit<model_linexp_gastro_2c_namespace::model_linexp_gastro_2c, boost::random::ecuyer1988> >("model_linexp_gastro_2c")
 
-    .constructor<SEXP,SEXP>()
+    .constructor<SEXP,SEXP,SEXP>()
 
 
     .method("call_sampler", &rstan::stan_fit<model_linexp_gastro_2c_namespace::model_linexp_gastro_2c, boost::random::ecuyer1988> ::call_sampler)
@@ -152,7 +152,7 @@ RCPP_MODULE(stan_fit4powexp_gastro_1b_mod) {
 
     class_<rstan::stan_fit<model_powexp_gastro_1b_namespace::model_powexp_gastro_1b, boost::random::ecuyer1988> >("model_powexp_gastro_1b")
 
-    .constructor<SEXP,SEXP>()
+    .constructor<SEXP,SEXP,SEXP>()
 
 
     .method("call_sampler", &rstan::stan_fit<model_powexp_gastro_1b_namespace::model_powexp_gastro_1b, boost::random::ecuyer1988> ::call_sampler)
@@ -181,7 +181,7 @@ RCPP_MODULE(stan_fit4powexp_gastro_2c_mod) {
 
     class_<rstan::stan_fit<model_powexp_gastro_2c_namespace::model_powexp_gastro_2c, boost::random::ecuyer1988> >("model_powexp_gastro_2c")
 
-    .constructor<SEXP,SEXP>()
+    .constructor<SEXP,SEXP,SEXP>()
 
 
     .method("call_sampler", &rstan::stan_fit<model_powexp_gastro_2c_namespace::model_powexp_gastro_2c, boost::random::ecuyer1988> ::call_sampler)

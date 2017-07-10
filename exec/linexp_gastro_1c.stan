@@ -1,11 +1,11 @@
-# A minimal program to fit linexp gastric emptying curves with Stan
-# Vectorized version
-# The prior mean of the initial volume can be set from the calling function.
-# All other priors are fixed.
+// A minimal program to fit linexp gastric emptying curves with Stan
+// Vectorized version
+// The prior mean of the initial volume can be set from the calling function.
+// All other priors are fixed.
 data{
   real prior_v0;
-  int<lower=0> n; # Number of data
-  int<lower=0> n_record; # Number of subjects
+  int<lower=0> n; // Number of data
+  int<lower=0> n_record; // Number of subjects
   int record[n];
   vector[n] minute;
   vector[n] volume;

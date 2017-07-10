@@ -1,5 +1,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/dmenne/gastempt.svg?branch=master)](https://travis-ci.org/dmenne/gastempt)
 [![Coverage Status](https://coveralls.io/repos/github/dmenne/gastempt/badge.svg?branch=master)](https://coveralls.io/github/dmenne/gastempt?branch=master)
+[![CRAN](https://cranlogs.r-pkg.org/badges/grand-total/gastempt)](https://CRAN.R-project.org/package=gastempt)
+
 
 # Fitting gastric emptying curves
 
@@ -10,7 +12,7 @@ A package and a Shiny web application to create simulated gastric emptying data,
 Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; thanks to Werner Schwizer and Andreas Steingötter for their contributions.
 
 ### Download
-The package is available from github, [source](https://github.com/dmenne/gastempt), [documentation](https://dmenne.github.io/gastempt/). To install, use:
+The package is available from [CRAN](https://CRAN.R-project.org/package=gastempt) and github ([source](https://github.com/dmenne/gastempt), [documentation](https://dmenne.github.io/gastempt/)). To install, use:
 
 ```
 devtools::install_github("dmenne/gastempt")

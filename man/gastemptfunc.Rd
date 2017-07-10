@@ -64,6 +64,11 @@ montonously decreasing but has more freedom to model details in the
 function tail.
 
 \code{vol(t) = v0 * exp(-(t / tempt) ^ beta)}
+
+The \code{_slope} functions return the first derivatives of \code{linexp}
+and \code{powexp}.
+Use the \code{_log} functions to enforce positive parameters
+\code{tempt} and \code{beta}. Rarely required for gastric emptying curves.
 }
 \examples{
 t = seq(0,100, by=5)
@@ -83,7 +88,4 @@ lines(t, linexp(t, v0, tempt, 1), type = "l", col = "green")
 plot(t, powexp(t, v0, tempt, beta), type = "l", ylab = "volume",
   main = "powexp\\nbeta = 2 and 1")
 lines(t, powexp(t, v0, tempt, 1), type = "l", col = "green")
-}
-\seealso{
-Self starting functions  \code{\link{selfStart}}.
 }
