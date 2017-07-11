@@ -1,9 +1,9 @@
 language: r
 sudo: false
 cache: packages
+dist: trusty
 
 r-github-packages:
-  - hadley/ggplot2
   - jimhester/covr
 
 
