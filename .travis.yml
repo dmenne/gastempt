@@ -15,7 +15,7 @@ r:
  - release
 
 matrix:
-  exclude:
+  include:
     - os: linux
       addons:
         apt:
@@ -26,7 +26,6 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
-  include:
     - os: linux
       addons:
         apt:
