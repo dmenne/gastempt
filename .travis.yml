@@ -18,7 +18,7 @@ r:
  - devel
 
 matrix:
-  include:
+  exclude:
     - os: linux
       addons:
         apt:
@@ -29,7 +29,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
-  exclude:
+  include:
     - os: linux
       addons:
         apt:
