@@ -11,11 +11,8 @@ warnings_are_errors: false
 
 r_check_args: "--as-cran"
 
-r-github-packages:
-  - jimhester/covr
-
 r:
- - devel
+ - release
 
 matrix:
   exclude:
@@ -45,4 +42,4 @@ before_install:
 
 after_success:
   - travis_wait 20 tar -C .. -xf $PKG_TARBALL
-  - travis_wait 40 Rscript -e 'covr::coveralls(line_exclusions= c("/src/include/models.hpp", "src/*.cpp", "R/zzz.R", "R/runshiny.R"))'
+  - travis_wait 40 Rscript -e 'covr::coveralls(line_exclusions= c("/src/include/models.hpp", "src/init.cpp", "R/zzz.R", "R/runshiny.R"))'
