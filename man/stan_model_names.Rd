@@ -18,5 +18,6 @@ A data frame with \code{model_name} and the first \code{n_lines}
 comment lines in model as description
 }
 \description{
-By default, line 2 and 3 of comments in Stan file are returned
+By default, line 2 and 3 of comments starting
+with # or // in Stan file are returned
 }

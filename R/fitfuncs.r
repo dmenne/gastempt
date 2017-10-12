@@ -123,11 +123,9 @@ powexp_slope = function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
     tempt = pars[["tempt"]]
     beta = pars[["beta"]]
   }
-  # No solution for t=0
-# d/dt v exp(-(t/p)^b)
-#  -beta * v0 * tempt^(-beta) * t ^ (beta-1) * exp(-tempt/t)^(-beta)
-  ttt = (t/tempt) ^ beta
-  as.numeric(-(beta * v0 * exp(-ttt) * ttt)/t)
+  .expr1 <- t/tempt
+  .expr4 <- v0 * exp(-.expr1^beta)
+  -(.expr4 * (.expr1^(beta - 1) * (beta * (1/tempt))))
 }
 
 
