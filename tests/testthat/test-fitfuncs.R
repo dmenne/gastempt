@@ -80,11 +80,6 @@ test_that("Powexp Functions can be called with pars or explicit parameters",{
   expect_error(powexp_slope(t, v0, tempt, beta, pars), "Either")
   expect_error(powexp_slope(t, tempt = tempt, beta = beta, pars = pars), "Either")
 
-  # special values
-  expect_equal(powexp_slope(0, 100, 100,  1), -1)
-  expect_equal(powexp_slope(0, 1, 100,  1), -0.01)
-  expect_equal(powexp_slope(0, 100, 100,  2), 0)
-  expect_equal(powexp_slope(0, 100, 100,  3), 0)
 
   # There is no powexp_auc
 
@@ -150,10 +145,15 @@ test_that("Limiting cases of slopes are correct",{
   r = linexp_slope(0, tempt = tempt, kappa = 0)*tempt
   expect_equal(r, -1)
 
-  r = powexp_slope(0, tempt = tempt, beta = 1)
-  expect_true(is.nan(r))
-  r = powexp_slope(1e-5, tempt = tempt, beta = 1)*tempt
+  # special values
+  expect_equal(powexp_slope(0, 100, 100,  1), -1)
+  expect_equal(powexp_slope(0, 1, 100,  1), -0.01)
+  expect_equal(powexp_slope(0, 100, 100,  2), 0)
+  expect_equal(powexp_slope(0, 100, 100,  3), 0)
+
+    r = powexp_slope(1e-5, tempt = tempt, beta = 1)*tempt
   expect_equal(r, -1, tolerance = tolerance)
+
 })
 
 
