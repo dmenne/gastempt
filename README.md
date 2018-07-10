@@ -1,11 +1,13 @@
+----------
+title: "gastempt: Fitting gastric emptying curves"
+author: "dieter.menne@menne-biomed.de, Menne Biomed Consulting Tübingen, D-72074 Tübingen"
+---------
+
+
 [![Travis-CI Build Status](https://travis-ci.org/dmenne/gastempt.svg?branch=master)](https://travis-ci.org/dmenne/gastempt)
 [![Coverage Status](https://coveralls.io/repos/github/dmenne/gastempt/badge.svg?branch=master)](https://coveralls.io/github/dmenne/gastempt?branch=master)
 [![CRAN](https://cranlogs.r-pkg.org/badges/grand-total/gastempt)](https://CRAN.R-project.org/package=gastempt)
 
-
-# Fitting gastric emptying curves
-
-By dieter.menne@menne-biomed.de, Menne Biomed Consulting Tübingen, D-72074 Tübingen
 
 A package and a Shiny web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package nlme. Stan-based (http://mc-stan.org/) Bayesian fits that can handle critical cases are included and will be extended in future.
 

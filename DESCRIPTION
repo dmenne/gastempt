@@ -1,11 +1,10 @@
 Package: gastempt
-Version: 0.5.0
+Version: 0.4.01.9000
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
 Type: Package
 Title: Analyzing Gastric Emptying from MRI or Scintigraphy
-Date: 2017-07-13
 Description: Fits gastric emptying time series from MRI or scintigraphic measurements
    using nonlinear mixed-model population fits with 'nlme' and Bayesian methods with 
    Stan; computes derived parameters such as t50 and AUC.
@@ -15,7 +14,7 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.4.0)
+    R (>= 3.5.0)
 Imports:
     Rcpp,
     nlme,
@@ -33,9 +32,9 @@ Suggests:
     testthat,
     methods
 LinkingTo:
-    StanHeaders (>= 2.16.0),
-    rstan (>= 2.16.0),
-    BH (>= 1.60.0),
+    StanHeaders (>= 2.17.2),
+    rstan (>= 2.17.0),
+    BH (>= 1.66.0),
     Rcpp (>= 0.12.0),
     RcppEigen (>= 0.3.3.3.0)
 RcppModules:
