@@ -21,7 +21,7 @@ Imports:
     dplyr,
     tibble,
     ggplot2 (>= 2.2.0),
-    rstan,
+    rstan (>= 2.18.1),
     assertthat,
     stringr,
     shiny
@@ -32,8 +32,8 @@ Suggests:
     testthat,
     methods
 LinkingTo:
-    StanHeaders (>= 2.17.2),
-    rstan (>= 2.17.0),
+    StanHeaders (>= 2.18.0),
+    rstan (>= 2.18.1),
     BH (>= 1.66.0),
     Rcpp (>= 0.12.0),
     RcppEigen (>= 0.3.3.3.0)
