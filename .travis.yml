@@ -1,44 +1,17 @@
 language: r
 sudo: required
 cache: packages
-dist: trusty
 latex: false
 
 warnings_are_errors: false
 
-# https://github.com/helske/walker
-# http://dirk.eddelbuettel.com/blog/2017/06/13/
-
-r_check_args: "--as-cran"
-
 r:
  - release
 
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
-
-  exclude:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-trusty
-          packages:
-            - clang-5.0
-      env:
-        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-
 before_install:
-    - eval "${MATRIX_EVAL}"
+   - mkdir -p ~/.R
+   - echo "CXX14FLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined" >> ~/.R/Makevars
+   - echo "CXX14 = g++ -std=c++1y" >> ~/.R/Makevars
 
 after_success:
   - travis_wait 20 tar -C .. -xf $PKG_TARBALL
