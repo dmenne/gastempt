@@ -45,5 +45,5 @@ RcppModules:
   stan_fit4linexp_gastro_2c_mod,
   stan_fit4powexp_gastro_1b_mod,
   stan_fit4powexp_gastro_2c_mod
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 VignetteBuilder: knitr

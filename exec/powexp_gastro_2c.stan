@@ -32,7 +32,7 @@ transformed data{
     for (i in 1:n){
       if (minute[i] < 5) {
         norm_vol = norm_vol + volume[i];
-        n_norm  = n_norm+1;
+        n_norm  += 1;
       }
     }
     norm_vol = norm_vol/n_norm;

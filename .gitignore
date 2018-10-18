@@ -12,3 +12,4 @@ vignettes/*.R
 .DS_Store
 *.bak
 check_rhub.cmd
+*.cc
