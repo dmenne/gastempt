@@ -78,25 +78,21 @@ public:
 
         // initialize member variables
         try {
-            current_statement_begin__ = 7;
             context__.validate_dims("data initialization", "prior_v0", "double", context__.to_vec());
             prior_v0 = double(0);
             vals_r__ = context__.vals_r("prior_v0");
             pos__ = 0;
             prior_v0 = vals_r__[pos__++];
-            current_statement_begin__ = 8;
             context__.validate_dims("data initialization", "n", "int", context__.to_vec());
             n = int(0);
             vals_i__ = context__.vals_i("n");
             pos__ = 0;
             n = vals_i__[pos__++];
-            current_statement_begin__ = 9;
             context__.validate_dims("data initialization", "n_record", "int", context__.to_vec());
             n_record = int(0);
             vals_i__ = context__.vals_i("n_record");
             pos__ = 0;
             n_record = vals_i__[pos__++];
-            current_statement_begin__ = 10;
             validate_non_negative_index("record", "n", n);
             context__.validate_dims("data initialization", "record", "int", context__.to_vec(n));
             validate_non_negative_index("record", "n", n);
@@ -107,7 +103,6 @@ public:
             for (size_t i_0__ = 0; i_0__ < record_limit_0__; ++i_0__) {
                 record[i_0__] = vals_i__[pos__++];
             }
-            current_statement_begin__ = 11;
             validate_non_negative_index("minute", "n", n);
             context__.validate_dims("data initialization", "minute", "vector_d", context__.to_vec(n));
             validate_non_negative_index("minute", "n", n);
@@ -118,7 +113,6 @@ public:
             for (size_t i_vec__ = 0; i_vec__ < minute_i_vec_lim__; ++i_vec__) {
                 minute[i_vec__] = vals_r__[pos__++];
             }
-            current_statement_begin__ = 12;
             validate_non_negative_index("volume", "n", n);
             context__.validate_dims("data initialization", "volume", "vector_d", context__.to_vec(n));
             validate_non_negative_index("volume", "n", n);
@@ -131,14 +125,8 @@ public:
             }
 
             // validate, data variables
-            current_statement_begin__ = 7;
-            current_statement_begin__ = 8;
             check_greater_or_equal(function__,"n",n,0);
-            current_statement_begin__ = 9;
             check_greater_or_equal(function__,"n_record",n_record,0);
-            current_statement_begin__ = 10;
-            current_statement_begin__ = 11;
-            current_statement_begin__ = 12;
             // initialize data variables
 
 
@@ -147,20 +135,14 @@ public:
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 16;
             validate_non_negative_index("v0", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 17;
             validate_non_negative_index("kappa", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 18;
             validate_non_negative_index("tempt", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 19;
             ++num_params_r__;
-            current_statement_begin__ = 20;
             ++num_params_r__;
-            current_statement_begin__ = 21;
             ++num_params_r__;
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -353,66 +335,48 @@ public:
 
             // model body
             {
-            current_statement_begin__ = 26;
             int reci(0);
             (void) reci;  // dummy to suppress unused var warning
 
             stan::math::fill(reci, std::numeric_limits<int>::min());
-            current_statement_begin__ = 27;
             local_scalar_t__ v0r;
             (void) v0r;  // dummy to suppress unused var warning
 
             stan::math::initialize(v0r, DUMMY_VAR__);
             stan::math::fill(v0r,DUMMY_VAR__);
-            current_statement_begin__ = 28;
             local_scalar_t__ kappar;
             (void) kappar;  // dummy to suppress unused var warning
 
             stan::math::initialize(kappar, DUMMY_VAR__);
             stan::math::fill(kappar,DUMMY_VAR__);
-            current_statement_begin__ = 29;
             local_scalar_t__ temptr;
             (void) temptr;  // dummy to suppress unused var warning
 
             stan::math::initialize(temptr, DUMMY_VAR__);
             stan::math::fill(temptr,DUMMY_VAR__);
-            current_statement_begin__ = 30;
             validate_non_negative_index("vol", "n", n);
             vector<local_scalar_t__> vol(n);
             stan::math::initialize(vol, DUMMY_VAR__);
             stan::math::fill(vol,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 31;
             lp_accum__.add(normal_log<propto__>(mu_kappa, 1.5, 0.5));
-            current_statement_begin__ = 32;
             lp_accum__.add(normal_log<propto__>(sigma_kappa, 1, 0.5));
-            current_statement_begin__ = 34;
             lp_accum__.add(normal_log<propto__>(v0, prior_v0, 100));
-            current_statement_begin__ = 35;
             lp_accum__.add(lognormal_log<propto__>(kappa, mu_kappa, sigma_kappa));
-            current_statement_begin__ = 36;
             lp_accum__.add(normal_log<propto__>(tempt, 60, 20));
-            current_statement_begin__ = 37;
             lp_accum__.add(gamma_log<propto__>(sigma, 20, 0.5));
-            current_statement_begin__ = 39;
             for (int i = 1; i <= n; ++i) {
 
-                current_statement_begin__ = 40;
                 stan::math::assign(reci, get_base1(record,i,"record",1));
-                current_statement_begin__ = 41;
                 stan::math::assign(v0r, get_base1(v0,reci,"v0",1));
-                current_statement_begin__ = 42;
                 stan::math::assign(kappar, get_base1(kappa,reci,"kappa",1));
-                current_statement_begin__ = 43;
                 stan::math::assign(temptr, get_base1(tempt,reci,"tempt",1));
-                current_statement_begin__ = 44;
                 stan::model::assign(vol, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             ((v0r * (1 + ((kappar * get_base1(minute,i,"minute",1)) / temptr))) * stan::math::exp((-(get_base1(minute,i,"minute",1)) / temptr))), 
                             "assigning variable vol");
             }
-            current_statement_begin__ = 46;
             lp_accum__.add(normal_log<propto__>(volume, vol, sigma));
             }
 
@@ -711,25 +675,21 @@ public:
 
         // initialize member variables
         try {
-            current_statement_begin__ = 6;
             context__.validate_dims("data initialization", "prior_v0", "double", context__.to_vec());
             prior_v0 = double(0);
             vals_r__ = context__.vals_r("prior_v0");
             pos__ = 0;
             prior_v0 = vals_r__[pos__++];
-            current_statement_begin__ = 7;
             context__.validate_dims("data initialization", "n", "int", context__.to_vec());
             n = int(0);
             vals_i__ = context__.vals_i("n");
             pos__ = 0;
             n = vals_i__[pos__++];
-            current_statement_begin__ = 8;
             context__.validate_dims("data initialization", "n_record", "int", context__.to_vec());
             n_record = int(0);
             vals_i__ = context__.vals_i("n_record");
             pos__ = 0;
             n_record = vals_i__[pos__++];
-            current_statement_begin__ = 9;
             validate_non_negative_index("record", "n", n);
             context__.validate_dims("data initialization", "record", "int", context__.to_vec(n));
             validate_non_negative_index("record", "n", n);
@@ -740,7 +700,6 @@ public:
             for (size_t i_0__ = 0; i_0__ < record_limit_0__; ++i_0__) {
                 record[i_0__] = vals_i__[pos__++];
             }
-            current_statement_begin__ = 10;
             validate_non_negative_index("minute", "n", n);
             context__.validate_dims("data initialization", "minute", "vector_d", context__.to_vec(n));
             validate_non_negative_index("minute", "n", n);
@@ -751,7 +710,6 @@ public:
             for (size_t i_vec__ = 0; i_vec__ < minute_i_vec_lim__; ++i_vec__) {
                 minute[i_vec__] = vals_r__[pos__++];
             }
-            current_statement_begin__ = 11;
             validate_non_negative_index("volume", "n", n);
             context__.validate_dims("data initialization", "volume", "vector_d", context__.to_vec(n));
             validate_non_negative_index("volume", "n", n);
@@ -764,14 +722,8 @@ public:
             }
 
             // validate, data variables
-            current_statement_begin__ = 6;
-            current_statement_begin__ = 7;
             check_greater_or_equal(function__,"n",n,0);
-            current_statement_begin__ = 8;
             check_greater_or_equal(function__,"n_record",n_record,0);
-            current_statement_begin__ = 9;
-            current_statement_begin__ = 10;
-            current_statement_begin__ = 11;
             // initialize data variables
 
 
@@ -780,20 +732,14 @@ public:
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 15;
             validate_non_negative_index("v0", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 16;
             validate_non_negative_index("kappa", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 17;
             validate_non_negative_index("tempt", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 18;
             ++num_params_r__;
-            current_statement_begin__ = 19;
             ++num_params_r__;
-            current_statement_begin__ = 20;
             ++num_params_r__;
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -986,7 +932,6 @@ public:
 
             // model body
             {
-            current_statement_begin__ = 25;
             validate_non_negative_index("vol", "n", n);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  vol(static_cast<Eigen::VectorXd::Index>(n));
             (void) vol;  // dummy to suppress unused var warning
@@ -995,21 +940,13 @@ public:
             stan::math::fill(vol,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 26;
             lp_accum__.add(normal_log<propto__>(mu_kappa, 1.5, 0.5));
-            current_statement_begin__ = 27;
             lp_accum__.add(normal_log<propto__>(sigma_kappa, 1, 0.5));
-            current_statement_begin__ = 29;
             lp_accum__.add(normal_log<propto__>(v0, prior_v0, 100));
-            current_statement_begin__ = 30;
             lp_accum__.add(lognormal_log<propto__>(kappa, mu_kappa, sigma_kappa));
-            current_statement_begin__ = 31;
             lp_accum__.add(normal_log<propto__>(tempt, 60, 20));
-            current_statement_begin__ = 32;
             lp_accum__.add(gamma_log<propto__>(sigma, 20, 0.5));
-            current_statement_begin__ = 33;
             stan::math::assign(vol, elt_multiply(elt_multiply(stan::model::rvalue(v0, stan::model::cons_list(stan::model::index_multi(record), stan::model::nil_index_list()), "v0"),add(1,elt_multiply(stan::model::rvalue(kappa, stan::model::cons_list(stan::model::index_multi(record), stan::model::nil_index_list()), "kappa"),elt_divide(minute,stan::model::rvalue(tempt, stan::model::cons_list(stan::model::index_multi(record), stan::model::nil_index_list()), "tempt"))))),stan::math::exp(elt_divide(minus(minute),stan::model::rvalue(tempt, stan::model::cons_list(stan::model::index_multi(record), stan::model::nil_index_list()), "tempt")))));
-            current_statement_begin__ = 35;
             lp_accum__.add(normal_log<propto__>(volume, vol, sigma));
             }
 
@@ -1308,25 +1245,21 @@ public:
 
         // initialize member variables
         try {
-            current_statement_begin__ = 6;
             context__.validate_dims("data initialization", "prior_v0", "double", context__.to_vec());
             prior_v0 = double(0);
             vals_r__ = context__.vals_r("prior_v0");
             pos__ = 0;
             prior_v0 = vals_r__[pos__++];
-            current_statement_begin__ = 7;
             context__.validate_dims("data initialization", "n", "int", context__.to_vec());
             n = int(0);
             vals_i__ = context__.vals_i("n");
             pos__ = 0;
             n = vals_i__[pos__++];
-            current_statement_begin__ = 8;
             context__.validate_dims("data initialization", "n_record", "int", context__.to_vec());
             n_record = int(0);
             vals_i__ = context__.vals_i("n_record");
             pos__ = 0;
             n_record = vals_i__[pos__++];
-            current_statement_begin__ = 9;
             validate_non_negative_index("record", "n", n);
             context__.validate_dims("data initialization", "record", "int", context__.to_vec(n));
             validate_non_negative_index("record", "n", n);
@@ -1337,7 +1270,6 @@ public:
             for (size_t i_0__ = 0; i_0__ < record_limit_0__; ++i_0__) {
                 record[i_0__] = vals_i__[pos__++];
             }
-            current_statement_begin__ = 10;
             validate_non_negative_index("minute", "n", n);
             context__.validate_dims("data initialization", "minute", "vector_d", context__.to_vec(n));
             validate_non_negative_index("minute", "n", n);
@@ -1348,7 +1280,6 @@ public:
             for (size_t i_vec__ = 0; i_vec__ < minute_i_vec_lim__; ++i_vec__) {
                 minute[i_vec__] = vals_r__[pos__++];
             }
-            current_statement_begin__ = 11;
             validate_non_negative_index("volume", "n", n);
             context__.validate_dims("data initialization", "volume", "vector_d", context__.to_vec(n));
             validate_non_negative_index("volume", "n", n);
@@ -1361,14 +1292,8 @@ public:
             }
 
             // validate, data variables
-            current_statement_begin__ = 6;
-            current_statement_begin__ = 7;
             check_greater_or_equal(function__,"n",n,0);
-            current_statement_begin__ = 8;
             check_greater_or_equal(function__,"n_record",n_record,0);
-            current_statement_begin__ = 9;
-            current_statement_begin__ = 10;
-            current_statement_begin__ = 11;
             // initialize data variables
 
 
@@ -1377,20 +1302,14 @@ public:
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 15;
             validate_non_negative_index("v0", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 16;
             validate_non_negative_index("kappa", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 17;
             validate_non_negative_index("tempt", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 18;
             ++num_params_r__;
-            current_statement_begin__ = 19;
             ++num_params_r__;
-            current_statement_begin__ = 20;
             ++num_params_r__;
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -1573,7 +1492,6 @@ public:
 
 
             // transformed parameters
-            current_statement_begin__ = 24;
             validate_non_negative_index("mt", "n", n);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  mt(static_cast<Eigen::VectorXd::Index>(n));
             (void) mt;  // dummy to suppress unused var warning
@@ -1582,7 +1500,6 @@ public:
             stan::math::fill(mt,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 25;
             stan::math::assign(mt, elt_divide(minute,stan::model::rvalue(tempt, stan::model::cons_list(stan::model::index_multi(record), stan::model::nil_index_list()), "tempt")));
 
             // validate transformed parameters
@@ -1596,11 +1513,9 @@ public:
 
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
-            current_statement_begin__ = 24;
 
             // model body
             {
-            current_statement_begin__ = 29;
             validate_non_negative_index("vol", "n", n);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  vol(static_cast<Eigen::VectorXd::Index>(n));
             (void) vol;  // dummy to suppress unused var warning
@@ -1609,21 +1524,13 @@ public:
             stan::math::fill(vol,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 30;
             lp_accum__.add(normal_log<propto__>(mu_kappa, 1.5, 0.5));
-            current_statement_begin__ = 31;
             lp_accum__.add(normal_log<propto__>(sigma_kappa, 1, 0.5));
-            current_statement_begin__ = 33;
             lp_accum__.add(normal_log<propto__>(v0, prior_v0, 100));
-            current_statement_begin__ = 34;
             lp_accum__.add(lognormal_log<propto__>(kappa, mu_kappa, sigma_kappa));
-            current_statement_begin__ = 35;
             lp_accum__.add(normal_log<propto__>(tempt, 60.0, 20.0));
-            current_statement_begin__ = 36;
             lp_accum__.add(gamma_log<propto__>(sigma, 20.0, 0.5));
-            current_statement_begin__ = 37;
             stan::math::assign(vol, elt_multiply(elt_multiply(stan::model::rvalue(v0, stan::model::cons_list(stan::model::index_multi(record), stan::model::nil_index_list()), "v0"),add(1,elt_multiply(stan::model::rvalue(kappa, stan::model::cons_list(stan::model::index_multi(record), stan::model::nil_index_list()), "kappa"),mt))),stan::math::exp(minus(mt))));
-            current_statement_begin__ = 38;
             lp_accum__.add(normal_log<propto__>(volume, vol, sigma));
             }
 
@@ -1728,7 +1635,6 @@ public:
         (void) DUMMY_VAR__;  // suppress unused var warning
 
         try {
-            current_statement_begin__ = 24;
             validate_non_negative_index("mt", "n", n);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  mt(static_cast<Eigen::VectorXd::Index>(n));
             (void) mt;  // dummy to suppress unused var warning
@@ -1737,11 +1643,9 @@ public:
             stan::math::fill(mt,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 25;
             stan::math::assign(mt, elt_divide(minute,stan::model::rvalue(tempt, stan::model::cons_list(stan::model::index_multi(record), stan::model::nil_index_list()), "tempt")));
 
             // validate transformed parameters
-            current_statement_begin__ = 24;
 
             // write transformed parameters
             if (include_tparams__) {
@@ -1954,31 +1858,26 @@ public:
 
         // initialize member variables
         try {
-            current_statement_begin__ = 12;
             context__.validate_dims("data initialization", "lkj", "double", context__.to_vec());
             lkj = double(0);
             vals_r__ = context__.vals_r("lkj");
             pos__ = 0;
             lkj = vals_r__[pos__++];
-            current_statement_begin__ = 13;
             context__.validate_dims("data initialization", "student_df", "int", context__.to_vec());
             student_df = int(0);
             vals_i__ = context__.vals_i("student_df");
             pos__ = 0;
             student_df = vals_i__[pos__++];
-            current_statement_begin__ = 14;
             context__.validate_dims("data initialization", "n", "int", context__.to_vec());
             n = int(0);
             vals_i__ = context__.vals_i("n");
             pos__ = 0;
             n = vals_i__[pos__++];
-            current_statement_begin__ = 15;
             context__.validate_dims("data initialization", "n_record", "int", context__.to_vec());
             n_record = int(0);
             vals_i__ = context__.vals_i("n_record");
             pos__ = 0;
             n_record = vals_i__[pos__++];
-            current_statement_begin__ = 16;
             validate_non_negative_index("record", "n", n);
             context__.validate_dims("data initialization", "record", "int", context__.to_vec(n));
             validate_non_negative_index("record", "n", n);
@@ -1989,7 +1888,6 @@ public:
             for (size_t i_0__ = 0; i_0__ < record_limit_0__; ++i_0__) {
                 record[i_0__] = vals_i__[pos__++];
             }
-            current_statement_begin__ = 17;
             validate_non_negative_index("minute", "n", n);
             context__.validate_dims("data initialization", "minute", "vector_d", context__.to_vec(n));
             validate_non_negative_index("minute", "n", n);
@@ -2000,7 +1898,6 @@ public:
             for (size_t i_vec__ = 0; i_vec__ < minute_i_vec_lim__; ++i_vec__) {
                 minute[i_vec__] = vals_r__[pos__++];
             }
-            current_statement_begin__ = 18;
             validate_non_negative_index("volume", "n", n);
             context__.validate_dims("data initialization", "volume", "vector_d", context__.to_vec(n));
             validate_non_negative_index("volume", "n", n);
@@ -2013,87 +1910,55 @@ public:
             }
 
             // validate, data variables
-            current_statement_begin__ = 12;
-            current_statement_begin__ = 13;
-            current_statement_begin__ = 14;
             check_greater_or_equal(function__,"n",n,0);
-            current_statement_begin__ = 15;
             check_greater_or_equal(function__,"n_record",n_record,0);
-            current_statement_begin__ = 16;
-            current_statement_begin__ = 17;
-            current_statement_begin__ = 18;
             // initialize data variables
-            current_statement_begin__ = 22;
             validate_non_negative_index("zeros", "2", 2);
             zeros = vector_d(static_cast<Eigen::VectorXd::Index>(2));
             stan::math::fill(zeros,DUMMY_VAR__);
-            current_statement_begin__ = 23;
             validate_non_negative_index("volume_1", "n", n);
             volume_1 = vector_d(static_cast<Eigen::VectorXd::Index>(n));
             stan::math::fill(volume_1,DUMMY_VAR__);
-            current_statement_begin__ = 24;
             norm_vol = double(0);
             stan::math::fill(norm_vol,DUMMY_VAR__);
-            current_statement_begin__ = 25;
             n_norm = int(0);
             stan::math::fill(n_norm, std::numeric_limits<int>::min());
 
-            current_statement_begin__ = 26;
             stan::model::assign(zeros, 
                         stan::model::cons_list(stan::model::index_uni(1), stan::model::nil_index_list()), 
                         0, 
                         "assigning variable zeros");
-            current_statement_begin__ = 27;
             stan::model::assign(zeros, 
                         stan::model::cons_list(stan::model::index_uni(2), stan::model::nil_index_list()), 
                         0, 
                         "assigning variable zeros");
-            current_statement_begin__ = 28;
             stan::math::assign(n_norm, 0);
-            current_statement_begin__ = 29;
             stan::math::assign(norm_vol, 0);
-            current_statement_begin__ = 31;
             for (int i = 1; i <= n; ++i) {
 
-                current_statement_begin__ = 32;
                 if (as_bool(logical_lt(get_base1(minute,i,"minute",1),5))) {
 
-                    current_statement_begin__ = 33;
                     stan::math::assign(norm_vol, (norm_vol + get_base1(volume,i,"volume",1)));
-                    current_statement_begin__ = 34;
                     stan::math::assign(n_norm, (n_norm + 1));
                 }
             }
-            current_statement_begin__ = 37;
             stan::math::assign(norm_vol, (norm_vol / n_norm));
-            current_statement_begin__ = 38;
             stan::math::assign(volume_1, divide(volume,norm_vol));
 
             // validate transformed data
-            current_statement_begin__ = 22;
-            current_statement_begin__ = 23;
-            current_statement_begin__ = 24;
-            current_statement_begin__ = 25;
 
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 43;
             validate_non_negative_index("v0_1", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 44;
             validate_non_negative_index("sigma_record", "2", 2);
             num_params_r__ += 2;
-            current_statement_begin__ = 45;
             ++num_params_r__;
-            current_statement_begin__ = 46;
             ++num_params_r__;
-            current_statement_begin__ = 47;
             validate_non_negative_index("rho", "2", 2);
             num_params_r__ += ((2 * (2 - 1)) / 2);
-            current_statement_begin__ = 48;
             ++num_params_r__;
-            current_statement_begin__ = 49;
             validate_non_negative_index("cf", "2", 2);
             validate_non_negative_index("cf", "n_record", n_record);
             num_params_r__ += 2 * n_record;
@@ -2308,7 +2173,6 @@ public:
 
 
             // transformed parameters
-            current_statement_begin__ = 53;
             validate_non_negative_index("sigma_cf", "2", 2);
             validate_non_negative_index("sigma_cf", "2", 2);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,Eigen::Dynamic>  sigma_cf(static_cast<Eigen::VectorXd::Index>(2),static_cast<Eigen::VectorXd::Index>(2));
@@ -2318,7 +2182,6 @@ public:
             stan::math::fill(sigma_cf,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 54;
             stan::math::assign(sigma_cf, quad_form_diag(rho,sigma_record));
 
             // validate transformed parameters
@@ -2334,34 +2197,28 @@ public:
 
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
-            current_statement_begin__ = 53;
 
             // model body
             {
-            current_statement_begin__ = 58;
             int rec(0);
             (void) rec;  // dummy to suppress unused var warning
 
             stan::math::fill(rec, std::numeric_limits<int>::min());
-            current_statement_begin__ = 59;
             local_scalar_t__ v0r;
             (void) v0r;  // dummy to suppress unused var warning
 
             stan::math::initialize(v0r, DUMMY_VAR__);
             stan::math::fill(v0r,DUMMY_VAR__);
-            current_statement_begin__ = 60;
             local_scalar_t__ kappar;
             (void) kappar;  // dummy to suppress unused var warning
 
             stan::math::initialize(kappar, DUMMY_VAR__);
             stan::math::fill(kappar,DUMMY_VAR__);
-            current_statement_begin__ = 61;
             local_scalar_t__ temptr;
             (void) temptr;  // dummy to suppress unused var warning
 
             stan::math::initialize(temptr, DUMMY_VAR__);
             stan::math::fill(temptr,DUMMY_VAR__);
-            current_statement_begin__ = 62;
             validate_non_negative_index("mu", "n", n);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  mu(static_cast<Eigen::VectorXd::Index>(n));
             (void) mu;  // dummy to suppress unused var warning
@@ -2370,40 +2227,25 @@ public:
             stan::math::fill(mu,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 66;
             lp_accum__.add(lkj_corr_log<propto__>(rho, lkj));
-            current_statement_begin__ = 68;
             lp_accum__.add(normal_log<propto__>(v0_1, 1, 0.29999999999999999));
-            current_statement_begin__ = 69;
             lp_accum__.add(multi_normal_log<propto__>(cf, zeros, sigma_cf));
-            current_statement_begin__ = 70;
             lp_accum__.add(normal_log<propto__>(mu_kappa, 0.80000000000000004, 0.29999999999999999));
-            current_statement_begin__ = 71;
             lp_accum__.add(normal_log<propto__>(mu_tempt, 40, 20));
-            current_statement_begin__ = 72;
             lp_accum__.add(cauchy_log<propto__>(get_base1(sigma_record,1,"sigma_record",1), 0, 20));
-            current_statement_begin__ = 73;
             lp_accum__.add(cauchy_log<propto__>(get_base1(sigma_record,2,"sigma_record",1), 0, 0.40000000000000002));
-            current_statement_begin__ = 74;
             lp_accum__.add(cauchy_log<propto__>(sigma, 0.0, 0.10000000000000001));
-            current_statement_begin__ = 76;
             for (int i = 1; i <= n; ++i) {
 
-                current_statement_begin__ = 77;
                 stan::math::assign(rec, get_base1(record,i,"record",1));
-                current_statement_begin__ = 78;
                 stan::math::assign(v0r, get_base1(v0_1,rec,"v0_1",1));
-                current_statement_begin__ = 79;
                 stan::math::assign(temptr, (mu_tempt + get_base1(get_base1(cf,rec,"cf",1),1,"cf",2)));
-                current_statement_begin__ = 80;
                 stan::math::assign(kappar, (mu_kappa + get_base1(get_base1(cf,rec,"cf",1),2,"cf",2)));
-                current_statement_begin__ = 81;
                 stan::model::assign(mu, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             ((v0r * (1 + ((kappar * get_base1(minute,i,"minute",1)) / temptr))) * stan::math::exp((-(get_base1(minute,i,"minute",1)) / temptr))), 
                             "assigning variable mu");
             }
-            current_statement_begin__ = 85;
             lp_accum__.add(student_t_log<propto__>(volume_1, student_df, mu, sigma));
             }
 
@@ -2539,7 +2381,6 @@ public:
         (void) DUMMY_VAR__;  // suppress unused var warning
 
         try {
-            current_statement_begin__ = 53;
             validate_non_negative_index("sigma_cf", "2", 2);
             validate_non_negative_index("sigma_cf", "2", 2);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,Eigen::Dynamic>  sigma_cf(static_cast<Eigen::VectorXd::Index>(2),static_cast<Eigen::VectorXd::Index>(2));
@@ -2549,11 +2390,9 @@ public:
             stan::math::fill(sigma_cf,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 54;
             stan::math::assign(sigma_cf, quad_form_diag(rho,sigma_record));
 
             // validate transformed parameters
-            current_statement_begin__ = 53;
 
             // write transformed parameters
             if (include_tparams__) {
@@ -2565,21 +2404,18 @@ public:
             }
             if (!include_gqs__) return;
             // declare and define generated quantities
-            current_statement_begin__ = 89;
             validate_non_negative_index("v0", "n_record", n_record);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  v0(static_cast<Eigen::VectorXd::Index>(n_record));
             (void) v0;  // dummy to suppress unused var warning
 
             stan::math::initialize(v0, DUMMY_VAR__);
             stan::math::fill(v0,DUMMY_VAR__);
-            current_statement_begin__ = 90;
             validate_non_negative_index("tempt", "n_record", n_record);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  tempt(static_cast<Eigen::VectorXd::Index>(n_record));
             (void) tempt;  // dummy to suppress unused var warning
 
             stan::math::initialize(tempt, DUMMY_VAR__);
             stan::math::fill(tempt,DUMMY_VAR__);
-            current_statement_begin__ = 91;
             validate_non_negative_index("kappa", "n_record", n_record);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  kappa(static_cast<Eigen::VectorXd::Index>(n_record));
             (void) kappa;  // dummy to suppress unused var warning
@@ -2588,17 +2424,13 @@ public:
             stan::math::fill(kappa,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 93;
             stan::math::assign(v0, multiply(v0_1,norm_vol));
-            current_statement_begin__ = 94;
             for (int i = 1; i <= n_record; ++i) {
 
-                current_statement_begin__ = 95;
                 stan::model::assign(tempt, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             (mu_tempt + get_base1(get_base1(cf,i,"cf",1),1,"cf",2)), 
                             "assigning variable tempt");
-                current_statement_begin__ = 96;
                 stan::model::assign(kappa, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             (mu_kappa + get_base1(get_base1(cf,i,"cf",1),2,"cf",2)), 
@@ -2606,9 +2438,6 @@ public:
             }
 
             // validate generated quantities
-            current_statement_begin__ = 89;
-            current_statement_begin__ = 90;
-            current_statement_begin__ = 91;
 
             // write generated quantities
             for (int k_0__ = 0; k_0__ < n_record; ++k_0__) {
@@ -2867,31 +2696,26 @@ public:
 
         // initialize member variables
         try {
-            current_statement_begin__ = 13;
             context__.validate_dims("data initialization", "lkj", "double", context__.to_vec());
             lkj = double(0);
             vals_r__ = context__.vals_r("lkj");
             pos__ = 0;
             lkj = vals_r__[pos__++];
-            current_statement_begin__ = 14;
             context__.validate_dims("data initialization", "student_df", "int", context__.to_vec());
             student_df = int(0);
             vals_i__ = context__.vals_i("student_df");
             pos__ = 0;
             student_df = vals_i__[pos__++];
-            current_statement_begin__ = 15;
             context__.validate_dims("data initialization", "n", "int", context__.to_vec());
             n = int(0);
             vals_i__ = context__.vals_i("n");
             pos__ = 0;
             n = vals_i__[pos__++];
-            current_statement_begin__ = 16;
             context__.validate_dims("data initialization", "n_record", "int", context__.to_vec());
             n_record = int(0);
             vals_i__ = context__.vals_i("n_record");
             pos__ = 0;
             n_record = vals_i__[pos__++];
-            current_statement_begin__ = 17;
             validate_non_negative_index("record", "n", n);
             context__.validate_dims("data initialization", "record", "int", context__.to_vec(n));
             validate_non_negative_index("record", "n", n);
@@ -2902,7 +2726,6 @@ public:
             for (size_t i_0__ = 0; i_0__ < record_limit_0__; ++i_0__) {
                 record[i_0__] = vals_i__[pos__++];
             }
-            current_statement_begin__ = 18;
             validate_non_negative_index("minute", "n", n);
             context__.validate_dims("data initialization", "minute", "vector_d", context__.to_vec(n));
             validate_non_negative_index("minute", "n", n);
@@ -2913,7 +2736,6 @@ public:
             for (size_t i_vec__ = 0; i_vec__ < minute_i_vec_lim__; ++i_vec__) {
                 minute[i_vec__] = vals_r__[pos__++];
             }
-            current_statement_begin__ = 19;
             validate_non_negative_index("volume", "n", n);
             context__.validate_dims("data initialization", "volume", "vector_d", context__.to_vec(n));
             validate_non_negative_index("volume", "n", n);
@@ -2926,72 +2748,44 @@ public:
             }
 
             // validate, data variables
-            current_statement_begin__ = 13;
-            current_statement_begin__ = 14;
-            current_statement_begin__ = 15;
             check_greater_or_equal(function__,"n",n,0);
-            current_statement_begin__ = 16;
             check_greater_or_equal(function__,"n_record",n_record,0);
-            current_statement_begin__ = 17;
-            current_statement_begin__ = 18;
-            current_statement_begin__ = 19;
             // initialize data variables
-            current_statement_begin__ = 23;
             validate_non_negative_index("volume_1", "n", n);
             volume_1 = vector_d(static_cast<Eigen::VectorXd::Index>(n));
             stan::math::fill(volume_1,DUMMY_VAR__);
-            current_statement_begin__ = 24;
             norm_vol = double(0);
             stan::math::fill(norm_vol,DUMMY_VAR__);
-            current_statement_begin__ = 25;
             n_norm = int(0);
             stan::math::fill(n_norm, std::numeric_limits<int>::min());
 
-            current_statement_begin__ = 26;
             stan::math::assign(n_norm, 0);
-            current_statement_begin__ = 27;
             stan::math::assign(norm_vol, 0);
-            current_statement_begin__ = 29;
             for (int i = 1; i <= n; ++i) {
 
-                current_statement_begin__ = 30;
                 if (as_bool(logical_lt(get_base1(minute,i,"minute",1),5))) {
 
-                    current_statement_begin__ = 31;
-                    stan::math::assign(norm_vol, stan::model::deep_copy((norm_vol + get_base1(volume,i,"volume",1))));
-                    current_statement_begin__ = 32;
+                    stan::math::assign(norm_vol, (norm_vol + get_base1(volume,i,"volume",1)));
                     stan::math::assign(n_norm, (n_norm + 1));
                 }
             }
-            current_statement_begin__ = 35;
-            stan::math::assign(norm_vol, stan::model::deep_copy((norm_vol / n_norm)));
-            current_statement_begin__ = 36;
+            stan::math::assign(norm_vol, (norm_vol / n_norm));
             stan::math::assign(volume_1, divide(volume,norm_vol));
 
             // validate transformed data
-            current_statement_begin__ = 23;
-            current_statement_begin__ = 24;
-            current_statement_begin__ = 25;
 
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 41;
             validate_non_negative_index("v0_1", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 42;
             validate_non_negative_index("sigma_record", "2", 2);
             num_params_r__ += 2;
-            current_statement_begin__ = 43;
             ++num_params_r__;
-            current_statement_begin__ = 44;
             ++num_params_r__;
-            current_statement_begin__ = 45;
             ++num_params_r__;
-            current_statement_begin__ = 46;
             validate_non_negative_index("L_rho", "2", 2);
             num_params_r__ += ((2 * (2 - 1)) / 2);
-            current_statement_begin__ = 47;
         validate_non_negative_index("z", "2", 2);
             validate_non_negative_index("z", "n_record", n_record);
             num_params_r__ += 2 * n_record;
@@ -3202,7 +2996,6 @@ public:
 
 
             // transformed parameters
-            current_statement_begin__ = 51;
             validate_non_negative_index("cf", "n_record", n_record);
             validate_non_negative_index("cf", "2", 2);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,Eigen::Dynamic>  cf(static_cast<Eigen::VectorXd::Index>(n_record),static_cast<Eigen::VectorXd::Index>(2));
@@ -3212,7 +3005,6 @@ public:
             stan::math::fill(cf,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 52;
             stan::math::assign(cf, transpose(multiply(diag_pre_multiply(sigma_record,L_rho),z)));
 
             // validate transformed parameters
@@ -3228,34 +3020,28 @@ public:
 
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
-            current_statement_begin__ = 51;
 
             // model body
             {
-            current_statement_begin__ = 56;
             int rec(0);
             (void) rec;  // dummy to suppress unused var warning
 
             stan::math::fill(rec, std::numeric_limits<int>::min());
-            current_statement_begin__ = 57;
             local_scalar_t__ v0r;
             (void) v0r;  // dummy to suppress unused var warning
 
             stan::math::initialize(v0r, DUMMY_VAR__);
             stan::math::fill(v0r,DUMMY_VAR__);
-            current_statement_begin__ = 58;
             local_scalar_t__ kappar;
             (void) kappar;  // dummy to suppress unused var warning
 
             stan::math::initialize(kappar, DUMMY_VAR__);
             stan::math::fill(kappar,DUMMY_VAR__);
-            current_statement_begin__ = 59;
             local_scalar_t__ temptr;
             (void) temptr;  // dummy to suppress unused var warning
 
             stan::math::initialize(temptr, DUMMY_VAR__);
             stan::math::fill(temptr,DUMMY_VAR__);
-            current_statement_begin__ = 60;
             validate_non_negative_index("mu", "n", n);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  mu(static_cast<Eigen::VectorXd::Index>(n));
             (void) mu;  // dummy to suppress unused var warning
@@ -3264,40 +3050,25 @@ public:
             stan::math::fill(mu,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 64;
             lp_accum__.add(lkj_corr_cholesky_log<propto__>(L_rho, lkj));
-            current_statement_begin__ = 65;
             lp_accum__.add(normal_log<propto__>(to_vector(z), 0, 1));
-            current_statement_begin__ = 67;
             lp_accum__.add(normal_log<propto__>(v0_1, 1, 0.29999999999999999));
-            current_statement_begin__ = 68;
             lp_accum__.add(normal_log<propto__>(mu_kappa, 0.80000000000000004, 0.29999999999999999));
-            current_statement_begin__ = 69;
             lp_accum__.add(normal_log<propto__>(mu_tempt, 40, 20));
-            current_statement_begin__ = 70;
             lp_accum__.add(cauchy_log<propto__>(get_base1(sigma_record,1,"sigma_record",1), 0, 20));
-            current_statement_begin__ = 71;
             lp_accum__.add(cauchy_log<propto__>(get_base1(sigma_record,2,"sigma_record",1), 0, 0.40000000000000002));
-            current_statement_begin__ = 72;
             lp_accum__.add(cauchy_log<propto__>(sigma, 0.0, 0.20000000000000001));
-            current_statement_begin__ = 74;
             for (int i = 1; i <= n; ++i) {
 
-                current_statement_begin__ = 75;
                 stan::math::assign(rec, get_base1(record,i,"record",1));
-                current_statement_begin__ = 76;
                 stan::math::assign(v0r, get_base1(v0_1,rec,"v0_1",1));
-                current_statement_begin__ = 77;
                 stan::math::assign(temptr, (mu_tempt + get_base1(cf,rec,1,"cf",1)));
-                current_statement_begin__ = 78;
                 stan::math::assign(kappar, (mu_kappa + get_base1(cf,rec,2,"cf",1)));
-                current_statement_begin__ = 79;
                 stan::model::assign(mu, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             ((v0r * (1 + ((kappar * get_base1(minute,i,"minute",1)) / temptr))) * stan::math::exp((-(get_base1(minute,i,"minute",1)) / temptr))), 
                             "assigning variable mu");
             }
-            current_statement_begin__ = 83;
             lp_accum__.add(student_t_log<propto__>(volume_1, student_df, mu, sigma));
             }
 
@@ -3429,7 +3200,6 @@ public:
         (void) DUMMY_VAR__;  // suppress unused var warning
 
         try {
-            current_statement_begin__ = 51;
             validate_non_negative_index("cf", "n_record", n_record);
             validate_non_negative_index("cf", "2", 2);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,Eigen::Dynamic>  cf(static_cast<Eigen::VectorXd::Index>(n_record),static_cast<Eigen::VectorXd::Index>(2));
@@ -3439,11 +3209,9 @@ public:
             stan::math::fill(cf,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 52;
             stan::math::assign(cf, transpose(multiply(diag_pre_multiply(sigma_record,L_rho),z)));
 
             // validate transformed parameters
-            current_statement_begin__ = 51;
 
             // write transformed parameters
             if (include_tparams__) {
@@ -3455,21 +3223,18 @@ public:
             }
             if (!include_gqs__) return;
             // declare and define generated quantities
-            current_statement_begin__ = 87;
             validate_non_negative_index("v0", "n_record", n_record);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  v0(static_cast<Eigen::VectorXd::Index>(n_record));
             (void) v0;  // dummy to suppress unused var warning
 
             stan::math::initialize(v0, DUMMY_VAR__);
             stan::math::fill(v0,DUMMY_VAR__);
-            current_statement_begin__ = 88;
             validate_non_negative_index("tempt", "n_record", n_record);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  tempt(static_cast<Eigen::VectorXd::Index>(n_record));
             (void) tempt;  // dummy to suppress unused var warning
 
             stan::math::initialize(tempt, DUMMY_VAR__);
             stan::math::fill(tempt,DUMMY_VAR__);
-            current_statement_begin__ = 89;
             validate_non_negative_index("kappa", "n_record", n_record);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  kappa(static_cast<Eigen::VectorXd::Index>(n_record));
             (void) kappa;  // dummy to suppress unused var warning
@@ -3478,17 +3243,13 @@ public:
             stan::math::fill(kappa,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 91;
             stan::math::assign(v0, multiply(v0_1,norm_vol));
-            current_statement_begin__ = 92;
             for (int i = 1; i <= n_record; ++i) {
 
-                current_statement_begin__ = 93;
                 stan::model::assign(tempt, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             (mu_tempt + get_base1(cf,i,1,"cf",1)), 
                             "assigning variable tempt");
-                current_statement_begin__ = 94;
                 stan::model::assign(kappa, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             (mu_kappa + get_base1(cf,i,2,"cf",1)), 
@@ -3496,9 +3257,6 @@ public:
             }
 
             // validate generated quantities
-            current_statement_begin__ = 87;
-            current_statement_begin__ = 88;
-            current_statement_begin__ = 89;
 
             // write generated quantities
             for (int k_0__ = 0; k_0__ < n_record; ++k_0__) {
@@ -3753,25 +3511,21 @@ public:
 
         // initialize member variables
         try {
-            current_statement_begin__ = 7;
             context__.validate_dims("data initialization", "prior_v0", "double", context__.to_vec());
             prior_v0 = double(0);
             vals_r__ = context__.vals_r("prior_v0");
             pos__ = 0;
             prior_v0 = vals_r__[pos__++];
-            current_statement_begin__ = 8;
             context__.validate_dims("data initialization", "n", "int", context__.to_vec());
             n = int(0);
             vals_i__ = context__.vals_i("n");
             pos__ = 0;
             n = vals_i__[pos__++];
-            current_statement_begin__ = 9;
             context__.validate_dims("data initialization", "n_record", "int", context__.to_vec());
             n_record = int(0);
             vals_i__ = context__.vals_i("n_record");
             pos__ = 0;
             n_record = vals_i__[pos__++];
-            current_statement_begin__ = 10;
             validate_non_negative_index("record", "n", n);
             context__.validate_dims("data initialization", "record", "int", context__.to_vec(n));
             validate_non_negative_index("record", "n", n);
@@ -3782,7 +3536,6 @@ public:
             for (size_t i_0__ = 0; i_0__ < record_limit_0__; ++i_0__) {
                 record[i_0__] = vals_i__[pos__++];
             }
-            current_statement_begin__ = 11;
             validate_non_negative_index("minute", "n", n);
             context__.validate_dims("data initialization", "minute", "vector_d", context__.to_vec(n));
             validate_non_negative_index("minute", "n", n);
@@ -3793,7 +3546,6 @@ public:
             for (size_t i_vec__ = 0; i_vec__ < minute_i_vec_lim__; ++i_vec__) {
                 minute[i_vec__] = vals_r__[pos__++];
             }
-            current_statement_begin__ = 12;
             validate_non_negative_index("volume", "n", n);
             context__.validate_dims("data initialization", "volume", "vector_d", context__.to_vec(n));
             validate_non_negative_index("volume", "n", n);
@@ -3806,14 +3558,8 @@ public:
             }
 
             // validate, data variables
-            current_statement_begin__ = 7;
-            current_statement_begin__ = 8;
             check_greater_or_equal(function__,"n",n,0);
-            current_statement_begin__ = 9;
             check_greater_or_equal(function__,"n_record",n_record,0);
-            current_statement_begin__ = 10;
-            current_statement_begin__ = 11;
-            current_statement_begin__ = 12;
             // initialize data variables
 
 
@@ -3822,20 +3568,14 @@ public:
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 16;
             validate_non_negative_index("v0", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 17;
             validate_non_negative_index("beta", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 18;
             validate_non_negative_index("tempt", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 19;
             ++num_params_r__;
-            current_statement_begin__ = 20;
             ++num_params_r__;
-            current_statement_begin__ = 21;
             ++num_params_r__;
         } catch (const std::exception& e) {
             stan::lang::rethrow_located(e, current_statement_begin__, prog_reader__());
@@ -4028,66 +3768,48 @@ public:
 
             // model body
             {
-            current_statement_begin__ = 26;
             int reci(0);
             (void) reci;  // dummy to suppress unused var warning
 
             stan::math::fill(reci, std::numeric_limits<int>::min());
-            current_statement_begin__ = 27;
             local_scalar_t__ v0r;
             (void) v0r;  // dummy to suppress unused var warning
 
             stan::math::initialize(v0r, DUMMY_VAR__);
             stan::math::fill(v0r,DUMMY_VAR__);
-            current_statement_begin__ = 28;
             local_scalar_t__ betar;
             (void) betar;  // dummy to suppress unused var warning
 
             stan::math::initialize(betar, DUMMY_VAR__);
             stan::math::fill(betar,DUMMY_VAR__);
-            current_statement_begin__ = 29;
             local_scalar_t__ temptr;
             (void) temptr;  // dummy to suppress unused var warning
 
             stan::math::initialize(temptr, DUMMY_VAR__);
             stan::math::fill(temptr,DUMMY_VAR__);
-            current_statement_begin__ = 30;
             validate_non_negative_index("vol", "n", n);
             vector<local_scalar_t__> vol(n);
             stan::math::initialize(vol, DUMMY_VAR__);
             stan::math::fill(vol,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 31;
             lp_accum__.add(normal_log<propto__>(mu_beta, 1.5, 0.5));
-            current_statement_begin__ = 32;
             lp_accum__.add(normal_log<propto__>(sigma_beta, 1, 0.5));
-            current_statement_begin__ = 34;
             lp_accum__.add(normal_log<propto__>(v0, prior_v0, 100));
-            current_statement_begin__ = 35;
             lp_accum__.add(lognormal_log<propto__>(beta, mu_beta, sigma_beta));
-            current_statement_begin__ = 36;
             lp_accum__.add(normal_log<propto__>(tempt, 60, 20));
-            current_statement_begin__ = 37;
             lp_accum__.add(gamma_log<propto__>(sigma, 20, 0.5));
-            current_statement_begin__ = 39;
             for (int i = 1; i <= n; ++i) {
 
-                current_statement_begin__ = 40;
                 stan::math::assign(reci, get_base1(record,i,"record",1));
-                current_statement_begin__ = 41;
                 stan::math::assign(v0r, get_base1(v0,reci,"v0",1));
-                current_statement_begin__ = 42;
                 stan::math::assign(betar, get_base1(beta,reci,"beta",1));
-                current_statement_begin__ = 43;
                 stan::math::assign(temptr, get_base1(tempt,reci,"tempt",1));
-                current_statement_begin__ = 44;
                 stan::model::assign(vol, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             (v0r * stan::math::exp(-(pow((get_base1(minute,i,"minute",1) / temptr),betar)))), 
                             "assigning variable vol");
             }
-            current_statement_begin__ = 46;
             lp_accum__.add(normal_log<propto__>(volume, vol, sigma));
             }
 
@@ -4391,31 +4113,26 @@ public:
 
         // initialize member variables
         try {
-            current_statement_begin__ = 13;
             context__.validate_dims("data initialization", "lkj", "double", context__.to_vec());
             lkj = double(0);
             vals_r__ = context__.vals_r("lkj");
             pos__ = 0;
             lkj = vals_r__[pos__++];
-            current_statement_begin__ = 14;
             context__.validate_dims("data initialization", "student_df", "int", context__.to_vec());
             student_df = int(0);
             vals_i__ = context__.vals_i("student_df");
             pos__ = 0;
             student_df = vals_i__[pos__++];
-            current_statement_begin__ = 15;
             context__.validate_dims("data initialization", "n", "int", context__.to_vec());
             n = int(0);
             vals_i__ = context__.vals_i("n");
             pos__ = 0;
             n = vals_i__[pos__++];
-            current_statement_begin__ = 16;
             context__.validate_dims("data initialization", "n_record", "int", context__.to_vec());
             n_record = int(0);
             vals_i__ = context__.vals_i("n_record");
             pos__ = 0;
             n_record = vals_i__[pos__++];
-            current_statement_begin__ = 17;
             validate_non_negative_index("record", "n", n);
             context__.validate_dims("data initialization", "record", "int", context__.to_vec(n));
             validate_non_negative_index("record", "n", n);
@@ -4426,7 +4143,6 @@ public:
             for (size_t i_0__ = 0; i_0__ < record_limit_0__; ++i_0__) {
                 record[i_0__] = vals_i__[pos__++];
             }
-            current_statement_begin__ = 18;
             validate_non_negative_index("minute", "n", n);
             context__.validate_dims("data initialization", "minute", "vector_d", context__.to_vec(n));
             validate_non_negative_index("minute", "n", n);
@@ -4437,7 +4153,6 @@ public:
             for (size_t i_vec__ = 0; i_vec__ < minute_i_vec_lim__; ++i_vec__) {
                 minute[i_vec__] = vals_r__[pos__++];
             }
-            current_statement_begin__ = 19;
             validate_non_negative_index("volume", "n", n);
             context__.validate_dims("data initialization", "volume", "vector_d", context__.to_vec(n));
             validate_non_negative_index("volume", "n", n);
@@ -4450,87 +4165,55 @@ public:
             }
 
             // validate, data variables
-            current_statement_begin__ = 13;
-            current_statement_begin__ = 14;
-            current_statement_begin__ = 15;
             check_greater_or_equal(function__,"n",n,0);
-            current_statement_begin__ = 16;
             check_greater_or_equal(function__,"n_record",n_record,0);
-            current_statement_begin__ = 17;
-            current_statement_begin__ = 18;
-            current_statement_begin__ = 19;
             // initialize data variables
-            current_statement_begin__ = 23;
             validate_non_negative_index("zeros", "2", 2);
             zeros = vector_d(static_cast<Eigen::VectorXd::Index>(2));
             stan::math::fill(zeros,DUMMY_VAR__);
-            current_statement_begin__ = 24;
             validate_non_negative_index("volume_1", "n", n);
             volume_1 = vector_d(static_cast<Eigen::VectorXd::Index>(n));
             stan::math::fill(volume_1,DUMMY_VAR__);
-            current_statement_begin__ = 25;
             norm_vol = double(0);
             stan::math::fill(norm_vol,DUMMY_VAR__);
-            current_statement_begin__ = 26;
             n_norm = int(0);
             stan::math::fill(n_norm, std::numeric_limits<int>::min());
 
-            current_statement_begin__ = 27;
             stan::model::assign(zeros, 
                         stan::model::cons_list(stan::model::index_uni(1), stan::model::nil_index_list()), 
                         0, 
                         "assigning variable zeros");
-            current_statement_begin__ = 28;
             stan::model::assign(zeros, 
                         stan::model::cons_list(stan::model::index_uni(2), stan::model::nil_index_list()), 
                         0, 
                         "assigning variable zeros");
-            current_statement_begin__ = 29;
             stan::math::assign(n_norm, 0);
-            current_statement_begin__ = 30;
             stan::math::assign(norm_vol, 0);
-            current_statement_begin__ = 32;
             for (int i = 1; i <= n; ++i) {
 
-                current_statement_begin__ = 33;
                 if (as_bool(logical_lt(get_base1(minute,i,"minute",1),5))) {
 
-                    current_statement_begin__ = 34;
-                    stan::math::assign(norm_vol, stan::model::deep_copy((norm_vol + get_base1(volume,i,"volume",1))));
-                    current_statement_begin__ = 35;
+                    stan::math::assign(norm_vol, (norm_vol + get_base1(volume,i,"volume",1)));
                     stan::math::assign(n_norm, (n_norm + 1));
                 }
             }
-            current_statement_begin__ = 38;
-            stan::math::assign(norm_vol, stan::model::deep_copy((norm_vol / n_norm)));
-            current_statement_begin__ = 39;
+            stan::math::assign(norm_vol, (norm_vol / n_norm));
             stan::math::assign(volume_1, divide(volume,norm_vol));
 
             // validate transformed data
-            current_statement_begin__ = 23;
-            current_statement_begin__ = 24;
-            current_statement_begin__ = 25;
-            current_statement_begin__ = 26;
 
             // validate, set parameter ranges
             num_params_r__ = 0U;
             param_ranges_i__.clear();
-            current_statement_begin__ = 44;
             validate_non_negative_index("v0_1", "n_record", n_record);
             num_params_r__ += n_record;
-            current_statement_begin__ = 45;
             validate_non_negative_index("sigma_record", "2", 2);
             num_params_r__ += 2;
-            current_statement_begin__ = 46;
             ++num_params_r__;
-            current_statement_begin__ = 47;
             ++num_params_r__;
-            current_statement_begin__ = 48;
             ++num_params_r__;
-            current_statement_begin__ = 49;
             validate_non_negative_index("L_rho", "2", 2);
             num_params_r__ += ((2 * (2 - 1)) / 2);
-            current_statement_begin__ = 50;
         validate_non_negative_index("z", "2", 2);
             validate_non_negative_index("z", "n_record", n_record);
             num_params_r__ += 2 * n_record;
@@ -4741,7 +4424,6 @@ public:
 
 
             // transformed parameters
-            current_statement_begin__ = 54;
             validate_non_negative_index("cf", "n_record", n_record);
             validate_non_negative_index("cf", "2", 2);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,Eigen::Dynamic>  cf(static_cast<Eigen::VectorXd::Index>(n_record),static_cast<Eigen::VectorXd::Index>(2));
@@ -4751,7 +4433,6 @@ public:
             stan::math::fill(cf,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 55;
             stan::math::assign(cf, transpose(multiply(diag_pre_multiply(sigma_record,L_rho),z)));
 
             // validate transformed parameters
@@ -4767,34 +4448,28 @@ public:
 
             const char* function__ = "validate transformed params";
             (void) function__;  // dummy to suppress unused var warning
-            current_statement_begin__ = 54;
 
             // model body
             {
-            current_statement_begin__ = 59;
             int rec(0);
             (void) rec;  // dummy to suppress unused var warning
 
             stan::math::fill(rec, std::numeric_limits<int>::min());
-            current_statement_begin__ = 60;
             local_scalar_t__ v0r;
             (void) v0r;  // dummy to suppress unused var warning
 
             stan::math::initialize(v0r, DUMMY_VAR__);
             stan::math::fill(v0r,DUMMY_VAR__);
-            current_statement_begin__ = 61;
             local_scalar_t__ betar;
             (void) betar;  // dummy to suppress unused var warning
 
             stan::math::initialize(betar, DUMMY_VAR__);
             stan::math::fill(betar,DUMMY_VAR__);
-            current_statement_begin__ = 62;
             local_scalar_t__ temptr;
             (void) temptr;  // dummy to suppress unused var warning
 
             stan::math::initialize(temptr, DUMMY_VAR__);
             stan::math::fill(temptr,DUMMY_VAR__);
-            current_statement_begin__ = 63;
             validate_non_negative_index("mu", "n", n);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  mu(static_cast<Eigen::VectorXd::Index>(n));
             (void) mu;  // dummy to suppress unused var warning
@@ -4803,40 +4478,25 @@ public:
             stan::math::fill(mu,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 67;
             lp_accum__.add(lkj_corr_cholesky_log<propto__>(L_rho, lkj));
-            current_statement_begin__ = 68;
             lp_accum__.add(normal_log<propto__>(to_vector(z), 0, 1));
-            current_statement_begin__ = 70;
             lp_accum__.add(normal_log<propto__>(v0_1, 1, 0.29999999999999999));
-            current_statement_begin__ = 71;
             lp_accum__.add(normal_log<propto__>(mu_beta, 1.2, 0.5));
-            current_statement_begin__ = 72;
             lp_accum__.add(normal_log<propto__>(mu_tempt, 100, 50));
-            current_statement_begin__ = 73;
             lp_accum__.add(cauchy_log<propto__>(get_base1(sigma_record,1,"sigma_record",1), 0, 20));
-            current_statement_begin__ = 74;
             lp_accum__.add(cauchy_log<propto__>(get_base1(sigma_record,2,"sigma_record",1), 0, 0.40000000000000002));
-            current_statement_begin__ = 75;
             lp_accum__.add(cauchy_log<propto__>(sigma, 0.0, 0.5));
-            current_statement_begin__ = 77;
             for (int i = 1; i <= n; ++i) {
 
-                current_statement_begin__ = 78;
                 stan::math::assign(rec, get_base1(record,i,"record",1));
-                current_statement_begin__ = 79;
                 stan::math::assign(v0r, get_base1(v0_1,rec,"v0_1",1));
-                current_statement_begin__ = 80;
                 stan::math::assign(temptr, (mu_tempt + get_base1(cf,rec,1,"cf",1)));
-                current_statement_begin__ = 81;
                 stan::math::assign(betar, (mu_beta + get_base1(cf,rec,2,"cf",1)));
-                current_statement_begin__ = 82;
                 stan::model::assign(mu, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             (v0r * stan::math::exp(-(pow((get_base1(minute,i,"minute",1) / temptr),betar)))), 
                             "assigning variable mu");
             }
-            current_statement_begin__ = 86;
             lp_accum__.add(student_t_log<propto__>(volume_1, student_df, mu, sigma));
             }
 
@@ -4968,7 +4628,6 @@ public:
         (void) DUMMY_VAR__;  // suppress unused var warning
 
         try {
-            current_statement_begin__ = 54;
             validate_non_negative_index("cf", "n_record", n_record);
             validate_non_negative_index("cf", "2", 2);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,Eigen::Dynamic>  cf(static_cast<Eigen::VectorXd::Index>(n_record),static_cast<Eigen::VectorXd::Index>(2));
@@ -4978,11 +4637,9 @@ public:
             stan::math::fill(cf,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 55;
             stan::math::assign(cf, transpose(multiply(diag_pre_multiply(sigma_record,L_rho),z)));
 
             // validate transformed parameters
-            current_statement_begin__ = 54;
 
             // write transformed parameters
             if (include_tparams__) {
@@ -4994,21 +4651,18 @@ public:
             }
             if (!include_gqs__) return;
             // declare and define generated quantities
-            current_statement_begin__ = 90;
             validate_non_negative_index("v0", "n_record", n_record);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  v0(static_cast<Eigen::VectorXd::Index>(n_record));
             (void) v0;  // dummy to suppress unused var warning
 
             stan::math::initialize(v0, DUMMY_VAR__);
             stan::math::fill(v0,DUMMY_VAR__);
-            current_statement_begin__ = 91;
             validate_non_negative_index("tempt", "n_record", n_record);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  tempt(static_cast<Eigen::VectorXd::Index>(n_record));
             (void) tempt;  // dummy to suppress unused var warning
 
             stan::math::initialize(tempt, DUMMY_VAR__);
             stan::math::fill(tempt,DUMMY_VAR__);
-            current_statement_begin__ = 92;
             validate_non_negative_index("beta", "n_record", n_record);
             Eigen::Matrix<local_scalar_t__,Eigen::Dynamic,1>  beta(static_cast<Eigen::VectorXd::Index>(n_record));
             (void) beta;  // dummy to suppress unused var warning
@@ -5017,17 +4671,13 @@ public:
             stan::math::fill(beta,DUMMY_VAR__);
 
 
-            current_statement_begin__ = 94;
             stan::math::assign(v0, multiply(v0_1,norm_vol));
-            current_statement_begin__ = 95;
             for (int i = 1; i <= n_record; ++i) {
 
-                current_statement_begin__ = 96;
                 stan::model::assign(tempt, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             (mu_tempt + get_base1(cf,i,1,"cf",1)), 
                             "assigning variable tempt");
-                current_statement_begin__ = 97;
                 stan::model::assign(beta, 
                             stan::model::cons_list(stan::model::index_uni(i), stan::model::nil_index_list()), 
                             (mu_beta + get_base1(cf,i,2,"cf",1)), 
@@ -5035,9 +4685,6 @@ public:
             }
 
             // validate generated quantities
-            current_statement_begin__ = 90;
-            current_statement_begin__ = 91;
-            current_statement_begin__ = 92;
 
             // write generated quantities
             for (int k_0__ = 0; k_0__ < n_record; ++k_0__) {

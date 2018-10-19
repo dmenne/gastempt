@@ -28,11 +28,11 @@ transformed data{
     // Use mean of initial volume to normalize
     for (i in 1:n){
       if (minute[i] < 5) {
-        norm_vol = norm_vol + volume[i];
+        norm_vol += volume[i];
         n_norm  += 1;
       }
     }
-    norm_vol = norm_vol/n_norm;
+    norm_vol /= n_norm;
     volume_1 = volume/norm_vol;
 }
 
