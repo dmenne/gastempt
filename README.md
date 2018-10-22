@@ -1,7 +1,12 @@
-----------
-title: "gastempt: Fitting gastric emptying curves"
-author: "dieter.menne@menne-biomed.de, Menne Biomed Consulting Tübingen, D-72074 Tübingen"
----------
+gastempt: Fitting gastric emptying curves
+====================================
+
+Dieter Menne  
+Menne Biomed Consulting Tübingen, Germany  
+http://www.menne-biomed.de  
+dieter.menne@menne-biomed.de   
+
+
 
 [![](https://gitlab.com/dmenne/gastempt/badges/master/build.svg)](https://gitlab.com/dmenne/gastempt) [![](https://travis-ci.org/dmenne/gastempt.svg?branch=master)](https://travis-ci.org/dmenne/gastempt) [![](https://coveralls.io/repos/github/dmenne/gastempt/badge.svg?branch=master)](https://coveralls.io/github/dmenne/gastempt?branch=master) [![](https://cranlogs.r-pkg.org/badges/grand-total/gastempt)](https://cran.r-project.org/web/packages/gastempt) [![](https://www.r-pkg.org/badges/last-release/gastempt)](https://CRAN.R-project.org/package=gastempt)
 
