@@ -47,3 +47,4 @@ RcppModules:
   stan_fit4powexp_gastro_2c_mod
 RoxygenNote: 6.1.0
 VignetteBuilder: knitr
+Encoding: UTF-8
