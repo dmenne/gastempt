@@ -11,3 +11,4 @@ _pkgdown.yml
 ^inst/doc/[A-Za-z0-9\-_]+[.]csv
 ^inst/doc/\.install_extras$
 vignettes/_output.yaml
+check_rhub.cmd
