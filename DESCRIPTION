@@ -14,14 +14,14 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.5.0)
+    R (>= 3.4.0)
 Imports:
-    Rcpp,
+    Rcpp (>= 0.12.18),
     nlme,
     dplyr,
     tibble,
     ggplot2 (>= 3.0.0),
-    rstan (>= 2.18.0),
+    rstan (>= 2.18.1),
     assertthat,
     stringr,
     shiny
