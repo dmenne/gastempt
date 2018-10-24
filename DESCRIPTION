@@ -14,14 +14,16 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.4.0)
+    methods, 
+    R (>= 3.4.0),
+    Rcpp (>= 0.12.19),
 Imports:
-    Rcpp (>= 0.12.18),
     nlme,
     dplyr,
     tibble,
     ggplot2 (>= 3.0.0),
     rstan (>= 2.18.1),
+    rstantools (> 1.5.1),
     assertthat,
     stringr,
     shiny
@@ -33,12 +35,12 @@ Suggests:
     methods
 LinkingTo:
     StanHeaders (>= 2.18.0),
-    rstan (>= 2.18.0),
-    BH (>= 1.66.0),
-    Rcpp (>= 0.12.18),
+    rstan (>= 2.18.1),
+    BH (>= 1.66.0-1),
+    Rcpp (>= 0.12.19),
     RcppEigen (>= 0.3.3.4.0)
 RoxygenNote: 6.1.0
 VignetteBuilder: knitr
 Encoding: UTF-8
-SystemRequirements: GNU make, pandoc (>= 1.12.3), pandoc-citeproc
+SystemRequirements: GNU make
 
