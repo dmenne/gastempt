@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">gastempt</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.1.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.4.2</span>
       </span>
     </div>
 
@@ -68,17 +68,19 @@
       
       </header><div class="row">
   <div class="contents col-md-9">
-    
-<hr>
-<p>title: “gastempt: Fitting gastric emptying curves” author: “<a href="mailto:dieter.menne@menne-biomed.de" class="email">dieter.menne@menne-biomed.de</a>, Menne Biomed Consulting Tübingen, D-72074 Tübingen” ———</p>
-<p><a href="https://travis-ci.org/dmenne/gastempt"><img src="https://travis-ci.org/dmenne/gastempt.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://coveralls.io/github/dmenne/gastempt?branch=master"><img src="https://coveralls.io/repos/github/dmenne/gastempt/badge.svg?branch=master" alt="Coverage Status"></a> <a href="https://CRAN.R-project.org/package=gastempt"><img src="https://cranlogs.r-pkg.org/badges/grand-total/gastempt" alt="CRAN"></a></p>
-<p>A package and a Shiny web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package nlme. Stan-based (<a href="http://mc-stan.org/" class="uri">http://mc-stan.org/</a>) Bayesian fits that can handle critical cases are included and will be extended in future.</p>
+    <div id="gastempt-fitting-gastric-emptying-curves" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#gastempt-fitting-gastric-emptying-curves" class="anchor"></a>gastempt: Fitting gastric emptying curves</h1></div>
+<p>Dieter Menne<br>
+Menne Biomed Consulting Tübingen, Germany<br><a href="http://www.menne-biomed.de" class="uri">http://www.menne-biomed.de</a><br><a href="mailto:dieter.menne@menne-biomed.de" class="email">dieter.menne@menne-biomed.de</a></p>
+<p><a href="https://gitlab.com/dmenne/gastempt"><img src="https://gitlab.com/dmenne/gastempt/badges/master/build.svg"></a> <a href="https://travis-ci.org/dmenne/gastempt"><img src="https://travis-ci.org/dmenne/gastempt.svg?branch=master"></a> <a href="https://coveralls.io/github/dmenne/gastempt?branch=master"><img src="https://coveralls.io/repos/github/dmenne/gastempt/badge.svg?branch=master"></a> <a href="https://cran.r-project.org/web/packages/gastempt"><img src="https://cranlogs.r-pkg.org/badges/grand-total/gastempt"></a> <a href="https://CRAN.R-project.org/package=gastempt"><img src="https://www.r-pkg.org/badges/last-release/gastempt"></a></p>
+<p>A package and a <a href="https://shiny.rstudio.com/">Shiny</a> web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package <code>nlme</code>. In addition,Bayesian fits with <a href="http://mc-stan.org/">Stan</a> to handle critical cases are implemented.</p>
 <p>Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; thanks to Werner Schwizer and Andreas Steingötter for their contributions.</p>
 <div id="download" class="section level3">
 <h3 class="hasAnchor">
 <a href="#download" class="anchor"></a>Download</h3>
 <p>The package is available from <a href="https://CRAN.R-project.org/package=gastempt">CRAN</a> and github (<a href="https://github.com/dmenne/gastempt">source</a>, <a href="https://dmenne.github.io/gastempt/">documentation</a>). To install, use:</p>
-<pre><code><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">devtools::install_github("dmenne/gastempt")</a></code></pre>
+<pre><code><a href="http://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("dmenne/gastempt")</a></code></pre>
 <p>Compilation of the Stan models needs several minutes.</p>
 </div>
 <div id="shiny-online-interface" class="section level3">
@@ -132,7 +134,7 @@ print(ret$plot)</code></pre>
 </ul>
 <p><img src="tools/readme/screenshot.png" alt="Screenshot"></p>
 </div>
-
+</div>
   </div>
 
   <div class="col-md-3" id="sidebar">
