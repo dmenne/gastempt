@@ -13,5 +13,3 @@ artifacts:
     paths:
       - /builds/dmenne/gastempt/gastempt.Rcheck/00install.out
 
-#after_script:
-#  - Rscript -e 'covr::coveralls(line_exclusions="src/init.cpp", repo_token = "dDxuL4PzyArS4FLQmI1A5iqv9yiYCK3UX")'
