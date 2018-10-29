@@ -17,6 +17,7 @@ Depends:
     R (>= 3.4.0)
 Imports:
     nlme,
+    Rcpp (>= 0.12.19),
     dplyr,
     tibble,
     ggplot2 (>= 3.0.0),
