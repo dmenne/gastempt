@@ -31,8 +31,7 @@ Suggests:
     rmarkdown,
     knitr,
     covr,
-    testthat,
-    methods
+    testthat
 LinkingTo:
     StanHeaders (>= 2.18.0),
     rstan (>= 2.18.1),
