@@ -16,7 +16,7 @@ BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
     methods, 
     R (>= 3.4.0),
-    Rcpp (>= 0.12.19),
+    Rcpp (>= 0.12.19)
 Imports:
     nlme,
     dplyr,
