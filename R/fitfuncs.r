@@ -32,6 +32,7 @@
 #' from the numeric vector pars instead.
 #' @return Vector of \code{length(t)} for computed volume.
 #' @examples
+#' library(breathtestcore) # for linexp/powexp
 #' t = seq(0,100, by=5)
 #' kappa = 1.3
 #' tempt = 60

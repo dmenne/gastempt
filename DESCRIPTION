@@ -14,7 +14,8 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.4.0)
+    R (>= 3.4.0),
+    methods
 Imports:
     nlme,
     Rcpp (>= 0.12.19),
