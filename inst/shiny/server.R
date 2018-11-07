@@ -119,11 +119,10 @@ shinyServer(function(input, output, session) {
     missing = as.double(input$missing)/100.
     model_name = input$model_s
     model = eval(parse(text = model_name))
-    set.seed(input$seed)
     # Compute simulated data
     d = simulate_gastempt(n_records, v0_mean, v0_std, tempt_mean,
       tempt_std, kappa_mean, kappa_std, beta_mean, beta_std, noise,
-      student_t_df, missing, model)
+      student_t_df, missing, model, seed = input$seed)
     # Copy simulated data to editor
     tc = textConnection("dt","w")
     comment = str_replace_all(comment(d$data),"\\n", " ")

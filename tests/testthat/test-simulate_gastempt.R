@@ -4,8 +4,7 @@ library(testthat)
 library(assertthat)
 
 test_that("Default call of simulate_gastempt must return plausible values",{
-  set.seed(4711)
-  d = simulate_gastempt()
+  d = simulate_gastempt(seed = 4711)
   expect_equal(names(d), c("record", "data", "stan_data"))
   expect_match(comment(d$data), "linexp")
   data = d$data
@@ -17,15 +16,14 @@ test_that("Default call of simulate_gastempt must return plausible values",{
 })
 
 test_that("When max_minute is explicitly given, it must be used",{
-  set.seed(4711)
-  d = simulate_gastempt(max_minute = 88)
+  d = simulate_gastempt(max_minute = 88, seed = 4711)
   expect_equal(max(d$data$minute), 60)
 })
 
 
 test_that("Noise = 0 must issue a warning",{
-  set.seed(4711)
-  expect_warning(d <- simulate_gastempt(noise = 0), "might fail")
+  expect_warning(d <- simulate_gastempt(noise = 0, seed = 4711),
+                 "might fail")
   expect_equal(names(d), c("record", "data", "stan_data"))
   data = d$data
   record = d$record
@@ -41,8 +39,7 @@ test_that("student_t_df < 0 must issue a warning",{
 })
 
 test_that("When data are missing, records must be shortened",{
-  set.seed(4711)
-  d = simulate_gastempt(missing = 0.5)
+  d = simulate_gastempt(missing = 0.5, seed = 4711)
   data = d$data
   record = d$record
   expect_equal(nrow(record), 10)
@@ -50,13 +47,11 @@ test_that("When data are missing, records must be shortened",{
 })
 
 test_that("Warning must be issued for invalid values of missing",{
-  set.seed(4711)
-  expect_warning(simulate_gastempt(missing = 1), "0.5")
-  expect_warning(simulate_gastempt(missing = -1), "0")
+  expect_warning(simulate_gastempt(missing = 1, seed = 4711), "0.5")
+  expect_warning(simulate_gastempt(missing = -1, seed = 4711), "0")
 })
 
 test_that("Should stop when linexp input parameters are invalid",{
-  set.seed(4711)
   expect_error(simulate_gastempt(kappa_mean = -1),"greater")
   expect_error(simulate_gastempt(kappa_mean = 1, kappa_std = 1),"greater")
 
@@ -72,7 +67,7 @@ test_that("Should stop when linexp input parameters are invalid",{
 test_that(
   "Default call of simulate_gastempt for powexp must return plausible values",{
   set.seed(4711)
-  d = simulate_gastempt(model = powexp)
+  d = simulate_gastempt(model = powexp, seed = 4711)
   expect_equal(names(d), c("record", "data", "stan_data"))
   data = d$data
   record = d$record
@@ -82,11 +77,10 @@ test_that(
 })
 
 test_that("Noise = 0 must issue a warning and powexp should not overshoot",{
-  set.seed(4711)
   expect_warning(d <- simulate_gastempt(
-    n_record = 4, v0_mean = 400, v0_std = 0,
+    n_records = 4, v0_mean = 400, v0_std = 0,
     beta_mean = 4,
-    noise = 0, model = powexp), "might fail")
+    noise = 0, model = powexp, seed = 4711), "might fail")
   data = d$data
   record = d$record
   expect_equal(names(d), c("record", "data", "stan_data"))

@@ -72,7 +72,6 @@ Use the \code{_log} functions to enforce positive parameters
 \code{tempt} and \code{beta}. Rarely required for gastric emptying curves.
 }
 \examples{
-library(breathtestcore) # for linexp/powexp
 t = seq(0,100, by=5)
 kappa = 1.3
 tempt = 60
