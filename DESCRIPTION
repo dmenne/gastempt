@@ -14,8 +14,7 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.4.0),
-    methods
+    R (>= 3.4.0)
 Imports:
     nlme,
     Rcpp (>= 0.12.19),
@@ -26,6 +25,7 @@ Imports:
     rstantools (>= 1.5.1),
     assertthat,
     stringr,
+    methods,
     shiny
 Suggests:
     rmarkdown,
