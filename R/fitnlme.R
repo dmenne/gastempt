@@ -57,6 +57,7 @@
 #' @import dplyr
 #'
 #' @examples
+#' suppressWarnings(RNGversion("3.5.0"))
 #' set.seed(4711)
 #' d = simulate_gastempt(n_record = 10, kappa_mean = 0.9, kappa_std = 0.3,
 #'                       model = linexp)$data

@@ -54,6 +54,7 @@ test_that("nlme_gastempt with special data fails", {
 search_pnlsTol = function(model = linexp, nlme_model = linexp,
                           variant = 1){
   # Only used manually to find interesting start values for test design
+  suppressWarnings(RNGversion("3.5.0"))
   set.seed(4711)
   while (TRUE) {
     r = sample.int(10000,1)

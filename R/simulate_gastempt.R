@@ -28,6 +28,7 @@
 #'  }
 #'  A comment is attached to the return value that can be used as a title
 #' @examples
+#' suppressWarnings(RNGversion("3.5.0"))
 #' set.seed(4711)
 #' library(ggplot2)
 #' vol_linexp = simulate_gastempt(n_records = 4, noise = 20)
@@ -61,8 +62,10 @@ simulate_gastempt = function(
 
   # Hack to avoid notes
   vol = . = NULL
-  if (!is.null(seed))
+  if (!is.null(seed)) {
+    suppressWarnings(RNGversion("3.5.0"))
     set.seed(seed)
+  }
   # Only linexp and powexp are supported
   assert_that(identical(model, linexp) || identical(model, powexp))
   model_name = ifelse(identical(model, linexp), "linexp", "powexp")

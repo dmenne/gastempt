@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.4.3
+Version: 0.4.4
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -38,8 +38,7 @@ LinkingTo:
     BH (>= 1.66.0-1),
     Rcpp (>= 0.12.19),
     RcppEigen (>= 0.3.3.4.0)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 VignetteBuilder: knitr
 Encoding: UTF-8
 SystemRequirements: GNU make
-

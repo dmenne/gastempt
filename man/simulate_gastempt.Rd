@@ -55,6 +55,7 @@ A list with 3 elements:
 Simulate gastric emptying data following a linexp or powexp function
 }
 \examples{
+suppressWarnings(RNGversion("3.5.0"))
 set.seed(4711)
 library(ggplot2)
 vol_linexp = simulate_gastempt(n_records = 4, noise = 20)

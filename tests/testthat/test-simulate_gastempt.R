@@ -2,6 +2,7 @@ context("Test simulation of data")
 
 library(testthat)
 library(assertthat)
+suppressWarnings(RNGversion("3.5.0"))
 
 test_that("Default call of simulate_gastempt must return plausible values",{
   d = simulate_gastempt(seed = 4711)
