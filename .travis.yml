@@ -10,10 +10,6 @@ r_check_args: '--ignore-vignettes'
 r_github_packages:
   - jimhester/covr
 
-r:
-  - release
-  - devel
-
 env:
   global:
     - MAKEFLAGS="-j 2"
@@ -21,6 +17,9 @@ env:
 matrix:
   include:
     - os: linux
+      r:
+        - release
+        - devel
       addons:
         apt:
           sources:
