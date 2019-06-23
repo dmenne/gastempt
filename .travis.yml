@@ -1,19 +1,48 @@
 language: r
-sudo: required
+sudo: false
 cache: packages
-latex: false
+dist: trusty
 
-warnings_are_errors: false
+latex: true
+r_build_args: '--no-build-vignettes'
+r_check_args: '--ignore-vignettes'
+
+r_github_packages:
+  - jimhester/covr
 
 r:
- - release
- - devel
+  - release
+  - devel
+
+env:
+  global:
+    - MAKEFLAGS="-j 2"
+
+matrix:
+  include:
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-7
+      env:
+        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
 before_install:
-   - mkdir -p ~/.R
-   - echo "CXX14FLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined" >> ~/.R/Makevars
-   - echo "CXX14=g++ -std=c++1y -fPIC" >> ~/.R/Makevars
+  - mkdir -p ~/.R/
+  - echo "CXX14 = g++-7 -fPIC -flto=2" >> ~/.R/Makevars
+  - echo "CXX14FLAGS = -mtune=native -march=native -Wno-unused-variable -Wno-unused-function -Wno-unused-local-typedefs -Wno-ignored-attributes -Wno-deprecated-declarations -Wno-attributes -O3" >> ~/.R/Makevars
+
+script:
+  - |
+    travis_wait 42 R CMD build .
+    travis_wait 59 R CMD check rstanarm*tar.gz
 
 after_success:
-  - travis_wait 20 tar -C .. -xf $PKG_TARBALL
-  - travis_wait 40 Rscript -e 'covr::coveralls(line_exclusions= c("/src/include/models.hpp", "src/init.cpp", "R/zzz.R", "R/runshiny.R"))'
+  - travis_wait 40 tar -C .. -xf $PKG_TARBALL
+  - travis_wait 40 Rscript -e 'covr::codecov()'
+
+after_failure:
+  - cat rstanarm.Rcheck/00*
