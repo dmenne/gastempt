@@ -37,11 +37,11 @@ before_install:
 script:
   - |
     travis_wait 42 R CMD build .
-    travis_wait 59 R CMD check rstanarm*tar.gz
+    travis_wait 59 R CMD check gastempt*tar.gz
 
 after_success:
   - travis_wait 40 tar -C .. -xf $PKG_TARBALL
   - travis_wait 40 Rscript -e 'covr::codecov()'
 
 after_failure:
-  - cat rstanarm.Rcheck/00*
+  - cat gastempt.Rcheck/00*
