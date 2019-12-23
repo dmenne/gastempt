@@ -4,8 +4,15 @@
 \alias{stan_gastempt}
 \title{Fit gastric emptying curves with Stan}
 \usage{
-stan_gastempt(d, model_name = "linexp_gastro_2b", lkj = 2,
-  student_df = 5L, init_r = 0.2, chains = 4, ...)
+stan_gastempt(
+  d,
+  model_name = "linexp_gastro_2b",
+  lkj = 2,
+  student_df = 5L,
+  init_r = 0.2,
+  chains = 4,
+  ...
+)
 }
 \arguments{
 \item{d}{A data frame with columns

@@ -4,12 +4,23 @@
 \alias{simulate_gastempt}
 \title{Simulate gastric emptying data following a linexp or powexp function}
 \usage{
-simulate_gastempt(n_records = 10, v0_mean = 400, v0_std = 50,
+simulate_gastempt(
+  n_records = 10,
+  v0_mean = 400,
+  v0_std = 50,
   tempt_mean = ifelse(identical(model, linexp), 60, 120),
-  tempt_std = tempt_mean/3, kappa_mean = 0.7,
-  kappa_std = kappa_mean/3, beta_mean = 0.7, beta_std = beta_mean/3,
-  noise = 20, student_t_df = NULL, missing = 0, model = linexp,
-  seed = NULL, max_minute = NULL)
+  tempt_std = tempt_mean/3,
+  kappa_mean = 0.7,
+  kappa_std = kappa_mean/3,
+  beta_mean = 0.7,
+  beta_std = beta_mean/3,
+  noise = 20,
+  student_t_df = NULL,
+  missing = 0,
+  model = linexp,
+  seed = NULL,
+  max_minute = NULL
+)
 }
 \arguments{
 \item{n_records}{Number of records}

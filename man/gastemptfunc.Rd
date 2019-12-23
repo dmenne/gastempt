@@ -21,8 +21,7 @@ powexp(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL)
 
 powexp_slope(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL)
 
-linexp_log(t, v0 = 1, logtempt = NULL, logkappa = NULL,
-  pars = NULL)
+linexp_log(t, v0 = 1, logtempt = NULL, logkappa = NULL, pars = NULL)
 
 powexp_log(t, v0 = 1, logtempt = NULL, logbeta = NULL, pars = NULL)
 }
@@ -80,13 +79,13 @@ beta = 3
 pars = c(v0 = v0, tempt = tempt, kappa = kappa)
 par(mfrow=c(1,3))
 plot(t, linexp(t, v0, tempt, kappa), type = "l", ylab = "volume",
-   main = "linexp\\nkappa = 1.3 and 1.0")
+   main = "linexp\nkappa = 1.3 and 1.0")
 lines(t, linexp(t, v0, tempt, 1), type = "l", col = "green")
 # This should give the same plot as above
 plot(t, linexp(t, pars = pars), type = "l", ylab = "volume",
-   main = "linexp\\nkappa = 1.3 and 1.0\\nwith vectored parameters")
+   main = "linexp\nkappa = 1.3 and 1.0\nwith vectored parameters")
 lines(t, linexp(t, v0, tempt, 1), type = "l", col = "green")
 plot(t, powexp(t, v0, tempt, beta), type = "l", ylab = "volume",
-  main = "powexp\\nbeta = 2 and 1")
+  main = "powexp\nbeta = 2 and 1")
 lines(t, powexp(t, v0, tempt, 1), type = "l", col = "green")
 }
