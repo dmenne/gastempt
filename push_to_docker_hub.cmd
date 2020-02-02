@@ -1,2 +1,2 @@
-docker tag dmenne/:latest dmenne/:latest
-docker push dmenne/:latest
+docker tag dmenne/gastempt:latest dmenne/gastempt:latest
+docker push dmenne/gastempt:latest

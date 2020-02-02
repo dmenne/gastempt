@@ -15,4 +15,5 @@ vignettes/*.R
 *.bak
 check_rhub.cmd
 *.cc
-tests/testthat/*
+
+

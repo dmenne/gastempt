@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.4.4
+Version: 0.4.4.9000
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -14,15 +14,15 @@ NeedsCompilation: yes
 URL: http://github.com/dmenne/gastempt
 BugReports: http://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 3.4.0)
+    R (>= 3.6.0)
 Imports:
     nlme,
     Rcpp (>= 0.12.19),
     dplyr,
     tibble,
-    ggplot2 (>= 3.0.0),
-    rstan (>= 2.18.1),
-    rstantools (>= 1.5.1),
+    ggplot2 (>= 3.2.0),
+    rstan (>= 2.19.1),
+    rstantools (>= 2.0.0),
     assertthat,
     stringr,
     methods,
@@ -34,10 +34,10 @@ Suggests:
     testthat
 LinkingTo:
     StanHeaders (>= 2.18.0),
-    rstan (>= 2.18.1),
-    BH (>= 1.66.0-1),
-    Rcpp (>= 0.12.19),
-    RcppEigen (>= 0.3.3.4.0)
+    rstan (>= 2.19.0),
+    BH (>= 1.72.0-1),
+    Rcpp (>= 1.0.3),
+    RcppEigen (>= 0.3.3.7.0)
 RoxygenNote: 7.0.2
 VignetteBuilder: knitr
 Encoding: UTF-8
