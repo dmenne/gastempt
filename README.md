@@ -60,11 +60,29 @@ print(ret$coef)
 print(ret$plot)
 ```
 
-### Coming:
-
-* Post-hoc analysis in Shiny application by treatment groups, both for cross-over and fully randomized designs.
-
 ![Screenshot](tools/readme/screenshot.png)
+
+
+## Docker image
+
+The image cannot be compiled on the Docker hub because the build runs out of memory in the standard configuration.
+
+### Installing Docker 
+- For Windows 10, you can get the installer from the [Docker store](https://store.docker.com/editions/community/docker-ce-desktop-windows). For installation details, see [here](https://docs.docker.com/docker-for-windows/install/).  
+- Linux users know how to install Docker anyway. 
+- Docker should have at least 2 GB of memory; on Windows, use Settings from the Docker tray icon. If you want to build the Docker image, you need at least 4 GB and 2 cores; confusing error messages are being emitted when memory is low.
+
+### Installing `gastempt` 
+
+- From the command line, enter the following to start the container
+
+```
+docker run --name gastempt  --restart unless-stopped -p 3838:3838 -d dmenne/gastempt
+```
+- The first startup needs some time because 1 GB has to be downloaded. Subsequent startups require only a few seconds.
+- Connect to the app with your browser: [localhost:3838](`localhost:3838`). <- This link does not work when your read this from github or the Docker hub, only on your local installation.
+
+
 
 
 
