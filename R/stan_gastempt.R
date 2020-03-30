@@ -77,7 +77,7 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
   })
   cf = summary(fit)$summary[,1]
   if (is_linexp){
-    coef = data_frame(
+    coef = tibble(
       record = unique(d$record),
       v0 = cf[grep("v0\\[", names(cf))],
       kappa = cf[grep("^kappa", names(cf))],
@@ -87,7 +87,7 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
     attr(coef, "sigma_kappa") = cf["sigma_kappa"]
   } else {
     # Assume powexp
-    coef = data_frame(
+    coef = tibble(
       record = unique(d$record),
       v0 = cf[grep("v0\\[", names(cf))],
       beta = cf[grep("^beta", names(cf))],
@@ -117,7 +117,7 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
     rowwise() %>%
     do({
       vol = pred_func(minute, pars = . )
-      data_frame(record = .$record, minute = minute, vol = vol)
+      tibble(record = .$record, minute = minute, vol = vol)
     })
 
   plot = plot + geom_line(data = newdata, col = "#006400")  +

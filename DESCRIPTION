@@ -38,7 +38,7 @@ LinkingTo:
     BH (>= 1.72.0-1),
     Rcpp (>= 1.0.3),
     RcppEigen (>= 0.3.3.7.0)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.0
 VignetteBuilder: knitr
 Encoding: UTF-8
 SystemRequirements: GNU make

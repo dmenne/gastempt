@@ -93,7 +93,7 @@ simulate_gastempt = function(
   minute = c(seq(0,20, by = 5), seq(30, max_minute, by = 30))
 
   # Record
-  rec = data_frame(
+  rec = tibble(
     record = sprintf("rec_%02d", 1:n_records),
     v0 = round(rnorm(n_records, v0_mean, v0_std)),
     tempt = pmax(rnorm(n_records, tempt_mean, tempt_std), tempt_mean/3))
@@ -119,7 +119,7 @@ simulate_gastempt = function(
   data = rec %>%
     rowwise() %>%
     do(
-      data_frame(
+      tibble(
         record = .$record,
         minute = minute,
         vol = model(minute, .[[2]], .[[3]], .[[4]])
