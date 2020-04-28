@@ -45,11 +45,13 @@ run_precompiled_model = function(model, iter = 500){
 }
 
 test_that("Running precompiled models linexp _1x directly returns valid result", {
+  skip("Temporary test")
   iter = ifelse(identical(Sys.getenv("NOT_CRAN"), "true"), 500, 100)
   run_precompiled_model("linexp_gastro_1b", iter = iter)
 })
 
 test_that("Running precompiled models linexp _1x directly returns valid result (", {
+  skip("Temporary test")
   skip_on_travis()
   skip_on_cran()
   run_precompiled_model("linexp_gastro_1c")
@@ -57,6 +59,7 @@ test_that("Running precompiled models linexp _1x directly returns valid result (
 })
 
 test_that("Running precompiled linexp models _2x directly returns valid result", {
+  skip("Temporary test")
   skip_on_travis()
   skip_on_cran()
   run_precompiled_model("linexp_gastro_2b")
@@ -64,16 +67,19 @@ test_that("Running precompiled linexp models _2x directly returns valid result",
 })
 
 test_that("Running precompiled powexp models directly returns valid result", {
+  skip("Temporary test")
   run_precompiled_model("powexp_gastro_1b")
 })
 
 test_that("Running precompiled powexp models directly returns valid result", {
+  skip("Temporary test")
   skip_on_travis()
   skip_on_cran()
   run_precompiled_model("powexp_gastro_2c")
 })
 
 test_that("Running stan_gastempt fit with default parameters returns valid result", {
+  skip("Temporary test")
   skip_on_cran()
   d = simulate_gastempt(n_records = 6, seed = 471)
   v0_d = d$rec$v0
@@ -95,6 +101,7 @@ test_that("Running stan_gastempt fit with default parameters returns valid resul
 
 
 test_that("Running stan_gastempt with powexp returns valid result", {
+  skip("Temporary test")
   skip_on_cran()
   options(mc.cores = 1)
   d = simulate_gastempt(n_records = 6, seed = 471, model = powexp,
@@ -113,6 +120,7 @@ test_that("Running stan_gastempt with powexp returns valid result", {
 })
 
 test_that("Running stan_gastempt fit with non-default parameters returns valid result", {
+  skip("Temporary test")
   skip_on_travis()
   skip_on_cran()
   d = simulate_gastempt(n_records = 6, seed = 471)
@@ -125,6 +133,7 @@ test_that("Running stan_gastempt fit with non-default parameters returns valid r
 })
 
 test_that("Running stan_gastempt with many missing data returns valid result", {
+  skip("Temporary test")
   skip_on_cran()
   d = simulate_gastempt(n_records = 6, missing = 0.3, seed = 471)
   v0_d = d$rec$v0
@@ -140,9 +149,9 @@ test_that("Running stan_gastempt with many missing data returns valid result", {
 })
 
 test_that("Direct use of sample model returns valid results", {
-  skip("Slow. Only use on errors in other Stan functions.")
+#  skip("Slow. Only use on errors in other Stan functions.")
   data = gastempt_data()
-  stan_model = "../../exec/linexp_gastro_2b.stan"
+  stan_model = "../../src/stan_files/linexp_gastro_2b.stan"
   expect_true(file.exists(stan_model))
   rstan_options(auto_write = TRUE)
   iter = 500
@@ -153,11 +162,11 @@ test_that("Direct use of sample model returns valid results", {
   })
   expect_is(mr_b, "stanfit")
 
-  stan_model = "../../exec/linexp_gastro_1c.stan"
+  stan_model = "../../src/stan_files/linexp_gastro_1c.stan"
   mr_c = stan(stan_model, data = data, chains = 4, iter = iter,
               seed = 4711, refresh = FALSE)
 
-  stan_model = "../../exec/linexp_gastro_1d.stan"
+  stan_model = "../../src/stan_files/linexp_gastro_1d.stan"
   mr_d = stan(stan_model, data = data, chains = 4, iter = iter,
               seed = 4711, refresh = FALSE)
 

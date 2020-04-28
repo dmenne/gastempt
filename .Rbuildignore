@@ -14,5 +14,5 @@ check_rhub.cmd
 build_docker.cmd
 run_docker.cmd
 push_to_docker_hub.cmd
-shiny_server.sh
-shiny_server.conf
+shiny-server.sh
+shiny-server.conf
