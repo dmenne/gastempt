@@ -7,7 +7,7 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
   libv8-dev
 
 
-RUN install2.r --error --ncpus 2 --deps TRUE \
+RUN install2.r --error --ncpus 2 --deps TRUE --skipinstalled \
     DT \
     gtools \
     shinyjs \
@@ -17,10 +17,10 @@ RUN install2.r --error --ncpus 2 --deps TRUE \
     shinycssloaders
 
 RUN mkdir -p ~/.R
-RUN echo "CXX14FLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined -Wno-deprecated-declarations -Wno-ignored-attributes" >> ~/.R/Makevars
+RUN echo "CXX14FLAGS=-O3 -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined -Wno-deprecated-declarations -Wno-ignored-attributes" >> ~/.R/Makevars
 
 
-RUN install2.r --error --ncpus 2 --deps TRUE \
+RUN install2.r --error --ncpus 2 --deps TRUE --skipinstalled \
    rstan \
    bayesplot \
    rstantools
