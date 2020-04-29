@@ -2,13 +2,14 @@ language: r
 r:
   - devel
   - release
-sudo: FALSE
+sudo: false
+latex: false
 
 cache:
   - packages
   - ccache
 
-warnings_are_errors: FALSE
+warnings_are_errors: false
 
 r_build_args: '--no-build-vignettes'
 r_check_args: '--ignore-vignettes'
