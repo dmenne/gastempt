@@ -6,6 +6,7 @@
 #' kappa, logkappa` depending on model. Function used `logbeta` when it is present,
 #' in `x`, otherwise beta, and similar for logkappa/kappa.
 #' @return Half-emptying time. Name of evaluated function is returned as attribute \code{fun}. Negative of slope is returned as attribute \code{slope}.
+#' @importFrom stats setNames
 #' @export
 t50 = function(x) {
   UseMethod("t50", x)
@@ -58,9 +59,10 @@ t50.data.frame = function(x){
   assert_that(all(c("record","tempt","v0") %in% names(x)))
   x$t50 = 0
   x$slope_t50 = 0
-  x$auc = NA
+  x$auc = NA_real_
   for (i in 1:nrow(x)) {
-    tt =  t50(unlist(x[i,-1]))
+    # Very ugly construct to restore old data frame drop behavior
+    tt =  t50(setNames(unlist(x[1,-1]), names(x[-1])))
     x[i,"t50"] = as.numeric(tt)
     x[i,"slope_t50"] = attr(tt,"slope")
     x[i,"auc"] = attr(tt,"auc")
