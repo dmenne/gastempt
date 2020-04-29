@@ -151,7 +151,7 @@ test_that("Running stan_gastempt with many missing data returns valid result", {
 test_that("Direct use of sample model returns valid results", {
 #  skip("Slow. Only use on errors in other Stan functions.")
   data = gastempt_data()
-  stan_model = "../../src/stan_files/linexp_gastro_2b.stan"
+  stan_model = "../../inst/stan/linexp_gastro_2b.stan"
   expect_true(file.exists(stan_model))
   rstan_options(auto_write = TRUE)
   iter = 500
@@ -162,11 +162,13 @@ test_that("Direct use of sample model returns valid results", {
   })
   expect_is(mr_b, "stanfit")
 
-  stan_model = "../../src/stan_files/linexp_gastro_1c.stan"
+  stan_model = "../../inst/stan/linexp_gastro_1c.stan"
+  expect_true(file.exists(stan_model))
   mr_c = stan(stan_model, data = data, chains = 4, iter = iter,
               seed = 4711, refresh = FALSE)
 
-  stan_model = "../../src/stan_files/linexp_gastro_1d.stan"
+  stan_model = "../../inst/stan/linexp_gastro_1d.stan"
+  expect_true(file.exists(stan_model))
   mr_d = stan(stan_model, data = data, chains = 4, iter = iter,
               seed = 4711, refresh = FALSE)
 
