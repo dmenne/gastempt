@@ -2,49 +2,28 @@ FROM rocker/shiny-verse:latest
 
 LABEL maintainer="dieter.menne@menne-biomed.de"
 
-RUN apt-get update -qq && apt-get -y --no-install-recommends install \
- libxml2-dev \
- libsqlite-dev \
- libmariadbd-dev \
- libmariadb-client-lgpl-dev \
- libpq-dev \
- libssh2-1-dev \
- libssl-dev  \
- curl \
- libv8-3.14 # for V8
 
-RUN install2.r --error --ncpus 2 \
-    devtools \
-    PKI \
-    caTools \
+RUN apt-get update -qq && apt-get -y --no-install-recommends install \
+  libv8-dev
+
+
+RUN install2.r --error --ncpus 2 --deps TRUE \
     DT \
-    dygraphs \
     gtools \
     shinyjs \
     shinythemes \
     shinyBS \
     shinyAce \
-    shinycssloaders \
-    colourpicker \
-    xts \
-    rsconnect \
-    V8 \
-    BH
+    shinycssloaders
 
-RUN install2.r --error --ncpus 2 \
-   Rcpp \
-   RcppEigen
+RUN mkdir -p ~/.R
+RUN echo "CXX14FLAGS=-O3 -mtune=native -march=native -Wno-unused-variable -Wno-unused-function  -Wno-macro-redefined -Wno-deprecated-declarations -Wno-ignored-attributes" >> ~/.R/Makevars
 
-RUN install2.r --error --ncpus 2 \
+
+RUN install2.r --error --ncpus 2 --deps TRUE \
    rstan \
    bayesplot \
    rstantools
-
-# For gitlab
-RUN install2.r --error --ncpus 2 \
-    ggfittext\
-    signal \
-    multcomp
 
 RUN Rscript -e "devtools::install_github('dmenne/gastempt')" \
   && rm -rf /tmp/downloaded_packages/ /tmp/*.rds \
