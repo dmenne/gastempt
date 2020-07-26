@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.5.0
+Version: 0.5.0.9000
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -30,7 +30,8 @@ Suggests:
     rmarkdown,
     knitr,
     covr,
-    testthat
+    testthat,
+    vdiffr
 LinkingTo:
     StanHeaders (>= 2.18.0),
     rstan (>= 2.19.0),

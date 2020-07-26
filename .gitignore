@@ -16,4 +16,4 @@ vignettes/*.R
 check_rhub.cmd
 *.cc
 renv/
-
+tests/figs/
