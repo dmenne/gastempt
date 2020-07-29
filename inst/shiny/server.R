@@ -15,6 +15,7 @@ shinyServer(function(input, output, session) {
     tc = textConnection(data)
     d = na.omit(read.table(tc, sep = "\t", header = TRUE))
     close(tc)
+    d$record = as.factor(d$record)
     validate(
       need(input$method_a == "stan" || nrow(d) > 20,
            "At least 20 data values required. Try Bayesian method instead"),
