@@ -18,9 +18,8 @@ Depends:
 Imports:
     nlme,
     Rcpp (>= 1.0.3),
-    methods,
     dplyr,
-    tibble (>=3.0.0),
+    tibble (>= 3.0.0),
     ggplot2 (>= 3.3.0),
     rstan (>= 2.21.0),
     assertthat,
