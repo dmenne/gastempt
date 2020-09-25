@@ -7,8 +7,10 @@ http://www.menne-biomed.de
 dieter.menne@menne-biomed.de   
 
 
-
+<!-- badges: start -->
+[![R build status](https://github.com/dmenne/gastempt/workflows/R-CMD-check/badge.svg)](https://github.com/dmenne/gastempt/actions)
 [![](https://travis-ci.com/dmenne/gastempt.svg?branch=master)](https://travis-ci.com/dmenne/gastempt) [![](https://coveralls.io/repos/github/dmenne/gastempt/badge.svg?branch=master)](https://coveralls.io/github/dmenne/gastempt?branch=master) [![](https://cranlogs.r-pkg.org/badges/grand-total/gastempt)](https://cran.r-project.org/package=gastempt) [![](https://www.r-pkg.org/badges/last-release/gastempt)](https://CRAN.R-project.org/package=gastempt)
+<!-- badges: end -->
 
 
 A package and a [Shiny](https://shiny.rstudio.com/) web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package `nlme`. In addition,Bayesian fits with [Stan](http://mc-stan.org/) to handle critical cases are implemented.

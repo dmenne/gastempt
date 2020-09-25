@@ -18,3 +18,4 @@ run_docker.cmd
 push_to_docker_hub.cmd
 shiny-server.sh
 shiny-server.conf
+^\.github$
