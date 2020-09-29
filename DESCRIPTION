@@ -41,6 +41,5 @@ LinkingTo:
     RcppEigen (>= 0.3.3.7.0)
 RoxygenNote: 7.1.1
 Encoding: UTF-8
-VignetteBuilder: knitr
 SystemRequirements: GNU make
 Biarch: true
