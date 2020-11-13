@@ -28,8 +28,7 @@ of available models.}
 
 \item{lkj}{LKJ prior for kappa/tempt correlation, only required
 for model linexp_gastro_2b. Values from 1.5 (strong correlation) to 50
-(almost independent) are useful. See
-\url{http://www.psychstatistics.com/2014/12/27/d-lkj-priors/} for examples.}
+(almost independent) are useful.}
 
 \item{student_df}{Student-t degrees of freedom for residual error;
 default 5. Use 3 for strong outliers; values above 10 are close to gaussian
