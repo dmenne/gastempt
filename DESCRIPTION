@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.5.1
+Version: 0.5.2
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -23,7 +23,6 @@ Imports:
     tibble (>= 3.0.0),
     ggplot2 (>= 3.3.0),
     rstan (>= 2.21.0),
-    rstantools (>= 2.1.1),
     assertthat,
     stringr,
     shiny

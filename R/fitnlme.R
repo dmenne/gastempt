@@ -49,13 +49,13 @@
 #'
 #' @export
 #' @import assertthat
+#' @import ggplot2
+#' @import dplyr
 #' @importFrom nlme nlme nlmeControl pdDiag
 #' @importFrom 	stats coef median na.omit predict rnorm	rt uniroot
 #' @importFrom utils head	tail
 #' @importFrom methods new
 #' @importFrom tibble rownames_to_column
-#' @import ggplot2
-#' @import dplyr
 #'
 #' @examples
 #' suppressWarnings(RNGversion("3.5.0"))
