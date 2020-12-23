@@ -21,6 +21,7 @@ addons:
       - libgdal-dev
       - libproj-dev
       - libv8-dev
+      - libgit2-dev
 
 before_install:
   - mkdir -p ~/.R
