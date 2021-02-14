@@ -3,7 +3,7 @@ gastempt: Fitting gastric emptying curves
 
 Dieter Menne  
 Menne Biomed Consulting Tübingen, Germany  
-http://www.menne-biomed.de  
+https://www.menne-biomed.de  
 dieter.menne@menne-biomed.de   
 
 
@@ -13,7 +13,7 @@ dieter.menne@menne-biomed.de
 <!-- badges: end -->
 
 
-A package and a [Shiny](https://shiny.rstudio.com/) web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package `nlme`. In addition,Bayesian fits with [Stan](http://mc-stan.org/) to handle critical cases are implemented.
+A package and a [Shiny](https://shiny.rstudio.com/) web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package `nlme`. In addition,Bayesian fits with [Stan](https://mc-stan.org/) to handle critical cases are implemented.
 
 Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; thanks to Werner Schwizer and Andreas Steingötter for their contributions.
 
@@ -39,7 +39,7 @@ Two __models__ are implemented in the web interface
 ### Methods with variants
 
 * Population fits based on function `nlme` in package R `nlme`.
-* [Stan-based fits](http://menne-biomed.de/blog/tag:Stan), both [without](https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_1b.stan) and [with](https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_2b.stan) covariance estimation. Thanks to priors, fitting with Bayesian methods also works for single records, even if stability strongly improves with more data sets available; see  [stan_gastempt](https://dmenne.github.io/gastempt/reference/stan_gastempt.html). Some details can be found in [my blog](https://menne-biomed.de/blog/ballot-and-bazaar). The rationale for using Stan to fit non-linear curves is discussed [here](http://menne-biomed.de/blog/breath-test-stan) for <sup>13</sup>C breath test data, but is equally valid for gastric emptying data. 
+* [Stan-based fits](https://menne-biomed.de/blog/tag:Stan), both [without](https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_1b.stan) and [with](https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_2b.stan) covariance estimation. Thanks to priors, fitting with Bayesian methods also works for single records, even if stability strongly improves with more data sets available; see  [stan_gastempt](https://dmenne.github.io/gastempt/reference/stan_gastempt.html). Some details can be found in [my blog](https://menne-biomed.de/blog/ballot-and-bazaar). The rationale for using Stan to fit non-linear curves is discussed [here](https://menne-biomed.de/blog/breath-test-stan) for <sup>13</sup>C breath test data, but is equally valid for gastric emptying data. 
 
 ### Data entry:
 * Data can be entered directly from the clipboard copied from Excel, or can be simulated using a Shiny app.

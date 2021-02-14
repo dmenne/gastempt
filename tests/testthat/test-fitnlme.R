@@ -10,7 +10,7 @@ if (FALSE) {
 }
 
 test_that("nlme_gastempt returns a valid structure", {
-  skip_on_cran() # Works on debian etc, but fails on some exotic ones
+  skip_on_cran()
   d = simulate_gastempt(seed = 4711)$data
   fit = nlme_gastempt(d)
   expect_is(fit, "nlme_gastempt")
@@ -22,6 +22,8 @@ test_that("nlme_gastempt returns a valid structure", {
 })
 
 test_that("nlme_gastempt can handle noisy and missing data", {
+  # https://www.stats.ox.ac.uk/pub/bdr/M1mac/gastempt.out
+  skip_on_cran()
   d = simulate_gastempt(kappa_mean = 1, noise = 40, student_t_df = 3,
                         seed = 11)$data
   fit = nlme_gastempt(d)

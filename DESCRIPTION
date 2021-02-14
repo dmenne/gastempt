@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.5.2
+Version: 0.5.3
 Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
@@ -11,8 +11,8 @@ Description: Fits gastric emptying time series from MRI or scintigraphic measure
 License: GPL (>=3)
 LazyData: TRUE
 NeedsCompilation: yes
-URL: http://github.com/dmenne/gastempt
-BugReports: http://github.com/dmenne/gastempt/issues
+URL: https://github.com/dmenne/gastempt
+BugReports: https://github.com/dmenne/gastempt/issues
 Depends:
     R (>= 4.0.0)
 Imports:
