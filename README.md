@@ -13,7 +13,7 @@ dieter.menne@menne-biomed.de
 <!-- badges: end -->
 
 
-A package and a [Shiny](https://shiny.rstudio.com/) web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package `nlme`. In addition,Bayesian fits with [Stan](https://mc-stan.org/) to handle critical cases are implemented.
+A package and a [Shiny](https://shiny.rstudio.com/) web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package `nlme`. In addition, Bayesian fits with [Stan](https://mc-stan.org/) to handle critical cases are implemented.
 
 Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; thanks to Werner Schwizer and Andreas Steingötter for their contributions.
 
@@ -70,7 +70,7 @@ print(ret$plot)
 The image cannot be compiled on the Docker hub because the build runs out of memory in the standard configuration.
 
 ### Installing Docker 
-- For Windows 10, you can get the installer from the [Docker store](https://store.docker.com/editions/community/docker-ce-desktop-windows). For installation details, see [here](https://docs.docker.com/docker-for-windows/install/).  
+- For Windows 10, you can get the installer from the [Docker store](https://hub.docker.com/editions/community/docker-ce-desktop-windows). For installation details, see [here](https://docs.docker.com/docker-for-windows/install/).  
 - Linux users know how to install Docker anyway. 
 - Docker should have at least 2 GB of memory; on Windows, use Settings from the Docker tray icon. If you want to build the Docker image, you need at least 4 GB and 2 cores; confusing error messages are being emitted when memory is low.
 
