@@ -37,8 +37,7 @@ LinkingTo:
     rstan (>= 2.21.0),
     BH (>= 1.72.0-1),
     Rcpp (>= 1.0.3),
-    RcppEigen (>= 0.3.3.7.0),
-    vctrs
+    RcppEigen (>= 0.3.3.7.0)
 VignetteBuilder: 
     knitr
 RoxygenNote: 7.1.1
