@@ -13,8 +13,8 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ubuntu-18.04
-    run: |
-      echo "R_VERSION=4.04" >> $GITHUB_ENV
+    env:
+      R_VERSION: 4.04
     steps:
       - uses: actions/checkout@v2
         with:
@@ -29,8 +29,8 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-{{env.R_VERSION}}-${{ hashFiles('depends.Rds') }}
-          restore-keys: ${{ runner.os }}-r-{{env.R_VERSION}}-
+          key: ${{ runner.os }}-r-${{env.R_VERSION}}-${{ hashFiles('depends.Rds') }}
+          restore-keys: ${{ runner.os }}-r-${{env.R_VERSION}}-
       - name: Install dependencies
         run: |
           install.packages(c("remotes", "rcmdcheck", "curl"))
