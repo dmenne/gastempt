@@ -13,8 +13,8 @@ name: R-CMD-check
 jobs:
   R-CMD-check:
     runs-on: ubuntu-18.04
-    env:
-      R_VERSION: 4.04
+    run: |
+      echo "R_VERSION=4.04" >> $GITHUB_ENV
     steps:
       - uses: actions/checkout@v2
         with:
