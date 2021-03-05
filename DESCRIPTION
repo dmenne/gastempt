@@ -44,4 +44,5 @@ VignetteBuilder:
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 SystemRequirements: GNU make
+Biarch: FALSE
 
