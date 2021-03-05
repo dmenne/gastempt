@@ -51,6 +51,7 @@
 #' @import assertthat
 #' @import ggplot2
 #' @import dplyr
+#' @import utf8
 #' @importFrom nlme nlme nlmeControl pdDiag
 #' @importFrom 	stats coef median na.omit predict rnorm	rt uniroot
 #' @importFrom utils head	tail

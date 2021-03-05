@@ -4,8 +4,8 @@ Authors@R: c(
       person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
     )
 Type: Package
-Title: Analyzing Gastric Emptying from MRI or Scintigraphy
-Description: Fits gastric emptying time series from MRI or scintigraphic measurements
+Title: Analyzing Gastric Emptying from MRI or 'Scintigraphy'
+Description: Fits gastric emptying time series from MRI or 'scintigraphic' measurements
    using nonlinear mixed-model population fits with 'nlme' and Bayesian methods with 
    Stan; computes derived parameters such as t50 and AUC.
 License: GPL (>=3)
@@ -25,7 +25,8 @@ Imports:
     rstan (>= 2.21.0),
     assertthat,
     stringr,
-    shiny
+    shiny,
+    utf8
 Suggests:
     rmarkdown,
     knitr,
@@ -38,9 +39,11 @@ LinkingTo:
     rstan (>= 2.21.0),
     BH (>= 1.72.0-1),
     Rcpp (>= 1.0.3),
-    RcppEigen (>= 0.3.3.7.0)
+    RcppEigen (>= 0.3.3.7.0),
+    RcppParallel (>= 5.0.1)
 VignetteBuilder: 
     knitr
 RoxygenNote: 7.1.1
 Encoding: UTF-8
-
+Biarch: FALSE
+SystemRequirements: GNU make
