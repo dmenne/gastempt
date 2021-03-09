@@ -20,3 +20,4 @@ shiny-server.sh
 shiny-server.conf
 ^\.github$
 ^cran-comments\.md$
+check_rhub.log

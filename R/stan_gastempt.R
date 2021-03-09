@@ -42,11 +42,13 @@
 #'  }
 #' @useDynLib gastempt, .registration = TRUE
 #' @examples
+#' \donttest{
+#'  # Runs 30+ seconds on CRAN
 #'  dd = simulate_gastempt(n_records = 6, seed = 471)
 #'  d = dd$data
-#'  # iter is low for testing on CRAN
-#'  ret = stan_gastempt(d, chains = 2, iter = 200)
+#'  ret = stan_gastempt(d)
 #'  print(ret$coef)
+#'  }
 #' @import rstan
 #' @importFrom utils capture.output
 #' @export

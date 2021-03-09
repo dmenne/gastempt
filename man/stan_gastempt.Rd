@@ -10,7 +10,8 @@ stan_gastempt(
   lkj = 2,
   student_df = 5L,
   init_r = 0.2,
-  chains = 4,
+  chains = 1,
+  iter = 2000,
   ...
 )
 }
@@ -37,9 +38,12 @@ residual distribution.}
 \item{init_r}{for stan, default = 0.2; Stan's own default is 2, which
 often results in stuck chains.}
 
-\item{chains}{for stan; default = 4. For debugging, use 1.}
+\item{chains}{for stan; default = 1}
 
-\item{...}{Additional parameter passed to \code{sampling}}
+\item{iter}{A positive integer specifying the number of iterations for
+each chain (including warmup). The default is 2000.}
+
+\item{...}{Additional parameter passed to \code{sampling} and \code{stan}}
 }
 \value{
 A list of class stan_gastempt with elements \code{coef, fit, plot}
@@ -54,7 +58,7 @@ A list of class stan_gastempt with elements \code{coef, fit, plot}
       \item \code{beta} Parameter \code{beta} for \code{model = powexp}
       \item \code{t50} Half-time of emptying
       \item \code{slope_t50} Slope in t50; typically in units of ml/minute
- On error, coef is NULL
+ On error, \code{coef} is NULL
    }
   \item \code{fit} Result of class `stanfit`
   \item \code{plot} A ggplot graph of data and prediction. Plot of raw data is
@@ -66,10 +70,10 @@ Fit gastric emptying curves with Stan
 }
 \examples{
 \donttest{
-  # This example needs about 40 seconds to run
-  dd = simulate_gastempt(n_records = 6, seed = 471)
-  d = dd$data
-  ret = stan_gastempt(d, )
-  print(ret$coef)
-}
+ # Runs 30+ seconds on CRAN
+ dd = simulate_gastempt(n_records = 6, seed = 471)
+ d = dd$data
+ ret = stan_gastempt(d)
+ print(ret$coef)
+ }
 }

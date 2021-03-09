@@ -17,3 +17,5 @@ check_rhub.cmd
 *.cc
 renv/
 tests/figs/
+check_rhub.log
+

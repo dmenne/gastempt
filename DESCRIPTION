@@ -42,7 +42,7 @@ LinkingTo:
     RcppParallel (>= 5.0.1)
 VignetteBuilder: 
     knitr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.1.9001
 Encoding: UTF-8
 Biarch: FALSE
 SystemRequirements: GNU make
