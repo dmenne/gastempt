@@ -1,8 +1,7 @@
 Package: gastempt
 Version: 0.5.4
-Authors@R: c(
-      person("Dieter", "Menne", ,"dieter.menne@menne-biomed.de", c("aut","cre"))
-    )
+Authors@R: c(person("Dieter", "Menne", 
+  email = "dieter.menne@menne-biomed.de", role = c("aut","cre")))
 Type: Package
 Title: Analyzing Gastric Emptying from MRI or 'Scintigraphy'
 Description: Fits gastric emptying time series from MRI or 'scintigraphic' measurements

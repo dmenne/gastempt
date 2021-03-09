@@ -29,7 +29,7 @@ test_that("nlme_gastempt can handle noisy and missing data", {
   expect_equal(fit$message, "Ok")
   # many missing
   # fails on aarch64, but skip_on_cran or skip_on_os("mac") does not help
-  skip( "Fails on aarch64" )
+  skip( "Skipped because it fails on aarch64" )
   d = simulate_gastempt(kappa_mean = 1, noise = 30, missing = 0.40,
                         student_t_df = 5, seed = 12)$data
   fit = nlme_gastempt(d)
