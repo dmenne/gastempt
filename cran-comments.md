@@ -10,7 +10,7 @@
 
 -   `par` reset to default in fitfuncs.R
 
--   Renamed `fitfuncs.r`to \`fitfuncs.R\`
+-   Renamed `fitfuncs.r`to `fitfuncs.R`
 
 -   Explicitly named fields `email` and `role` in DESCRIPTION. I do not understand what is meant with "e.g.: Trustees of Columbia University" in the CRAN review. I am the sole package author/contributor.
 
