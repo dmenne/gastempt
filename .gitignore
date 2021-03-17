@@ -20,5 +20,4 @@ tests/figs/
 check_rhub.log
 *.gcno
 *.def
-
-
+.Renviron

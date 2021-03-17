@@ -22,3 +22,4 @@ shiny-server.conf
 ^cran-comments\.md$
 check_rhub.log
 .lintr
+.Renviron
