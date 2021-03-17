@@ -10,7 +10,6 @@ dieter.menne@menne-biomed.de
 <!-- badges: start -->
 [![R build status](https://github.com/dmenne/gastempt/workflows/R-CMD-check/badge.svg)](https://github.com/dmenne/gastempt/actions)
  [![](https://cranlogs.r-pkg.org/badges/grand-total/gastempt)](https://cran.r-project.org/package=gastempt) [![](https://www.r-pkg.org/badges/last-release/gastempt)](https://CRAN.R-project.org/package=gastempt)
-[![Coveralls test coverage](https://coveralls.io/repos/github/dmenne/gastempt/badge.svg)](https://coveralls.io/r/dmenne/gastempt?branch=master)
 <!-- badges: end -->
 
 
