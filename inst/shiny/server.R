@@ -5,12 +5,12 @@ library(shinyBS)
 
 shinyServer(function(input, output, session) {
 
-  getData = reactive({
+  get_data = reactive({
     # Read and pre-process editor data
     data = input$data
     # Replace multiple spaces or tabs by single tab
-    data = str_replace_all(data,"([\t ]+)","\t")
-    data = str_replace_all(data,",",".")
+    data = str_replace_all(data, "([\t ]+)", "\t")
+    data = str_replace_all(data, ",", ".")
     if (nchar(data) < 10) return(NULL)
     tc = textConnection(data)
     d = na.omit(read.table(tc, sep = "\t", header = TRUE))
@@ -23,7 +23,7 @@ shinyServer(function(input, output, session) {
            "At least 3 records required. Try Bayesian method instead.")
     )
     comment = paste(unlist(str_extract_all(data, "^#.*\\n")), collapse = "\n")
-    comment = str_replace_all(comment,"\\t", " ")
+    comment = str_replace_all(comment, "\\t", " ")
     comment(d) = comment
     d
   })
@@ -31,12 +31,12 @@ shinyServer(function(input, output, session) {
 
   pc = reactive({
     # Compute fit
-    d = getData();
+    d = get_data();
     if (is.null(d)) return(NULL)
     if (input$method_a == "nlme") {
       model = eval(parse(text = input$fit_model))
       variant = input$variant
-      ng = nlme_gastempt(d, model = model, variant = variant )
+      ng = nlme_gastempt(d, model = model, variant = variant)
       comment(ng) = comment(d)
     } else {
       model_name = stan_models[input$cov_model, input$fit_model]
@@ -47,7 +47,7 @@ shinyServer(function(input, output, session) {
     ng
   })
 
-  popit = function(session, show, id, title, placement = "right" ){
+  popit = function(session, show, id, title, placement = "right") {
     if (show) {
       content = pop_content[id]
       if (is.na(pop_content[id]))
@@ -89,10 +89,10 @@ shinyServer(function(input, output, session) {
     preset  = input$preset
     if (is.null(preset)) return(NULL)
     ss = presets %>% filter(id == preset)
-    num_presets = ss[,numcols]
-    lapply(seq_along(num_presets), function(i){
+    num_presets = ss[, numcols]
+    lapply(seq_along(num_presets), function(i) {
       name = names(num_presets)[i]
-      updateNumericInput(session, name, value = num_presets[[name]] )
+      updateNumericInput(session, name, value = num_presets[[name]])
     })
     updateSelectInput(session, "model_s", selected =  ss$model_s)
   })
@@ -101,7 +101,7 @@ shinyServer(function(input, output, session) {
     # Clear ace editor
     if (input$clearButton == 0)
       return(NULL)
-    updateAceEditor(session, "data",value = 1)
+    updateAceEditor(session, "data", value = 1)
   })
 
   observe({
@@ -125,12 +125,12 @@ shinyServer(function(input, output, session) {
       tempt_std, kappa_mean, kappa_std, beta_mean, beta_std, noise,
       student_t_df, missing, model, seed = input$seed)
     # Copy simulated data to editor
-    tc = textConnection("dt","w")
-    comment = str_replace_all(comment(d$data),"\\n", " ")
+    tc = textConnection("dt", "w")
+    comment = str_replace_all(comment(d$data), "\\n", " ")
     writeLines(paste0("# ", comment), con = tc)
     suppressWarnings(write.table(d$data, file = tc, append = TRUE,
                 row.names = FALSE, sep = "\t", quote = FALSE))
-    updateAceEditor(session, "data", value = paste(dt, collapse = "\n") )
+    updateAceEditor(session, "data", value = paste(dt, collapse = "\n"))
     close(tc)
   })
 
@@ -180,7 +180,7 @@ shinyServer(function(input, output, session) {
 
   output$download_coef = downloadHandler(
     filename = function() {
-      paste('gastempt_', Sys.Date(), '.csv', sep='')
+      paste("gastempt_", Sys.Date(), ".csv", sep="")
     },
     content = function(con) {
       p = pc()
@@ -190,8 +190,8 @@ shinyServer(function(input, output, session) {
       }
       cf = coef(p, signif = 3)
       comment = comment(p)
-      if (!is.null(comment) || comment != ""){
-        comment = str_replace_all(comment,"\\n", " ")
+      if (!is.null(comment) || comment != "") {
+        comment = str_replace_all(comment, "\\n", " ")
         print(str(comment))
         writeLines(paste0("# ", comment), con = con)
 

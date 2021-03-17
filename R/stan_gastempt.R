@@ -53,12 +53,11 @@
 #' @importFrom utils capture.output
 #' @export
 stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
-                         student_df = 5L, init_r = 0.2, chains = 1, iter = 2000, ...){
-  assert_that(all(c("record", "minute","vol") %in% names(d)))
+                         student_df = 5L, init_r = 0.2,
+                         chains = 1, iter = 2000, ...) {
+  assert_that(all(c("record", "minute", "vol") %in% names(d)))
   . = NULL # keep notes quiet
   is_linexp = grepl("linexp", model_name)
-#  rstan_options(auto_write = TRUE)
-#  options(mc.cores = parallel::detectCores())
   # Integer index of records
   d$record_i =  as.integer(as.factor(d$record))
 
@@ -73,12 +72,11 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
     volume = d$vol)
   mod = stanmodels[[model_name]]
   capture.output({
-    #fit = suppressWarnings(sampling(mod, data = data))
     fit = suppressWarnings(sampling(mod, data = data, init_r = init_r,
                                     chains = chains, iter = iter, ...))
   })
-  cf = summary(fit)$summary[,1]
-  if (is_linexp){
+  cf = summary(fit)$summary[, 1]
+  if (is_linexp) {
     coef = tibble(
       record = unique(d$record),
       v0 = cf[grep("v0\\[", names(cf))],
@@ -107,7 +105,7 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
     facet_wrap(~ record) +
     expand_limits(x = 0, y = 0) # force zeroes to be visible
   minute = seq(min(d$minute), max(d$minute), length.out = 51)
-  if (is_linexp){
+  if (is_linexp) {
     title = paste0("Stan fitted linexp function, model ", model_name)
     pred_func = linexp
   } else {
@@ -118,8 +116,8 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
   newdata  = coef %>%
     rowwise() %>%
     do({
-      vol = pred_func(minute, pars = . )
-      tibble(record = .$record, minute = minute, vol = vol)
+      vol = pred_func(minute, pars = .)
+      tibble(record = .$record, minute=minute, vol=vol)
     })
 
   plot = plot + geom_line(data = newdata, col = "#006400")  +
@@ -138,12 +136,12 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
 #'
 #' @return a data frame with coefficients. See \code{\link{nlme_gastempt}} for an example.
 #' @export
-coef.stan_gastempt = function(object, ...){
-  Call = match.call(expand.dots = TRUE)
-  sigdig = as.integer(Call[["signif"]])
+coef.stan_gastempt = function(object, ...) {
+  call = match.call(expand.dots = TRUE)
+  sigdig = as.integer(call[["signif"]])
   cf = object$coef
-  if (!is.null(Call[["signif"]])) {
-    cf[,-1] = lapply(cf[,-1], signif, sigdig)
+  if (!is.null(call[["signif"]])) {
+    cf[, -1] = lapply(cf[, -1], signif, sigdig)
   }
   cf
 }
@@ -157,18 +155,6 @@ coef.stan_gastempt = function(object, ...){
 #' non-interactively to show the curve
 #' @method plot stan_gastempt
 #' @export
-plot.stan_gastempt = function(x, ...){
+plot.stan_gastempt = function(x, ...) {
   x$plot
-}
-
-if (FALSE) {
-  library(gastempt)
-  library(rstan)
-  library(dplyr)
-  library(assertthat)
-  dd = simulate_gastempt(n_records = 6, seed = 471)
-  d = dd$data
-  ret = stan_gastempt(d)
-  coef = ret$coef
-  plot(ret$plot)
 }

@@ -15,7 +15,13 @@ nlme_gastempt(d, pnlsTol = 0.001, model = linexp, variant = 1)
  }}
 
 \item{pnlsTol}{The value of pnlsTol at the initial iteration.
-See \code{\link[nlme]{nlmeControl}}  When the model does not converge, \code{pnlsTol} is multiplied by 5 and the iteration repeated until convergence or \code{pnlsTol >= 0.5}. The effective value of  \code{pnlsTol} is returned in a separate list item. When it is known that a data set converges badly, it is recommended to set the initial \code{pnlsTol} to a higher value, but below 0.5, for faster convergence.}
+See \code{\link[nlme]{nlmeControl}}  When the model does not converge,
+\code{pnlsTol} is multiplied by 5 and the iteration repeated until
+convergence or \code{pnlsTol >= 0.5}.
+The effective value of  \code{pnlsTol} is returned in a separate list item.
+When it is known that a data set converges badly,
+it is recommended to set the initial \code{pnlsTol} to a higher value,
+but below 0.5, for faster convergence.}
 
 \item{model}{\code{linexp} (default) or \code{powexp}}
 
@@ -25,8 +31,18 @@ See \code{\link[nlme]{nlmeControl}}  When the model does not converge, \code{pnl
   of all three parameters per record
   (\code{random = v0 + tempt + kappa ~ 1 | record}). The most likely to fail
   for degenerate cases. If this variant converges, use it.
-  \item \code{variant = 2 } Diagonal random effects (\code{random = pdDiag(v0 + tempt + kappa) ~ 1; groups =  ~record }). Better convergence in critical cases. Note:  I never found out why I have to use the \code{groups} parameter instead of the \code{|}; see also p. 380 of Pinheiro/Bates.
-  \item \code{variant = 3} Since parameters \code{kappa} and \code{beta} respectively are the most difficult to estimate, these are fixed in this variant (\code{random = v0 + tempt ~ 1}). This variant converges in all reasonable cases, but the estimates of \code{kappa} and \code{beta} cannot be use for secondary between-group analysis. If you are only interested in \code{t50}, you can use this safe version.
+  \item \code{variant = 2 } Diagonal random effects
+  (\code{random = pdDiag(v0 + tempt + kappa) ~ 1; groups =  ~record }).
+  Better convergence in critical cases. Note:  I never found out why I have
+  to use the \code{groups} parameter instead of the \code{|};
+  see also p. 380 of Pinheiro/Bates.
+  \item \code{variant = 3} Since parameters \code{kappa} and
+  \code{beta} respectively are the most difficult to estimate, these are
+  fixed in this variant (\code{random = v0 + tempt ~ 1}).
+  This variant converges in all reasonable cases, but the estimates
+  of \code{kappa} and \code{beta} cannot be use for secondary
+  between-group analysis. If you are only interested in \code{t50},
+  you can use this safe version.
   }}
 }
 \value{

@@ -4,9 +4,9 @@
 #' @export
 #'
 run_shiny = function() {
-  appDir = system.file("shiny", package = "gastempt")
-  if (appDir == "") {
+  app_dir = system.file("shiny", package = "gastempt")
+  if (app_dir == "") {
     stop("Could not Shiny app in gastempt", call. = FALSE)
   }
-  shiny::runApp(appDir, display.mode = "normal")
+  shiny::runApp(app_dir, display.mode = "normal")
 }

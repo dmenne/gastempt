@@ -12,6 +12,8 @@ presets = na.omit(
   )
 numcols = which(sapply(presets, is.numeric))
 
+
+# nolint start
 pop_content = c(
   model_a = "<code>linexp</code>, <b>vol = v0 * (1 + kappa * t / tempt) * exp(-t / tempt):</b><br>Recommended for gastric emptying curves with an initial volume overshoot from secretion. With parameter kappa &gt; 1, there is a maximum after t=0. When all emptying curves start with a steep drop, this model can be difficult to fit.<hr><code>powexp</code>, <b>vol = v0 * exp(-(t / tempt) ^ beta):</b><br>The power exponential function introduced by Elashof et. al. to fit scintigraphic emptying data; this type of data does not have an initial overshoot by design. Compared to the linexp model, fitting powexp is more reliable and rarely fails to converge in the presence of noise and outliers. The power exponential can be useful with MRI data when there is an unusual late phase in emptying.",
 
@@ -41,11 +43,13 @@ lkj = 'LKJ prior for kappa/tempt correlation, only required for model with covar
 student_df = "Student-t degrees of freedom for residual error; default 5. Use 3 when there are heavy outliers in the data set; values above 10 are adequate for almost gaussian residuals."
 )
 
+# nolint end
+
 stan_models = ####################### add powexp_gastro_1d ++++
   matrix(c("linexp_gastro_1b", "linexp_gastro_2b",
            "powexp_gastro_1b", "powexp_gastro_2c"),
          nrow = 2, dimnames = list(c("nocov", "withcov"), c("linexp", "powexp")))
 
-preset_description = function(id){
+preset_description = function(id) {
   as.character(presets[presets$id == id, "description"])
 }

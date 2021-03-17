@@ -67,7 +67,7 @@ linexp = function(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL) {
 
 #' @rdname gastemptfunc
 #' @export
-linexp_slope = function(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL){
+linexp_slope = function(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL) {
   use_pars = is.null(tempt) ||  is.null(kappa)
   if (use_pars == is.null(pars))
     stop("Either (tempt, kappa) or pars must be given in linexp_slope")
@@ -82,7 +82,7 @@ linexp_slope = function(t, v0 = 1, tempt = NULL, kappa = NULL, pars = NULL){
 
 #' @rdname gastemptfunc
 #' @export
-linexp_auc = function(v0 = 1, tempt = NULL, kappa = NULL, pars = NULL){
+linexp_auc = function(v0 = 1, tempt = NULL, kappa = NULL, pars = NULL) {
   use_pars = is.null(tempt) &&  is.null(kappa)
   if (use_pars == is.null(pars))
     stop("Either (tempt, kappa) or pars must be given in linexp_auc")
@@ -99,7 +99,7 @@ linexp_auc = function(v0 = 1, tempt = NULL, kappa = NULL, pars = NULL){
 
 #' @rdname gastemptfunc
 #' @export
-powexp =  function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
+powexp =  function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL) {
   use_pars = is.null(tempt) &&  is.null(beta)
   if (use_pars == is.null(pars))
     stop("Either (tempt, beta) or pars must be given in powexp")
@@ -115,7 +115,7 @@ powexp =  function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
 
 #' @rdname gastemptfunc
 #' @export
-powexp_slope = function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
+powexp_slope = function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL) {
   use_pars = is.null(tempt) &&  is.null(beta)
   if (use_pars == is.null(pars))
     stop("Either (tempt, beta) or pars must be given in powexp_slope")
@@ -132,7 +132,7 @@ powexp_slope = function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL){
 
 #' @rdname gastemptfunc
 #' @export
-linexp_log = function(t, v0 = 1, logtempt = NULL, logkappa = NULL, pars = NULL){
+linexp_log = function(t, v0 = 1, logtempt = NULL, logkappa = NULL, pars = NULL) {
   use_pars = is.null(logtempt) &&  is.null(logkappa)
   if (use_pars == is.null(pars))
     stop("Either (v0, logtempt, logkappa) or pars must be given in linexp_log")
@@ -149,7 +149,7 @@ linexp_log = function(t, v0 = 1, logtempt = NULL, logkappa = NULL, pars = NULL){
 
 #' @rdname gastemptfunc
 #' @export
-powexp_log = function(t, v0 = 1, logtempt = NULL, logbeta = NULL, pars = NULL){
+powexp_log = function(t, v0 = 1, logtempt = NULL, logbeta = NULL, pars = NULL) {
   use_pars =  is.null(logtempt) &&  is.null(logbeta)
   if (use_pars == is.null(pars))
     stop("Either (v0, tempt, beta) or pars must be given in powexp_log")
@@ -163,4 +163,3 @@ powexp_log = function(t, v0 = 1, logtempt = NULL, logbeta = NULL, pars = NULL){
   }
   as.numeric(v0 * exp(-(t / tempt) ^ beta))
 }
-

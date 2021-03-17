@@ -18,4 +18,7 @@ check_rhub.cmd
 renv/
 tests/figs/
 check_rhub.log
+*.gcno
+*.def
+
 

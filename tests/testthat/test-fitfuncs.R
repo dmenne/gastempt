@@ -1,7 +1,7 @@
 context("Test fit functions")
 tolerance = 5.e-5
 
-test_that("Linexp Functions can be called with par or explicit parameters",{
+test_that("Linexp Functions can be called with par or explicit parameters", {
   v0 = 400
   tempt = 60
   kappa = 2
@@ -54,7 +54,7 @@ test_that("Linexp Functions can be called with par or explicit parameters",{
                           pars = pars), "Either")
 })
 
-test_that("Powexp Functions can be called with pars or explicit parameters",{
+test_that("Powexp Functions can be called with pars or explicit parameters", {
   v0 = 400
   tempt = 60
   beta = 2
@@ -99,7 +99,7 @@ test_that("Powexp Functions can be called with pars or explicit parameters",{
 })
 
 
-test_that("Functions at t=0 must return initial volume",{
+test_that("Functions at t=0 must return initial volume", {
   v0 = 400
   tempt = 60
   kappa = 2
@@ -133,7 +133,7 @@ test_that("Functions at t=0 must return initial volume",{
 
 })
 
-test_that("Limiting cases of slopes are correct",{
+test_that("Limiting cases of slopes are correct", {
   tempt = 60
   kappa = 1
   # linexp
@@ -155,5 +155,3 @@ test_that("Limiting cases of slopes are correct",{
   expect_equal(r, -1, tolerance = tolerance)
 
 })
-
-

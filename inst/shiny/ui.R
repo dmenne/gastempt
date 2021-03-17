@@ -44,7 +44,7 @@ shinyUI(
         hr(),
         h3("Simulated data"),
         h4("Preset"),
-        selectInput("preset",NULL,
+        selectInput("preset", NULL,
                     choices = setNames(presets$id, presets$label)),
         conditionalPanel(
           condition = "input.manual",
@@ -53,27 +53,27 @@ shinyUI(
             numericInput("n_records", "# records", 12, 5, 30, 5, width = "80px"),
             numericInput("seed", "Seed", 33, width = "80px")
           )),
-          selectInput("model_s","Data generated as ", choices =
+          selectInput("model_s", "Data generated as ", choices =
                         c("linexp (with overshoot)" = "linexp",
                           "powexp (without overshoot)" = "powexp")),
           fluidRow(splitLayout(
             h5(HTML("<br><br>v0")),
             numericInput("v0_mean", "Mean", 400,  50, 800, 50),
             numericInput("v0_std_perc", "Std (%)", 20, 5, 30, 5),
-            cellWidths = c("25%","30%","30%"))),
+            cellWidths = c("25%", "30%", "30%"))),
           fluidRow(splitLayout(
             h5("tempt"),
-            numericInput("tempt_mean", NULL, 60, 20 , 200, 5),
+            numericInput("tempt_mean", NULL, 60, 20, 200, 5),
             numericInput("tempt_std_perc", NULL, 25, 5, 30, 5),
-            cellWidths = c("25%","30%","30%"))),
+            cellWidths = c("25%", "30%", "30%"))),
           fluidRow(splitLayout(
             h5(HTML("beta/<br>kappa")),
             numericInput("kappa_beta_mean", NULL, 1, 0.1, 4, 0.1),
             numericInput("kappa_beta_std_perc", NULL, 10, 5, 30, 5),
-            cellWidths = c("25%","30%","30%"))),
+            cellWidths = c("25%", "30%", "30%"))),
 
-          div(class = 'withSeparator',
-            selectInput("student_t_df","Noise type/outliers",
+          div(class = "withSeparator",
+            selectInput("student_t_df", "Noise type/outliers",
                         choices = c("Gauss" = 0,
                                     "weak (Student-7)" = 7,
                                     "some (Student-5)" = 5,
@@ -89,13 +89,13 @@ shinyUI(
         checkboxInput("show_pop", "Show popover help", value = TRUE),
         # The following should not be moved to the server, because one
         # popover must remain on the page to load dependencies
-        bsPopover("show_pop",  "Enable/disable all popups","","right"),
+        bsPopover("show_pop",  "Enable/disable all popups", "", "right"),
         width = 3),
       mainPanel(
         tabsetPanel(
           tabPanel("Data",
             aceEditor("data", "", mode = "plain_text"),
-            actionButton("clearButton","Clear", icon = icon("eraser")),
+            actionButton("clearButton", "Clear", icon = icon("eraser")),
             tags$script(type = "text/javascript",
               HTML("ace.edit('data').setOptions({tabSize:12,showInvisibles:true,useSoftTabs:false});")),
             div(id = "plot-container",
@@ -116,4 +116,3 @@ shinyUI(
     ) # sidebarLayout
   ) # fluidPanel
 ) # shinyUI
-

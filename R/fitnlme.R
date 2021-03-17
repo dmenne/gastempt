@@ -9,7 +9,13 @@
 #'   \item \code{vol} Volume of meal or stomach
 #'  }
 #' @param pnlsTol The value of pnlsTol at the initial iteration.
-#' See \code{\link[nlme]{nlmeControl}}  When the model does not converge, \code{pnlsTol} is multiplied by 5 and the iteration repeated until convergence or \code{pnlsTol >= 0.5}. The effective value of  \code{pnlsTol} is returned in a separate list item. When it is known that a data set converges badly, it is recommended to set the initial \code{pnlsTol} to a higher value, but below 0.5, for faster convergence.
+#' See \code{\link[nlme]{nlmeControl}}  When the model does not converge,
+#' \code{pnlsTol} is multiplied by 5 and the iteration repeated until
+#' convergence or \code{pnlsTol >= 0.5}.
+#' The effective value of  \code{pnlsTol} is returned in a separate list item.
+#' When it is known that a data set converges badly,
+#' it is recommended to set the initial \code{pnlsTol} to a higher value,
+#' but below 0.5, for faster convergence.
 #'
 #' @param model \code{linexp} (default) or \code{powexp}
 #' @param variant For both models, there are 3 variants
@@ -18,8 +24,18 @@
 #'   of all three parameters per record
 #'   (\code{random = v0 + tempt + kappa ~ 1 | record}). The most likely to fail
 #'   for degenerate cases. If this variant converges, use it.
-#'   \item \code{variant = 2 } Diagonal random effects (\code{random = pdDiag(v0 + tempt + kappa) ~ 1; groups =  ~record }). Better convergence in critical cases. Note:  I never found out why I have to use the \code{groups} parameter instead of the \code{|}; see also p. 380 of Pinheiro/Bates.
-#'   \item \code{variant = 3} Since parameters \code{kappa} and \code{beta} respectively are the most difficult to estimate, these are fixed in this variant (\code{random = v0 + tempt ~ 1}). This variant converges in all reasonable cases, but the estimates of \code{kappa} and \code{beta} cannot be use for secondary between-group analysis. If you are only interested in \code{t50}, you can use this safe version.
+#'   \item \code{variant = 2 } Diagonal random effects
+#'   (\code{random = pdDiag(v0 + tempt + kappa) ~ 1; groups =  ~record }).
+#'   Better convergence in critical cases. Note:  I never found out why I have
+#'   to use the \code{groups} parameter instead of the \code{|};
+#'   see also p. 380 of Pinheiro/Bates.
+#'   \item \code{variant = 3} Since parameters \code{kappa} and
+#'   \code{beta} respectively are the most difficult to estimate, these are
+#'   fixed in this variant (\code{random = v0 + tempt ~ 1}).
+#'   This variant converges in all reasonable cases, but the estimates
+#'   of \code{kappa} and \code{beta} cannot be use for secondary
+#'   between-group analysis. If you are only interested in \code{t50},
+#'   you can use this safe version.
 #'   }
 #'
 #' @return A list of class nlme_gastempt with elements
@@ -73,22 +89,22 @@
 #'# fit_d$plot  # direct access is possible
 #' plot(fit_d) # better use accessor function
 
-nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1){
-  assert_that(all(c("record", "minute","vol") %in% names(d)))
+nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1) {
+  assert_that(all(c("record", "minute", "vol") %in% names(d)))
   # Only linexp and powexp are supported
   assert_that(identical(model, linexp) || identical(model, powexp))
   variant = as.integer(variant)
   # alternative models
   linexp_models = c(nlme_linexp_1, nlme_linexp_2, nlme_linexp_3)
   powexp_models = c(nlme_powexp_1, nlme_powexp_2, nlme_powexp_3)
-  assert_that(variant > 0 && variant <= length(linexp_models) )
+  assert_that(variant > 0 && variant <= length(linexp_models))
 
   minute = vol = 0 # Keep NOTEs off
   # Make sure that records are factors
   d$record = as.factor(d$record)
   if (nlevels(d$record) < 3)
     stop(paste("At least 3 records are required, but there were only",
-                nlevels(d$record) ))
+                nlevels(d$record)))
   # Estimated initial values
   v0 = median(tail(sort(d$vol)))
   # raw data plot
@@ -111,7 +127,6 @@ nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1){
   while (!success && pnlsTol < 0.5) {
     d_nlme = nlme_func(d, start, pnlsTol)
     success = !inherits(d_nlme, "try-error")
-    #if (!success) print(d_nlme)
     if (!success) pnlsTol = pnlsTol * 5
   }
 
@@ -125,12 +140,12 @@ nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1){
     start_r = lapply(start$fixed, signif, 3)
     # TODO: Enable subtitle when version of ggplot > 2.1.0
     subtitle = paste0("Start values are shown in red: ",
-           paste0(names(start$fixed), " = ", start_r , collapse = ","))
+           paste0(names(start$fixed), " = ", start_r, collapse = ","))
     plot = plot + geom_line(data = newdata, col = "red") +
-      ggtitle(paste("No convergence:", title, ", pnlsTol = ", pnlsTol ),
+      ggtitle(paste("No convergence:", title, ", pnlsTol = ", pnlsTol),
               subtitle = subtitle)
     ret = list(coef = NULL, summary = NULL, pnlsTol = pnlsTol, plot = plot,
-               message = paste("pnlsTol = ", signif(pnlsTol, 2),"\n",
+               message = paste("pnlsTol = ", signif(pnlsTol, 2), "\n",
                                as.character(d_nlme)))
     class(ret) = "nlme_gastempt"
     return(ret)
@@ -151,7 +166,7 @@ nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1){
 }
 
 # Core functions - only random part varies
-nlme_linexp_c = function(d, start, pnlsTol, random ){
+nlme_linexp_c = function(d, start, pnlsTol, random) {
     suppressWarnings(try(
       nlme(vol~linexp(minute, v0, tempt, kappa),
            data = d,
@@ -167,7 +182,7 @@ nlme_linexp_c = function(d, start, pnlsTol, random ){
       silent = TRUE))
 }
 
-nlme_powexp_c = function(d, start, pnlsTol, random){
+nlme_powexp_c = function(d, start, pnlsTol, random) {
   suppressWarnings(try(
     nlme(vol~powexp(minute, v0, tempt, beta),
          data = d,
@@ -181,29 +196,29 @@ nlme_powexp_c = function(d, start, pnlsTol, random){
 }
 
 
-nlme_linexp_1 = function(d, start, pnlsTol){
+nlme_linexp_1 = function(d, start, pnlsTol) {
   nlme_linexp_c(d, start, pnlsTol, v0 + tempt + kappa ~ 1)
 }
 
-nlme_powexp_1 = function(d, start, pnlsTol){
+nlme_powexp_1 = function(d, start, pnlsTol) {
   nlme_powexp_c(d, start, pnlsTol, v0 + tempt + beta ~ 1)
 }
 
 # Version with pdDiag
-nlme_linexp_2 = function(d, start, pnlsTol){
+nlme_linexp_2 = function(d, start, pnlsTol) {
   nlme_linexp_c(d, start, pnlsTol, pdDiag(v0 + tempt + kappa ~ 1))
 }
 
-nlme_powexp_2 = function(d, start, pnlsTol){
+nlme_powexp_2 = function(d, start, pnlsTol) {
   nlme_powexp_c(d, start, pnlsTol, pdDiag(v0 + tempt + beta ~ 1))
 }
 
 # Version with fixed kappa and beta
-nlme_linexp_3 = function(d, start, pnlsTol){
+nlme_linexp_3 = function(d, start, pnlsTol) {
   nlme_linexp_c(d, start, pnlsTol, pdDiag(v0 + tempt ~ 1))
 }
 
-nlme_powexp_3 = function(d, start, pnlsTol){
+nlme_powexp_3 = function(d, start, pnlsTol) {
   nlme_powexp_c(d, start, pnlsTol, pdDiag(v0 + tempt ~ 1))
 }
 
@@ -215,12 +230,12 @@ nlme_powexp_3 = function(d, start, pnlsTol){
 #'
 #' @return a data frame with coefficients. See \code{\link{nlme_gastempt}} for an example.
 #' @export
-coef.nlme_gastempt = function(object, ...){
-  Call = match.call(expand.dots = TRUE)
-  sigdig = as.integer(Call[["signif"]])
+coef.nlme_gastempt = function(object, ...) {
+  call = match.call(expand.dots = TRUE)
+  sigdig = as.integer(call[["signif"]])
   cf = object$coef
-  if (!is.null(Call[["signif"]])) {
-    cf[,-1] = lapply(cf[,-1], signif, sigdig)
+  if (!is.null(call[["signif"]])) {
+    cf[, -1] = lapply(cf[, -1], signif, sigdig)
   }
   cf
 }
@@ -233,6 +248,6 @@ coef.nlme_gastempt = function(object, ...){
 #' @return a ggplot object. Use \code{print()} if used non-interactively to show the curve
 #' @method plot nlme_gastempt
 #' @export
-plot.nlme_gastempt = function(x, ...){
+plot.nlme_gastempt = function(x, ...) {
   x$plot
 }

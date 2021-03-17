@@ -15,10 +15,10 @@ test_that("nlme_gastempt returns a valid structure", {
   fit = nlme_gastempt(d)
   expect_is(fit, "nlme_gastempt")
   expect_equal(fit$message, "Ok")
-  expect_equal(names(fit), c("coef", "nlme_result", "plot", "pnlsTol","message"))
+  expect_equal(names(fit), c("coef", "nlme_result", "plot", "pnlsTol", "message"))
   expect_is(plot(fit), "ggplot")
   expect_is(coef(fit), "data.frame")
-  expect_equal(as.numeric(coef(fit, signif = 1)[1,2]) , 500)
+  expect_equal(as.numeric(coef(fit, signif = 1)[1, 2]), 500)
 })
 
 test_that("nlme_gastempt can handle noisy and missing data", {
@@ -29,7 +29,7 @@ test_that("nlme_gastempt can handle noisy and missing data", {
   expect_equal(fit$message, "Ok")
   # many missing
   # fails on aarch64, but skip_on_cran or skip_on_os("mac") does not help
-  skip( "Skipped because it fails on aarch64" )
+  skip("Skipped because it fails on aarch64")
   d = simulate_gastempt(kappa_mean = 1, noise = 30, missing = 0.40,
                         student_t_df = 5, seed = 12)$data
   fit = nlme_gastempt(d)
@@ -54,21 +54,19 @@ test_that("nlme_gastempt with special data fails", {
 })
 
 
-search_pnlsTol = function(model = linexp, nlme_model = linexp,
-                          variant = 1){
+search_pnls_tol = function(model = linexp, nlme_model = linexp,
+                          variant = 1) {
   # Only used manually to find interesting start values for test design
   suppressWarnings(RNGversion("3.5.0"))
   set.seed(4711)
   while (TRUE) {
-    r = sample.int(10000,1)
+    r = sample.int(10000, 1)
     d = simulate_gastempt(model = model, seed = r)$data
     fit = nlme_gastempt(d, model = nlme_model, variant = variant)
-    cat(r, " ",fit$pnlsTol, fit$nl$numIter, "\n")
+    cat(r, " ", fit$pnlsTol, fit$nl$numIter, "\n")
   }
 }
 
-#search_pnlsTol()
-#search_pnlsTol(model = powexp, nlme_model = linexp)
 
 test_that("fit of powexp data to powexp curve gives valid coefficients", {
   d = simulate_gastempt(model = powexp, seed = 4711)$data
@@ -77,7 +75,7 @@ test_that("fit of powexp data to powexp curve gives valid coefficients", {
   expect_equal(fit$pnlsTol, 0.001)
   expect_is(fit, "nlme_gastempt")
   expect_equal(fit$message, "Ok")
-  expect_equal(names(fit), c("coef", "nlme_result", "plot", "pnlsTol","message"))
+  expect_equal(names(fit), c("coef", "nlme_result", "plot", "pnlsTol", "message"))
   expect_is(plot(fit), "ggplot")
   expect_is(coef(fit), "data.frame")
   fit = nlme_gastempt(d, model = powexp, variant = 2)
@@ -107,5 +105,3 @@ test_that("fit of powexp data with beta=2 to linexp curve converges", {
   expect_equal(fit$message, "Ok")
   fit = nlme_gastempt(d, model = linexp)
 })
-
-

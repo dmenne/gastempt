@@ -3,11 +3,22 @@
 #' @param n_records Number of records
 #' @param v0_mean,v0_std Mean and between record standard deviation of initial volume, typically in ml.
 #' @param tempt_mean,tempt_std Mean and between record standard deviation of parameter $t_{empt}$, typically in minutes.
-#' @param kappa_mean,kappa_std For linexp only: Mean and between-record standard deviation of overshoot parameter \code{kappa}. For values of \code{kappa} above 1, curve has an overshoot that can be used to follow volume time series with secretion.
-#' @param beta_mean,beta_std For powexp only: Mean and between-record standard deviation of the so called lag parameter.
-#' @param noise Standard deviation of normal noise when \code{student_t_df = NULL}; scaling of noise when student_t_df >= 2.
-#' @param student_t_df When NULL (default), Gaussian noise is added; when >= 2, Student_t distributed noise is added, which generates more realistic outliers. Values from 2 to 5 are useful, when higher values are used the result comes close to that of Gaussian noise. Values below 2 are rounded to 2.
-#' @param missing When 0 (default), all curves have the same number of data points. When > 0, this is the fraction of points that were removed randomly to simulate missing points. Maximum value is 0.5.
+#' @param kappa_mean,kappa_std For linexp only: Mean and between-record
+#' standard deviation of overshoot parameter \code{kappa}.
+#' For values of \code{kappa} above 1, curve has an overshoot that can
+#' be used to follow volume time series with secretion.
+#' @param beta_mean,beta_std For powexp only: Mean and between-record
+#' standard deviation of the so called lag parameter.
+#' @param noise Standard deviation of normal noise when
+#' \code{student_t_df = NULL}; scaling of noise when student_t_df >= 2.
+#' @param student_t_df When NULL (default), Gaussian noise is added;
+#' when >= 2, Student_t distributed noise is added, which generates more
+#' realistic outliers. Values from 2 to 5 are useful, when higher values
+#' are used the result comes close to that of Gaussian noise. Values
+#' below 2 are rounded to 2.
+#' @param missing When 0 (default), all curves have the same number of data
+#' points. When > 0, this is the fraction of points that were removed randomly
+#' to simulate missing points. Maximum value is 0.5.
 #' @param model linexp(default) or powexp
 #' @param seed optional seed; not set if seed = NULL (default)
 #' @param max_minute Maximal time in minutes; if NULL, a sensible
@@ -90,7 +101,7 @@ simulate_gastempt = function(
     # Round to hours
     max_minute = ((max_minute %/% 60) + 1) * 60
   }
-  minute = c(seq(0,20, by = 5), seq(30, max_minute, by = 30))
+  minute = c(seq(0, 20, by = 5), seq(30, max_minute, by = 30))
 
   # Record
   rec = tibble(
@@ -104,7 +115,7 @@ simulate_gastempt = function(
   }
 
   # Noise term
-  if (is.null(student_t_df) || student_t_df == 0 ) {
+  if (is.null(student_t_df) || student_t_df == 0) {
     if (noise == 0)
       warning("With noise == 0, non-linear fits might fail.")
     noise_d = rnorm(nrow(rec)*length(minute), 0, noise)
@@ -131,10 +142,10 @@ simulate_gastempt = function(
     )
   # Remove missing
   if (missing != 0) {
-    missing1 = min(max(abs(missing), 0),0.5)
+    missing1 = min(max(abs(missing), 0), 0.5)
     if (missing1 != missing)
       warning("Fraction of missing was set to ", missing1)
-    data = data[-sample.int(nrow(data), nrow(data)*missing1),]
+    data = data[-sample.int(nrow(data), nrow(data)*missing1), ]
   }
 
   # Add descriptor as comment
@@ -142,7 +153,7 @@ simulate_gastempt = function(
               sprintf("kappa = %.2f\U00B1%.2f", kappa_mean,  kappa_std),
               sprintf("beta = %.2f\U00B1%.2f", beta_mean,  beta_std))
   sf = ifelse(is.null(student_t_df) || student_t_df == 0, "Gaussian",
-              paste0("Student-t ", student_t_df," df"))
+              paste0("Student-t ", student_t_df, " df"))
   comment = sprintf("%.0f records, %s, v0 = %.0f\U00B1%.0f, tempt =  %.0f\U00B1%.0f, %s,\n%s noise amplitude = %.0f, %.0f%% missing",
           n_records, model_name, v0_mean, v0_std, tempt_mean, tempt_std, kb,
           sf, noise, 100*missing)

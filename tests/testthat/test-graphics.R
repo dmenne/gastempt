@@ -11,4 +11,3 @@ test_that("nlme_gastempt graphics creates a plot", {
   p = plot(fit)
   vdiffr::expect_doppelganger("nlme gastempt", p)
 })
-
