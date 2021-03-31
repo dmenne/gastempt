@@ -1,5 +1,3 @@
-context("Test simulation of data")
-
 library(testthat)
 library(assertthat)
 suppressWarnings(RNGversion("3.5.0"))

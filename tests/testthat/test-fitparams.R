@@ -1,5 +1,3 @@
-context("Test parameter extraction function")
-
 tolerance = 1.e-5
 suppressWarnings(RNGversion("3.5.0"))
 

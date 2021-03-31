@@ -1,5 +1,3 @@
-context("Test basic Stan models")
-
 # only for debugging
 if (FALSE) {
   library(rstan)

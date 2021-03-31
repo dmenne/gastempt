@@ -1,5 +1,3 @@
-context("Test nlme fit to gastric emptying data")
-
 # only for debugging
 if (FALSE) {
   library(testthat)

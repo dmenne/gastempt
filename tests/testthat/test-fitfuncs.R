@@ -1,4 +1,3 @@
-context("Test fit functions")
 tolerance = 5.e-5
 
 test_that("Linexp Functions can be called with par or explicit parameters", {
