@@ -87,5 +87,6 @@ jobs:
 
 
       - name: Test coverage
+        if: runner.os != 'Windows'
         run: covr::codecov()
         shell: Rscript {0}
