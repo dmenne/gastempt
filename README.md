@@ -18,7 +18,7 @@ A package and a [Shiny](https://shiny.rstudio.com/) web application to create si
 Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; thanks to Werner Schwizer and Andreas Steingötter for their contributions.
 
 ### Download
-The package is available from [CRAN](https://CRAN.R-project.org/package=gastempt) and github ([source](https://github.com/dmenne/gastempt), [documentation](https://dmenne.github.io/gastempt/)). To install, use:
+The package is available from [CRAN](https://CRAN.R-project.org/package=gastempt) and github ([source](https://github.com/dmenne/gastempt), [documentation](https://github.com/dmenne/gastempt/)). To install, use:
 
 ```
 devtools::install_github("dmenne/gastempt")
@@ -39,14 +39,14 @@ Two __models__ are implemented in the web interface
 ### Methods with variants
 
 * Population fits based on function `nlme` in package R `nlme`.
-* [Stan-based fits](https://menne-biomed.de/blog/tag:Stan), both [without](https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_1b.stan) and [with](https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_2b.stan) covariance estimation. Thanks to priors, fitting with Bayesian methods also works for single records, even if stability strongly improves with more data sets available; see  [stan_gastempt](https://dmenne.github.io/gastempt/reference/stan_gastempt.html). Some details can be found in [my blog](https://menne-biomed.de/blog/ballot-and-bazaar). The rationale for using Stan to fit non-linear curves is discussed [here](https://menne-biomed.de/blog/breath-test-stan) for <sup>13</sup>C breath test data, but is equally valid for gastric emptying data. 
+* [Stan-based fits](https://menne-biomed.de/blog/tag:Stan), both [without](https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_1b.stan) and [with](https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_2b.stan) covariance estimation. Thanks to priors, fitting with Bayesian methods also works for single records, even if stability strongly improves with more data sets available; see  [stan_gastempt](https://github.com/dmenne/gastempt/reference/stan_gastempt.html). Some details can be found in [my blog](https://menne-biomed.de/blog/ballot-and-bazaar). The rationale for using Stan to fit non-linear curves is discussed [here](https://menne-biomed.de/blog/breath-test-stan) for <sup>13</sup>C breath test data, but is equally valid for gastric emptying data. 
 
 ### Data entry:
 * Data can be entered directly from the clipboard copied from Excel, or can be simulated using a Shiny app.
 * Several preset simulations are provided in the Shiny app, with different amounts of noise and outliers 
 * Robustness of models can be tested by manipulating noise quality and between-subject variance. 
 * Fits are displayed with data.
-* The coefficients of the analysis including t50 and the slope in t50 can be downloaded in .csv format.
+* The coefficients of the analysis including half-emptying time _t50_ and the slope at time _t50_ can be downloaded in .csv format.
 
 
 ### Example 

@@ -24,3 +24,5 @@ check_rhub.log
 .lintr
 .Renviron
 .covrignore
+^_pkgdown\.yml$
+^pkgdown$
