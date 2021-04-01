@@ -88,5 +88,5 @@ jobs:
 
       - name: Test coverage
         if: runner.os != 'Windows'
-        run: covr::codecov()
+        run: covr::codecov(line_exclusions = list("*.h"))
         shell: Rscript {0}
