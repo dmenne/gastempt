@@ -1,2 +1,3 @@
 ignore:
   - "**/*.h"
+  - R/runshiny.R
