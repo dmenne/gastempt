@@ -1,7 +1,5 @@
 test_that("nlme_gastempt graphics creates a plot", {
   skip_on_cran()
-  # Check if this can be removed in next version of R
-  skip_if(Sys.getenv("TRAVIS_R_VERSION_STRING") == "devel")
   d = simulate_gastempt(seed = 4711)$data
   fit = nlme_gastempt(d)
   expect_is(fit, "nlme_gastempt")

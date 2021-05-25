@@ -15,6 +15,6 @@ LaTeX: XeLaTeX
 StripTrailingWhitespace: Yes
 
 BuildType: Package
-PackageInstallArgs: --with-keep.source --no-manual
-PackageCheckArgs: --run-donttest --as-cran  --no-manual --run-donttest
+PackageInstallArgs: --with-keep.source
+PackageCheckArgs: --run-donttest --as-cran --run-donttest
 PackageRoxygenize: rd,collate,namespace
