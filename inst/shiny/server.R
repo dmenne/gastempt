@@ -1,7 +1,7 @@
 # Libraries are included to keep intellisense quiet
 library(shinyjs)
 library(shinyAce)
-library(shinyBS)
+#library(shinyBS)
 
 shinyServer(function(input, output, session) {
 

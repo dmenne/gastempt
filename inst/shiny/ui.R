@@ -1,7 +1,7 @@
 # Libraries are included to keep intellisense quiet
 suppressPackageStartupMessages(library(shinyjs))
 library(shinyAce)
-library(shinyBS)
+#library(shinyBS)
 
 shinyUI(
   fluidPage(
