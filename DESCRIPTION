@@ -13,7 +13,7 @@ NeedsCompilation: yes
 URL: https://github.com/dmenne/gastempt
 BugReports: https://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 4.0.0)
+    R (>= 4.1.0)
 Imports:
     nlme,
     Rcpp (>= 1.0.3),
@@ -42,7 +42,7 @@ LinkingTo:
     RcppParallel (>= 5.0.1)
 VignetteBuilder: 
     knitr
-RoxygenNote: 7.1.1.9001
+RoxygenNote: 7.1.2
 Encoding: UTF-8
 Biarch: FALSE
 SystemRequirements: GNU make

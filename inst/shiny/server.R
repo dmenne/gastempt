@@ -51,9 +51,10 @@ shinyServer(function(input, output, session) {
       content = pop_content[id]
       if (is.na(pop_content[id]))
         content = ""
-      addPopover(session, id, title, content, placement)
+      tippyThis(id, content, .is_tag = FALSE)
+      tippy_enable(id, .is_tag = FALSE)
     } else {
-      removePopover(session, id)
+      tippy_hide(id, .is_tag = FALSE)
     }
   }
 
@@ -135,9 +136,9 @@ shinyServer(function(input, output, session) {
 
   observe({
     # Update preset popover TODO: does not work reliably
-    removePopover(session, "preset")
-    addPopover(session, "preset",  "Simulated Sample Data",
-               preset_description(input$preset), "right")
+#    removePopover(session, "preset")
+#    addPopover(session, "preset",  "Simulated Sample Data",
+#               preset_description(input$preset), "right")
 
   })
 
@@ -147,7 +148,7 @@ shinyServer(function(input, output, session) {
     # Todo: residuals for Bayes
     if (class(p) == "nlme_gastempt") {
       aic = AIC(p$nlme_result)
-      max_resid = max(abs(summary(p$nlme)$residuals))+0.2
+      max_resid = max(abs(summary(p$nlme)$residuals)) + 0.2
       plot(p$nlme_result, pch = 16, id = 0.05,
            main = paste("Standardized residuals of fit; AIC =", round(aic)),
            ylim = c(-max_resid, max_resid),
@@ -179,7 +180,7 @@ shinyServer(function(input, output, session) {
 
   output$download_coef = downloadHandler(
     filename = function() {
-      paste("gastempt_", Sys.Date(), ".csv", sep="")
+      paste("gastempt_", Sys.Date(), ".csv", sep = "")
     },
     content = function(con) {
       p = pc()

@@ -1,6 +1,7 @@
 library(stringr)
 library(ggplot2)
 library(gastempt)
+library(tippy)
 suppressPackageStartupMessages(library(dplyr))
 library(readxl)
 github_repo = "https://github.com/dmenne/gastempt/blob/master/exec/"

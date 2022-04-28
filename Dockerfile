@@ -21,6 +21,7 @@ RUN install2.r --error --ncpus 2 --deps TRUE --skipinstalled \
     xml2 \
   	V8 \
     httr \
+    readxl \
     remotes
 
 
@@ -38,7 +39,7 @@ RUN Rscript -e "remotes::install_github('dmenne/gastempt')" \
   && rm -rf /var/lib/apt/lists/*
 
 RUN install2.r --error --ncpus 2 --deps TRUE --skipinstalled \
-  readxl
+  tippy
 
 EXPOSE 3838
 HEALTHCHECK --interval=60s  --start-period=20s CMD curl --fail http://localhost:3838 || exit 1

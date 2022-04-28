@@ -88,7 +88,7 @@ shinyUI(
         checkboxInput("show_pop", "Show popover help", value = TRUE),
         # The following should not be moved to the server, because one
         # popover must remain on the page to load dependencies
-#        bsPopover("show_pop",  "Enable/disable all popups", "", "right"),
+        #bsPopover("show_pop",  "Enable/disable all popups", "", "right"),
         width = 3),
       mainPanel(
         tabsetPanel(
