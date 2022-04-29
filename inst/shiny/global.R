@@ -4,7 +4,7 @@ library(gastempt)
 library(tippy)
 suppressPackageStartupMessages(library(dplyr))
 library(readxl)
-github_repo = "https://github.com/dmenne/gastempt/blob/master/exec/"
+#github_repo = "https://github.com/dmenne/gastempt/blob/master/exec/"
 presets = na.omit(
   suppressWarnings(read_excel("gastempt_presets.xlsx", sheet = "gastempt_samples"))) %>%
   mutate(
@@ -12,6 +12,9 @@ presets = na.omit(
   )
 numcols = which(sapply(presets, is.numeric))
 
+# Remove this when https://github.com/rstudio/shiny/issues/3626 is resolved
+# To avoid "Fontconfig error: Cannot load default config file"
+options(shiny.useragg = TRUE)
 
 # nolint start
 pop_content = c(

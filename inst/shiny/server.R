@@ -52,9 +52,9 @@ shinyServer(function(input, output, session) {
       if (is.na(pop_content[id]))
         content = ""
       tippyThis(id, content, .is_tag = FALSE)
-      tippy_enable(id, .is_tag = FALSE)
+#      tippy_enable(id, .is_tag = FALSE)
     } else {
-      tippy_hide(id, .is_tag = FALSE)
+#      tippy_hide(id, .is_tag = FALSE)
     }
   }
 

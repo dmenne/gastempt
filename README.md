@@ -7,7 +7,7 @@ Menne Biomed Consulting Tübingen, Germany\
 
 <!-- badges: start -->
 
-[![R build status](https://github.com/dmenne/gastempt/workflows/R-CMD-check/badge.svg)](https://github.com/dmenne/gastempt/actions) [![](https://cranlogs.r-pkg.org/badges/grand-total/gastempt)](https://cran.r-project.org/package=gastempt) [![](https://www.r-pkg.org/badges/last-release/gastempt) [![codecov](https://codecov.io/gh/dmenne/gastempt/branch/main/graph/badge.svg?token=estAZKCvn4)](https://codecov.io/gh/dmenne/gastempt)
+[![R build status](https://github.com/dmenne/gastempt/workflows/R-CMD-check/badge.svg)](https://github.com/dmenne/gastempt/actions) [![](https://cranlogs.r-pkg.org/badges/grand-total/gastempt)](https://cran.r-project.org/package=gastempt) [![](https://www.r-pkg.org/badges/last-release/gastempt) [![codecov](https://app.codecov.io/gh/dmenne/gastempt/branch/main/graph/badge.svg?token=estAZKCvn4)](https://app.codecov.io/gh/dmenne/gastempt)
 
 <!-- badges: end -->
 
@@ -64,7 +64,7 @@ The image cannot be compiled on the Docker hub because the build runs out of mem
 
 ### Installing Docker
 
--   For Windows 10, you can get the installer from the [Docker store](https://hub.docker.com/editions/community/docker-ce-desktop-windows). For installation details, see [here](https://docs.docker.com/docker-for-windows/install/).\
+-   For Windows 10, you can get the installer from the [Docker store](https://docs.docker.com/desktop/windows/install/). For installation details, see [here](https://docs.docker.com/docker-for-windows/install/).\
 -   Linux users know how to install Docker anyway.
 -   Docker should have at least 2 GB of memory; on Windows, use Settings from the Docker tray icon. If you want to build the Docker image, you need at least 4 GB and 2 cores; confusing error messages are being emitted when memory is low.
 
