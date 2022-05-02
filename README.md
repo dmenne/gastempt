@@ -7,7 +7,10 @@ Menne Biomed Consulting Tübingen, Germany\
 
 <!-- badges: start -->
 
-[![R build status](https://github.com/dmenne/gastempt/workflows/R-CMD-check/badge.svg)](https://github.com/dmenne/gastempt/actions) [![](https://cranlogs.r-pkg.org/badges/grand-total/gastempt)](https://cran.r-project.org/package=gastempt) [![](https://www.r-pkg.org/badges/last-release/gastempt) [![codecov](https://app.codecov.io/gh/dmenne/gastempt/branch/main/graph/badge.svg?token=estAZKCvn4)](https://app.codecov.io/gh/dmenne/gastempt)
+[![R build status](https://github.com/dmenne/gastempt/workflows/R-CMD-check/badge.svg)](https://github.com/dmenne/gastempt/actions)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/gastempt)](https://cran.r-project.org/package=gastempt) 
+![](https://www.r-pkg.org/badges/version-ago/gastempt)
+[![codecov](https://codecov.io/gh/dmenne/gastempt/branch/main/graph/badge.svg?token=estAZKCvn4)](https://app.codecov.io/gh/dmenne/gastempt)
 
 <!-- badges: end -->
 

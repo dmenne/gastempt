@@ -1,9 +1,9 @@
 Package: gastempt
-Version: 0.5.4.9000
+Version: 0.5.5
 Authors@R: c(person("Dieter", "Menne", 
   email = "dieter.menne@menne-biomed.de", role = c("aut","cre")))
 Type: Package
-Title: Analyzing Gastric Emptying from MRI or 'Scintigraphy'
+Title: Analyzing Gastric Emptying from MRI or Scintigraphy
 Description: Fits gastric emptying time series from MRI or 'scintigraphic' measurements
    using nonlinear mixed-model population fits with 'nlme' and Bayesian methods with 
    Stan; computes derived parameters such as t50 and AUC.
@@ -30,7 +30,7 @@ Suggests:
     rmarkdown,
     knitr,
     covr,
-    testthat,
+    testthat (>= 2.99),
     ragg,
     vdiffr,
     rstantools
@@ -47,3 +47,6 @@ RoxygenNote: 7.1.2
 Encoding: UTF-8
 Biarch: FALSE
 SystemRequirements: GNU make
+Config/testthat/parallel: true
+Config/testthat/edition: 3
+
