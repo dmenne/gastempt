@@ -28,3 +28,4 @@ check_rhub.log
 ^pkgdown$
 codecov.yml
 templates/
+DockerMakevars

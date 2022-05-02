@@ -40,6 +40,7 @@ LinkingTo:
     Rcpp (>= 1.0.3),
     RcppEigen (>= 0.3.3.7.0),
     RcppParallel (>= 5.0.1)
+Remotes: JohnCoene/tippy
 VignetteBuilder: 
     knitr
 RoxygenNote: 7.1.2
