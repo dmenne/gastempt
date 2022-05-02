@@ -12,7 +12,6 @@ presets = na.omit(
   )
 numcols = which(sapply(presets, is.numeric))
 
-# Remove this when https://github.com/rstudio/shiny/issues/3626 is resolved
 # To avoid "Fontconfig error: Cannot load default config file"
 options(shiny.useragg = TRUE)
 
