@@ -8,7 +8,6 @@ Description: Fits gastric emptying time series from MRI or 'scintigraphic' measu
    using nonlinear mixed-model population fits with 'nlme' and Bayesian methods with 
    Stan; computes derived parameters such as t50 and AUC.
 License: GPL (>=3)
-LazyData: TRUE
 NeedsCompilation: yes
 URL: https://github.com/dmenne/gastempt
 BugReports: https://github.com/dmenne/gastempt/issues
