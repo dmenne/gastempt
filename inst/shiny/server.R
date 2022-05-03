@@ -46,44 +46,6 @@ shinyServer(function(input, output, session) {
     ng
   })
 
-  popit = function(session, show, id, title, placement = "right") {
-    if (show) {
-      content = pop_content[id]
-      if (is.na(pop_content[id]))
-        content = ""
-      tippyThis(id, content, .is_tag = FALSE)
-#      tippy_enable(id, .is_tag = FALSE)
-    } else {
-#      tippy_hide(id, .is_tag = FALSE)
-    }
-  }
-
-  observe({
-    show = input$show_pop
-    popit(session, show, "method_a", "Fitting method")
-    popit(session, show, "fit_model",  "Modelling curves")
-    popit(session, show, "variant",  "Available Variants")
-    popit(session, show, "cov_model",  "Covariance of Stan Model")
-    popit(session, show, "seed",  "Randomization Seed")
-    popit(session, show, "model_s",  "Curves created as")
-    popit(session, show, "manual", "Manual set parameter of simulated data")
-    popit(session, show, "lkj", "LKJ parameter for covariance")
-    popit(session, show, "student_df", "Residual error outliers")
-    popit(session, show, "tempt_mean",  "Mean of emptying time constant")
-    popit(session, show, "tempt_std_perc",
-              "Between-record standard deviation of emptying time constant")
-    popit(session, show, "v0_mean", "Mean of initial volume")
-    popit(session, show, "v0_std_perc",
-          "Between-record standard deviation of initial volume")
-    popit(session, show, "kappa_beta_mean",  "Mean of kappa or beta")
-    popit(session, show, "kappa_beta_std_perc",
-          "Between-record standard deviation of kappa or beta")
-    popit(session, show, "student_t_df",  "Type of noise")
-    popit(session, show, "noise_perc", "Amplitude of noise")
-    popit(session, show, "missing", "Fraction of data missing")
-    popit(session, show, "data",  "Entering data", "bottom")
-  })
-
   observe({
     # Create dependency on all numeric fields
     preset  = input$preset

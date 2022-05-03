@@ -19,7 +19,7 @@ options(shiny.useragg = TRUE)
 pop_content = c(
   model_a = "<code>linexp</code>, <b>vol = v0 * (1 + kappa * t / tempt) * exp(-t / tempt):</b><br>Recommended for gastric emptying curves with an initial volume overshoot from secretion. With parameter kappa &gt; 1, there is a maximum after t=0. When all emptying curves start with a steep drop, this model can be difficult to fit.<hr><code>powexp</code>, <b>vol = v0 * exp(-(t / tempt) ^ beta):</b><br>The power exponential function introduced by Elashof et. al. to fit scintigraphic emptying data; this type of data does not have an initial overshoot by design. Compared to the linexp model, fitting powexp is more reliable and rarely fails to converge in the presence of noise and outliers. The power exponential can be useful with MRI data when there is an unusual late phase in emptying.",
 
-  variant = "<b>Variant 1:</b> The most generic assumptions to estimate the per-record parameters is also the most likely to fail to converge. If this variant works, use it. Otherwise, try one of the other variants.<br><b>Variant 2</b>: A slightly more restricted version; sometimes converges when variant 1 fails.<br><b>Variant 3</b>: Parameters beta or kappa, which are most difficult to estimate for each curve individually, are computed once only for all records, so these parameters cannot be tested for between-treatment differences. If you are only interested in a good estimate of t50 and v0 and the other variants do not work, use this method.",
+  variant = "<b>Variant 1:</b> The most generic assumptions to estimate the per-record parameters is also the most likely to fail to converge. If it gives valid fits, use it. Otherwise, try one of the other variants.<br><b>Variant 2</b>: A slightly more restricted version; sometimes converges when variant 1 fails.<br><b>Variant 3</b>: Parameters beta or kappa, which are most difficult to estimate for each curve individually, are computed once only for all records, so these parameters cannot be tested for between-treatment differences. Use it if you are only interested in a good estimate of t50 and v0 and the other variants do not work.",
 
   cov_model = 'Try the simple model "Without covariance" first, it runs faster. Compare with the model "With covariance" when the fit is not satisfactory. The preset "rough powexp scint" provides example data where the more complex fit is markedly superior.',
 
@@ -34,15 +34,23 @@ kappa_beta = "<b>kappa</b> is used for the linexp model; values of kappa &gt; 1 
 student_t_df = "Gaussian noise is the usual nice-behaved noise that never occurs in the real world of medical research. With three variants of Student-t distributed noise, outliers can be generated to test the methods for robustness. ",
 fit_model2 = '<b>linexp or powexp?</b> The linexp function can have an initial overshoot to fit gastric emptying curves with secretion.<br><code>vol(t) = v0 * (1 + kappa * t / tempt) * exp(-t / tempt)</code>.<img src="powlinexp.png">',
 
-fit_model = '<b>linexp or powexp?</b><img src="linexp.png"><br>The <b>linexp</b> function introduced by the author of this app can have an initial overshoot to fit gastric emptying curves with secretion.<br><code>vol(t) = v0 * (1 + kappa * t / tempt) * exp(-t / tempt)</code><br>. Fatty meals analyzed by MRI are best represented by this function. The method does not work well when gastric emptying is almost linear or exponential in time; try the Bayesian version with covariance estimation to get stable results.<br><img src="powexp.png"><br>The <b>powexp</b> function historically used by Elashof et al. is strictly montonously decreasing but has more freedom to model details in the function tail. It is the model of choice for scintigraphic data which by definition cannot overshoot.<br><code>vol(t) = v0 * exp(-(t / tempt) ^ beta)</code><br>',
+fit_model = '<b>linexp or powexp?</b><img src="linexp.png"><br>The <b>linexp</b> function introduced by the author of this app can have an initial overshoot to fit gastric emptying curves with secretion.<br><code>vol(t) = v0 * (1 + kappa * t / tempt) * exp(-t / tempt)</code><br>Fatty meals analyzed by MRI are best represented by this function. The method does not work well when gastric emptying is almost linear or exponential in time; try the Bayesian version with covariance estimation to get stable results.<br><img src="powexp.png"><br>The <b>powexp</b> function historically used by Elashof et al. is strictly montonously decreasing but has more freedom to model details in the function tail. It is the model of choice for scintigraphic data which by definition cannot overshoot.<br><code>vol(t) = v0 * exp(-(t / tempt) ^ beta)</code><br>',
 
-method_a = "<b>Methods to fit curves</b> For gastric emptying time series without too many missing data and few outliers, the <code>nlme</code> population fit provide quick and reliable fits. If <code>nlme</code> fails, the Bayesian method will work; it needs much more time and may bring the free online account on ShinyApps to their knee; no problem if you run this on your own computer. If you have a data set that does not give a fit with the Bayesian method, please post the example on the github issues page; link see on the bottom left of the app.",
+method_a = "<b>Methods to fit curves</b> For gastric emptying time series without too many missing data and few outliers, the <code>nlme</code> population fit provide quick and reliable fits.<br>If <code>nlme</code> fails, the Bayesian method will work but is slower. <br>When you have a data set that does not give a fit with the Bayesian method, please post the example on the github issues page; link see on the bottom left of the app.",
 
 noise_perc = "Noise amplitude, measured in % of the initial volume v0",
 missing = "Fraction of randomly missing data to test the method for robustness",
 manual = "Expert settings for parameters of simulated emptying curves and Bayesian fit.",
 lkj = 'LKJ prior for kappa/tempt correlation, only required for model with covariance. Values from 1.5 (strong correlation) to 50 (almost independent) are useful. See http://www.psychstatistics.com/2014/12/27/d-lkj-priors/ for examples.',
-student_df = "Student-t degrees of freedom for residual error; default 5. Use 3 when there are heavy outliers in the data set; values above 10 are adequate for almost gaussian residuals."
+student_df = "Student-t degrees of freedom for residual error; default 5. Use 3 when there are heavy outliers in the data set; values above 10 are adequate for almost gaussian residuals.",
+n_records = "Number of records to generate",
+preset = "Demo sets from real and simulated data",
+v0_mean = "Mean initial volume",
+v0_std_perc = "Standard deviation between records of initial volume",
+tempt_mean = "Mean of emptying time constant",
+tempt_std_perc = "Standard deviation between records of emptying time constant",
+kappa_beta_mean = "For linexp model, parameter <code>kappa</code>; values >1 result in  overshooting initial time series. For powexp model, the power exponential parameter <code>beta</code>.",
+kappa_beta_std_perc = "Standard deviation between records for parameter kappa or beta"
 )
 
 # nolint end
@@ -55,3 +63,28 @@ stan_models = ####################### add powexp_gastro_1d ++++
 preset_description = function(id) {
   as.character(presets[presets$id == id, "description"])
 }
+
+
+tippy_r = function(element, placement = "right-start") {
+  cd = unlist(element$children)
+  iid = which(str_detect(names(cd), "attribs\\.(id|for)"))
+  for (i in iid) {
+    ct = pop_content[cd[i]]
+    if (!is.na(ct))
+      return(tippy(element, ct,  placement = placement))
+  }
+  return(element)
+}
+
+tippy_c = function(element, placement = "right-start") {
+  cd = unlist(element$children)
+  iid = which(str_detect(names(cd), "attribs\\.(id|for)"))
+  browser()
+  for (i in iid) {
+    ct = pop_content[cd[i]]
+    if (!is.na(ct))
+      return(tippy(element, ct,  placement = placement))
+  }
+  return(element)
+}
+
