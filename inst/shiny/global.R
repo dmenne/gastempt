@@ -75,16 +75,3 @@ tippy_r = function(element, placement = "right-start") {
   }
   return(element)
 }
-
-tippy_c = function(element, placement = "right-start") {
-  cd = unlist(element$children)
-  iid = which(str_detect(names(cd), "attribs\\.(id|for)"))
-  browser()
-  for (i in iid) {
-    ct = pop_content[cd[i]]
-    if (!is.na(ct))
-      return(tippy(element, ct,  placement = placement))
-  }
-  return(element)
-}
-
