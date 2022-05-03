@@ -70,7 +70,7 @@ shinyServer(function(input, output, session) {
     # Create simulated data
     req(input$n_records, input$v0_mean, input$v0_std_perc, input$tempt_mean)
     req(input$tempt_std_perc, input$kappa_beta_mean, input$kappa_beta_std_perc)
-    req(input$noise_perc, input$student_t_df, input$missing)
+    req(input$noise_perc, input$student_t_df, input$missing, input$model_s)
     n_records = input$n_records
     v0_mean = input$v0_mean
     v0_std = input$v0_std_perc*input$v0_mean/100
