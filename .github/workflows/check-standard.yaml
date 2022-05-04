@@ -38,15 +38,8 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - uses: r-lib/actions/setup-r-dependencies@v1
         with:
-          extra-packages: |
-            any::covr
-            rcmdcheck
-          needs: coverage
+          extra-packages: rcmdcheck
 
       - uses: r-lib/actions/check-r-package@v1
-
-      - name: Test coverage
-        run: covr::codecov(quiet = FALSE)
-        shell: Rscript {0}
