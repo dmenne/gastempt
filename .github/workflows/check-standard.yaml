@@ -42,6 +42,6 @@ jobs:
           extra-packages: covr
 
       - name: Test coverage
-        if: runner.os == 'Linux'
+        if: ${{ matrix.config.r}} == 'relase' && ${{ matrix.config.os}} == 'ubuntu-20.04'
         run: covr::codecov(quiet=FALSE)
         shell: Rscript {0}
