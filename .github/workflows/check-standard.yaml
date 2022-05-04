@@ -25,6 +25,8 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
+      CXX14FLAGS: "-O3  -Wno-unused-variable -Wno-ignored-attributes -Wno-attributes -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-maybe-uninitialized"
+
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-pandoc@v2
@@ -40,5 +42,6 @@ jobs:
           extra-packages: covr
 
       - name: Test coverage
+        if: runner.os == 'Linux'
         run: covr::codecov(quiet=FALSE)
         shell: Rscript {0}
