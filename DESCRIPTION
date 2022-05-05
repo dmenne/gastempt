@@ -45,8 +45,7 @@ VignetteBuilder:
     knitr
 RoxygenNote: 7.1.2
 Encoding: UTF-8
-Biarch: FALSE
 SystemRequirements: GNU make
 Config/testthat/parallel: true
-Config/testthat/edition: 2
+Config/testthat/edition: 3
 

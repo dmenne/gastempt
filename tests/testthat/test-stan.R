@@ -43,7 +43,7 @@ run_precompiled_model = function(model, iter = 500) {
       verbose = FALSE
     ))
   })
-  expect_is(fit, "stanfit")
+  expect_s4_class(fit, "stanfit")
 }
 
 test_that("Running precompiled models linexp _1x directly returns valid result", {
@@ -71,9 +71,9 @@ test_that("Running stan_gastempt fit with default parameters returns valid resul
                                 chains = chains,
                                 iter = 500,
                                 refresh = -1)
-            expect_is(ret, "stan_gastempt")
-            expect_is(ret$plot, "ggplot")
-            expect_is(ret$plot, "ggplot")
+            expect_s3_class(ret, "stan_gastempt")
+            expect_s3_class(ret$plot, "ggplot")
+            expect_s3_class(ret$plot, "ggplot")
             expect_equal(ret$coef, coef(ret))
             expect_s4_class(ret$fit, "stanfit")
             # residual standard deviation
@@ -101,8 +101,8 @@ test_that("Running stan_gastempt with powexp returns valid result", {
                       model_name = "powexp_gastro_2c",
                       refresh = -1,
                       iter = 500)
-  expect_is(ret, "stan_gastempt")
-  expect_is(ret$plot, "ggplot")
+  expect_s3_class(ret, "stan_gastempt")
+  expect_s3_class(ret$plot, "ggplot")
   expect_s4_class(ret$fit, "stanfit")
   # residual standard deviation
   v0_f = ret$coef$v0
@@ -125,7 +125,7 @@ test_that("Running stan_gastempt fit with non-default parameters returns valid r
     chains = 2,
     init_r = 0.3
   )
-  expect_is(ret, "stan_gastempt")
+  expect_s3_class(ret, "stan_gastempt")
   v0_f = ret$coef$v0
   expect_lt(sqrt(var(v0_d - v0_f)), 8)
 })
@@ -137,8 +137,8 @@ test_that("Running stan_gastempt with many missing data returns valid result", {
                         seed = 471)
   v0_d = d$rec$v0
   ret = stan_gastempt(d$data, model_name = "linexp_gastro_1b", refresh = -1)
-  expect_is(ret, "stan_gastempt")
-  expect_is(ret$plot, "ggplot")
+  expect_s3_class(ret, "stan_gastempt")
+  expect_s3_class(ret$plot, "ggplot")
   expect_s4_class(ret$fit, "stanfit")
   # residual standard deviation
   v0_f = ret$coef$v0
@@ -167,7 +167,7 @@ test_that("Direct use of sample model returns valid results", {
       refresh = FALSE
     ))
   })
-  expect_is(mr_b, "stanfit")
+  expect_s3_class(mr_b, "stanfit")
 
 
   stan_model = "../../inst/stan/linexp_gastro_1b.stan"

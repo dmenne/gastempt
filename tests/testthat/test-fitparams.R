@@ -8,8 +8,8 @@ checklinexp = function(tempt, kappa) {
   expect_equal(attr(tt0, "fun"), linexp)
   v50 = as.numeric(attr(tt0, "fun")(tt0, tempt = tempt, kappa = kappa))
   expect_equal(v50, 0.5,  tolerance = tolerance)
-  expect_is(attr(tt0,  "slope"), "numeric")
-  expect_is(attr(tt0, "auc"), "numeric")
+  expect_type(attr(tt0,  "slope"), "double")
+  expect_type(attr(tt0, "auc"), "double")
 
   # With v0
   v0 = 400
@@ -26,9 +26,9 @@ checklinexp = function(tempt, kappa) {
     kappa = kappa
   ))
   expect_equal(v50, v0 / 2,  tolerance = tolerance)
-  expect_equal(tt0, tt, check.attributes = FALSE, tolerance = tolerance)
+  expect_equal(tt0, tt, ignore_attr = TRUE, tolerance = tolerance)
 
-  expect_is(attr(tt, "slope"), "numeric")
+  expect_type(attr(tt, "slope"), "double")
   slope = attr(tt, "slope")
   # Compute slope directly
   slope_0 = 10 * diff(linexp(
@@ -69,8 +69,8 @@ checklinexp = function(tempt, kappa) {
     logkappa = log(kappa)
   ))
   expect_equal(v50, 0.5, tolerance = tolerance)
-  expect_is(attr(ttt, "slope"), "numeric")
-  expect_equal(tt0, ttt, check.attributes = FALSE, tolerance = tolerance)
+  expect_type(attr(ttt, "slope"), "double")
+  expect_equal(tt0, ttt, ignore_attr = TRUE, tolerance = tolerance)
 }
 
 test_that("linexp t50 returns correct value", {
@@ -90,7 +90,7 @@ checkpowexp = function(tempt, beta) {
   expect_equal(attr(tt0, "fun"), powexp)
   v50 = as.numeric(attr(tt0, "fun")(tt0, tempt = tempt, beta = beta))
   expect_equal(v50, 0.5,  tolerance = tolerance)
-  expect_is(attr(tt0, "slope"), "numeric")
+  expect_type(attr(tt0, "slope"), "double")
 
   # With v0
   v0 = 400
@@ -103,9 +103,9 @@ checkpowexp = function(tempt, beta) {
     beta = beta
   ))
   expect_equal(v50, v0 / 2,  tolerance = tolerance)
-  expect_is(attr(tt, "slope"), "numeric")
+  expect_type(attr(tt, "slope"), "double")
 
-  expect_equal(tt0, tt, check.attributes = FALSE, tolerance = tolerance)
+  expect_equal(tt0, tt, ignore_attr = TRUE, tolerance = tolerance)
 
   # Transformed
   ttt = t50(c(logtempt = log(tempt), logbeta = log(beta)))
@@ -113,9 +113,9 @@ checkpowexp = function(tempt, beta) {
   v50 = as.numeric(attr(ttt, "fun")(ttt, logtempt = log(tempt),
                                     logbeta = log(beta)))
   expect_equal(v50, 0.5, tolerance = tolerance)
-  expect_is(attr(ttt, "slope"), "numeric")
+  expect_type(attr(ttt, "slope"), "double")
 
-  expect_equal(tt0, ttt, check.attributes = FALSE, tolerance = tolerance)
+  expect_equal(tt0, ttt, ignore_attr = TRUE, tolerance = tolerance)
 }
 
 test_that("powexp t50 returns correct value", {
@@ -135,7 +135,7 @@ test_that("t50 for data frame returns a data frame with column t50", {
     kappa = rnorm(n, 0.7, 0.1)
   )
   ret = t50(x)
-  expect_is(ret, "data.frame")
+  expect_s3_class(ret, "data.frame")
   expect_equal(nrow(ret), 3)
   expect_false(any(sapply(ret, function(x)
     any(is.na(
