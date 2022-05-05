@@ -11,7 +11,7 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
   curl
 
 RUN mkdir -p ~/.R
-COPY ./DockerMakevars /root/.R/Makevars
+COPY ./Makevars /root/.R/Makevars
 
 RUN install2.r --error --ncpus 2 --skipinstalled \
     DT \

@@ -85,7 +85,6 @@ test_that("Running stan_gastempt fit with default parameters returns valid resul
             ))
           })
 
-
 test_that("Running stan_gastempt with powexp returns valid result", {
   skip_on_cran()
   options(mc.cores = 1)
