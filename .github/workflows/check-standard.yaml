@@ -17,7 +17,7 @@ jobs:
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         config:
           - {os: windows-latest, r: 'release'}
@@ -89,7 +89,7 @@ jobs:
           path: check
 
 
-#      - name: Test coverage
-#        if: runner.os != 'Windows'
-#        run: covr::codecov()
-#        shell: Rscript {0}
+      - name: Test coverage
+        if: runner.os != 'Windows'
+        run: covr::codecov()
+        shell: Rscript {0}
