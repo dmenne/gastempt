@@ -19,13 +19,13 @@ jobs:
       matrix:
         config:
           - {os: windows-latest, r: 'release'}
-          - {os: macOS-latest, r: 'release'}
-          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+#          - {os: macOS-latest, r: 'release'}
+#          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
+#          - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
-      CXX14FLAGS: "-O3  -Wno-unused-variable -Wno-ignored-attributes -Wno-attributes -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-maybe-uninitialized"
+      CXX14FLAGS: "-O3  -Wno-unused-variable -Wno-ignored-attributes -Wno-attributes -Wno-deprecated-declarations -Wno-unused-but-set-variable -Wno-maybe-uninitialized -Wno-pedantic"
 
     steps:
       - uses: actions/checkout@v2
