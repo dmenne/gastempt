@@ -20,8 +20,8 @@ jobs:
       fail-fast: true
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
-          - {os: macOS-latest, r: 'release'}
+#          - {os: windows-latest, r: 'release'}
+#          - {os: macOS-latest, r: 'release'}
           - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
           - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
@@ -90,6 +90,6 @@ jobs:
 
 
       - name: Test coverage
-        if: runner.os == 'Linux' && runner.r == 'release'
+        if: runner.os == 'Linux' && r == 'release'
         run: covr::codecov()
         shell: Rscript {0}
