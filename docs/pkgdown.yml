@@ -1,7 +1,10 @@
-pandoc: 2.11.4
-pkgdown: 1.6.1
+pandoc: 2.17.1.1
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   gastempt: gastempt.html
-last_built: 2021-03-31T07:48Z
+last_built: 2022-05-09T07:23Z
+urls:
+  reference: http://dmenne.github.io/gastempt/reference
+  article: http://dmenne.github.io/gastempt/articles
 

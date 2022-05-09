@@ -1,6 +1,4 @@
+url: http://dmenne.github.io/gastempt/
 template:
-  path: ./templates
-  default_assets: true
-  params:
-    bootswatch: cosmo
+  bootstrap: 5
 

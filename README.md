@@ -61,15 +61,10 @@ Program with simulated data (needs about 40 seconds till plot shows):
 
 ![Screenshot](tools/readme/screenshot.png)
 
-## Docker image
-
-The image cannot be compiled on the Docker hub because the build runs out of memory in the standard configuration.
-
 ### Installing Docker
 
 -   For Windows 10, you can get the installer from the [Docker store](https://docs.docker.com/desktop/windows/install/). For installation details, see [here](https://docs.docker.com/docker-for-windows/install/).\
 -   Linux users know how to install Docker anyway.
--   Docker should have at least 2 GB of memory; on Windows, use Settings from the Docker tray icon. If you want to build the Docker image, you need at least 4 GB and 2 cores; confusing error messages are being emitted when memory is low.
 
 ### Installing `gastempt`
 

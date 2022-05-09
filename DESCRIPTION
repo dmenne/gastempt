@@ -9,7 +9,8 @@ Description: Fits gastric emptying time series from MRI or 'scintigraphic' measu
    Stan; computes derived parameters such as t50 and AUC.
 License: GPL (>=3)
 NeedsCompilation: yes
-URL: https://github.com/dmenne/gastempt
+URL: https://github.com/dmenne/gastempt,
+    http://dmenne.github.io/gastempt/
 BugReports: https://github.com/dmenne/gastempt/issues
 Depends:
     R (>= 4.2.0)
@@ -48,4 +49,3 @@ Encoding: UTF-8
 SystemRequirements: GNU make
 Config/testthat/parallel: false
 Config/testthat/edition: 3
-

@@ -4,14 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Fits gastric emptying time series from MRI or scintigraphic measurements
+   using nonlinear mixed-model population fits with nlme and Bayesian methods with 
+   Stan; computes derived parameters such as t50 and AUC.">
 <title>Analyzing Gastric Emptying from MRI or Scintigraphy • gastempt</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Analyzing Gastric Emptying from MRI or Scintigraphy">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Analyzing Gastric Emptying from MRI or Scintigraphy">
 <meta property="og:description" content="Fits gastric emptying time series from MRI or scintigraphic measurements
    using nonlinear mixed-model population fits with nlme and Bayesian methods with 
    Stan; computes derived parameters such as t50 and AUC.">
@@ -20,77 +22,69 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-home">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">gastempt</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.5.4.9000</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
+    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
+    
+    <a class="navbar-brand me-2" href="index.html">gastempt</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6.0</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="articles/gastempt.html">Get started</a>
 </li>
-<li>
-  <a href="articles/gastempt.html">Get started</a>
-</li>
-<li>
-  <a href="reference/index.html">Reference</a>
+<li class="nav-item">
+  <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/dmenne/gastempt/">
-    <span class="fab fa-github fa-lg"></span>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/dmenne/gastempt/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
       </ul>
 </div>
-<!--/.nav-collapse -->
+
+    
   </div>
-<!--/.container -->
-</div>
-<!--/.navbar -->
-
-      
-
-      </header><div class="row">
-  <div class="contents col-md-9">
-<div id="gastempt-fitting-gastric-emptying-curves" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#gastempt-fitting-gastric-emptying-curves" class="anchor"></a>gastempt: Fitting gastric emptying curves</h1></div>
+</nav><div class="container template-home">
+<div class="row">
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="gastempt-fitting-gastric-emptying-curves">gastempt: Fitting gastric emptying curves<a class="anchor" aria-label="anchor" href="#gastempt-fitting-gastric-emptying-curves"></a>
+</h1></div>
 <p>Dieter Menne<br>
-Menne Biomed Consulting Tübingen, Germany<br><a href="https://www.menne-biomed.de" class="uri">https://www.menne-biomed.de</a><br><a href="mailto:dieter.menne@menne-biomed.de" class="email">dieter.menne@menne-biomed.de</a></p>
+Menne Biomed Consulting Tübingen, Germany<br><a href="https://www.menne-biomed.de" class="external-link uri">https://www.menne-biomed.de</a><br><a href="mailto:dieter.menne@menne-biomed.de" class="email">dieter.menne@menne-biomed.de</a></p>
 <!-- badges: start -->
-<p><a href="https://github.com/dmenne/gastempt/actions"><img src="https://github.com/dmenne/gastempt/workflows/R-CMD-check/badge.svg" alt="R build status"></a> <a href="https://cran.r-project.org/package=gastempt"><img src="https://cranlogs.r-pkg.org/badges/grand-total/gastempt"></a> <a href="https://CRAN.R-project.org/package=gastempt"><img src="https://www.r-pkg.org/badges/last-release/gastempt"></a> <!-- badges: end --></p>
-<p>A package and a <a href="https://shiny.rstudio.com/">Shiny</a> web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package <code>nlme</code>. In addition, Bayesian fits with <a href="https://mc-stan.org/">Stan</a> to handle critical cases are implemented.</p>
+
+<!-- badges: end -->
+<p>A package and a <a href="https://shiny.rstudio.com/" class="external-link">Shiny</a> web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package <code>nlme</code>. In addition, Bayesian fits with <a href="https://mc-stan.org/" class="external-link">Stan</a> to handle critical cases are implemented.</p>
 <p>Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; thanks to Werner Schwizer and Andreas Steingötter for their contributions.</p>
-<div id="download" class="section level3">
-<h3 class="hasAnchor">
-<a href="#download" class="anchor"></a>Download</h3>
-<p>The package is available from <a href="https://CRAN.R-project.org/package=gastempt">CRAN</a> and github (<a href="https://github.com/dmenne/gastempt">source</a>, <a href="https://github.com/dmenne/gastempt/">documentation</a>). To install, use:</p>
-<pre><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github("dmenne/gastempt")</a></code></pre>
+<div class="section level3">
+<h3 id="download">Download<a class="anchor" aria-label="anchor" href="#download"></a>
+</h3>
+<p>The package is available from <a href="https://CRAN.R-project.org/package=gastempt" class="external-link">CRAN</a> and github (<a href="https://github.com/dmenne/gastempt" class="external-link">source</a>, <a href="https://github.com/dmenne/gastempt/" class="external-link">documentation</a>). To install, use:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"dmenne/gastempt"</span>)</span></code></pre></div>
 <p>Compilation of the Stan models needs several minutes.</p>
 </div>
-<div id="shiny-online-interface" class="section level3">
-<h3 class="hasAnchor">
-<a href="#shiny-online-interface" class="anchor"></a>Shiny online interface</h3>
-<p>The web interface can be installed on your computer, or run as <a href="https://apps.menne-biomed.de/gastempt/">web app</a>.</p>
+<div class="section level3">
+<h3 id="shiny-online-interface">Shiny online interface<a class="anchor" aria-label="anchor" href="#shiny-online-interface"></a>
+</h3>
+<p>The web interface can be installed on your computer, or run as <a href="https://apps.menne-biomed.de/gastempt/" class="external-link">web app</a>.</p>
 <p>Two <strong>models</strong> are implemented in the web interface</p>
 <ul>
 <li>
@@ -99,18 +93,18 @@ Menne Biomed Consulting Tübingen, Germany<br><a href="https://www.menne-biomed.
 <code>powexp, vol = v0 * exp(-(t / tempt) ^ beta):</code> The power exponential function introduced by Elashof et. al. to fit scintigraphic emptying data; this type of data does not have an initial overshoot by design. Compared to the <code>linexp</code> model, fitting <code>powexp</code> is more reliable and rarely fails to converge in the presence of noise and outliers. The power exponential can be useful with MRI data when there is an unusual late phase in emptying.</li>
 </ul>
 </div>
-<div id="methods-with-variants" class="section level3">
-<h3 class="hasAnchor">
-<a href="#methods-with-variants" class="anchor"></a>Methods with variants</h3>
+<div class="section level3">
+<h3 id="methods-with-variants">Methods with variants<a class="anchor" aria-label="anchor" href="#methods-with-variants"></a>
+</h3>
 <ul>
 <li>Population fits based on function <code>nlme</code> in package R <code>nlme</code>.</li>
 <li>
-<a href="https://menne-biomed.de/blog/tag:Stan">Stan-based fits</a>, both <a href="https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_1b.stan">without</a> and <a href="https://github.com/dmenne/gastempt/blob/master/inst/stan/linexp_gastro_2b.stan">with</a> covariance estimation. Thanks to priors, fitting with Bayesian methods also works for single records, even if stability strongly improves with more data sets available; see <a href="https://github.com/dmenne/gastempt/reference/stan_gastempt.html">stan_gastempt</a>. Some details can be found in <a href="https://menne-biomed.de/blog/ballot-and-bazaar">my blog</a>. The rationale for using Stan to fit non-linear curves is discussed <a href="https://menne-biomed.de/blog/breath-test-stan">here</a> for <sup>13</sup>C breath test data, but is equally valid for gastric emptying data.</li>
+<a href="https://menne-biomed.de/blog/tag:Stan" class="external-link">Stan-based fits</a>, both <a href="https://github.com/dmenne/gastempt/blob/main/inst/stan/linexp_gastro_1b.stan" class="external-link">without</a> and <a href="https://github.com/dmenne/gastempt/blob/main/inst/stan/linexp_gastro_2b.stan" class="external-link">with</a> covariance estimation. Thanks to priors, fitting with Bayesian methods also works for single records, even if stability strongly improves with more data sets available; see <a href="https://dmenne.github.io/gastempt/reference/stan_gastempt.html" class="external-link">stan_gastempt</a>. Some details can be found in <a href="https://menne-biomed.de/blog/ballot-and-bazaar" class="external-link">my blog</a>. The rationale for using Stan to fit non-linear curves is discussed <a href="https://menne-biomed.de/blog/breath-test-stan" class="external-link">here</a> for <sup>13</sup>C breath test data, but is equally valid for gastric emptying data.</li>
 </ul>
 </div>
-<div id="data-entry" class="section level3">
-<h3 class="hasAnchor">
-<a href="#data-entry" class="anchor"></a>Data entry:</h3>
+<div class="section level3">
+<h3 id="data-entry">Data entry:<a class="anchor" aria-label="anchor" href="#data-entry"></a>
+</h3>
 <ul>
 <li>Data can be entered directly from the clipboard copied from Excel, or can be simulated using a Shiny app.</li>
 <li>Several preset simulations are provided in the Shiny app, with different amounts of noise and outliers</li>
@@ -119,40 +113,42 @@ Menne Biomed Consulting Tübingen, Germany<br><a href="https://www.menne-biomed.
 <li>The coefficients of the analysis including half-emptying time <em>t50</em> and the slope at time <em>t50</em> can be downloaded in .csv format.</li>
 </ul>
 </div>
-<div id="example" class="section level3">
-<h3 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h3>
+<div class="section level3">
+<h3 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h3>
 <p>Program with simulated data (needs about 40 seconds till plot shows):</p>
-<pre><code><a href="https://github.com/dmenne/gastempt">library(gastempt)
-dd = simulate_gastempt(n_records = 6, seed = 471)
-d = dd$data
-ret = stan_gastempt(d)
-print(ret$coef)
-print(ret$plot)</a></code></pre>
-<p><img src="tools/readme/screenshot.png" alt="Screenshot"></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gastempt)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">=</span> <span class="fu">simulate_gastempt</span>(<span class="at">n_records =</span> <span class="dv">6</span>, <span class="at">seed =</span> <span class="dv">471</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">=</span> dd<span class="sc">$</span>data</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ret <span class="ot">=</span> <span class="fu">stan_gastempt</span>(d)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ret<span class="sc">$</span>coef)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ret<span class="sc">$</span>plot)</span></code></pre></div>
+<div class="figure">
+<img src="tools/readme/screenshot.png" alt=""><p class="caption">Screenshot</p>
 </div>
-<div id="docker-image" class="section level2">
-<h2 class="hasAnchor">
-<a href="#docker-image" class="anchor"></a>Docker image</h2>
+</div>
+<div class="section level2">
+<h2 id="docker-image">Docker image<a class="anchor" aria-label="anchor" href="#docker-image"></a>
+</h2>
 <p>The image cannot be compiled on the Docker hub because the build runs out of memory in the standard configuration.</p>
-<div id="installing-docker" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installing-docker" class="anchor"></a>Installing Docker</h3>
+<div class="section level3">
+<h3 id="installing-docker">Installing Docker<a class="anchor" aria-label="anchor" href="#installing-docker"></a>
+</h3>
 <ul>
-<li>For Windows 10, you can get the installer from the <a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows">Docker store</a>. For installation details, see <a href="https://docs.docker.com/docker-for-windows/install/">here</a>.<br>
+<li>For Windows 10, you can get the installer from the <a href="https://docs.docker.com/desktop/windows/install/" class="external-link">Docker store</a>. For installation details, see <a href="https://docs.docker.com/docker-for-windows/install/" class="external-link">here</a>.<br>
 </li>
 <li>Linux users know how to install Docker anyway.</li>
 <li>Docker should have at least 2 GB of memory; on Windows, use Settings from the Docker tray icon. If you want to build the Docker image, you need at least 4 GB and 2 cores; confusing error messages are being emitted when memory is low.</li>
 </ul>
 </div>
-<div id="installing-gastempt" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installing-gastempt" class="anchor"></a>Installing <code>gastempt</code>
+<div class="section level3">
+<h3 id="installing-gastempt">Installing <code>gastempt</code>
+<a class="anchor" aria-label="anchor" href="#installing-gastempt"></a>
 </h3>
 <ul>
 <li>From the command line, enter the following to start the container</li>
 </ul>
-<pre><code>docker run --name gastempt  --restart unless-stopped -p 3838:3838 -d dmenne/gastempt</code></pre>
+<!-- --><div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>docker run <span class="sc">--</span>name gastempt  <span class="sc">--</span>restart unless<span class="sc">-</span>stopped <span class="sc">-</span>p <span class="dv">3838</span><span class="sc">:</span><span class="dv">3838</span> <span class="sc">-</span>d dmenne<span class="sc">/</span>gastempt</span></code></pre></div>
 <ul>
 <li>The first startup needs some time because 1 GB has to be downloaded. Subsequent startups require only a few seconds.</li>
 <li>Connect to the app with your browser via <code>localhost:3838</code>.</li>
@@ -160,50 +156,66 @@ print(ret$plot)</a></code></pre>
 </div>
 </div>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="links">
-<h2>Links</h2>
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=gastempt">https://​cloud.r-project.org/​package=gastempt</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/dmenne/gastempt/">https://​github.com/​dmenne/​gastempt/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/dmenne/gastempt/issues">https://​github.com/​dmenne/​gastempt/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=gastempt" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/dmenne/gastempt/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/dmenne/gastempt/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>GPL (&gt;=3)</li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing gastempt</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Dieter Menne <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
 
-  </div>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/dmenne/gastempt/actions" class="external-link"><img src="https://github.com/dmenne/gastempt/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://cran.r-project.org/package=gastempt" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/gastempt" alt="Downloads"></a></li>
+<li><a href="https://app.codecov.io/gh/dmenne/gastempt" class="external-link"><img src="https://codecov.io/gh/dmenne/gastempt/branch/main/graph/badge.svg?token=estAZKCvn4" alt="codecov"></a></li>
+</ul>
+</div>
+
+  </aside>
 </div>
 
 
-      <footer><div class="copyright">
-  <p>Developed by Dieter Menne.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by Dieter Menne.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>
