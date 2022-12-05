@@ -137,17 +137,17 @@ but below 0.5, for faster convergence.</p></dd>
 <span class="r-in"><span><span class="va">fit_d</span> <span class="op">=</span> <span class="fu">nlme_gastempt</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># fit_d$coef # direct access</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit_d</span><span class="op">)</span> <span class="co"># better use accessor function</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    record       v0     tempt     kappa      t50 slope_t50      auc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  rec_01 514.2601  38.26802 0.9614559 62.74067  4.211651 38600.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  rec_02 494.2307  29.06192 0.7791296 62.74067  4.211651 38600.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  rec_03 474.9859  65.59174 0.9788657 62.74067  4.211651 38600.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  rec_04 409.2770  70.62793 0.6727204 62.74067  4.211651 38600.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  rec_05 364.8374  69.44832 0.4269907 62.74067  4.211651 38600.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  rec_06 342.5370 104.75822 0.6046204 62.74067  4.211651 38600.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  rec_07 438.8781  48.00173 0.6406705 62.74067  4.211651 38600.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  rec_08 370.9166  72.25445 0.4834700 62.74067  4.211651 38600.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  rec_09 396.2707  59.60555 0.5053315 62.74067  4.211651 38600.89</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 rec_10 446.1291  82.80581 0.9667218 62.74067  4.211651 38600.89</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    record       v0     tempt     kappa      t50 slope_t50     auc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  rec_01 514.2572  38.26755 0.9614860 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  rec_02 494.2277  29.06142 0.7791640 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  rec_03 474.9852  65.59146 0.9788760 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  rec_04 409.2757  70.62709 0.6727428 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  rec_05 364.8369  69.44775 0.4270034 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  rec_06 342.5338 104.75216 0.6047117 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  rec_07 438.8791  48.00223 0.6406530 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  rec_08 370.9151  72.25262 0.4835091 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  rec_09 396.2782  59.61221 0.5051639 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 rec_10 446.1316  82.80695 0.9666869 62.74108  4.211677 38600.8</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit_d</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="co"># Can also set number of digits</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    record  v0 tempt kappa  t50 slope_t50   auc</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  rec_01 514  38.3 0.961 62.7      4.21 38600</span>
@@ -157,7 +157,7 @@ but below 0.5, for faster convergence.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5  rec_05 365  69.4 0.427 62.7      4.21 38600</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6  rec_06 343 105.0 0.605 62.7      4.21 38600</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 7  rec_07 439  48.0 0.641 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  rec_08 371  72.3 0.483 62.7      4.21 38600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  rec_08 371  72.3 0.484 62.7      4.21 38600</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9  rec_09 396  59.6 0.505 62.7      4.21 38600</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 rec_10 446  82.8 0.967 62.7      4.21 38600</span>
 <span class="r-in"><span><span class="co"># Avoid ugly ggplot shading (not really needed...)</span></span></span>
