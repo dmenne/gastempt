@@ -1,7 +1,7 @@
 ## Version 0.5.5
 
--	Minor fixed for README 
--   Use Edition 3 for  testthat
+- Minor fixes for README 
+- Use Edition 3 for  testthat
 
 ## Test environments
 

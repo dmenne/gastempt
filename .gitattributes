@@ -1,0 +1,3 @@
+# https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
+
+Makevars text eol=LF
