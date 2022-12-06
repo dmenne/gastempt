@@ -56,6 +56,6 @@ jobs:
           needs: coverage
 
       - name: Test coverage
-        if: $r == 'devel'
+        if: ${{config.r == 'devel'}}
         run: covr::codecov(quiet = FALSE)
         shell: Rscript {0}
