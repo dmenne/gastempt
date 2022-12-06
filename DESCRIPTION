@@ -33,6 +33,7 @@ Suggests:
     testthat (>= 2.99),
     ragg,
     vdiffr,
+    parallelly,
     rstantools
 LinkingTo:
     StanHeaders (>= 2.21.0),

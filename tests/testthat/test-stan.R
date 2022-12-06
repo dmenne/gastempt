@@ -66,7 +66,7 @@ test_that("Running stan_gastempt fit with default parameters returns valid resul
             d = simulate_gastempt(n_records = 6, seed = 471)
             v0_d = d$rec$v0
             chains = 2 # Problems with more chains on travis
-            options(mc.cores = min(parallel::detectCores(), chains))
+            options(mc.cores = parallelly::availableCores(omit = 1))
             ret = stan_gastempt(d$data,
                                 chains = chains,
                                 iter = 500,
