@@ -14,7 +14,7 @@ data{
   int student_df; // 3 to 9
   int<lower=0> n; // Number of data
   int<lower=0> n_record; // Number of records, used for v0
-  int record[n];
+  array[n] int record;
   vector[n] minute;
   vector[n] volume;
 }
