@@ -21,7 +21,7 @@ Imports:
     methods,
     tibble (>= 3.1.0),
     ggplot2 (>= 3.3.0),
-    rstan (>= 2.21.0),
+    rstan (>= 2.26.0),
     assertthat,
     stringr,
     shiny,
@@ -36,8 +36,8 @@ Suggests:
     parallelly,
     rstantools
 LinkingTo:
-    StanHeaders (>= 2.21.0),
-    rstan (>= 2.21.0),
+    StanHeaders (>= 2.26.0),
+    rstan (>= 2.26.0),
     BH (>= 1.72.0-1),
     Rcpp (>= 1.0.3),
     RcppEigen (>= 0.3.3.7.0),

@@ -13,7 +13,7 @@ data{
   int student_df; // 3 to 9
   int<lower=0> n; // Number of data
   int<lower=0> n_record; // Number of records, used for v0
-  int record[n];
+  array[n] int record;
   vector[n] minute;
   vector[n] volume;
 }
@@ -46,7 +46,7 @@ parameters{
   real <lower=0> mu_tempt;
   corr_matrix[2] rho;
   real<lower=0> sigma;
-  vector[2] cf[n_record];
+  array[n_record] vector[2] cf;
 }
 
 transformed parameters{
