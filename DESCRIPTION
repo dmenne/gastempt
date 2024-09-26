@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.6.0
+Version: 0.6.1
 Authors@R: c(person("Dieter", "Menne", 
   email = "dieter.menne@menne-biomed.de", role = c("aut","cre")))
 Type: Package
@@ -45,7 +45,7 @@ LinkingTo:
 Remotes: JohnCoene/tippy
 VignetteBuilder: 
     knitr
-RoxygenNote: 7.2.2
+RoxygenNote: 7.3.2
 Encoding: UTF-8
 SystemRequirements: GNU make
 Config/testthat/parallel: false
