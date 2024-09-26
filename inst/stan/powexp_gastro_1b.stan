@@ -7,7 +7,7 @@ data{
   real prior_v0;
   int<lower=0> n; // Number of data
   int<lower=0> n_record; // Number of records
-  int record[n];
+  array[n] int record;
   vector[n] minute;
   vector[n] volume;
 }
@@ -27,7 +27,7 @@ model{
   real v0r;
   real betar;
   real temptr;
-  real vol[n];
+  array[n] real vol;
   mu_beta ~ normal(1.5,0.5);
   sigma_beta ~ normal(1,0.5);
 
