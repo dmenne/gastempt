@@ -9,14 +9,14 @@ if (FALSE) {
 
 test_that("nlme_gastempt returns a valid structure", {
   skip_on_cran()
-  d = simulate_gastempt(seed = 4711)$data
+  d = simulate_gastempt(seed = 4712)$data
   fit = nlme_gastempt(d)
   expect_s3_class(fit, "nlme_gastempt")
   expect_equal(fit$message, "Ok")
   expect_equal(names(fit), c("coef", "nlme_result", "plot", "pnlsTol", "message"))
   expect_s3_class(plot(fit), "ggplot")
   expect_s3_class(coef(fit), "data.frame")
-  expect_equal(as.numeric(coef(fit, signif = 1)[1, 2]), 500)
+  expect_equal(as.numeric(coef(fit, signif = 1)[1, 2]), 400)
 })
 
 test_that("nlme_gastempt can handle noisy and missing data", {

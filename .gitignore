@@ -1,7 +1,7 @@
 Meta
 doc
 *.o
-src/*.o-*
+src/*.*
 *.so
 *.rda
 *.dll
