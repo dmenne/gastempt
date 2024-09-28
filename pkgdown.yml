@@ -3,7 +3,7 @@ pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   gastempt: gastempt.html
-last_built: 2024-09-26T17:24Z
+last_built: 2024-09-28T06:07Z
 urls:
   reference: http://dmenne.github.io/gastempt/reference
   article: http://dmenne.github.io/gastempt/articles
