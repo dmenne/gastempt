@@ -2,7 +2,7 @@
 #'
 #' @param n_records Number of records
 #' @param v0_mean,v0_std Mean and between record standard deviation of initial volume, typically in ml.
-#' @param tempt_mean,tempt_std Mean and between record standard deviation of parameter $t_{empt}$, typically in minutes.
+#' @param tempt_mean,tempt_std Mean and between record standard deviation of parameter \eqn{t_{empt}}, typically in minutes.
 #' @param kappa_mean,kappa_std For linexp only: Mean and between-record
 #' standard deviation of overshoot parameter \code{kappa}.
 #' For values of \code{kappa} above 1, curve has an overshoot that can

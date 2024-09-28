@@ -14,7 +14,7 @@ Menne Biomed Consulting Tübingen, Germany\
 
 <!-- badges: end -->
 
-A package and a [Shiny](https://shiny.rstudio.com/) web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package `nlme`. In addition, Bayesian fits with [Stan](https://mc-stan.org/) to handle critical cases are implemented.
+A package and a [Shiny](https://shiny.posit.co/) web application to create simulated gastric emptying data, and to analyze gastric emptying from clinical studies using a population fit with R and package `nlme`. In addition, Bayesian fits with [Stan](https://mc-stan.org/) to handle critical cases are implemented.
 
 Part of the work has been supported by section GI MRT, Klinik für Gastroenterologie und Hepatologie, Universitätsspital Zürich; thanks to Werner Schwizer and Andreas Steingötter for their contributions.
 

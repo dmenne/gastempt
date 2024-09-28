@@ -27,7 +27,7 @@ simulate_gastempt(
 
 \item{v0_mean, v0_std}{Mean and between record standard deviation of initial volume, typically in ml.}
 
-\item{tempt_mean, tempt_std}{Mean and between record standard deviation of parameter $t_{empt}$, typically in minutes.}
+\item{tempt_mean, tempt_std}{Mean and between record standard deviation of parameter \eqn{t_{empt}}, typically in minutes.}
 
 \item{kappa_mean, kappa_std}{For linexp only: Mean and between-record
 standard deviation of overshoot parameter \code{kappa}.
