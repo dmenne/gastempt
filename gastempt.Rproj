@@ -1,4 +1,5 @@
 Version: 1.0
+ProjectId: d2ffb482-b74c-4e86-8dfe-1f0bac8fe649
 
 RestoreWorkspace: Default
 SaveWorkspace: Default
@@ -15,6 +16,7 @@ LaTeX: XeLaTeX
 StripTrailingWhitespace: Yes
 
 BuildType: Package
+PackageUseDevtools: Yes
 PackageInstallArgs: --with-keep.source --install-tests
 PackageCheckArgs: --run-donttest --as-cran --no-manual
 PackageRoxygenize: rd,collate,namespace
