@@ -29,3 +29,4 @@ check_rhub.log
 codecov.yml
 templates/
 Makevars
+tests/testhtat/_snaps/
