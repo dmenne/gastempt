@@ -1,5 +1,5 @@
 Package: gastempt
-Version: 0.6.2
+Version: 0.7.0
 Authors@R: c(person("Dieter", "Menne", 
   email = "dieter.menne@menne-biomed.de", role = c("aut","cre")))
 Type: Package
@@ -13,7 +13,7 @@ URL: https://github.com/dmenne/gastempt,
     http://dmenne.github.io/gastempt/
 BugReports: https://github.com/dmenne/gastempt/issues
 Depends:
-    R (>= 4.1.0)
+    R (>= 4.3.0)
 Imports:
     nlme,
     Rcpp (>= 1.0.3),
@@ -30,18 +30,18 @@ Suggests:
     rmarkdown,
     knitr,
     covr,
-    testthat (>= 2.99),
+    testthat (>= 3.2.0),
     ragg,
     vdiffr,
     parallelly,
     rstantools
 LinkingTo:
-    StanHeaders (>= 2.26.0),
-    rstan (>= 2.26.0),
-    BH (>= 1.72.0-1),
+    StanHeaders (>= 2.32.0),
+    rstan (>= 2.32.0),
+    BH (>= 1.80.0-1),
     Rcpp (>= 1.0.3),
-    RcppEigen (>= 0.3.3.7.0),
-    RcppParallel (>= 5.0.1)
+    RcppEigen (>= 0.3.4.0.0),
+    RcppParallel (>= 5.1.9)
 VignetteBuilder: 
     knitr
 RoxygenNote: 7.3.2

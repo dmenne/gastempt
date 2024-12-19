@@ -120,8 +120,8 @@ shinyServer(function(input, output, session) {
            xlab = "fitted volumes (ml)"
            )
     } else {
-      plot(x = 1, main = "Residuals for Bayesian fit not yet implemented",
-           ylab = "Just nothing yet", xlab = "Just nothing yet")
+      plot(x = 1, main = "Residuals for Bayesian fit not implemented",
+           ylab = "Just nothing", xlab = "Just nothing")
     }
   }, height =  500, width = 700) # Make height variable
 
@@ -140,7 +140,7 @@ shinyServer(function(input, output, session) {
   output$fit_plot = renderPlot({
     p1 = pc()
     if (is.null(p1)) return(NULL)
-    p1$plot
+    plot(p1)
   })
 
   output$download_coef = downloadHandler(
