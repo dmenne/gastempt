@@ -61,7 +61,7 @@ t50.data.frame = function(x) {
     ifelse("logtempt" %in% names(x), exp(x[["logtempt"]]), x[["tempt"]])
   # Search interval is 5*tempt
   # Keep CRAN happy
-  logtemp = logbeta = tempt = logkappa = NULL
+  logtempt = logbeta = tempt = logkappa = NULL
   interval = c(tempt_initial/20, 5*tempt_initial)
   v0 =  x[["v0"]]
   v0[is.na(v0)] = median(v0, na.rm = TRUE)
