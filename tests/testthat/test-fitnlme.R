@@ -8,7 +8,7 @@ if (FALSE) {
 }
 
 test_that("nlme_gastempt returns a valid structure", {
-  skip_on_cran()
+#  skip_on_cran()
   d = simulate_gastempt(seed = 4712)$data
   fit = nlme_gastempt(d)
   expect_s3_class(fit, "nlme_gastempt")
