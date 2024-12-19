@@ -122,29 +122,35 @@ but below 0.5, for faster convergence.</p></dd>
 <span class="r-in"><span><span class="va">fit_d</span> <span class="op">=</span> <span class="fu">nlme_gastempt</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># fit_d$coef # direct access</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit_d</span><span class="op">)</span> <span class="co"># better use accessor function</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    record       v0     tempt     kappa      t50 slope_t50     auc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  rec_01 514.2572  38.26755 0.9614860 62.74108  4.211677 38600.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  rec_02 494.2277  29.06142 0.7791640 62.74108  4.211677 38600.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  rec_03 474.9852  65.59146 0.9788760 62.74108  4.211677 38600.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  rec_04 409.2757  70.62709 0.6727428 62.74108  4.211677 38600.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  rec_05 364.8369  69.44775 0.4270034 62.74108  4.211677 38600.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  rec_06 342.5338 104.75216 0.6047117 62.74108  4.211677 38600.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  rec_07 438.8791  48.00223 0.6406530 62.74108  4.211677 38600.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  rec_08 370.9151  72.25262 0.4835091 62.74108  4.211677 38600.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  rec_09 396.2782  59.61221 0.5051639 62.74108  4.211677 38600.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 rec_10 446.1316  82.80695 0.9666869 62.74108  4.211677 38600.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rowwise: </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    record    v0 tempt kappa   t50 slope_t50    auc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> rec_01  514.  38.3 0.961  62.7      4.21 <span style="text-decoration: underline;">38</span>601.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> rec_02  494.  29.1 0.779  42.1      5.39 <span style="text-decoration: underline;">25</span>554.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> rec_03  475.  65.6 0.979 109.       2.27 <span style="text-decoration: underline;">61</span>652.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> rec_04  409.  70.6 0.673  94.2      1.87 <span style="text-decoration: underline;">48</span>352.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> rec_05  365.  69.4 0.427  74.3      1.86 <span style="text-decoration: underline;">36</span>156.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> rec_06  343. 105.  0.605 132.       1.07 <span style="text-decoration: underline;">57</span>579.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> rec_07  439.  48.0 0.641  62.3      2.97 <span style="text-decoration: underline;">34</span>564.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> rec_08  371.  72.3 0.484  81.5      1.76 <span style="text-decoration: underline;">39</span>757.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> rec_09  396.  59.6 0.505  68.7      2.26 <span style="text-decoration: underline;">35</span>557.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> rec_10  446.  82.8 0.967 136.       1.69 <span style="text-decoration: underline;">72</span>655.</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">fit_d</span>, signif <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="co"># Can also set number of digits</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    record  v0 tempt kappa  t50 slope_t50   auc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  rec_01 514  38.3 0.961 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  rec_02 494  29.1 0.779 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  rec_03 475  65.6 0.979 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  rec_04 409  70.6 0.673 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  rec_05 365  69.4 0.427 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  rec_06 343 105.0 0.605 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  rec_07 439  48.0 0.641 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  rec_08 371  72.3 0.484 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  rec_09 396  59.6 0.505 62.7      4.21 38600</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 rec_10 446  82.8 0.967 62.7      4.21 38600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rowwise: </span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    record    v0 tempt kappa   t50 slope_t50   auc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> rec_01   514  38.3 0.961  62.7      4.21 <span style="text-decoration: underline;">38</span>600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> rec_02   494  29.1 0.779  42.1      5.39 <span style="text-decoration: underline;">25</span>600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> rec_03   475  65.6 0.979 109        2.27 <span style="text-decoration: underline;">61</span>700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> rec_04   409  70.6 0.673  94.2      1.87 <span style="text-decoration: underline;">48</span>400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> rec_05   365  69.4 0.427  74.3      1.86 <span style="text-decoration: underline;">36</span>200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> rec_06   343 105   0.605 132        1.07 <span style="text-decoration: underline;">57</span>600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> rec_07   439  48   0.641  62.3      2.97 <span style="text-decoration: underline;">34</span>600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> rec_08   371  72.3 0.484  81.5      1.76 <span style="text-decoration: underline;">39</span>800</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> rec_09   396  59.6 0.505  68.7      2.26 <span style="text-decoration: underline;">35</span>600</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> rec_10   446  82.8 0.967 136        1.69 <span style="text-decoration: underline;">72</span>700</span>
 <span class="r-in"><span><span class="co"># Avoid ugly ggplot shading (not really needed...)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_bw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.spacing <span class="op">=</span> <span class="fu">grid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">0</span>,<span class="st">"lines"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>

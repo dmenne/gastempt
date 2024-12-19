@@ -117,22 +117,21 @@ each chain (including warmup). The default is 2000.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
-<span class="r-in"><span> <span class="co"># Runs 30+ seconds on CRAN</span></span></span>
-<span class="r-in"><span> <span class="va">dd</span> <span class="op">=</span> <span class="fu"><a href="simulate_gastempt.html">simulate_gastempt</a></span><span class="op">(</span>n_records <span class="op">=</span> <span class="fl">6</span>, seed <span class="op">=</span> <span class="fl">471</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="va">d</span> <span class="op">=</span> <span class="va">dd</span><span class="op">$</span><span class="va">data</span></span></span>
-<span class="r-in"><span> <span class="va">ret</span> <span class="op">=</span> <span class="fu">stan_gastempt</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-in"><span> <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ret</span><span class="op">$</span><span class="va">coef</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Runs 30+ seconds on CRAN</span></span></span>
+<span class="r-in"><span><span class="va">dd</span> <span class="op">=</span> <span class="fu"><a href="simulate_gastempt.html">simulate_gastempt</a></span><span class="op">(</span>n_records <span class="op">=</span> <span class="fl">6</span>, seed <span class="op">=</span> <span class="fl">471</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">d</span> <span class="op">=</span> <span class="va">dd</span><span class="op">$</span><span class="va">data</span></span></span>
+<span class="r-in"><span><span class="va">ret</span> <span class="op">=</span> <span class="fu">stan_gastempt</span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">ret</span><span class="op">$</span><span class="va">coef</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Rowwise: </span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   record    v0 kappa tempt   t50 slope_t50    auc</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> rec_01  285. 0.471  68.8  76.8      1.43 <span style="text-decoration: underline;">28</span>908.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> rec_02  429. 0.612  78.7  76.8      1.43 <span style="text-decoration: underline;">28</span>908.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> rec_03  408. 0.403  77.2  76.8      1.43 <span style="text-decoration: underline;">28</span>908.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> rec_04  367. 0.845  77.9  76.8      1.43 <span style="text-decoration: underline;">28</span>908.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> rec_05  428. 0.181  60.9  76.8      1.43 <span style="text-decoration: underline;">28</span>908.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> rec_06  472. 0.226  65.4  76.8      1.43 <span style="text-decoration: underline;">28</span>908.</span>
-<span class="r-in"><span> <span class="co"># }</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> rec_01  286. 0.461  69.5  76.8      1.43 <span style="text-decoration: underline;">29</span>016.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> rec_02  429. 0.628  78.0 100.       1.79 <span style="text-decoration: underline;">54</span>417.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> rec_03  409. 0.405  76.2  79.7      1.92 <span style="text-decoration: underline;">43</span>771.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> rec_04  366. 0.862  77.2 119.       1.49 <span style="text-decoration: underline;">52</span>656.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> rec_05  429. 0.168  61.5  50.6      2.97 <span style="text-decoration: underline;">30</span>836.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> rec_06  471. 0.230  65.7  57.6      2.90 <span style="text-decoration: underline;">38</span>013.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
