@@ -119,7 +119,9 @@ stan_gastempt = function(d, model_name = "linexp_gastro_2b", lkj = 2,
     })
 
   plot = plot + geom_line(data = newdata, col = "#006400")  +
-    ggtitle(title, subtitle = comment(d))
+    ggtitle(title, subtitle = comment(d)) +
+    geom_vline(data = coef, aes(xintercept = t50), color = "lightgreen" )
+
 
   # Assemble return
   ret = list(coef = coef, fit = fit, plot = plot)

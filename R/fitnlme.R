@@ -157,8 +157,11 @@ nlme_gastempt = function(d, pnlsTol = 1.E-3, model = linexp, variant = 1) {
   newdata = expand.grid(record = levels(d$record),
                         minute = seq(0, max(d$minute), length.out = 50))
   newdata$vol = predict(d_nlme, newdata)
-  plot = plot + geom_line(data = newdata, col = "#006400") +
-    ggtitle(paste0(title, ", pnlsTol = ", pnlsTol), subtitle = comment(d))
+  plot = plot +
+    geom_line(data = newdata, col = "#006400") +
+    ggtitle(paste0(title, ", pnlsTol = ", pnlsTol), subtitle = comment(d)) +
+    geom_vline(data = cf, aes(xintercept = t50), color = "lightgreen" )
+
   ret = list(coef = cf, nlme_result = d_nlme, plot = plot,
              pnlsTol = pnlsTol, message = "Ok")
   class(ret) = "nlme_gastempt"
