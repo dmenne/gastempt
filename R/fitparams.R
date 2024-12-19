@@ -57,16 +57,53 @@ t50.default = function(x) {
 
 #' @export
 t50.data.frame = function(x) {
-  assert_that(all(c("record", "tempt", "v0") %in% names(x)))
-  x$t50 = 0
-  x$slope_t50 = 0
-  x$auc = NA_real_
-  for (i in seq_len(nrow(x))) {
-    # Very ugly construct to restore old data frame drop behavior
-    tt =  t50(setNames(unlist(x[1, -1]), names(x[-1])))
-    x[i, "t50"] = as.numeric(tt)
-    x[i, "slope_t50"] = attr(tt, "slope")
-    x[i, "auc"] = attr(tt, "auc")
-  }
-  x
+  tempt_initial =
+    ifelse("logtempt" %in% names(x), exp(x[["logtempt"]]), x[["tempt"]])
+  # Search interval is 5*tempt
+  # Keep CRAN happy
+  logtemp = logbeta = tempt = logkappa = NULL
+  interval = c(tempt_initial/20, 5*tempt_initial)
+  v0 =  x[["v0"]]
+  v0[is.na(v0)] = median(v0, na.rm = TRUE)
+
+  auc = NA
+  x = x |> rowwise()
+  if ("logbeta" %in% names(x)) {
+    ssfun = powexp_log
+    ret = x |>
+      mutate(
+        t50 = uniroot(function(t)
+          powexp_log(t, 1, logtempt, logbeta) - 0.5, interval = log(interval))$root,
+        slope_t50 = powexp_slope(t50, v0, logtempt, logbeta))
+  } else if ("beta" %in% names(x)) {
+    ssfun = powexp
+    ret = x |>
+      mutate(
+        t50 = uniroot(function(t)
+          powexp(t, 1, tempt, beta) - 0.5, interval = interval)$root,
+        slope_t50 = powexp_slope(t50, v0, tempt, beta)
+      )
+  } else
+    if ("logkappa" %in% names(x)) {
+      ssfun = linexp_log
+      ret = x |>
+        mutate(
+          t50 = uniroot(function(t)
+            linexp_log(t, 1, logtempt, logkappa) - 0.5,
+            interval = log(interval))$root,
+          slope_t50 = linexp_slope(t50, v0, exp(logtempt), exp(logkappa)))
+    } else
+      if ("kappa" %in% names(x)) {
+        ssfun = linexp
+        ret = x |>
+          mutate(
+            t50 = uniroot(function(t)
+              linexp(t, 1, tempt, kappa) - 0.5, interval = interval)$root,
+            slope_t50 = -linexp_slope(t50, v0, tempt, kappa),
+            auc = linexp_auc(v0, tempt, kappa)
+          )
+      }
+  attr(ret, "fun") = ssfun
+  ret
 }
+

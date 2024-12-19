@@ -15,7 +15,10 @@ test_that("nlme_gastempt returns a valid structure", {
   expect_equal(fit$message, "Ok")
   expect_equal(names(fit), c("coef", "nlme_result", "plot", "pnlsTol", "message"))
   expect_s3_class(plot(fit), "ggplot")
-  expect_s3_class(coef(fit), "data.frame")
+  cf = coef(fit)
+  expect_s3_class(cf, "data.frame")
+  # https://github.com/dmenne/gastempt/issues/5
+  expect_equal(length(unique(cf$t50)), length(cf$t50))
   expect_equal(as.numeric(coef(fit, signif = 1)[1, 2]), 400)
 })
 

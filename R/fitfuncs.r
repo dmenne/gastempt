@@ -126,7 +126,7 @@ powexp_slope = function(t, v0 = 1, tempt = NULL, beta = NULL, pars = NULL) {
   }
   .expr1 <- t/tempt
   .expr4 <- v0 * exp(-.expr1^beta)
-  -(.expr4 * (.expr1^(beta - 1) * (beta * (1/tempt))))
+  - (.expr4 * (.expr1^(beta - 1) * (beta * (1/tempt))))
 }
 
 
