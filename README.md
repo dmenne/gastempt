@@ -50,7 +50,7 @@ Two **models** are implemented in the web interface
 
 ### Example
 
-Program with simulated data (needs about 40 seconds till plot shows):
+Program with simulated data (needs about 10 seconds till plot shows):
 
     library(gastempt)
     dd = simulate_gastempt(n_records = 6, seed = 471)
